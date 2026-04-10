@@ -10,7 +10,7 @@ const services = [
     label: "Custom Sofas",
     tagline: "Crafted to Your Vision",
     description:
-      "At JPM Enterprises, every sofa begins with your story. Our bespoke creation process starts with a personal consultation where our designers listen — truly listen — to your aesthetic preferences, lifestyle needs, and spatial requirements. From a detailed sketch through to the final stitch, every step is done by hand in our Mumbai workshop. We source only Grade-A materials: kiln-dried hardwood frames, tempered steel springs, and premium upholstery fabrics that stand the test of time.",
+      "At JPM Enterprises, every sofa begins with your story. Our bespoke creation process starts with a personal consultation where our designers listen — truly listen — to your aesthetic preferences, lifestyle needs, and spatial requirements. From a detailed sketch through to the final stitch, every step is done by hand in our Hisar workshop. We source only Grade-A materials: kiln-dried hardwood frames, tempered steel springs, and premium upholstery fabrics that stand the test of time.",
     features: [
       "Personal design consultation",
       "Handcrafted by master upholsterers",
@@ -42,7 +42,7 @@ const services = [
     description:
       "Unsure where to begin? Our complimentary interior consultation service pairs you with a certified design professional who will visit your home, assess the existing palette, lighting, and traffic flow, and provide tailored recommendations for sofa form, finish, and placement. We work alongside your interior designer or independently — whatever suits you best. The goal is a living space that feels cohesive, considered, and unmistakably yours.",
     features: [
-      "Complimentary home visit (Mumbai metro area)",
+      "Complimentary home visit (Hisar area)",
       "Certified interior design professionals",
       "3D space planning and mood boards",
       "Coordination with existing décor",
@@ -55,7 +55,7 @@ const services = [
     label: "Delivery & Installation",
     tagline: "White-Glove Service to Your Door",
     description:
-      "Your custom sofa deserves a delivery experience that matches its craftsmanship. Our dedicated logistics team handles every detail: protective wrapping in breathable cotton covers, climate-controlled transport, and a two-person installation crew who will carefully place, assemble, and position your sofa — then remove all packaging. We operate across Maharashtra with extended service to Delhi, Bangalore, Chennai, and Hyderabad. International shipping is available on request.",
+      "Your custom sofa deserves a delivery experience that matches its craftsmanship. Our dedicated logistics team handles every detail: protective wrapping in breathable cotton covers, climate-controlled transport, and a two-person installation crew who will carefully place, assemble, and position your sofa — then remove all packaging. We operate from Hisar with extended service across India. International shipping is available on request.",
     features: [
       "Climate-controlled vehicle transport",
       "Two-person white-glove delivery team",

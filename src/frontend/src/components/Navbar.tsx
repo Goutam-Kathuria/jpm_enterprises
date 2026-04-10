@@ -1,5 +1,7 @@
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { scrollToSection } from "../utils/scrollToSection";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -16,6 +18,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("#home");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -26,8 +30,13 @@ export function Navbar() {
   const handleNav = (href: string) => {
     setActive(href);
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    const sectionId = href.replace("#", "");
+    if (location.pathname === "/") {
+      scrollToSection(sectionId);
+    } else {
+      navigate({ to: "/" });
+      setTimeout(() => scrollToSection(sectionId), 350);
+    }
   };
 
   return (
@@ -51,7 +60,7 @@ export function Navbar() {
           <img
             src="/assets/uploads/image-1.png"
             alt="JPM Enterprises"
-            className="h-12 w-auto object-contain"
+            className="h-14 w-auto object-contain"
           />
         </button>
 

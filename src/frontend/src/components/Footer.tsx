@@ -1,37 +1,56 @@
+import { useNavigate } from "@tanstack/react-router";
 import {
   SiFacebook,
   SiInstagram,
   SiLinkedin,
   SiPinterest,
 } from "react-icons/si";
+import { scrollToSection } from "../utils/scrollToSection";
 
 const quickLinks = [
-  "Home",
-  "Collection",
-  "Custom Design",
-  "Why Us",
-  "Gallery",
-  "Contact",
+  { label: "Home", section: "home" },
+  { label: "Collection", section: "collection" },
+  { label: "Custom Design", section: "custom-design" },
+  { label: "Why Us", section: "why-us" },
+  { label: "Gallery", section: "gallery" },
+  { label: "Contact", section: "contact" },
 ];
-const services = [
-  "Custom Sofas",
-  "Fabric Selection",
-  "Interior Consultation",
-  "Delivery & Installation",
+
+const serviceLinks = [
+  { label: "Custom Sofas", anchor: "custom-sofas" },
+  { label: "Fabric Selection", anchor: "fabric-selection" },
+  { label: "Interior Consultation", anchor: "interior-consultation" },
+  { label: "Delivery & Installation", anchor: "delivery-installation" },
 ];
+
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
-  { Icon: SiInstagram, label: "Instagram", href: "https://instagram.com" },
+  {
+    Icon: SiInstagram,
+    label: "Instagram",
+    href: "https://instagram.com/jpmenterpriseshissar",
+  },
   { Icon: SiFacebook, label: "Facebook", href: "https://facebook.com" },
   { Icon: SiPinterest, label: "Pinterest", href: "https://pinterest.com" },
   { Icon: SiLinkedin, label: "LinkedIn", href: "https://linkedin.com" },
 ];
 
 export function Footer() {
-  const scrollTo = (id: string) => {
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+
+  const handleQuickLink = (section: string) => {
+    if (window.location.pathname === "/") {
+      scrollToSection(section);
+    } else {
+      navigate({ to: "/" });
+      setTimeout(() => scrollToSection(section), 350);
+    }
+  };
+
+  const handleServiceLink = (anchor: string) => {
+    navigate({ to: "/services" });
+    setTimeout(() => scrollToSection(anchor), 350);
   };
 
   return (
@@ -95,12 +114,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link}>
+                <li key={link.label}>
                   <button
                     type="button"
-                    onClick={() =>
-                      scrollTo(`#${link.toLowerCase().replace(" ", "-")}`)
-                    }
+                    onClick={() => handleQuickLink(link.section)}
+                    data-ocid={`footer.${link.section.replace("-", "_")}_link`}
                     className="font-general text-sm transition-colors duration-200 text-left"
                     style={{ color: "oklch(0.7 0.015 80)" }}
                     onMouseEnter={(e) => {
@@ -110,7 +128,7 @@ export function Footer() {
                       e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                     }}
                   >
-                    {link}
+                    {link.label}
                   </button>
                 </li>
               ))}
@@ -126,14 +144,23 @@ export function Footer() {
               Services
             </h4>
             <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <span
-                    className="font-general text-sm"
+              {serviceLinks.map((service) => (
+                <li key={service.label}>
+                  <button
+                    type="button"
+                    onClick={() => handleServiceLink(service.anchor)}
+                    data-ocid={`footer.${service.anchor.replace("-", "_")}_link`}
+                    className="font-general text-sm transition-colors duration-200 text-left"
                     style={{ color: "oklch(0.7 0.015 80)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "oklch(0.65 0.12 75)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "oklch(0.7 0.015 80)";
+                    }}
                   >
-                    {service}
-                  </span>
+                    {service.label}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -153,14 +180,12 @@ export function Footer() {
                   className="font-general text-sm"
                   style={{ color: "oklch(0.7 0.015 80)" }}
                 >
-                  45 Furniture Hub, Design District,
-                  <br />
-                  Mumbai, India — 400 001
+                  Plot No. 1/1 & 1/2, Paschim Vihar, Phase-III, Kaimri Road, Opp. Ananda Hospital, Hisar, District- Hisar, Haryana-125001.
                 </p>
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919468396001"
                   className="font-general text-sm transition-colors"
                   style={{ color: "oklch(0.7 0.015 80)" }}
                   onMouseEnter={(e) => {
@@ -170,12 +195,12 @@ export function Footer() {
                     e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                   }}
                 >
-                  +91 98765 43210
+                  +91 94683 96001
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@jpmenterprises.com"
+                  href="mailto:jpmenterprises2602@gmail.com"
                   className="font-general text-sm transition-colors"
                   style={{ color: "oklch(0.7 0.015 80)" }}
                   onMouseEnter={(e) => {
@@ -185,7 +210,7 @@ export function Footer() {
                     e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                   }}
                 >
-                  info@jpmenterprises.com
+                  jpmenterprises2602@gmail.com
                 </a>
               </li>
             </ul>

@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import { Home, Layers, Maximize2, Palette, Ruler, Square } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -39,6 +40,7 @@ const options = [
 export function CustomDesignSection() {
   const leftRef = useScrollReveal();
   const stepsRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const container = stepsRef.current;
@@ -101,6 +103,7 @@ export function CustomDesignSection() {
             <button
               type="button"
               data-ocid="custom.start_button"
+              onClick={() => navigate({ to: "/custom-design" })}
               className="font-general px-8 py-4 text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-1"
               style={{
                 background: "oklch(0.65 0.12 75)",

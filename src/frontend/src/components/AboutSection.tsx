@@ -29,7 +29,7 @@ export function AboutSection() {
               <span className="italic">Heart of Everything</span>
             </h2>
             <p className="font-general text-secondary-foreground leading-relaxed mb-5">
-              Founded in 2005 in Mumbai, JPM Enterprises began as a small
+              Founded in 2005 in Hisar, JPM Enterprises began as a small
               workshop with a single vision: to create furniture that stands the
               test of time. Today, we are one of India's most trusted names in
               luxury sofa design and manufacturing.

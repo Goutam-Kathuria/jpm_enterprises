@@ -166,7 +166,7 @@ function systemSetTimeoutZero(callback) {
 var isServer = typeof window === "undefined" || "Deno" in globalThis;
 function noop$6() {
 }
-function functionalUpdate(updater, input) {
+function functionalUpdate$1(updater, input) {
   return typeof updater === "function" ? updater(input) : updater;
 }
 function isValidTimeout(value) {
@@ -248,7 +248,7 @@ function hashQueryKeyByOptions(queryKey, options2) {
 function hashKey(queryKey) {
   return JSON.stringify(
     queryKey,
-    (_, val) => isPlainObject(val) ? Object.keys(val).sort().reduce((result, key) => {
+    (_, val) => isPlainObject$1(val) ? Object.keys(val).sort().reduce((result, key) => {
       result[key] = val[key];
       return result;
     }, {}) : val
@@ -266,13 +266,13 @@ function partialMatchKey(a, b) {
   }
   return false;
 }
-var hasOwn = Object.prototype.hasOwnProperty;
-function replaceEqualDeep(a, b) {
+var hasOwn$1 = Object.prototype.hasOwnProperty;
+function replaceEqualDeep$1(a, b) {
   if (a === b) {
     return a;
   }
-  const array = isPlainArray(a) && isPlainArray(b);
-  if (!array && !(isPlainObject(a) && isPlainObject(b))) return b;
+  const array = isPlainArray$1(a) && isPlainArray$1(b);
+  if (!array && !(isPlainObject$1(a) && isPlainObject$1(b))) return b;
   const aItems = array ? a : Object.keys(a);
   const aSize = aItems.length;
   const bItems = array ? b : Object.keys(b);
@@ -285,24 +285,24 @@ function replaceEqualDeep(a, b) {
     const bItem = b[key];
     if (aItem === bItem) {
       copy[key] = aItem;
-      if (array ? i < aSize : hasOwn.call(a, key)) equalItems++;
+      if (array ? i < aSize : hasOwn$1.call(a, key)) equalItems++;
       continue;
     }
     if (aItem === null || bItem === null || typeof aItem !== "object" || typeof bItem !== "object") {
       copy[key] = bItem;
       continue;
     }
-    const v = replaceEqualDeep(aItem, bItem);
+    const v = replaceEqualDeep$1(aItem, bItem);
     copy[key] = v;
     if (v === aItem) equalItems++;
   }
   return aSize === bSize && equalItems === aSize ? a : copy;
 }
-function isPlainArray(value) {
+function isPlainArray$1(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
-function isPlainObject(o) {
-  if (!hasObjectPrototype(o)) {
+function isPlainObject$1(o) {
+  if (!hasObjectPrototype$1(o)) {
     return false;
   }
   const ctor = o.constructor;
@@ -310,7 +310,7 @@ function isPlainObject(o) {
     return true;
   }
   const prot = ctor.prototype;
-  if (!hasObjectPrototype(prot)) {
+  if (!hasObjectPrototype$1(prot)) {
     return false;
   }
   if (!prot.hasOwnProperty("isPrototypeOf")) {
@@ -321,7 +321,7 @@ function isPlainObject(o) {
   }
   return true;
 }
-function hasObjectPrototype(o) {
+function hasObjectPrototype$1(o) {
   return Object.prototype.toString.call(o) === "[object Object]";
 }
 function sleep(timeout) {
@@ -333,7 +333,7 @@ function replaceData(prevData, data, options2) {
   if (typeof options2.structuralSharing === "function") {
     return options2.structuralSharing(prevData, data);
   } else if (options2.structuralSharing !== false) {
-    return replaceEqualDeep(prevData, data);
+    return replaceEqualDeep$1(prevData, data);
   }
   return data;
 }
@@ -1804,7 +1804,7 @@ var QueryClient = (_i = class {
       defaultedOptions.queryHash
     );
     const prevData = query == null ? void 0 : query.state.data;
-    const data = functionalUpdate(updater, prevData);
+    const data = functionalUpdate$1(updater, prevData);
     if (data === void 0) {
       return void 0;
     }
@@ -2432,9 +2432,9 @@ react_production.useRef = function(initialValue) {
 react_production.useState = function(initialState) {
   return ReactSharedInternals$2.H.useState(initialState);
 };
-react_production.useSyncExternalStore = function(subscribe, getSnapshot, getServerSnapshot) {
+react_production.useSyncExternalStore = function(subscribe2, getSnapshot, getServerSnapshot) {
   return ReactSharedInternals$2.H.useSyncExternalStore(
-    subscribe,
+    subscribe2,
     getSnapshot,
     getServerSnapshot
   );
@@ -2447,7 +2447,7 @@ react_production.version = "19.1.1";
   react.exports = react_production;
 }
 var reactExports = react.exports;
-const React$2 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React$4 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
 var QueryClientContext = reactExports.createContext(
   void 0
 );
@@ -2492,15 +2492,15 @@ var scheduler_production = {};
   }
   function pop2(heap) {
     if (0 === heap.length) return null;
-    var first = heap[0], last = heap.pop();
-    if (last !== first) {
-      heap[0] = last;
+    var first = heap[0], last2 = heap.pop();
+    if (last2 !== first) {
+      heap[0] = last2;
       a: for (var index2 = 0, length = heap.length, halfLength = length >>> 1; index2 < halfLength; ) {
         var leftIndex = 2 * (index2 + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
-        if (0 > compare2(left, last))
-          rightIndex < length && 0 > compare2(right, left) ? (heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex) : (heap[index2] = left, heap[leftIndex] = last, index2 = leftIndex);
-        else if (rightIndex < length && 0 > compare2(right, last))
-          heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex;
+        if (0 > compare2(left, last2))
+          rightIndex < length && 0 > compare2(right, left) ? (heap[index2] = right, heap[rightIndex] = last2, index2 = rightIndex) : (heap[index2] = left, heap[leftIndex] = last2, index2 = leftIndex);
+        else if (rightIndex < length && 0 > compare2(right, last2))
+          heap[index2] = right, heap[rightIndex] = last2, index2 = rightIndex;
         else break a;
       }
     }
@@ -2740,7 +2740,7 @@ var reactDom_production = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React$1 = reactExports;
+var React$3 = reactExports;
 function formatProdErrorMessage$1(code) {
   var url = "https://react.dev/errors/" + code;
   if (1 < arguments.length) {
@@ -2779,7 +2779,7 @@ function createPortal$1(children, containerInfo, implementation) {
     implementation
   };
 }
-var ReactSharedInternals$1 = React$1.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+var ReactSharedInternals$1 = React$3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
 function getCrossOriginStringAs(as, input) {
   if ("font" === as) return "";
   if ("string" === typeof input)
@@ -2905,7 +2905,7 @@ var reactDomExports = reactDom.exports;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var Scheduler = schedulerExports, React = reactExports, ReactDOM$1 = reactDomExports;
+var Scheduler = schedulerExports, React$2 = reactExports, ReactDOM$1 = reactDomExports;
 function formatProdErrorMessage(code) {
   var url = "https://react.dev/errors/" + code;
   if (1 < arguments.length) {
@@ -3073,7 +3073,7 @@ function getComponentNameFromType(type) {
     }
   return null;
 }
-var isArrayImpl = Array.isArray, ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM$1.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, sharedNotPendingObject = {
+var isArrayImpl = Array.isArray, ReactSharedInternals = React$2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM$1.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, sharedNotPendingObject = {
   pending: false,
   data: null,
   method: null,
@@ -3490,17 +3490,17 @@ function setValueForNamespacedAttribute(node, namespace, name, value) {
     node.setAttributeNS(namespace, name, "" + value);
   }
 }
-var prefix, suffix;
+var prefix$1, suffix;
 function describeBuiltInComponentFrame(name) {
-  if (void 0 === prefix)
+  if (void 0 === prefix$1)
     try {
       throw Error();
     } catch (x) {
       var match = x.stack.trim().match(/\n( *(at )?)/);
-      prefix = match && match[1] || "";
+      prefix$1 = match && match[1] || "";
       suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
     }
-  return "\n" + prefix + name + suffix;
+  return "\n" + prefix$1 + name + suffix;
 }
 var reentry = false;
 function describeNativeComponentFrame(fn, construct) {
@@ -4403,19 +4403,19 @@ function getTargetInstForInputOrChangeEvent(domEventName, targetInst) {
   if ("input" === domEventName || "change" === domEventName)
     return getInstIfValueChanged(targetInst);
 }
-function is(x, y) {
+function is$2(x, y) {
   return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
 }
-var objectIs = "function" === typeof Object.is ? Object.is : is;
+var objectIs$2 = "function" === typeof Object.is ? Object.is : is$2;
 function shallowEqual(objA, objB) {
-  if (objectIs(objA, objB)) return true;
+  if (objectIs$2(objA, objB)) return true;
   if ("object" !== typeof objA || null === objA || "object" !== typeof objB || null === objB)
     return false;
   var keysA = Object.keys(objA), keysB = Object.keys(objB);
   if (keysA.length !== keysB.length) return false;
   for (keysB = 0; keysB < keysA.length; keysB++) {
     var currentKey = keysA[keysB];
-    if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
+    if (!hasOwnProperty.call(objB, currentKey) || !objectIs$2(objA[currentKey], objB[currentKey]))
       return false;
   }
   return true;
@@ -4973,7 +4973,7 @@ function propagateParentContextChanges(current, workInProgress2, renderLanes2, f
       currentParent = currentParent.memoizedProps;
       if (null !== currentParent) {
         var context = parent.type;
-        objectIs(parent.pendingProps.value, currentParent.value) || (null !== current ? current.push(context) : current = [context]);
+        objectIs$2(parent.pendingProps.value, currentParent.value) || (null !== current ? current.push(context) : current = [context]);
       }
     } else if (parent === hostTransitionProviderCursor.current) {
       currentParent = parent.alternate;
@@ -4992,7 +4992,7 @@ function propagateParentContextChanges(current, workInProgress2, renderLanes2, f
 }
 function checkIfContextChanged(currentDependencies) {
   for (currentDependencies = currentDependencies.firstContext; null !== currentDependencies; ) {
-    if (!objectIs(
+    if (!objectIs$2(
       currentDependencies.context._currentValue,
       currentDependencies.memoizedValue
     ))
@@ -5394,7 +5394,7 @@ function throwInvalidHookError() {
 function areHookInputsEqual(nextDeps, prevDeps) {
   if (null === prevDeps) return false;
   for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++)
-    if (!objectIs(nextDeps[i], prevDeps[i])) return false;
+    if (!objectIs$2(nextDeps[i], prevDeps[i])) return false;
   return true;
 }
 function renderWithHooks(current, workInProgress2, Component2, props, secondArg, nextRenderLanes) {
@@ -5626,7 +5626,7 @@ function updateReducerImpl(hook, current, reducer) {
       update = update.next;
     } while (null !== update && update !== current);
     null === newBaseQueueLast ? baseFirst = pendingQueue : newBaseQueueLast.next = newBaseQueueFirst;
-    if (!objectIs(pendingQueue, hook.memoizedState) && (didReceiveUpdate = true, didReadFromEntangledAsyncAction$32 && (reducer = currentEntangledActionThenable, null !== reducer)))
+    if (!objectIs$2(pendingQueue, hook.memoizedState) && (didReceiveUpdate = true, didReadFromEntangledAsyncAction$32 && (reducer = currentEntangledActionThenable, null !== reducer)))
       throw reducer;
     hook.memoizedState = pendingQueue;
     hook.baseState = baseFirst;
@@ -5647,27 +5647,27 @@ function rerenderReducer(reducer) {
     do
       newState = reducer(newState, update.action), update = update.next;
     while (update !== lastRenderPhaseUpdate);
-    objectIs(newState, hook.memoizedState) || (didReceiveUpdate = true);
+    objectIs$2(newState, hook.memoizedState) || (didReceiveUpdate = true);
     hook.memoizedState = newState;
     null === hook.baseQueue && (hook.baseState = newState);
     queue.lastRenderedState = newState;
   }
   return [newState, dispatch];
 }
-function updateSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) {
+function updateSyncExternalStore(subscribe2, getSnapshot, getServerSnapshot) {
   var fiber = currentlyRenderingFiber, hook = updateWorkInProgressHook(), isHydrating$jscomp$0 = isHydrating;
   if (isHydrating$jscomp$0) {
     if (void 0 === getServerSnapshot) throw Error(formatProdErrorMessage(407));
     getServerSnapshot = getServerSnapshot();
   } else getServerSnapshot = getSnapshot();
-  var snapshotChanged = !objectIs(
+  var snapshotChanged = !objectIs$2(
     (currentHook || hook).memoizedState,
     getServerSnapshot
   );
   snapshotChanged && (hook.memoizedState = getServerSnapshot, didReceiveUpdate = true);
   hook = hook.queue;
-  var create = subscribeToStore.bind(null, fiber, hook, subscribe);
-  updateEffectImpl(2048, 8, create, [subscribe]);
+  var create = subscribeToStore.bind(null, fiber, hook, subscribe2);
+  updateEffectImpl(2048, 8, create, [subscribe2]);
   if (hook.getSnapshot !== getSnapshot || snapshotChanged || null !== workInProgressHook && workInProgressHook.memoizedState.tag & 1) {
     fiber.flags |= 2048;
     pushSimpleEffect(
@@ -5696,19 +5696,19 @@ function pushStoreConsistencyCheck(fiber, getSnapshot, renderedSnapshot) {
 function updateStoreInstance(fiber, inst, nextSnapshot, getSnapshot) {
   inst.value = nextSnapshot;
   inst.getSnapshot = getSnapshot;
-  checkIfSnapshotChanged(inst) && forceStoreRerender(fiber);
+  checkIfSnapshotChanged$1(inst) && forceStoreRerender(fiber);
 }
-function subscribeToStore(fiber, inst, subscribe) {
-  return subscribe(function() {
-    checkIfSnapshotChanged(inst) && forceStoreRerender(fiber);
+function subscribeToStore(fiber, inst, subscribe2) {
+  return subscribe2(function() {
+    checkIfSnapshotChanged$1(inst) && forceStoreRerender(fiber);
   });
 }
-function checkIfSnapshotChanged(inst) {
+function checkIfSnapshotChanged$1(inst) {
   var latestGetSnapshot = inst.getSnapshot;
   inst = inst.value;
   try {
     var nextValue = latestGetSnapshot();
-    return !objectIs(inst, nextValue);
+    return !objectIs$2(inst, nextValue);
   } catch (error) {
     return true;
   }
@@ -5812,13 +5812,13 @@ function onActionSuccess(actionQueue, actionNode, nextState) {
   null !== actionNode && (nextState = actionNode.next, nextState === actionNode ? actionQueue.pending = null : (nextState = nextState.next, actionNode.next = nextState, runActionStateAction(actionQueue, nextState)));
 }
 function onActionError(actionQueue, actionNode, error) {
-  var last = actionQueue.pending;
+  var last2 = actionQueue.pending;
   actionQueue.pending = null;
-  if (null !== last) {
-    last = last.next;
+  if (null !== last2) {
+    last2 = last2.next;
     do
       actionNode.status = "rejected", actionNode.reason = error, notifyActionListeners(actionNode), actionNode = actionNode.next;
-    while (actionNode !== last);
+    while (actionNode !== last2);
   }
   actionQueue.action = null;
 }
@@ -6059,9 +6059,9 @@ function mountDeferredValueImpl(hook, value, initialValue) {
   return initialValue;
 }
 function updateDeferredValueImpl(hook, prevValue, value, initialValue) {
-  if (objectIs(value, prevValue)) return value;
+  if (objectIs$2(value, prevValue)) return value;
   if (null !== currentTreeHiddenStackCursor.current)
-    return hook = mountDeferredValueImpl(hook, value, initialValue), objectIs(hook, prevValue) || (didReceiveUpdate = true), hook;
+    return hook = mountDeferredValueImpl(hook, value, initialValue), objectIs$2(hook, prevValue) || (didReceiveUpdate = true), hook;
   if (0 === (renderLanes & 42))
     return didReceiveUpdate = true, hook.memoizedState = value;
   hook = requestDeferredLane();
@@ -6221,7 +6221,7 @@ function dispatchSetStateInternal(fiber, queue, action, lane) {
         var currentState = queue.lastRenderedState, eagerState = alternate(currentState, action);
         update.hasEagerState = true;
         update.eagerState = eagerState;
-        if (objectIs(eagerState, currentState))
+        if (objectIs$2(eagerState, currentState))
           return enqueueUpdate$1(fiber, queue, update, 0), null === workInProgressRoot && finishQueueingConcurrentUpdates(), false;
       } catch (error) {
       } finally {
@@ -6393,7 +6393,7 @@ var ContextOnlyDispatcher = {
     mountWorkInProgressHook().memoizedState = stateHook;
     return [false, stateHook];
   },
-  useSyncExternalStore: function(subscribe, getSnapshot, getServerSnapshot) {
+  useSyncExternalStore: function(subscribe2, getSnapshot, getServerSnapshot) {
     var fiber = currentlyRenderingFiber, hook = mountWorkInProgressHook();
     if (isHydrating) {
       if (void 0 === getServerSnapshot)
@@ -6408,8 +6408,8 @@ var ContextOnlyDispatcher = {
     hook.memoizedState = getServerSnapshot;
     var inst = { value: getServerSnapshot, getSnapshot };
     hook.queue = inst;
-    mountEffect(subscribeToStore.bind(null, fiber, inst, subscribe), [
-      subscribe
+    mountEffect(subscribeToStore.bind(null, fiber, inst, subscribe2), [
+      subscribe2
     ]);
     fiber.flags |= 2048;
     pushSimpleEffect(
@@ -10398,7 +10398,7 @@ function isRenderConsistentWithExternalStores(finishedWork) {
         var check = tag[i], getSnapshot = check.getSnapshot;
         check = check.value;
         try {
-          if (!objectIs(getSnapshot(), check)) return false;
+          if (!objectIs$2(getSnapshot(), check)) return false;
         } catch (error) {
           return false;
         }
@@ -13132,10 +13132,10 @@ function acquireResource(hoistableRoot, resource, props) {
 function insertStylesheet(instance, precedence, root2) {
   for (var nodes = root2.querySelectorAll(
     'link[rel="stylesheet"][data-precedence],style[data-precedence]'
-  ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i = 0; i < nodes.length; i++) {
+  ), last2 = nodes.length ? nodes[nodes.length - 1] : null, prior = last2, i = 0; i < nodes.length; i++) {
     var node = nodes[i];
     if (node.dataset.precedence === precedence) prior = node;
-    else if (prior !== last) break;
+    else if (prior !== last2) break;
   }
   prior ? prior.parentNode.insertBefore(instance, prior.nextSibling) : (precedence = 9 === root2.nodeType ? root2.head : root2, precedence.insertBefore(instance, precedence.firstChild));
 }
@@ -13282,7 +13282,7 @@ function insertSuspendedStylesheets(state, resources) {
 function insertStylesheetIntoRoot(root2, resource) {
   if (!(resource.state.loading & 4)) {
     var precedences = precedencesByRoot.get(root2);
-    if (precedences) var last = precedences.get(null);
+    if (precedences) var last2 = precedences.get(null);
     else {
       precedences = /* @__PURE__ */ new Map();
       precedencesByRoot.set(root2, precedences);
@@ -13291,19 +13291,19 @@ function insertStylesheetIntoRoot(root2, resource) {
       ), i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         if ("LINK" === node.nodeName || "not all" !== node.getAttribute("media"))
-          precedences.set(node.dataset.precedence, node), last = node;
+          precedences.set(node.dataset.precedence, node), last2 = node;
       }
-      last && precedences.set(null, last);
+      last2 && precedences.set(null, last2);
     }
     nodes = resource.instance;
     node = nodes.getAttribute("data-precedence");
-    i = precedences.get(node) || last;
-    i === last && precedences.set(null, nodes);
+    i = precedences.get(node) || last2;
+    i === last2 && precedences.set(null, nodes);
     precedences.set(node, nodes);
     this.count++;
-    last = onUnsuspend.bind(this);
-    nodes.addEventListener("load", last);
-    nodes.addEventListener("error", last);
+    last2 = onUnsuspend.bind(this);
+    nodes.addEventListener("load", last2);
+    nodes.addEventListener("error", last2);
     i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
     resource.state.loading |= 4;
   }
@@ -13859,7 +13859,7 @@ ReactDOMHydrationRoot.prototype.unstable_scheduleHydration = function(target) {
     0 === i && attemptExplicitHydrationTarget(target);
   }
 };
-var isomorphicReactPackageVersion$jscomp$inline_1785 = React.version;
+var isomorphicReactPackageVersion$jscomp$inline_1785 = React$2.version;
 if ("19.1.1" !== isomorphicReactPackageVersion$jscomp$inline_1785)
   throw Error(
     formatProdErrorMessage(
@@ -13970,6 +13970,5224 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
+var prefix = "Invariant failed";
+function invariant(condition, message) {
+  if (condition) {
+    return;
+  }
+  {
+    throw new Error(prefix);
+  }
+}
+function warning(condition, message) {
+}
+const __storeToDerived = /* @__PURE__ */ new WeakMap();
+const __derivedToStore = /* @__PURE__ */ new WeakMap();
+const __depsThatHaveWrittenThisTick = {
+  current: []
+};
+let __isFlushing = false;
+let __batchDepth = 0;
+const __pendingUpdates = /* @__PURE__ */ new Set();
+const __initialBatchValues = /* @__PURE__ */ new Map();
+function __flush_internals(relatedVals) {
+  const sorted = Array.from(relatedVals).sort((a, b) => {
+    if (a instanceof Derived && a.options.deps.includes(b)) return 1;
+    if (b instanceof Derived && b.options.deps.includes(a)) return -1;
+    return 0;
+  });
+  for (const derived of sorted) {
+    if (__depsThatHaveWrittenThisTick.current.includes(derived)) {
+      continue;
+    }
+    __depsThatHaveWrittenThisTick.current.push(derived);
+    derived.recompute();
+    const stores = __derivedToStore.get(derived);
+    if (stores) {
+      for (const store of stores) {
+        const relatedLinkedDerivedVals = __storeToDerived.get(store);
+        if (!relatedLinkedDerivedVals) continue;
+        __flush_internals(relatedLinkedDerivedVals);
+      }
+    }
+  }
+}
+function __notifyListeners(store) {
+  const value = {
+    prevVal: store.prevState,
+    currentVal: store.state
+  };
+  for (const listener of store.listeners) {
+    listener(value);
+  }
+}
+function __notifyDerivedListeners(derived) {
+  const value = {
+    prevVal: derived.prevState,
+    currentVal: derived.state
+  };
+  for (const listener of derived.listeners) {
+    listener(value);
+  }
+}
+function __flush(store) {
+  if (__batchDepth > 0 && !__initialBatchValues.has(store)) {
+    __initialBatchValues.set(store, store.prevState);
+  }
+  __pendingUpdates.add(store);
+  if (__batchDepth > 0) return;
+  if (__isFlushing) return;
+  try {
+    __isFlushing = true;
+    while (__pendingUpdates.size > 0) {
+      const stores = Array.from(__pendingUpdates);
+      __pendingUpdates.clear();
+      for (const store2 of stores) {
+        const prevState = __initialBatchValues.get(store2) ?? store2.prevState;
+        store2.prevState = prevState;
+        __notifyListeners(store2);
+      }
+      for (const store2 of stores) {
+        const derivedVals = __storeToDerived.get(store2);
+        if (!derivedVals) continue;
+        __depsThatHaveWrittenThisTick.current.push(store2);
+        __flush_internals(derivedVals);
+      }
+      for (const store2 of stores) {
+        const derivedVals = __storeToDerived.get(store2);
+        if (!derivedVals) continue;
+        for (const derived of derivedVals) {
+          __notifyDerivedListeners(derived);
+        }
+      }
+    }
+  } finally {
+    __isFlushing = false;
+    __depsThatHaveWrittenThisTick.current = [];
+    __initialBatchValues.clear();
+  }
+}
+function batch(fn) {
+  __batchDepth++;
+  try {
+    fn();
+  } finally {
+    __batchDepth--;
+    if (__batchDepth === 0) {
+      const pendingUpdateToFlush = __pendingUpdates.values().next().value;
+      if (pendingUpdateToFlush) {
+        __flush(pendingUpdateToFlush);
+      }
+    }
+  }
+}
+function isUpdaterFunction(updater) {
+  return typeof updater === "function";
+}
+class Store {
+  constructor(initialState, options2) {
+    this.listeners = /* @__PURE__ */ new Set();
+    this.subscribe = (listener) => {
+      var _a2, _b2;
+      this.listeners.add(listener);
+      const unsub = (_b2 = (_a2 = this.options) == null ? void 0 : _a2.onSubscribe) == null ? void 0 : _b2.call(_a2, listener, this);
+      return () => {
+        this.listeners.delete(listener);
+        unsub == null ? void 0 : unsub();
+      };
+    };
+    this.prevState = initialState;
+    this.state = initialState;
+    this.options = options2;
+  }
+  setState(updater) {
+    var _a2, _b2, _c2;
+    this.prevState = this.state;
+    if ((_a2 = this.options) == null ? void 0 : _a2.updateFn) {
+      this.state = this.options.updateFn(this.prevState)(updater);
+    } else {
+      if (isUpdaterFunction(updater)) {
+        this.state = updater(this.prevState);
+      } else {
+        this.state = updater;
+      }
+    }
+    (_c2 = (_b2 = this.options) == null ? void 0 : _b2.onUpdate) == null ? void 0 : _c2.call(_b2);
+    __flush(this);
+  }
+}
+class Derived {
+  constructor(options2) {
+    this.listeners = /* @__PURE__ */ new Set();
+    this._subscriptions = [];
+    this.lastSeenDepValues = [];
+    this.getDepVals = () => {
+      const l = this.options.deps.length;
+      const prevDepVals = new Array(l);
+      const currDepVals = new Array(l);
+      for (let i = 0; i < l; i++) {
+        const dep = this.options.deps[i];
+        prevDepVals[i] = dep.prevState;
+        currDepVals[i] = dep.state;
+      }
+      this.lastSeenDepValues = currDepVals;
+      return {
+        prevDepVals,
+        currDepVals,
+        prevVal: this.prevState ?? void 0
+      };
+    };
+    this.recompute = () => {
+      var _a2, _b2;
+      this.prevState = this.state;
+      const depVals = this.getDepVals();
+      this.state = this.options.fn(depVals);
+      (_b2 = (_a2 = this.options).onUpdate) == null ? void 0 : _b2.call(_a2);
+    };
+    this.checkIfRecalculationNeededDeeply = () => {
+      for (const dep of this.options.deps) {
+        if (dep instanceof Derived) {
+          dep.checkIfRecalculationNeededDeeply();
+        }
+      }
+      let shouldRecompute = false;
+      const lastSeenDepValues = this.lastSeenDepValues;
+      const { currDepVals } = this.getDepVals();
+      for (let i = 0; i < currDepVals.length; i++) {
+        if (currDepVals[i] !== lastSeenDepValues[i]) {
+          shouldRecompute = true;
+          break;
+        }
+      }
+      if (shouldRecompute) {
+        this.recompute();
+      }
+    };
+    this.mount = () => {
+      this.registerOnGraph();
+      this.checkIfRecalculationNeededDeeply();
+      return () => {
+        this.unregisterFromGraph();
+        for (const cleanup of this._subscriptions) {
+          cleanup();
+        }
+      };
+    };
+    this.subscribe = (listener) => {
+      var _a2, _b2;
+      this.listeners.add(listener);
+      const unsub = (_b2 = (_a2 = this.options).onSubscribe) == null ? void 0 : _b2.call(_a2, listener, this);
+      return () => {
+        this.listeners.delete(listener);
+        unsub == null ? void 0 : unsub();
+      };
+    };
+    this.options = options2;
+    this.state = options2.fn({
+      prevDepVals: void 0,
+      prevVal: void 0,
+      currDepVals: this.getDepVals().currDepVals
+    });
+  }
+  registerOnGraph(deps = this.options.deps) {
+    for (const dep of deps) {
+      if (dep instanceof Derived) {
+        dep.registerOnGraph();
+        this.registerOnGraph(dep.options.deps);
+      } else if (dep instanceof Store) {
+        let relatedLinkedDerivedVals = __storeToDerived.get(dep);
+        if (!relatedLinkedDerivedVals) {
+          relatedLinkedDerivedVals = /* @__PURE__ */ new Set();
+          __storeToDerived.set(dep, relatedLinkedDerivedVals);
+        }
+        relatedLinkedDerivedVals.add(this);
+        let relatedStores = __derivedToStore.get(this);
+        if (!relatedStores) {
+          relatedStores = /* @__PURE__ */ new Set();
+          __derivedToStore.set(this, relatedStores);
+        }
+        relatedStores.add(dep);
+      }
+    }
+  }
+  unregisterFromGraph(deps = this.options.deps) {
+    for (const dep of deps) {
+      if (dep instanceof Derived) {
+        this.unregisterFromGraph(dep.options.deps);
+      } else if (dep instanceof Store) {
+        const relatedLinkedDerivedVals = __storeToDerived.get(dep);
+        if (relatedLinkedDerivedVals) {
+          relatedLinkedDerivedVals.delete(this);
+        }
+        const relatedStores = __derivedToStore.get(this);
+        if (relatedStores) {
+          relatedStores.delete(dep);
+        }
+      }
+    }
+  }
+}
+const stateIndexKey = "__TSR_index";
+const popStateEvent = "popstate";
+const beforeUnloadEvent = "beforeunload";
+function createHistory(opts) {
+  let location2 = opts.getLocation();
+  const subscribers = /* @__PURE__ */ new Set();
+  const notify = (action) => {
+    location2 = opts.getLocation();
+    subscribers.forEach((subscriber) => subscriber({ location: location2, action }));
+  };
+  const handleIndexChange = (action) => {
+    if (opts.notifyOnIndexChange ?? true) notify(action);
+    else location2 = opts.getLocation();
+  };
+  const tryNavigation = async ({
+    task,
+    navigateOpts,
+    ...actionInfo
+  }) => {
+    var _a2, _b2;
+    const ignoreBlocker = (navigateOpts == null ? void 0 : navigateOpts.ignoreBlocker) ?? false;
+    if (ignoreBlocker) {
+      task();
+      return;
+    }
+    const blockers = ((_a2 = opts.getBlockers) == null ? void 0 : _a2.call(opts)) ?? [];
+    const isPushOrReplace = actionInfo.type === "PUSH" || actionInfo.type === "REPLACE";
+    if (typeof document !== "undefined" && blockers.length && isPushOrReplace) {
+      for (const blocker of blockers) {
+        const nextLocation = parseHref(actionInfo.path, actionInfo.state);
+        const isBlocked = await blocker.blockerFn({
+          currentLocation: location2,
+          nextLocation,
+          action: actionInfo.type
+        });
+        if (isBlocked) {
+          (_b2 = opts.onBlocked) == null ? void 0 : _b2.call(opts);
+          return;
+        }
+      }
+    }
+    task();
+  };
+  return {
+    get location() {
+      return location2;
+    },
+    get length() {
+      return opts.getLength();
+    },
+    subscribers,
+    subscribe: (cb) => {
+      subscribers.add(cb);
+      return () => {
+        subscribers.delete(cb);
+      };
+    },
+    push: (path, state, navigateOpts) => {
+      const currentIndex = location2.state[stateIndexKey];
+      state = assignKeyAndIndex(currentIndex + 1, state);
+      tryNavigation({
+        task: () => {
+          opts.pushState(path, state);
+          notify({ type: "PUSH" });
+        },
+        navigateOpts,
+        type: "PUSH",
+        path,
+        state
+      });
+    },
+    replace: (path, state, navigateOpts) => {
+      const currentIndex = location2.state[stateIndexKey];
+      state = assignKeyAndIndex(currentIndex, state);
+      tryNavigation({
+        task: () => {
+          opts.replaceState(path, state);
+          notify({ type: "REPLACE" });
+        },
+        navigateOpts,
+        type: "REPLACE",
+        path,
+        state
+      });
+    },
+    go: (index2, navigateOpts) => {
+      tryNavigation({
+        task: () => {
+          opts.go(index2);
+          handleIndexChange({ type: "GO", index: index2 });
+        },
+        navigateOpts,
+        type: "GO"
+      });
+    },
+    back: (navigateOpts) => {
+      tryNavigation({
+        task: () => {
+          opts.back((navigateOpts == null ? void 0 : navigateOpts.ignoreBlocker) ?? false);
+          handleIndexChange({ type: "BACK" });
+        },
+        navigateOpts,
+        type: "BACK"
+      });
+    },
+    forward: (navigateOpts) => {
+      tryNavigation({
+        task: () => {
+          opts.forward((navigateOpts == null ? void 0 : navigateOpts.ignoreBlocker) ?? false);
+          handleIndexChange({ type: "FORWARD" });
+        },
+        navigateOpts,
+        type: "FORWARD"
+      });
+    },
+    canGoBack: () => location2.state[stateIndexKey] !== 0,
+    createHref: (str) => opts.createHref(str),
+    block: (blocker) => {
+      var _a2;
+      if (!opts.setBlockers) return () => {
+      };
+      const blockers = ((_a2 = opts.getBlockers) == null ? void 0 : _a2.call(opts)) ?? [];
+      opts.setBlockers([...blockers, blocker]);
+      return () => {
+        var _a22, _b2;
+        const blockers2 = ((_a22 = opts.getBlockers) == null ? void 0 : _a22.call(opts)) ?? [];
+        (_b2 = opts.setBlockers) == null ? void 0 : _b2.call(opts, blockers2.filter((b) => b !== blocker));
+      };
+    },
+    flush: () => {
+      var _a2;
+      return (_a2 = opts.flush) == null ? void 0 : _a2.call(opts);
+    },
+    destroy: () => {
+      var _a2;
+      return (_a2 = opts.destroy) == null ? void 0 : _a2.call(opts);
+    },
+    notify
+  };
+}
+function assignKeyAndIndex(index2, state) {
+  if (!state) {
+    state = {};
+  }
+  const key = createRandomKey();
+  return {
+    ...state,
+    key,
+    // TODO: Remove in v2 - use __TSR_key instead
+    __TSR_key: key,
+    [stateIndexKey]: index2
+  };
+}
+function createBrowserHistory(opts) {
+  var _a2, _b2;
+  const win = typeof document !== "undefined" ? window : void 0;
+  const originalPushState = win.history.pushState;
+  const originalReplaceState = win.history.replaceState;
+  let blockers = [];
+  const _getBlockers = () => blockers;
+  const _setBlockers = (newBlockers) => blockers = newBlockers;
+  const createHref = (path) => path;
+  const parseLocation = () => parseHref(
+    `${win.location.pathname}${win.location.search}${win.location.hash}`,
+    win.history.state
+  );
+  if (!((_a2 = win.history.state) == null ? void 0 : _a2.__TSR_key) && !((_b2 = win.history.state) == null ? void 0 : _b2.key)) {
+    const addedKey = createRandomKey();
+    win.history.replaceState(
+      {
+        [stateIndexKey]: 0,
+        key: addedKey,
+        // TODO: Remove in v2 - use __TSR_key instead
+        __TSR_key: addedKey
+      },
+      ""
+    );
+  }
+  let currentLocation = parseLocation();
+  let rollbackLocation;
+  let nextPopIsGo = false;
+  let ignoreNextPop = false;
+  let skipBlockerNextPop = false;
+  let ignoreNextBeforeUnload = false;
+  const getLocation = () => currentLocation;
+  let next;
+  let scheduled;
+  const flush = () => {
+    if (!next) {
+      return;
+    }
+    history._ignoreSubscribers = true;
+    (next.isPush ? win.history.pushState : win.history.replaceState)(
+      next.state,
+      "",
+      next.href
+    );
+    history._ignoreSubscribers = false;
+    next = void 0;
+    scheduled = void 0;
+    rollbackLocation = void 0;
+  };
+  const queueHistoryAction = (type, destHref, state) => {
+    const href = createHref(destHref);
+    if (!scheduled) {
+      rollbackLocation = currentLocation;
+    }
+    currentLocation = parseHref(destHref, state);
+    next = {
+      href,
+      state,
+      isPush: (next == null ? void 0 : next.isPush) || type === "push"
+    };
+    if (!scheduled) {
+      scheduled = Promise.resolve().then(() => flush());
+    }
+  };
+  const onPushPop = (type) => {
+    currentLocation = parseLocation();
+    history.notify({ type });
+  };
+  const onPushPopEvent = async () => {
+    if (ignoreNextPop) {
+      ignoreNextPop = false;
+      return;
+    }
+    const nextLocation = parseLocation();
+    const delta = nextLocation.state[stateIndexKey] - currentLocation.state[stateIndexKey];
+    const isForward = delta === 1;
+    const isBack = delta === -1;
+    const isGo = !isForward && !isBack || nextPopIsGo;
+    nextPopIsGo = false;
+    const action = isGo ? "GO" : isBack ? "BACK" : "FORWARD";
+    const notify = isGo ? {
+      type: "GO",
+      index: delta
+    } : {
+      type: isBack ? "BACK" : "FORWARD"
+    };
+    if (skipBlockerNextPop) {
+      skipBlockerNextPop = false;
+    } else {
+      const blockers2 = _getBlockers();
+      if (typeof document !== "undefined" && blockers2.length) {
+        for (const blocker of blockers2) {
+          const isBlocked = await blocker.blockerFn({
+            currentLocation,
+            nextLocation,
+            action
+          });
+          if (isBlocked) {
+            ignoreNextPop = true;
+            win.history.go(1);
+            history.notify(notify);
+            return;
+          }
+        }
+      }
+    }
+    currentLocation = parseLocation();
+    history.notify(notify);
+  };
+  const onBeforeUnload = (e) => {
+    if (ignoreNextBeforeUnload) {
+      ignoreNextBeforeUnload = false;
+      return;
+    }
+    let shouldBlock = false;
+    const blockers2 = _getBlockers();
+    if (typeof document !== "undefined" && blockers2.length) {
+      for (const blocker of blockers2) {
+        const shouldHaveBeforeUnload = blocker.enableBeforeUnload ?? true;
+        if (shouldHaveBeforeUnload === true) {
+          shouldBlock = true;
+          break;
+        }
+        if (typeof shouldHaveBeforeUnload === "function" && shouldHaveBeforeUnload() === true) {
+          shouldBlock = true;
+          break;
+        }
+      }
+    }
+    if (shouldBlock) {
+      e.preventDefault();
+      return e.returnValue = "";
+    }
+    return;
+  };
+  const history = createHistory({
+    getLocation,
+    getLength: () => win.history.length,
+    pushState: (href, state) => queueHistoryAction("push", href, state),
+    replaceState: (href, state) => queueHistoryAction("replace", href, state),
+    back: (ignoreBlocker) => {
+      if (ignoreBlocker) skipBlockerNextPop = true;
+      ignoreNextBeforeUnload = true;
+      return win.history.back();
+    },
+    forward: (ignoreBlocker) => {
+      if (ignoreBlocker) skipBlockerNextPop = true;
+      ignoreNextBeforeUnload = true;
+      win.history.forward();
+    },
+    go: (n) => {
+      nextPopIsGo = true;
+      win.history.go(n);
+    },
+    createHref: (href) => createHref(href),
+    flush,
+    destroy: () => {
+      win.history.pushState = originalPushState;
+      win.history.replaceState = originalReplaceState;
+      win.removeEventListener(beforeUnloadEvent, onBeforeUnload, {
+        capture: true
+      });
+      win.removeEventListener(popStateEvent, onPushPopEvent);
+    },
+    onBlocked: () => {
+      if (rollbackLocation && currentLocation !== rollbackLocation) {
+        currentLocation = rollbackLocation;
+      }
+    },
+    getBlockers: _getBlockers,
+    setBlockers: _setBlockers,
+    notifyOnIndexChange: false
+  });
+  win.addEventListener(beforeUnloadEvent, onBeforeUnload, { capture: true });
+  win.addEventListener(popStateEvent, onPushPopEvent);
+  win.history.pushState = function(...args) {
+    const res = originalPushState.apply(win.history, args);
+    if (!history._ignoreSubscribers) onPushPop("PUSH");
+    return res;
+  };
+  win.history.replaceState = function(...args) {
+    const res = originalReplaceState.apply(win.history, args);
+    if (!history._ignoreSubscribers) onPushPop("REPLACE");
+    return res;
+  };
+  return history;
+}
+function createMemoryHistory(opts = {
+  initialEntries: ["/"]
+}) {
+  const entries = opts.initialEntries;
+  let index2 = opts.initialIndex ? Math.min(Math.max(opts.initialIndex, 0), entries.length - 1) : entries.length - 1;
+  const states = entries.map(
+    (_entry, index22) => assignKeyAndIndex(index22, void 0)
+  );
+  const getLocation = () => parseHref(entries[index2], states[index2]);
+  return createHistory({
+    getLocation,
+    getLength: () => entries.length,
+    pushState: (path, state) => {
+      if (index2 < entries.length - 1) {
+        entries.splice(index2 + 1);
+        states.splice(index2 + 1);
+      }
+      states.push(state);
+      entries.push(path);
+      index2 = Math.max(entries.length - 1, 0);
+    },
+    replaceState: (path, state) => {
+      states[index2] = state;
+      entries[index2] = path;
+    },
+    back: () => {
+      index2 = Math.max(index2 - 1, 0);
+    },
+    forward: () => {
+      index2 = Math.min(index2 + 1, entries.length - 1);
+    },
+    go: (n) => {
+      index2 = Math.min(Math.max(index2 + n, 0), entries.length - 1);
+    },
+    createHref: (path) => path
+  });
+}
+function parseHref(href, state) {
+  const hashIndex = href.indexOf("#");
+  const searchIndex = href.indexOf("?");
+  const addedKey = createRandomKey();
+  return {
+    href,
+    pathname: href.substring(
+      0,
+      hashIndex > 0 ? searchIndex > 0 ? Math.min(hashIndex, searchIndex) : hashIndex : searchIndex > 0 ? searchIndex : href.length
+    ),
+    hash: hashIndex > -1 ? href.substring(hashIndex) : "",
+    search: searchIndex > -1 ? href.slice(searchIndex, hashIndex === -1 ? void 0 : hashIndex) : "",
+    state: state || { [stateIndexKey]: 0, key: addedKey, __TSR_key: addedKey }
+  };
+}
+function createRandomKey() {
+  return (Math.random() + 1).toString(36).substring(7);
+}
+function last(arr) {
+  return arr[arr.length - 1];
+}
+function isFunction(d) {
+  return typeof d === "function";
+}
+function functionalUpdate(updater, previous) {
+  if (isFunction(updater)) {
+    return updater(previous);
+  }
+  return updater;
+}
+const hasOwn = Object.prototype.hasOwnProperty;
+function replaceEqualDeep(prev, _next) {
+  if (prev === _next) {
+    return prev;
+  }
+  const next = _next;
+  const array = isPlainArray(prev) && isPlainArray(next);
+  if (!array && !(isPlainObject(prev) && isPlainObject(next))) return next;
+  const prevItems = array ? prev : getEnumerableOwnKeys(prev);
+  if (!prevItems) return next;
+  const nextItems = array ? next : getEnumerableOwnKeys(next);
+  if (!nextItems) return next;
+  const prevSize = prevItems.length;
+  const nextSize = nextItems.length;
+  const copy = array ? new Array(nextSize) : {};
+  let equalItems = 0;
+  for (let i = 0; i < nextSize; i++) {
+    const key = array ? i : nextItems[i];
+    const p = prev[key];
+    const n = next[key];
+    if (p === n) {
+      copy[key] = p;
+      if (array ? i < prevSize : hasOwn.call(prev, key)) equalItems++;
+      continue;
+    }
+    if (p === null || n === null || typeof p !== "object" || typeof n !== "object") {
+      copy[key] = n;
+      continue;
+    }
+    const v = replaceEqualDeep(p, n);
+    copy[key] = v;
+    if (v === p) equalItems++;
+  }
+  return prevSize === nextSize && equalItems === prevSize ? prev : copy;
+}
+function getEnumerableOwnKeys(o) {
+  const keys = [];
+  const names = Object.getOwnPropertyNames(o);
+  for (const name of names) {
+    if (!Object.prototype.propertyIsEnumerable.call(o, name)) return false;
+    keys.push(name);
+  }
+  const symbols = Object.getOwnPropertySymbols(o);
+  for (const symbol of symbols) {
+    if (!Object.prototype.propertyIsEnumerable.call(o, symbol)) return false;
+    keys.push(symbol);
+  }
+  return keys;
+}
+function isPlainObject(o) {
+  if (!hasObjectPrototype(o)) {
+    return false;
+  }
+  const ctor = o.constructor;
+  if (typeof ctor === "undefined") {
+    return true;
+  }
+  const prot = ctor.prototype;
+  if (!hasObjectPrototype(prot)) {
+    return false;
+  }
+  if (!prot.hasOwnProperty("isPrototypeOf")) {
+    return false;
+  }
+  return true;
+}
+function hasObjectPrototype(o) {
+  return Object.prototype.toString.call(o) === "[object Object]";
+}
+function isPlainArray(value) {
+  return Array.isArray(value) && value.length === Object.keys(value).length;
+}
+function deepEqual(a, b, opts) {
+  if (a === b) {
+    return true;
+  }
+  if (typeof a !== typeof b) {
+    return false;
+  }
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) return false;
+    for (let i = 0, l = a.length; i < l; i++) {
+      if (!deepEqual(a[i], b[i], opts)) return false;
+    }
+    return true;
+  }
+  if (isPlainObject(a) && isPlainObject(b)) {
+    const ignoreUndefined = (opts == null ? void 0 : opts.ignoreUndefined) ?? true;
+    if (opts == null ? void 0 : opts.partial) {
+      for (const k in b) {
+        if (!ignoreUndefined || b[k] !== void 0) {
+          if (!deepEqual(a[k], b[k], opts)) return false;
+        }
+      }
+      return true;
+    }
+    let aCount = 0;
+    if (!ignoreUndefined) {
+      aCount = Object.keys(a).length;
+    } else {
+      for (const k in a) {
+        if (a[k] !== void 0) aCount++;
+      }
+    }
+    let bCount = 0;
+    for (const k in b) {
+      if (!ignoreUndefined || b[k] !== void 0) {
+        bCount++;
+        if (bCount > aCount || !deepEqual(a[k], b[k], opts)) return false;
+      }
+    }
+    return aCount === bCount;
+  }
+  return false;
+}
+function createControlledPromise(onResolve) {
+  let resolveLoadPromise;
+  let rejectLoadPromise;
+  const controlledPromise = new Promise((resolve, reject) => {
+    resolveLoadPromise = resolve;
+    rejectLoadPromise = reject;
+  });
+  controlledPromise.status = "pending";
+  controlledPromise.resolve = (value) => {
+    controlledPromise.status = "resolved";
+    controlledPromise.value = value;
+    resolveLoadPromise(value);
+    onResolve == null ? void 0 : onResolve(value);
+  };
+  controlledPromise.reject = (e) => {
+    controlledPromise.status = "rejected";
+    rejectLoadPromise(e);
+  };
+  return controlledPromise;
+}
+function isPromise(value) {
+  return Boolean(
+    value && typeof value === "object" && typeof value.then === "function"
+  );
+}
+const SEGMENT_TYPE_PATHNAME = 0;
+const SEGMENT_TYPE_PARAM = 1;
+const SEGMENT_TYPE_WILDCARD = 2;
+const SEGMENT_TYPE_OPTIONAL_PARAM = 3;
+function joinPaths(paths) {
+  return cleanPath(
+    paths.filter((val) => {
+      return val !== void 0;
+    }).join("/")
+  );
+}
+function cleanPath(path) {
+  return path.replace(/\/{2,}/g, "/");
+}
+function trimPathLeft(path) {
+  return path === "/" ? path : path.replace(/^\/{1,}/, "");
+}
+function trimPathRight(path) {
+  return path === "/" ? path : path.replace(/\/{1,}$/, "");
+}
+function trimPath(path) {
+  return trimPathRight(trimPathLeft(path));
+}
+function removeTrailingSlash(value, basepath) {
+  if ((value == null ? void 0 : value.endsWith("/")) && value !== "/" && value !== `${basepath}/`) {
+    return value.slice(0, -1);
+  }
+  return value;
+}
+function exactPathTest(pathName1, pathName2, basepath) {
+  return removeTrailingSlash(pathName1, basepath) === removeTrailingSlash(pathName2, basepath);
+}
+function segmentToString(segment) {
+  const { type, value } = segment;
+  if (type === SEGMENT_TYPE_PATHNAME) {
+    return value;
+  }
+  const { prefixSegment, suffixSegment } = segment;
+  if (type === SEGMENT_TYPE_PARAM) {
+    const param = value.substring(1);
+    if (prefixSegment && suffixSegment) {
+      return `${prefixSegment}{$${param}}${suffixSegment}`;
+    } else if (prefixSegment) {
+      return `${prefixSegment}{$${param}}`;
+    } else if (suffixSegment) {
+      return `{$${param}}${suffixSegment}`;
+    }
+  }
+  if (type === SEGMENT_TYPE_OPTIONAL_PARAM) {
+    const param = value.substring(1);
+    if (prefixSegment && suffixSegment) {
+      return `${prefixSegment}{-$${param}}${suffixSegment}`;
+    } else if (prefixSegment) {
+      return `${prefixSegment}{-$${param}}`;
+    } else if (suffixSegment) {
+      return `{-$${param}}${suffixSegment}`;
+    }
+    return `{-$${param}}`;
+  }
+  if (type === SEGMENT_TYPE_WILDCARD) {
+    if (prefixSegment && suffixSegment) {
+      return `${prefixSegment}{$}${suffixSegment}`;
+    } else if (prefixSegment) {
+      return `${prefixSegment}{$}`;
+    } else if (suffixSegment) {
+      return `{$}${suffixSegment}`;
+    }
+  }
+  return value;
+}
+function resolvePath({
+  basepath,
+  base,
+  to,
+  trailingSlash = "never",
+  caseSensitive,
+  parseCache
+}) {
+  var _a2;
+  base = removeBasepath(basepath, base, caseSensitive);
+  to = removeBasepath(basepath, to, caseSensitive);
+  let baseSegments = parseBasePathSegments(base, parseCache).slice();
+  const toSegments = parseRoutePathSegments(to, parseCache);
+  if (baseSegments.length > 1 && ((_a2 = last(baseSegments)) == null ? void 0 : _a2.value) === "/") {
+    baseSegments.pop();
+  }
+  for (let index2 = 0, length = toSegments.length; index2 < length; index2++) {
+    const toSegment = toSegments[index2];
+    const value = toSegment.value;
+    if (value === "/") {
+      if (!index2) {
+        baseSegments = [toSegment];
+      } else if (index2 === length - 1) {
+        baseSegments.push(toSegment);
+      } else ;
+    } else if (value === "..") {
+      baseSegments.pop();
+    } else if (value === ".") ;
+    else {
+      baseSegments.push(toSegment);
+    }
+  }
+  if (baseSegments.length > 1) {
+    if (last(baseSegments).value === "/") {
+      if (trailingSlash === "never") {
+        baseSegments.pop();
+      }
+    } else if (trailingSlash === "always") {
+      baseSegments.push({ type: SEGMENT_TYPE_PATHNAME, value: "/" });
+    }
+  }
+  const segmentValues = baseSegments.map(segmentToString);
+  const joined = joinPaths([basepath, ...segmentValues]);
+  return joined;
+}
+const parseBasePathSegments = (pathname, cache) => parsePathname(pathname, cache, true);
+const parseRoutePathSegments = (pathname, cache) => parsePathname(pathname, cache, false);
+const parsePathname = (pathname, cache, basePathValues) => {
+  if (!pathname) return [];
+  const cached = cache == null ? void 0 : cache.get(pathname);
+  if (cached) return cached;
+  const parsed = baseParsePathname(pathname, basePathValues);
+  cache == null ? void 0 : cache.set(pathname, parsed);
+  return parsed;
+};
+const PARAM_RE = /^\$.{1,}$/;
+const PARAM_W_CURLY_BRACES_RE = /^(.*?)\{(\$[a-zA-Z_$][a-zA-Z0-9_$]*)\}(.*)$/;
+const OPTIONAL_PARAM_W_CURLY_BRACES_RE = /^(.*?)\{-(\$[a-zA-Z_$][a-zA-Z0-9_$]*)\}(.*)$/;
+const WILDCARD_RE = /^\$$/;
+const WILDCARD_W_CURLY_BRACES_RE = /^(.*?)\{\$\}(.*)$/;
+function baseParsePathname(pathname, basePathValues) {
+  pathname = cleanPath(pathname);
+  const segments = [];
+  if (pathname.slice(0, 1) === "/") {
+    pathname = pathname.substring(1);
+    segments.push({
+      type: SEGMENT_TYPE_PATHNAME,
+      value: "/"
+    });
+  }
+  if (!pathname) {
+    return segments;
+  }
+  const split2 = pathname.split("/").filter(Boolean);
+  segments.push(
+    ...split2.map((part) => {
+      const partToMatch = !basePathValues && part.slice(-1) === "_" ? part.slice(0, -1) : part;
+      const wildcardBracesMatch = partToMatch.match(WILDCARD_W_CURLY_BRACES_RE);
+      if (wildcardBracesMatch) {
+        const prefix2 = wildcardBracesMatch[1];
+        const suffix2 = wildcardBracesMatch[2];
+        return {
+          type: SEGMENT_TYPE_WILDCARD,
+          value: "$",
+          prefixSegment: prefix2 || void 0,
+          suffixSegment: suffix2 || void 0
+        };
+      }
+      const optionalParamBracesMatch = partToMatch.match(
+        OPTIONAL_PARAM_W_CURLY_BRACES_RE
+      );
+      if (optionalParamBracesMatch) {
+        const prefix2 = optionalParamBracesMatch[1];
+        const paramName = optionalParamBracesMatch[2];
+        const suffix2 = optionalParamBracesMatch[3];
+        return {
+          type: SEGMENT_TYPE_OPTIONAL_PARAM,
+          value: paramName,
+          // Now just $paramName (no prefix)
+          prefixSegment: prefix2 || void 0,
+          suffixSegment: suffix2 || void 0
+        };
+      }
+      const paramBracesMatch = partToMatch.match(PARAM_W_CURLY_BRACES_RE);
+      if (paramBracesMatch) {
+        const prefix2 = paramBracesMatch[1];
+        const paramName = paramBracesMatch[2];
+        const suffix2 = paramBracesMatch[3];
+        return {
+          type: SEGMENT_TYPE_PARAM,
+          value: "" + paramName,
+          prefixSegment: prefix2 || void 0,
+          suffixSegment: suffix2 || void 0
+        };
+      }
+      if (PARAM_RE.test(partToMatch)) {
+        const paramName = partToMatch.substring(1);
+        return {
+          type: SEGMENT_TYPE_PARAM,
+          value: "$" + paramName,
+          prefixSegment: void 0,
+          suffixSegment: void 0
+        };
+      }
+      if (WILDCARD_RE.test(partToMatch)) {
+        return {
+          type: SEGMENT_TYPE_WILDCARD,
+          value: "$",
+          prefixSegment: void 0,
+          suffixSegment: void 0
+        };
+      }
+      return {
+        type: SEGMENT_TYPE_PATHNAME,
+        value: partToMatch.includes("%25") ? partToMatch.split("%25").map((segment) => decodeURI(segment)).join("%25") : decodeURI(partToMatch)
+      };
+    })
+  );
+  if (pathname.slice(-1) === "/") {
+    pathname = pathname.substring(1);
+    segments.push({
+      type: SEGMENT_TYPE_PATHNAME,
+      value: "/"
+    });
+  }
+  return segments;
+}
+function interpolatePath({
+  path,
+  params,
+  leaveWildcards,
+  leaveParams,
+  decodeCharMap,
+  parseCache
+}) {
+  const interpolatedPathSegments = parseRoutePathSegments(path, parseCache);
+  function encodeParam(key) {
+    const value = params[key];
+    const isValueString = typeof value === "string";
+    if (key === "*" || key === "_splat") {
+      return isValueString ? encodeURI(value) : value;
+    } else {
+      return isValueString ? encodePathParam(value, decodeCharMap) : value;
+    }
+  }
+  let isMissingParams = false;
+  const usedParams = {};
+  const interpolatedPath = joinPaths(
+    interpolatedPathSegments.map((segment) => {
+      if (segment.type === SEGMENT_TYPE_PATHNAME) {
+        return segment.value;
+      }
+      if (segment.type === SEGMENT_TYPE_WILDCARD) {
+        usedParams._splat = params._splat;
+        usedParams["*"] = params._splat;
+        const segmentPrefix = segment.prefixSegment || "";
+        const segmentSuffix = segment.suffixSegment || "";
+        if (!("_splat" in params)) {
+          isMissingParams = true;
+          if (leaveWildcards) {
+            return `${segmentPrefix}${segment.value}${segmentSuffix}`;
+          }
+          if (segmentPrefix || segmentSuffix) {
+            return `${segmentPrefix}${segmentSuffix}`;
+          }
+          return void 0;
+        }
+        const value = encodeParam("_splat");
+        if (leaveWildcards) {
+          return `${segmentPrefix}${segment.value}${value ?? ""}${segmentSuffix}`;
+        }
+        return `${segmentPrefix}${value}${segmentSuffix}`;
+      }
+      if (segment.type === SEGMENT_TYPE_PARAM) {
+        const key = segment.value.substring(1);
+        if (!isMissingParams && !(key in params)) {
+          isMissingParams = true;
+        }
+        usedParams[key] = params[key];
+        const segmentPrefix = segment.prefixSegment || "";
+        const segmentSuffix = segment.suffixSegment || "";
+        if (leaveParams) {
+          const value = encodeParam(segment.value);
+          return `${segmentPrefix}${segment.value}${value ?? ""}${segmentSuffix}`;
+        }
+        return `${segmentPrefix}${encodeParam(key) ?? "undefined"}${segmentSuffix}`;
+      }
+      if (segment.type === SEGMENT_TYPE_OPTIONAL_PARAM) {
+        const key = segment.value.substring(1);
+        const segmentPrefix = segment.prefixSegment || "";
+        const segmentSuffix = segment.suffixSegment || "";
+        if (!(key in params) || params[key] == null) {
+          if (leaveWildcards) {
+            return `${segmentPrefix}${key}${segmentSuffix}`;
+          }
+          if (segmentPrefix || segmentSuffix) {
+            return `${segmentPrefix}${segmentSuffix}`;
+          }
+          return void 0;
+        }
+        usedParams[key] = params[key];
+        if (leaveParams) {
+          const value = encodeParam(segment.value);
+          return `${segmentPrefix}${segment.value}${value ?? ""}${segmentSuffix}`;
+        }
+        if (leaveWildcards) {
+          return `${segmentPrefix}${key}${encodeParam(key) ?? ""}${segmentSuffix}`;
+        }
+        return `${segmentPrefix}${encodeParam(key) ?? ""}${segmentSuffix}`;
+      }
+      return segment.value;
+    })
+  );
+  return { usedParams, interpolatedPath, isMissingParams };
+}
+function encodePathParam(value, decodeCharMap) {
+  let encoded = encodeURIComponent(value);
+  if (decodeCharMap) {
+    for (const [encodedChar, char] of decodeCharMap) {
+      encoded = encoded.replaceAll(encodedChar, char);
+    }
+  }
+  return encoded;
+}
+function matchPathname(basepath, currentPathname, matchLocation, parseCache) {
+  const pathParams = matchByPath(
+    basepath,
+    currentPathname,
+    matchLocation,
+    parseCache
+  );
+  if (matchLocation.to && !pathParams) {
+    return;
+  }
+  return pathParams ?? {};
+}
+function removeBasepath(basepath, pathname, caseSensitive = false) {
+  const normalizedBasepath = caseSensitive ? basepath : basepath.toLowerCase();
+  const normalizedPathname = caseSensitive ? pathname : pathname.toLowerCase();
+  switch (true) {
+    case normalizedBasepath === "/":
+      return pathname;
+    case normalizedPathname === normalizedBasepath:
+      return "";
+    case pathname.length < basepath.length:
+      return pathname;
+    case normalizedPathname[normalizedBasepath.length] !== "/":
+      return pathname;
+    case normalizedPathname.startsWith(normalizedBasepath):
+      return pathname.slice(basepath.length);
+    default:
+      return pathname;
+  }
+}
+function matchByPath(basepath, from, {
+  to,
+  fuzzy,
+  caseSensitive
+}, parseCache) {
+  if (basepath !== "/" && !from.startsWith(basepath)) {
+    return void 0;
+  }
+  from = removeBasepath(basepath, from, caseSensitive);
+  to = removeBasepath(basepath, `${to ?? "$"}`, caseSensitive);
+  const baseSegments = parseBasePathSegments(
+    from.startsWith("/") ? from : `/${from}`,
+    parseCache
+  );
+  const routeSegments = parseRoutePathSegments(
+    to.startsWith("/") ? to : `/${to}`,
+    parseCache
+  );
+  const params = {};
+  const result = isMatch(
+    baseSegments,
+    routeSegments,
+    params,
+    fuzzy,
+    caseSensitive
+  );
+  return result ? params : void 0;
+}
+function isMatch(baseSegments, routeSegments, params, fuzzy, caseSensitive) {
+  var _a2, _b2, _c2;
+  let baseIndex = 0;
+  let routeIndex = 0;
+  while (baseIndex < baseSegments.length || routeIndex < routeSegments.length) {
+    const baseSegment = baseSegments[baseIndex];
+    const routeSegment = routeSegments[routeIndex];
+    if (routeSegment) {
+      if (routeSegment.type === SEGMENT_TYPE_WILDCARD) {
+        const remainingBaseSegments = baseSegments.slice(baseIndex);
+        let _splat;
+        if (routeSegment.prefixSegment || routeSegment.suffixSegment) {
+          if (!baseSegment) return false;
+          const prefix2 = routeSegment.prefixSegment || "";
+          const suffix2 = routeSegment.suffixSegment || "";
+          const baseValue = baseSegment.value;
+          if ("prefixSegment" in routeSegment) {
+            if (!baseValue.startsWith(prefix2)) {
+              return false;
+            }
+          }
+          if ("suffixSegment" in routeSegment) {
+            if (!((_a2 = baseSegments[baseSegments.length - 1]) == null ? void 0 : _a2.value.endsWith(suffix2))) {
+              return false;
+            }
+          }
+          let rejoinedSplat = decodeURI(
+            joinPaths(remainingBaseSegments.map((d) => d.value))
+          );
+          if (prefix2 && rejoinedSplat.startsWith(prefix2)) {
+            rejoinedSplat = rejoinedSplat.slice(prefix2.length);
+          }
+          if (suffix2 && rejoinedSplat.endsWith(suffix2)) {
+            rejoinedSplat = rejoinedSplat.slice(
+              0,
+              rejoinedSplat.length - suffix2.length
+            );
+          }
+          _splat = rejoinedSplat;
+        } else {
+          _splat = decodeURI(
+            joinPaths(remainingBaseSegments.map((d) => d.value))
+          );
+        }
+        params["*"] = _splat;
+        params["_splat"] = _splat;
+        return true;
+      }
+      if (routeSegment.type === SEGMENT_TYPE_PATHNAME) {
+        if (routeSegment.value === "/" && !(baseSegment == null ? void 0 : baseSegment.value)) {
+          routeIndex++;
+          continue;
+        }
+        if (baseSegment) {
+          if (caseSensitive) {
+            if (routeSegment.value !== baseSegment.value) {
+              return false;
+            }
+          } else if (routeSegment.value.toLowerCase() !== baseSegment.value.toLowerCase()) {
+            return false;
+          }
+          baseIndex++;
+          routeIndex++;
+          continue;
+        } else {
+          return false;
+        }
+      }
+      if (routeSegment.type === SEGMENT_TYPE_PARAM) {
+        if (!baseSegment) {
+          return false;
+        }
+        if (baseSegment.value === "/") {
+          return false;
+        }
+        let _paramValue = "";
+        let matched = false;
+        if (routeSegment.prefixSegment || routeSegment.suffixSegment) {
+          const prefix2 = routeSegment.prefixSegment || "";
+          const suffix2 = routeSegment.suffixSegment || "";
+          const baseValue = baseSegment.value;
+          if (prefix2 && !baseValue.startsWith(prefix2)) {
+            return false;
+          }
+          if (suffix2 && !baseValue.endsWith(suffix2)) {
+            return false;
+          }
+          let paramValue = baseValue;
+          if (prefix2 && paramValue.startsWith(prefix2)) {
+            paramValue = paramValue.slice(prefix2.length);
+          }
+          if (suffix2 && paramValue.endsWith(suffix2)) {
+            paramValue = paramValue.slice(0, paramValue.length - suffix2.length);
+          }
+          _paramValue = decodeURIComponent(paramValue);
+          matched = true;
+        } else {
+          _paramValue = decodeURIComponent(baseSegment.value);
+          matched = true;
+        }
+        if (matched) {
+          params[routeSegment.value.substring(1)] = _paramValue;
+          baseIndex++;
+        }
+        routeIndex++;
+        continue;
+      }
+      if (routeSegment.type === SEGMENT_TYPE_OPTIONAL_PARAM) {
+        if (!baseSegment) {
+          routeIndex++;
+          continue;
+        }
+        if (baseSegment.value === "/") {
+          routeIndex++;
+          continue;
+        }
+        let _paramValue = "";
+        let matched = false;
+        if (routeSegment.prefixSegment || routeSegment.suffixSegment) {
+          const prefix2 = routeSegment.prefixSegment || "";
+          const suffix2 = routeSegment.suffixSegment || "";
+          const baseValue = baseSegment.value;
+          if ((!prefix2 || baseValue.startsWith(prefix2)) && (!suffix2 || baseValue.endsWith(suffix2))) {
+            let paramValue = baseValue;
+            if (prefix2 && paramValue.startsWith(prefix2)) {
+              paramValue = paramValue.slice(prefix2.length);
+            }
+            if (suffix2 && paramValue.endsWith(suffix2)) {
+              paramValue = paramValue.slice(
+                0,
+                paramValue.length - suffix2.length
+              );
+            }
+            _paramValue = decodeURIComponent(paramValue);
+            matched = true;
+          }
+        } else {
+          let shouldMatchOptional = true;
+          for (let lookAhead = routeIndex + 1; lookAhead < routeSegments.length; lookAhead++) {
+            const futureRouteSegment = routeSegments[lookAhead];
+            if ((futureRouteSegment == null ? void 0 : futureRouteSegment.type) === SEGMENT_TYPE_PATHNAME && futureRouteSegment.value === baseSegment.value) {
+              shouldMatchOptional = false;
+              break;
+            }
+            if ((futureRouteSegment == null ? void 0 : futureRouteSegment.type) === SEGMENT_TYPE_PARAM || (futureRouteSegment == null ? void 0 : futureRouteSegment.type) === SEGMENT_TYPE_WILDCARD) {
+              if (baseSegments.length < routeSegments.length) {
+                shouldMatchOptional = false;
+              }
+              break;
+            }
+          }
+          if (shouldMatchOptional) {
+            _paramValue = decodeURIComponent(baseSegment.value);
+            matched = true;
+          }
+        }
+        if (matched) {
+          params[routeSegment.value.substring(1)] = _paramValue;
+          baseIndex++;
+        }
+        routeIndex++;
+        continue;
+      }
+    }
+    if (baseIndex < baseSegments.length && routeIndex >= routeSegments.length) {
+      params["**"] = joinPaths(
+        baseSegments.slice(baseIndex).map((d) => d.value)
+      );
+      return !!fuzzy && ((_b2 = routeSegments[routeSegments.length - 1]) == null ? void 0 : _b2.value) !== "/";
+    }
+    if (routeIndex < routeSegments.length && baseIndex >= baseSegments.length) {
+      for (let i = routeIndex; i < routeSegments.length; i++) {
+        if (((_c2 = routeSegments[i]) == null ? void 0 : _c2.type) !== SEGMENT_TYPE_OPTIONAL_PARAM) {
+          return false;
+        }
+      }
+      break;
+    }
+    break;
+  }
+  return true;
+}
+const SLASH_SCORE = 0.75;
+const STATIC_SEGMENT_SCORE = 1;
+const REQUIRED_PARAM_BASE_SCORE = 0.5;
+const OPTIONAL_PARAM_BASE_SCORE = 0.4;
+const WILDCARD_PARAM_BASE_SCORE = 0.25;
+const STATIC_AFTER_DYNAMIC_BONUS_SCORE = 0.2;
+const BOTH_PRESENCE_BASE_SCORE = 0.05;
+const PREFIX_PRESENCE_BASE_SCORE = 0.02;
+const SUFFIX_PRESENCE_BASE_SCORE = 0.01;
+const PREFIX_LENGTH_SCORE_MULTIPLIER = 2e-4;
+const SUFFIX_LENGTH_SCORE_MULTIPLIER = 1e-4;
+function handleParam(segment, baseScore) {
+  if (segment.prefixSegment && segment.suffixSegment) {
+    return baseScore + BOTH_PRESENCE_BASE_SCORE + PREFIX_LENGTH_SCORE_MULTIPLIER * segment.prefixSegment.length + SUFFIX_LENGTH_SCORE_MULTIPLIER * segment.suffixSegment.length;
+  }
+  if (segment.prefixSegment) {
+    return baseScore + PREFIX_PRESENCE_BASE_SCORE + PREFIX_LENGTH_SCORE_MULTIPLIER * segment.prefixSegment.length;
+  }
+  if (segment.suffixSegment) {
+    return baseScore + SUFFIX_PRESENCE_BASE_SCORE + SUFFIX_LENGTH_SCORE_MULTIPLIER * segment.suffixSegment.length;
+  }
+  return baseScore;
+}
+function sortRoutes(routes) {
+  const scoredRoutes = [];
+  routes.forEach((d, i) => {
+    var _a2;
+    if (d.isRoot || !d.path) {
+      return;
+    }
+    const trimmed = trimPathLeft(d.fullPath);
+    let parsed = parseRoutePathSegments(trimmed);
+    let skip = 0;
+    while (parsed.length > skip + 1 && ((_a2 = parsed[skip]) == null ? void 0 : _a2.value) === "/") {
+      skip++;
+    }
+    if (skip > 0) parsed = parsed.slice(skip);
+    let optionalParamCount = 0;
+    let hasStaticAfter = false;
+    const scores = parsed.map((segment, index2) => {
+      if (segment.value === "/") {
+        return SLASH_SCORE;
+      }
+      if (segment.type === SEGMENT_TYPE_PATHNAME) {
+        return STATIC_SEGMENT_SCORE;
+      }
+      let baseScore = void 0;
+      if (segment.type === SEGMENT_TYPE_PARAM) {
+        baseScore = REQUIRED_PARAM_BASE_SCORE;
+      } else if (segment.type === SEGMENT_TYPE_OPTIONAL_PARAM) {
+        baseScore = OPTIONAL_PARAM_BASE_SCORE;
+        optionalParamCount++;
+      } else {
+        baseScore = WILDCARD_PARAM_BASE_SCORE;
+      }
+      for (let i2 = index2 + 1; i2 < parsed.length; i2++) {
+        const nextSegment = parsed[i2];
+        if (nextSegment.type === SEGMENT_TYPE_PATHNAME && nextSegment.value !== "/") {
+          hasStaticAfter = true;
+          return handleParam(
+            segment,
+            baseScore + STATIC_AFTER_DYNAMIC_BONUS_SCORE
+          );
+        }
+      }
+      return handleParam(segment, baseScore);
+    });
+    scoredRoutes.push({
+      child: d,
+      trimmed,
+      parsed,
+      index: i,
+      scores,
+      optionalParamCount,
+      hasStaticAfter
+    });
+  });
+  const flatRoutes = scoredRoutes.sort((a, b) => {
+    const minLength = Math.min(a.scores.length, b.scores.length);
+    for (let i = 0; i < minLength; i++) {
+      if (a.scores[i] !== b.scores[i]) {
+        return b.scores[i] - a.scores[i];
+      }
+    }
+    if (a.scores.length !== b.scores.length) {
+      if (a.optionalParamCount !== b.optionalParamCount) {
+        if (a.hasStaticAfter === b.hasStaticAfter) {
+          return a.optionalParamCount - b.optionalParamCount;
+        } else if (a.hasStaticAfter && !b.hasStaticAfter) {
+          return -1;
+        } else if (!a.hasStaticAfter && b.hasStaticAfter) {
+          return 1;
+        }
+      }
+      return b.scores.length - a.scores.length;
+    }
+    for (let i = 0; i < minLength; i++) {
+      if (a.parsed[i].value !== b.parsed[i].value) {
+        return a.parsed[i].value > b.parsed[i].value ? 1 : -1;
+      }
+    }
+    return a.index - b.index;
+  }).map((d, i) => {
+    d.child.rank = i;
+    return d.child;
+  });
+  return flatRoutes;
+}
+function processRouteTree({
+  routeTree: routeTree2,
+  initRoute
+}) {
+  const routesById = {};
+  const routesByPath = {};
+  const recurseRoutes = (childRoutes) => {
+    childRoutes.forEach((childRoute, i) => {
+      initRoute == null ? void 0 : initRoute(childRoute, i);
+      const existingRoute = routesById[childRoute.id];
+      invariant(
+        !existingRoute,
+        `Duplicate routes found with id: ${String(childRoute.id)}`
+      );
+      routesById[childRoute.id] = childRoute;
+      if (!childRoute.isRoot && childRoute.path) {
+        const trimmedFullPath = trimPathRight(childRoute.fullPath);
+        if (!routesByPath[trimmedFullPath] || childRoute.fullPath.endsWith("/")) {
+          routesByPath[trimmedFullPath] = childRoute;
+        }
+      }
+      const children = childRoute.children;
+      if (children == null ? void 0 : children.length) {
+        recurseRoutes(children);
+      }
+    });
+  };
+  recurseRoutes([routeTree2]);
+  const flatRoutes = sortRoutes(Object.values(routesById));
+  return { routesById, routesByPath, flatRoutes };
+}
+function isNotFound(obj) {
+  return !!(obj == null ? void 0 : obj.isNotFound);
+}
+function getSafeSessionStorage() {
+  try {
+    if (typeof window !== "undefined" && typeof window.sessionStorage === "object") {
+      return window.sessionStorage;
+    }
+  } catch {
+  }
+  return void 0;
+}
+const storageKey = "tsr-scroll-restoration-v1_3";
+const throttle = (fn, wait) => {
+  let timeout;
+  return (...args) => {
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        fn(...args);
+        timeout = null;
+      }, wait);
+    }
+  };
+};
+function createScrollRestorationCache() {
+  const safeSessionStorage = getSafeSessionStorage();
+  if (!safeSessionStorage) {
+    return void 0;
+  }
+  const persistedState = safeSessionStorage.getItem(storageKey);
+  let state = persistedState ? JSON.parse(persistedState) : {};
+  return {
+    state,
+    // This setter is simply to make sure that we set the sessionStorage right
+    // after the state is updated. It doesn't necessarily need to be a functional
+    // update.
+    set: (updater) => (state = functionalUpdate(updater, state) || state, safeSessionStorage.setItem(storageKey, JSON.stringify(state)))
+  };
+}
+const scrollRestorationCache = createScrollRestorationCache();
+const defaultGetScrollRestorationKey = (location2) => {
+  return location2.state.__TSR_key || location2.href;
+};
+function getCssSelector(el) {
+  const path = [];
+  let parent;
+  while (parent = el.parentNode) {
+    path.push(
+      `${el.tagName}:nth-child(${Array.prototype.indexOf.call(parent.children, el) + 1})`
+    );
+    el = parent;
+  }
+  return `${path.reverse().join(" > ")}`.toLowerCase();
+}
+let ignoreScroll = false;
+function restoreScroll({
+  storageKey: storageKey2,
+  key,
+  behavior,
+  shouldScrollRestoration,
+  scrollToTopSelectors,
+  location: location2
+}) {
+  var _a2, _b2;
+  let byKey;
+  try {
+    byKey = JSON.parse(sessionStorage.getItem(storageKey2) || "{}");
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  const resolvedKey = key || ((_a2 = window.history.state) == null ? void 0 : _a2.key);
+  const elementEntries = byKey[resolvedKey];
+  ignoreScroll = true;
+  scroll: {
+    if (shouldScrollRestoration && elementEntries && Object.keys(elementEntries).length > 0) {
+      for (const elementSelector in elementEntries) {
+        const entry = elementEntries[elementSelector];
+        if (elementSelector === "window") {
+          window.scrollTo({
+            top: entry.scrollY,
+            left: entry.scrollX,
+            behavior
+          });
+        } else if (elementSelector) {
+          const element = document.querySelector(elementSelector);
+          if (element) {
+            element.scrollLeft = entry.scrollX;
+            element.scrollTop = entry.scrollY;
+          }
+        }
+      }
+      break scroll;
+    }
+    const hash = (location2 ?? window.location).hash.split("#", 2)[1];
+    if (hash) {
+      const hashScrollIntoViewOptions = ((_b2 = window.history.state) == null ? void 0 : _b2.__hashScrollIntoViewOptions) ?? true;
+      if (hashScrollIntoViewOptions) {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView(hashScrollIntoViewOptions);
+        }
+      }
+      break scroll;
+    }
+    const scrollOptions = { top: 0, left: 0, behavior };
+    window.scrollTo(scrollOptions);
+    if (scrollToTopSelectors) {
+      for (const selector of scrollToTopSelectors) {
+        if (selector === "window") continue;
+        const element = typeof selector === "function" ? selector() : document.querySelector(selector);
+        if (element) element.scrollTo(scrollOptions);
+      }
+    }
+  }
+  ignoreScroll = false;
+}
+function setupScrollRestoration(router2, force) {
+  if (scrollRestorationCache === void 0) {
+    return;
+  }
+  const shouldScrollRestoration = router2.options.scrollRestoration ?? false;
+  if (shouldScrollRestoration) {
+    router2.isScrollRestoring = true;
+  }
+  if (typeof document === "undefined" || router2.isScrollRestorationSetup) {
+    return;
+  }
+  router2.isScrollRestorationSetup = true;
+  ignoreScroll = false;
+  const getKey = router2.options.getScrollRestorationKey || defaultGetScrollRestorationKey;
+  window.history.scrollRestoration = "manual";
+  const onScroll = (event) => {
+    if (ignoreScroll || !router2.isScrollRestoring) {
+      return;
+    }
+    let elementSelector = "";
+    if (event.target === document || event.target === window) {
+      elementSelector = "window";
+    } else {
+      const attrId = event.target.getAttribute(
+        "data-scroll-restoration-id"
+      );
+      if (attrId) {
+        elementSelector = `[data-scroll-restoration-id="${attrId}"]`;
+      } else {
+        elementSelector = getCssSelector(event.target);
+      }
+    }
+    const restoreKey = getKey(router2.state.location);
+    scrollRestorationCache.set((state) => {
+      const keyEntry = state[restoreKey] || (state[restoreKey] = {});
+      const elementEntry = keyEntry[elementSelector] || (keyEntry[elementSelector] = {});
+      if (elementSelector === "window") {
+        elementEntry.scrollX = window.scrollX || 0;
+        elementEntry.scrollY = window.scrollY || 0;
+      } else if (elementSelector) {
+        const element = document.querySelector(elementSelector);
+        if (element) {
+          elementEntry.scrollX = element.scrollLeft || 0;
+          elementEntry.scrollY = element.scrollTop || 0;
+        }
+      }
+      return state;
+    });
+  };
+  if (typeof document !== "undefined") {
+    document.addEventListener("scroll", throttle(onScroll, 100), true);
+  }
+  router2.subscribe("onRendered", (event) => {
+    const cacheKey = getKey(event.toLocation);
+    if (!router2.resetNextScroll) {
+      router2.resetNextScroll = true;
+      return;
+    }
+    restoreScroll({
+      storageKey,
+      key: cacheKey,
+      behavior: router2.options.scrollRestorationBehavior,
+      shouldScrollRestoration: router2.isScrollRestoring,
+      scrollToTopSelectors: router2.options.scrollToTopSelectors,
+      location: router2.history.location
+    });
+    if (router2.isScrollRestoring) {
+      scrollRestorationCache.set((state) => {
+        state[cacheKey] || (state[cacheKey] = {});
+        return state;
+      });
+    }
+  });
+}
+function handleHashScroll(router2) {
+  if (typeof document !== "undefined" && document.querySelector) {
+    const hashScrollIntoViewOptions = router2.state.location.state.__hashScrollIntoViewOptions ?? true;
+    if (hashScrollIntoViewOptions && router2.state.location.hash !== "") {
+      const el = document.getElementById(router2.state.location.hash);
+      if (el) {
+        el.scrollIntoView(hashScrollIntoViewOptions);
+      }
+    }
+  }
+}
+function encode(obj, stringify = String) {
+  const result = new URLSearchParams();
+  for (const key in obj) {
+    const val = obj[key];
+    if (val !== void 0) {
+      result.set(key, stringify(val));
+    }
+  }
+  return result.toString();
+}
+function toValue(str) {
+  if (!str) return "";
+  if (str === "false") return false;
+  if (str === "true") return true;
+  return +str * 0 === 0 && +str + "" === str ? +str : str;
+}
+function decode(str) {
+  const searchParams = new URLSearchParams(str);
+  const result = {};
+  for (const [key, value] of searchParams.entries()) {
+    const previousValue = result[key];
+    if (previousValue == null) {
+      result[key] = toValue(value);
+    } else if (Array.isArray(previousValue)) {
+      previousValue.push(toValue(value));
+    } else {
+      result[key] = [previousValue, toValue(value)];
+    }
+  }
+  return result;
+}
+const defaultParseSearch = parseSearchWith(JSON.parse);
+const defaultStringifySearch = stringifySearchWith(
+  JSON.stringify,
+  JSON.parse
+);
+function parseSearchWith(parser) {
+  return (searchStr) => {
+    if (searchStr[0] === "?") {
+      searchStr = searchStr.substring(1);
+    }
+    const query = decode(searchStr);
+    for (const key in query) {
+      const value = query[key];
+      if (typeof value === "string") {
+        try {
+          query[key] = parser(value);
+        } catch (_err) {
+        }
+      }
+    }
+    return query;
+  };
+}
+function stringifySearchWith(stringify, parser) {
+  const hasParser = typeof parser === "function";
+  function stringifyValue(val) {
+    if (typeof val === "object" && val !== null) {
+      try {
+        return stringify(val);
+      } catch (_err) {
+      }
+    } else if (hasParser && typeof val === "string") {
+      try {
+        parser(val);
+        return stringify(val);
+      } catch (_err) {
+      }
+    }
+    return val;
+  }
+  return (search) => {
+    const searchStr = encode(search, stringifyValue);
+    return searchStr ? `?${searchStr}` : "";
+  };
+}
+const rootRouteId = "__root__";
+function redirect(opts) {
+  opts.statusCode = opts.statusCode || opts.code || 307;
+  if (!opts.reloadDocument && typeof opts.href === "string") {
+    try {
+      new URL(opts.href);
+      opts.reloadDocument = true;
+    } catch {
+    }
+  }
+  const headers = new Headers(opts.headers);
+  if (opts.href && headers.get("Location") === null) {
+    headers.set("Location", opts.href);
+  }
+  const response = new Response(null, {
+    status: opts.statusCode,
+    headers
+  });
+  response.options = opts;
+  if (opts.throw) {
+    throw response;
+  }
+  return response;
+}
+function isRedirect(obj) {
+  return obj instanceof Response && !!obj.options;
+}
+function createLRUCache(max) {
+  const cache = /* @__PURE__ */ new Map();
+  let oldest;
+  let newest;
+  const touch = (entry) => {
+    if (!entry.next) return;
+    if (!entry.prev) {
+      entry.next.prev = void 0;
+      oldest = entry.next;
+      entry.next = void 0;
+      if (newest) {
+        entry.prev = newest;
+        newest.next = entry;
+      }
+    } else {
+      entry.prev.next = entry.next;
+      entry.next.prev = entry.prev;
+      entry.next = void 0;
+      if (newest) {
+        newest.next = entry;
+        entry.prev = newest;
+      }
+    }
+    newest = entry;
+  };
+  return {
+    get(key) {
+      const entry = cache.get(key);
+      if (!entry) return void 0;
+      touch(entry);
+      return entry.value;
+    },
+    set(key, value) {
+      if (cache.size >= max && oldest) {
+        const toDelete = oldest;
+        cache.delete(toDelete.key);
+        if (toDelete.next) {
+          oldest = toDelete.next;
+          toDelete.next.prev = void 0;
+        }
+        if (toDelete === newest) {
+          newest = void 0;
+        }
+      }
+      const existing = cache.get(key);
+      if (existing) {
+        existing.value = value;
+        touch(existing);
+      } else {
+        const entry = { key, value, prev: newest };
+        if (newest) newest.next = entry;
+        newest = entry;
+        if (!oldest) oldest = entry;
+        cache.set(key, entry);
+      }
+    }
+  };
+}
+const triggerOnReady = (inner) => {
+  var _a2;
+  if (!inner.rendered) {
+    inner.rendered = true;
+    return (_a2 = inner.onReady) == null ? void 0 : _a2.call(inner);
+  }
+};
+const resolvePreload = (inner, matchId) => {
+  return !!(inner.preload && !inner.router.state.matches.some((d) => d.id === matchId));
+};
+const _handleNotFound = (inner, err) => {
+  var _a2;
+  const routeCursor = inner.router.routesById[err.routeId ?? ""] ?? inner.router.routeTree;
+  if (!routeCursor.options.notFoundComponent && ((_a2 = inner.router.options) == null ? void 0 : _a2.defaultNotFoundComponent)) {
+    routeCursor.options.notFoundComponent = inner.router.options.defaultNotFoundComponent;
+  }
+  invariant(
+    routeCursor.options.notFoundComponent
+  );
+  const matchForRoute = inner.matches.find((m) => m.routeId === routeCursor.id);
+  invariant(matchForRoute, "Could not find match for route: " + routeCursor.id);
+  inner.updateMatch(matchForRoute.id, (prev) => ({
+    ...prev,
+    status: "notFound",
+    error: err,
+    isFetching: false
+  }));
+  if (err.routerCode === "BEFORE_LOAD" && routeCursor.parentRoute) {
+    err.routeId = routeCursor.parentRoute.id;
+    _handleNotFound(inner, err);
+  }
+};
+const handleRedirectAndNotFound = (inner, match, err) => {
+  var _a2, _b2, _c2;
+  if (!isRedirect(err) && !isNotFound(err)) return;
+  if (isRedirect(err) && err.redirectHandled && !err.options.reloadDocument) {
+    throw err;
+  }
+  if (match) {
+    (_a2 = match._nonReactive.beforeLoadPromise) == null ? void 0 : _a2.resolve();
+    (_b2 = match._nonReactive.loaderPromise) == null ? void 0 : _b2.resolve();
+    match._nonReactive.beforeLoadPromise = void 0;
+    match._nonReactive.loaderPromise = void 0;
+    const status = isRedirect(err) ? "redirected" : "notFound";
+    inner.updateMatch(match.id, (prev) => ({
+      ...prev,
+      status,
+      isFetching: false,
+      error: err
+    }));
+    if (isNotFound(err) && !err.routeId) {
+      err.routeId = match.routeId;
+    }
+    (_c2 = match._nonReactive.loadPromise) == null ? void 0 : _c2.resolve();
+  }
+  if (isRedirect(err)) {
+    inner.rendered = true;
+    err.options._fromLocation = inner.location;
+    err.redirectHandled = true;
+    err = inner.router.resolveRedirect(err);
+    throw err;
+  } else {
+    _handleNotFound(inner, err);
+    throw err;
+  }
+};
+const shouldSkipLoader = (inner, matchId) => {
+  const match = inner.router.getMatch(matchId);
+  if (!inner.router.isServer && match._nonReactive.dehydrated) {
+    return true;
+  }
+  if (inner.router.isServer && match.ssr === false) {
+    return true;
+  }
+  return false;
+};
+const handleSerialError = (inner, index2, err, routerCode) => {
+  var _a2, _b2;
+  const { id: matchId, routeId } = inner.matches[index2];
+  const route = inner.router.looseRoutesById[routeId];
+  if (err instanceof Promise) {
+    throw err;
+  }
+  err.routerCode = routerCode;
+  inner.firstBadMatchIndex ?? (inner.firstBadMatchIndex = index2);
+  handleRedirectAndNotFound(inner, inner.router.getMatch(matchId), err);
+  try {
+    (_b2 = (_a2 = route.options).onError) == null ? void 0 : _b2.call(_a2, err);
+  } catch (errorHandlerErr) {
+    err = errorHandlerErr;
+    handleRedirectAndNotFound(inner, inner.router.getMatch(matchId), err);
+  }
+  inner.updateMatch(matchId, (prev) => {
+    var _a22, _b22;
+    (_a22 = prev._nonReactive.beforeLoadPromise) == null ? void 0 : _a22.resolve();
+    prev._nonReactive.beforeLoadPromise = void 0;
+    (_b22 = prev._nonReactive.loadPromise) == null ? void 0 : _b22.resolve();
+    return {
+      ...prev,
+      error: err,
+      status: "error",
+      isFetching: false,
+      updatedAt: Date.now(),
+      abortController: new AbortController()
+    };
+  });
+};
+const isBeforeLoadSsr = (inner, matchId, index2, route) => {
+  var _a2;
+  const existingMatch = inner.router.getMatch(matchId);
+  const parentMatchId = (_a2 = inner.matches[index2 - 1]) == null ? void 0 : _a2.id;
+  const parentMatch = parentMatchId ? inner.router.getMatch(parentMatchId) : void 0;
+  if (inner.router.isShell()) {
+    existingMatch.ssr = matchId === rootRouteId;
+    return;
+  }
+  if ((parentMatch == null ? void 0 : parentMatch.ssr) === false) {
+    existingMatch.ssr = false;
+    return;
+  }
+  const parentOverride = (tempSsr2) => {
+    if (tempSsr2 === true && (parentMatch == null ? void 0 : parentMatch.ssr) === "data-only") {
+      return "data-only";
+    }
+    return tempSsr2;
+  };
+  const defaultSsr = inner.router.options.defaultSsr ?? true;
+  if (route.options.ssr === void 0) {
+    existingMatch.ssr = parentOverride(defaultSsr);
+    return;
+  }
+  if (typeof route.options.ssr !== "function") {
+    existingMatch.ssr = parentOverride(route.options.ssr);
+    return;
+  }
+  const { search, params } = existingMatch;
+  const ssrFnContext = {
+    search: makeMaybe(search, existingMatch.searchError),
+    params: makeMaybe(params, existingMatch.paramsError),
+    location: inner.location,
+    matches: inner.matches.map((match) => ({
+      index: match.index,
+      pathname: match.pathname,
+      fullPath: match.fullPath,
+      staticData: match.staticData,
+      id: match.id,
+      routeId: match.routeId,
+      search: makeMaybe(match.search, match.searchError),
+      params: makeMaybe(match.params, match.paramsError),
+      ssr: match.ssr
+    }))
+  };
+  const tempSsr = route.options.ssr(ssrFnContext);
+  if (isPromise(tempSsr)) {
+    return tempSsr.then((ssr) => {
+      existingMatch.ssr = parentOverride(ssr ?? defaultSsr);
+    });
+  }
+  existingMatch.ssr = parentOverride(tempSsr ?? defaultSsr);
+  return;
+};
+const setupPendingTimeout = (inner, matchId, route, match) => {
+  var _a2;
+  if (match._nonReactive.pendingTimeout !== void 0) return;
+  const pendingMs = route.options.pendingMs ?? inner.router.options.defaultPendingMs;
+  const shouldPending = !!(inner.onReady && !inner.router.isServer && !resolvePreload(inner, matchId) && (route.options.loader || route.options.beforeLoad || routeNeedsPreload(route)) && typeof pendingMs === "number" && pendingMs !== Infinity && (route.options.pendingComponent ?? ((_a2 = inner.router.options) == null ? void 0 : _a2.defaultPendingComponent)));
+  if (shouldPending) {
+    const pendingTimeout = setTimeout(() => {
+      triggerOnReady(inner);
+    }, pendingMs);
+    match._nonReactive.pendingTimeout = pendingTimeout;
+  }
+};
+const preBeforeLoadSetup = (inner, matchId, route) => {
+  const existingMatch = inner.router.getMatch(matchId);
+  if (!existingMatch._nonReactive.beforeLoadPromise && !existingMatch._nonReactive.loaderPromise)
+    return;
+  setupPendingTimeout(inner, matchId, route, existingMatch);
+  const then = () => {
+    const match = inner.router.getMatch(matchId);
+    if (match.preload && (match.status === "redirected" || match.status === "notFound")) {
+      handleRedirectAndNotFound(inner, match, match.error);
+    }
+  };
+  return existingMatch._nonReactive.beforeLoadPromise ? existingMatch._nonReactive.beforeLoadPromise.then(then) : then();
+};
+const executeBeforeLoad = (inner, matchId, index2, route) => {
+  var _a2;
+  const match = inner.router.getMatch(matchId);
+  const prevLoadPromise = match._nonReactive.loadPromise;
+  match._nonReactive.loadPromise = createControlledPromise(() => {
+    prevLoadPromise == null ? void 0 : prevLoadPromise.resolve();
+  });
+  const { paramsError, searchError } = match;
+  if (paramsError) {
+    handleSerialError(inner, index2, paramsError, "PARSE_PARAMS");
+  }
+  if (searchError) {
+    handleSerialError(inner, index2, searchError, "VALIDATE_SEARCH");
+  }
+  setupPendingTimeout(inner, matchId, route, match);
+  const abortController = new AbortController();
+  const parentMatchId = (_a2 = inner.matches[index2 - 1]) == null ? void 0 : _a2.id;
+  const parentMatch = parentMatchId ? inner.router.getMatch(parentMatchId) : void 0;
+  const parentMatchContext = (parentMatch == null ? void 0 : parentMatch.context) ?? inner.router.options.context ?? void 0;
+  const context = { ...parentMatchContext, ...match.__routeContext };
+  let isPending = false;
+  const pending = () => {
+    if (isPending) return;
+    isPending = true;
+    inner.updateMatch(matchId, (prev) => ({
+      ...prev,
+      isFetching: "beforeLoad",
+      fetchCount: prev.fetchCount + 1,
+      abortController,
+      context
+    }));
+  };
+  const resolve = () => {
+    var _a22;
+    (_a22 = match._nonReactive.beforeLoadPromise) == null ? void 0 : _a22.resolve();
+    match._nonReactive.beforeLoadPromise = void 0;
+    inner.updateMatch(matchId, (prev) => ({
+      ...prev,
+      isFetching: false
+    }));
+  };
+  if (!route.options.beforeLoad) {
+    batch(() => {
+      pending();
+      resolve();
+    });
+    return;
+  }
+  match._nonReactive.beforeLoadPromise = createControlledPromise();
+  const { search, params, cause } = match;
+  const preload2 = resolvePreload(inner, matchId);
+  const beforeLoadFnContext = {
+    search,
+    abortController,
+    params,
+    preload: preload2,
+    context,
+    location: inner.location,
+    navigate: (opts) => inner.router.navigate({
+      ...opts,
+      _fromLocation: inner.location
+    }),
+    buildLocation: inner.router.buildLocation,
+    cause: preload2 ? "preload" : cause,
+    matches: inner.matches
+  };
+  const updateContext = (beforeLoadContext2) => {
+    if (beforeLoadContext2 === void 0) {
+      batch(() => {
+        pending();
+        resolve();
+      });
+      return;
+    }
+    if (isRedirect(beforeLoadContext2) || isNotFound(beforeLoadContext2)) {
+      pending();
+      handleSerialError(inner, index2, beforeLoadContext2, "BEFORE_LOAD");
+    }
+    batch(() => {
+      pending();
+      inner.updateMatch(matchId, (prev) => ({
+        ...prev,
+        __beforeLoadContext: beforeLoadContext2,
+        context: {
+          ...prev.context,
+          ...beforeLoadContext2
+        }
+      }));
+      resolve();
+    });
+  };
+  let beforeLoadContext;
+  try {
+    beforeLoadContext = route.options.beforeLoad(beforeLoadFnContext);
+    if (isPromise(beforeLoadContext)) {
+      pending();
+      return beforeLoadContext.catch((err) => {
+        handleSerialError(inner, index2, err, "BEFORE_LOAD");
+      }).then(updateContext);
+    }
+  } catch (err) {
+    pending();
+    handleSerialError(inner, index2, err, "BEFORE_LOAD");
+  }
+  updateContext(beforeLoadContext);
+  return;
+};
+const handleBeforeLoad = (inner, index2) => {
+  const { id: matchId, routeId } = inner.matches[index2];
+  const route = inner.router.looseRoutesById[routeId];
+  const serverSsr = () => {
+    if (inner.router.isServer) {
+      const maybePromise = isBeforeLoadSsr(inner, matchId, index2, route);
+      if (isPromise(maybePromise)) return maybePromise.then(queueExecution);
+    }
+    return queueExecution();
+  };
+  const queueExecution = () => {
+    if (shouldSkipLoader(inner, matchId)) return;
+    const result = preBeforeLoadSetup(inner, matchId, route);
+    return isPromise(result) ? result.then(execute) : execute();
+  };
+  const execute = () => executeBeforeLoad(inner, matchId, index2, route);
+  return serverSsr();
+};
+const executeHead = (inner, matchId, route) => {
+  var _a2, _b2, _c2, _d2, _e2, _f2;
+  const match = inner.router.getMatch(matchId);
+  if (!match) {
+    return;
+  }
+  if (!route.options.head && !route.options.scripts && !route.options.headers) {
+    return;
+  }
+  const assetContext = {
+    matches: inner.matches,
+    match,
+    params: match.params,
+    loaderData: match.loaderData
+  };
+  return Promise.all([
+    (_b2 = (_a2 = route.options).head) == null ? void 0 : _b2.call(_a2, assetContext),
+    (_d2 = (_c2 = route.options).scripts) == null ? void 0 : _d2.call(_c2, assetContext),
+    (_f2 = (_e2 = route.options).headers) == null ? void 0 : _f2.call(_e2, assetContext)
+  ]).then(([headFnContent, scripts, headers]) => {
+    const meta = headFnContent == null ? void 0 : headFnContent.meta;
+    const links = headFnContent == null ? void 0 : headFnContent.links;
+    const headScripts = headFnContent == null ? void 0 : headFnContent.scripts;
+    const styles = headFnContent == null ? void 0 : headFnContent.styles;
+    return {
+      meta,
+      links,
+      headScripts,
+      headers,
+      scripts,
+      styles
+    };
+  });
+};
+const getLoaderContext = (inner, matchId, index2, route) => {
+  const parentMatchPromise = inner.matchPromises[index2 - 1];
+  const { params, loaderDeps, abortController, context, cause } = inner.router.getMatch(matchId);
+  const preload2 = resolvePreload(inner, matchId);
+  return {
+    params,
+    deps: loaderDeps,
+    preload: !!preload2,
+    parentMatchPromise,
+    abortController,
+    context,
+    location: inner.location,
+    navigate: (opts) => inner.router.navigate({
+      ...opts,
+      _fromLocation: inner.location
+    }),
+    cause: preload2 ? "preload" : cause,
+    route
+  };
+};
+const runLoader = async (inner, matchId, index2, route) => {
+  var _a2, _b2, _c2, _d2;
+  try {
+    const match = inner.router.getMatch(matchId);
+    try {
+      if (!inner.router.isServer || match.ssr === true) {
+        loadRouteChunk(route);
+      }
+      const loaderResult = (_b2 = (_a2 = route.options).loader) == null ? void 0 : _b2.call(
+        _a2,
+        getLoaderContext(inner, matchId, index2, route)
+      );
+      const loaderResultIsPromise = route.options.loader && isPromise(loaderResult);
+      const willLoadSomething = !!(loaderResultIsPromise || route._lazyPromise || route._componentsPromise || route.options.head || route.options.scripts || route.options.headers || match._nonReactive.minPendingPromise);
+      if (willLoadSomething) {
+        inner.updateMatch(matchId, (prev) => ({
+          ...prev,
+          isFetching: "loader"
+        }));
+      }
+      if (route.options.loader) {
+        const loaderData = loaderResultIsPromise ? await loaderResult : loaderResult;
+        handleRedirectAndNotFound(
+          inner,
+          inner.router.getMatch(matchId),
+          loaderData
+        );
+        if (loaderData !== void 0) {
+          inner.updateMatch(matchId, (prev) => ({
+            ...prev,
+            loaderData
+          }));
+        }
+      }
+      if (route._lazyPromise) await route._lazyPromise;
+      const headResult = executeHead(inner, matchId, route);
+      const head = headResult ? await headResult : void 0;
+      const pendingPromise = match._nonReactive.minPendingPromise;
+      if (pendingPromise) await pendingPromise;
+      if (route._componentsPromise) await route._componentsPromise;
+      inner.updateMatch(matchId, (prev) => ({
+        ...prev,
+        error: void 0,
+        status: "success",
+        isFetching: false,
+        updatedAt: Date.now(),
+        ...head
+      }));
+    } catch (e) {
+      let error = e;
+      const pendingPromise = match._nonReactive.minPendingPromise;
+      if (pendingPromise) await pendingPromise;
+      handleRedirectAndNotFound(inner, inner.router.getMatch(matchId), e);
+      try {
+        (_d2 = (_c2 = route.options).onError) == null ? void 0 : _d2.call(_c2, e);
+      } catch (onErrorError) {
+        error = onErrorError;
+        handleRedirectAndNotFound(
+          inner,
+          inner.router.getMatch(matchId),
+          onErrorError
+        );
+      }
+      const headResult = executeHead(inner, matchId, route);
+      const head = headResult ? await headResult : void 0;
+      inner.updateMatch(matchId, (prev) => ({
+        ...prev,
+        error,
+        status: "error",
+        isFetching: false,
+        ...head
+      }));
+    }
+  } catch (err) {
+    const match = inner.router.getMatch(matchId);
+    if (match) {
+      const headResult = executeHead(inner, matchId, route);
+      if (headResult) {
+        const head = await headResult;
+        inner.updateMatch(matchId, (prev) => ({
+          ...prev,
+          ...head
+        }));
+      }
+      match._nonReactive.loaderPromise = void 0;
+    }
+    handleRedirectAndNotFound(inner, match, err);
+  }
+};
+const loadRouteMatch = async (inner, index2) => {
+  var _a2, _b2;
+  const { id: matchId, routeId } = inner.matches[index2];
+  let loaderShouldRunAsync = false;
+  let loaderIsRunningAsync = false;
+  const route = inner.router.looseRoutesById[routeId];
+  if (shouldSkipLoader(inner, matchId)) {
+    if (inner.router.isServer) {
+      const headResult = executeHead(inner, matchId, route);
+      if (headResult) {
+        const head = await headResult;
+        inner.updateMatch(matchId, (prev) => ({
+          ...prev,
+          ...head
+        }));
+      }
+      return inner.router.getMatch(matchId);
+    }
+  } else {
+    const prevMatch = inner.router.getMatch(matchId);
+    if (prevMatch._nonReactive.loaderPromise) {
+      if (prevMatch.status === "success" && !inner.sync && !prevMatch.preload) {
+        return prevMatch;
+      }
+      await prevMatch._nonReactive.loaderPromise;
+      const match2 = inner.router.getMatch(matchId);
+      if (match2.error) {
+        handleRedirectAndNotFound(inner, match2, match2.error);
+      }
+    } else {
+      const age = Date.now() - prevMatch.updatedAt;
+      const preload2 = resolvePreload(inner, matchId);
+      const staleAge = preload2 ? route.options.preloadStaleTime ?? inner.router.options.defaultPreloadStaleTime ?? 3e4 : route.options.staleTime ?? inner.router.options.defaultStaleTime ?? 0;
+      const shouldReloadOption = route.options.shouldReload;
+      const shouldReload = typeof shouldReloadOption === "function" ? shouldReloadOption(getLoaderContext(inner, matchId, index2, route)) : shouldReloadOption;
+      const nextPreload = !!preload2 && !inner.router.state.matches.some((d) => d.id === matchId);
+      const match2 = inner.router.getMatch(matchId);
+      match2._nonReactive.loaderPromise = createControlledPromise();
+      if (nextPreload !== match2.preload) {
+        inner.updateMatch(matchId, (prev) => ({
+          ...prev,
+          preload: nextPreload
+        }));
+      }
+      const { status, invalid } = match2;
+      loaderShouldRunAsync = status === "success" && (invalid || (shouldReload ?? age > staleAge));
+      if (preload2 && route.options.preload === false) ;
+      else if (loaderShouldRunAsync && !inner.sync) {
+        loaderIsRunningAsync = true;
+        (async () => {
+          var _a22, _b22;
+          try {
+            await runLoader(inner, matchId, index2, route);
+            const match3 = inner.router.getMatch(matchId);
+            (_a22 = match3._nonReactive.loaderPromise) == null ? void 0 : _a22.resolve();
+            (_b22 = match3._nonReactive.loadPromise) == null ? void 0 : _b22.resolve();
+            match3._nonReactive.loaderPromise = void 0;
+          } catch (err) {
+            if (isRedirect(err)) {
+              await inner.router.navigate(err.options);
+            }
+          }
+        })();
+      } else if (status !== "success" || loaderShouldRunAsync && inner.sync) {
+        await runLoader(inner, matchId, index2, route);
+      } else {
+        const headResult = executeHead(inner, matchId, route);
+        if (headResult) {
+          const head = await headResult;
+          inner.updateMatch(matchId, (prev) => ({
+            ...prev,
+            ...head
+          }));
+        }
+      }
+    }
+  }
+  const match = inner.router.getMatch(matchId);
+  if (!loaderIsRunningAsync) {
+    (_a2 = match._nonReactive.loaderPromise) == null ? void 0 : _a2.resolve();
+    (_b2 = match._nonReactive.loadPromise) == null ? void 0 : _b2.resolve();
+  }
+  clearTimeout(match._nonReactive.pendingTimeout);
+  match._nonReactive.pendingTimeout = void 0;
+  if (!loaderIsRunningAsync) match._nonReactive.loaderPromise = void 0;
+  match._nonReactive.dehydrated = void 0;
+  const nextIsFetching = loaderIsRunningAsync ? match.isFetching : false;
+  if (nextIsFetching !== match.isFetching || match.invalid !== false) {
+    inner.updateMatch(matchId, (prev) => ({
+      ...prev,
+      isFetching: nextIsFetching,
+      invalid: false
+    }));
+    return inner.router.getMatch(matchId);
+  } else {
+    return match;
+  }
+};
+async function loadMatches(arg) {
+  const inner = Object.assign(arg, {
+    matchPromises: []
+  });
+  if (!inner.router.isServer && inner.router.state.matches.some((d) => d._forcePending)) {
+    triggerOnReady(inner);
+  }
+  try {
+    for (let i = 0; i < inner.matches.length; i++) {
+      const beforeLoad = handleBeforeLoad(inner, i);
+      if (isPromise(beforeLoad)) await beforeLoad;
+    }
+    const max = inner.firstBadMatchIndex ?? inner.matches.length;
+    for (let i = 0; i < max; i++) {
+      inner.matchPromises.push(loadRouteMatch(inner, i));
+    }
+    await Promise.all(inner.matchPromises);
+    const readyPromise = triggerOnReady(inner);
+    if (isPromise(readyPromise)) await readyPromise;
+  } catch (err) {
+    if (isNotFound(err) && !inner.preload) {
+      const readyPromise = triggerOnReady(inner);
+      if (isPromise(readyPromise)) await readyPromise;
+      throw err;
+    }
+    if (isRedirect(err)) {
+      throw err;
+    }
+  }
+  return inner.matches;
+}
+async function loadRouteChunk(route) {
+  if (!route._lazyLoaded && route._lazyPromise === void 0) {
+    if (route.lazyFn) {
+      route._lazyPromise = route.lazyFn().then((lazyRoute) => {
+        const { id: _id, ...options2 } = lazyRoute.options;
+        Object.assign(route.options, options2);
+        route._lazyLoaded = true;
+        route._lazyPromise = void 0;
+      });
+    } else {
+      route._lazyLoaded = true;
+    }
+  }
+  if (!route._componentsLoaded && route._componentsPromise === void 0) {
+    const loadComponents = () => {
+      var _a2;
+      const preloads = [];
+      for (const type of componentTypes) {
+        const preload2 = (_a2 = route.options[type]) == null ? void 0 : _a2.preload;
+        if (preload2) preloads.push(preload2());
+      }
+      if (preloads.length)
+        return Promise.all(preloads).then(() => {
+          route._componentsLoaded = true;
+          route._componentsPromise = void 0;
+        });
+      route._componentsLoaded = true;
+      route._componentsPromise = void 0;
+      return;
+    };
+    route._componentsPromise = route._lazyPromise ? route._lazyPromise.then(loadComponents) : loadComponents();
+  }
+  return route._componentsPromise;
+}
+function makeMaybe(value, error) {
+  if (error) {
+    return { status: "error", error };
+  }
+  return { status: "success", value };
+}
+function routeNeedsPreload(route) {
+  var _a2;
+  for (const componentType of componentTypes) {
+    if ((_a2 = route.options[componentType]) == null ? void 0 : _a2.preload) {
+      return true;
+    }
+  }
+  return false;
+}
+const componentTypes = [
+  "component",
+  "errorComponent",
+  "pendingComponent",
+  "notFoundComponent"
+];
+function getLocationChangeInfo(routerState) {
+  const fromLocation = routerState.resolvedLocation;
+  const toLocation = routerState.location;
+  const pathChanged = (fromLocation == null ? void 0 : fromLocation.pathname) !== toLocation.pathname;
+  const hrefChanged = (fromLocation == null ? void 0 : fromLocation.href) !== toLocation.href;
+  const hashChanged = (fromLocation == null ? void 0 : fromLocation.hash) !== toLocation.hash;
+  return { fromLocation, toLocation, pathChanged, hrefChanged, hashChanged };
+}
+class RouterCore {
+  /**
+   * @deprecated Use the `createRouter` function instead
+   */
+  constructor(options2) {
+    this.tempLocationKey = `${Math.round(
+      Math.random() * 1e7
+    )}`;
+    this.resetNextScroll = true;
+    this.shouldViewTransition = void 0;
+    this.isViewTransitionTypesSupported = void 0;
+    this.subscribers = /* @__PURE__ */ new Set();
+    this.isScrollRestoring = false;
+    this.isScrollRestorationSetup = false;
+    this.startTransition = (fn) => fn();
+    this.update = (newOptions) => {
+      var _a2;
+      if (newOptions.notFoundRoute) {
+        console.warn(
+          "The notFoundRoute API is deprecated and will be removed in the next major version. See https://tanstack.com/router/v1/docs/framework/react/guide/not-found-errors#migrating-from-notfoundroute for more info."
+        );
+      }
+      const previousOptions = this.options;
+      this.options = {
+        ...this.options,
+        ...newOptions
+      };
+      this.isServer = this.options.isServer ?? typeof document === "undefined";
+      this.pathParamsDecodeCharMap = this.options.pathParamsAllowedCharacters ? new Map(
+        this.options.pathParamsAllowedCharacters.map((char) => [
+          encodeURIComponent(char),
+          char
+        ])
+      ) : void 0;
+      if (!this.basepath || newOptions.basepath && newOptions.basepath !== previousOptions.basepath) {
+        if (newOptions.basepath === void 0 || newOptions.basepath === "" || newOptions.basepath === "/") {
+          this.basepath = "/";
+        } else {
+          this.basepath = `/${trimPath(newOptions.basepath)}`;
+        }
+      }
+      if (!this.history || this.options.history && this.options.history !== this.history) {
+        this.history = this.options.history ?? (this.isServer ? createMemoryHistory({
+          initialEntries: [this.basepath || "/"]
+        }) : createBrowserHistory());
+        this.updateLatestLocation();
+      }
+      if (this.options.routeTree !== this.routeTree) {
+        this.routeTree = this.options.routeTree;
+        this.buildRouteTree();
+      }
+      if (!this.__store) {
+        this.__store = new Store(getInitialRouterState(this.latestLocation), {
+          onUpdate: () => {
+            this.__store.state = {
+              ...this.state,
+              cachedMatches: this.state.cachedMatches.filter(
+                (d) => !["redirected"].includes(d.status)
+              )
+            };
+          }
+        });
+        setupScrollRestoration(this);
+      }
+      if (typeof window !== "undefined" && "CSS" in window && typeof ((_a2 = window.CSS) == null ? void 0 : _a2.supports) === "function") {
+        this.isViewTransitionTypesSupported = window.CSS.supports(
+          "selector(:active-view-transition-type(a)"
+        );
+      }
+    };
+    this.updateLatestLocation = () => {
+      this.latestLocation = this.parseLocation(
+        this.history.location,
+        this.latestLocation
+      );
+    };
+    this.buildRouteTree = () => {
+      const { routesById, routesByPath, flatRoutes } = processRouteTree({
+        routeTree: this.routeTree,
+        initRoute: (route, i) => {
+          route.init({
+            originalIndex: i
+          });
+        }
+      });
+      this.routesById = routesById;
+      this.routesByPath = routesByPath;
+      this.flatRoutes = flatRoutes;
+      const notFoundRoute = this.options.notFoundRoute;
+      if (notFoundRoute) {
+        notFoundRoute.init({
+          originalIndex: 99999999999
+        });
+        this.routesById[notFoundRoute.id] = notFoundRoute;
+      }
+    };
+    this.subscribe = (eventType, fn) => {
+      const listener = {
+        eventType,
+        fn
+      };
+      this.subscribers.add(listener);
+      return () => {
+        this.subscribers.delete(listener);
+      };
+    };
+    this.emit = (routerEvent) => {
+      this.subscribers.forEach((listener) => {
+        if (listener.eventType === routerEvent.type) {
+          listener.fn(routerEvent);
+        }
+      });
+    };
+    this.parseLocation = (locationToParse, previousLocation) => {
+      const parse = ({
+        pathname,
+        search,
+        hash,
+        state
+      }) => {
+        const parsedSearch = this.options.parseSearch(search);
+        const searchStr = this.options.stringifySearch(parsedSearch);
+        return {
+          pathname,
+          searchStr,
+          search: replaceEqualDeep(previousLocation == null ? void 0 : previousLocation.search, parsedSearch),
+          hash: hash.split("#").reverse()[0] ?? "",
+          href: `${pathname}${searchStr}${hash}`,
+          state: replaceEqualDeep(previousLocation == null ? void 0 : previousLocation.state, state)
+        };
+      };
+      const location2 = parse(locationToParse);
+      const { __tempLocation, __tempKey } = location2.state;
+      if (__tempLocation && (!__tempKey || __tempKey === this.tempLocationKey)) {
+        const parsedTempLocation = parse(__tempLocation);
+        parsedTempLocation.state.key = location2.state.key;
+        parsedTempLocation.state.__TSR_key = location2.state.__TSR_key;
+        delete parsedTempLocation.state.__tempLocation;
+        return {
+          ...parsedTempLocation,
+          maskedLocation: location2
+        };
+      }
+      return location2;
+    };
+    this.resolvePathWithBase = (from, path) => {
+      const resolvedPath = resolvePath({
+        basepath: this.basepath,
+        base: from,
+        to: cleanPath(path),
+        trailingSlash: this.options.trailingSlash,
+        caseSensitive: this.options.caseSensitive,
+        parseCache: this.parsePathnameCache
+      });
+      return resolvedPath;
+    };
+    this.matchRoutes = (pathnameOrNext, locationSearchOrOpts, opts) => {
+      if (typeof pathnameOrNext === "string") {
+        return this.matchRoutesInternal(
+          {
+            pathname: pathnameOrNext,
+            search: locationSearchOrOpts
+          },
+          opts
+        );
+      }
+      return this.matchRoutesInternal(pathnameOrNext, locationSearchOrOpts);
+    };
+    this.parsePathnameCache = createLRUCache(1e3);
+    this.getMatchedRoutes = (pathname, routePathname) => {
+      return getMatchedRoutes({
+        pathname,
+        routePathname,
+        basepath: this.basepath,
+        caseSensitive: this.options.caseSensitive,
+        routesByPath: this.routesByPath,
+        routesById: this.routesById,
+        flatRoutes: this.flatRoutes,
+        parseCache: this.parsePathnameCache
+      });
+    };
+    this.cancelMatch = (id) => {
+      const match = this.getMatch(id);
+      if (!match) return;
+      match.abortController.abort();
+      clearTimeout(match._nonReactive.pendingTimeout);
+      match._nonReactive.pendingTimeout = void 0;
+    };
+    this.cancelMatches = () => {
+      var _a2;
+      (_a2 = this.state.pendingMatches) == null ? void 0 : _a2.forEach((match) => {
+        this.cancelMatch(match.id);
+      });
+    };
+    this.buildLocation = (opts) => {
+      const build = (dest = {}) => {
+        var _a2, _b2;
+        const currentLocation = dest._fromLocation || this.latestLocation;
+        const allCurrentLocationMatches = this.matchRoutes(currentLocation, {
+          _buildLocation: true
+        });
+        const lastMatch = last(allCurrentLocationMatches);
+        if (dest.from && false) ;
+        const defaultedFromPath = dest.unsafeRelative === "path" ? currentLocation.pathname : dest.from ?? lastMatch.fullPath;
+        const fromPath = this.resolvePathWithBase(defaultedFromPath, ".");
+        const fromSearch = lastMatch.search;
+        const fromParams = { ...lastMatch.params };
+        const nextTo = dest.to ? this.resolvePathWithBase(fromPath, `${dest.to}`) : this.resolvePathWithBase(fromPath, ".");
+        const nextParams = dest.params === false || dest.params === null ? {} : (dest.params ?? true) === true ? fromParams : Object.assign(
+          fromParams,
+          functionalUpdate(dest.params, fromParams)
+        );
+        const interpolatedNextTo = interpolatePath({
+          path: nextTo,
+          params: nextParams,
+          parseCache: this.parsePathnameCache
+        }).interpolatedPath;
+        const destRoutes = this.matchRoutes(interpolatedNextTo, void 0, {
+          _buildLocation: true
+        }).map((d) => this.looseRoutesById[d.routeId]);
+        if (Object.keys(nextParams).length > 0) {
+          for (const route of destRoutes) {
+            const fn = ((_a2 = route.options.params) == null ? void 0 : _a2.stringify) ?? route.options.stringifyParams;
+            if (fn) {
+              Object.assign(nextParams, fn(nextParams));
+            }
+          }
+        }
+        const nextPathname = interpolatePath({
+          // Use the original template path for interpolation
+          // This preserves the original parameter syntax including optional parameters
+          path: nextTo,
+          params: nextParams,
+          leaveWildcards: false,
+          leaveParams: opts.leaveParams,
+          decodeCharMap: this.pathParamsDecodeCharMap,
+          parseCache: this.parsePathnameCache
+        }).interpolatedPath;
+        let nextSearch = fromSearch;
+        if (opts._includeValidateSearch && ((_b2 = this.options.search) == null ? void 0 : _b2.strict)) {
+          const validatedSearch = {};
+          destRoutes.forEach((route) => {
+            if (route.options.validateSearch) {
+              try {
+                Object.assign(
+                  validatedSearch,
+                  validateSearch(route.options.validateSearch, {
+                    ...validatedSearch,
+                    ...nextSearch
+                  })
+                );
+              } catch {
+              }
+            }
+          });
+          nextSearch = validatedSearch;
+        }
+        nextSearch = applySearchMiddleware({
+          search: nextSearch,
+          dest,
+          destRoutes,
+          _includeValidateSearch: opts._includeValidateSearch
+        });
+        nextSearch = replaceEqualDeep(fromSearch, nextSearch);
+        const searchStr = this.options.stringifySearch(nextSearch);
+        const hash = dest.hash === true ? currentLocation.hash : dest.hash ? functionalUpdate(dest.hash, currentLocation.hash) : void 0;
+        const hashStr = hash ? `#${hash}` : "";
+        let nextState = dest.state === true ? currentLocation.state : dest.state ? functionalUpdate(dest.state, currentLocation.state) : {};
+        nextState = replaceEqualDeep(currentLocation.state, nextState);
+        return {
+          pathname: nextPathname,
+          search: nextSearch,
+          searchStr,
+          state: nextState,
+          hash: hash ?? "",
+          href: `${nextPathname}${searchStr}${hashStr}`,
+          unmaskOnReload: dest.unmaskOnReload
+        };
+      };
+      const buildWithMatches = (dest = {}, maskedDest) => {
+        var _a2;
+        const next = build(dest);
+        let maskedNext = maskedDest ? build(maskedDest) : void 0;
+        if (!maskedNext) {
+          let params = {};
+          const foundMask = (_a2 = this.options.routeMasks) == null ? void 0 : _a2.find((d) => {
+            const match = matchPathname(
+              this.basepath,
+              next.pathname,
+              {
+                to: d.from,
+                caseSensitive: false,
+                fuzzy: false
+              },
+              this.parsePathnameCache
+            );
+            if (match) {
+              params = match;
+              return true;
+            }
+            return false;
+          });
+          if (foundMask) {
+            const { from: _from, ...maskProps } = foundMask;
+            maskedDest = {
+              from: opts.from,
+              ...maskProps,
+              params
+            };
+            maskedNext = build(maskedDest);
+          }
+        }
+        if (maskedNext) {
+          next.maskedLocation = maskedNext;
+        }
+        return next;
+      };
+      if (opts.mask) {
+        return buildWithMatches(opts, {
+          from: opts.from,
+          ...opts.mask
+        });
+      }
+      return buildWithMatches(opts);
+    };
+    this.commitLocation = ({
+      viewTransition,
+      ignoreBlocker,
+      ...next
+    }) => {
+      const isSameState = () => {
+        const ignoredProps = [
+          "key",
+          // TODO: Remove in v2 - use __TSR_key instead
+          "__TSR_key",
+          "__TSR_index",
+          "__hashScrollIntoViewOptions"
+        ];
+        ignoredProps.forEach((prop) => {
+          next.state[prop] = this.latestLocation.state[prop];
+        });
+        const isEqual = deepEqual(next.state, this.latestLocation.state);
+        ignoredProps.forEach((prop) => {
+          delete next.state[prop];
+        });
+        return isEqual;
+      };
+      const isSameUrl = this.latestLocation.href === next.href;
+      const previousCommitPromise = this.commitLocationPromise;
+      this.commitLocationPromise = createControlledPromise(() => {
+        previousCommitPromise == null ? void 0 : previousCommitPromise.resolve();
+      });
+      if (isSameUrl && isSameState()) {
+        this.load();
+      } else {
+        let { maskedLocation, hashScrollIntoView, ...nextHistory } = next;
+        if (maskedLocation) {
+          nextHistory = {
+            ...maskedLocation,
+            state: {
+              ...maskedLocation.state,
+              __tempKey: void 0,
+              __tempLocation: {
+                ...nextHistory,
+                search: nextHistory.searchStr,
+                state: {
+                  ...nextHistory.state,
+                  __tempKey: void 0,
+                  __tempLocation: void 0,
+                  __TSR_key: void 0,
+                  key: void 0
+                  // TODO: Remove in v2 - use __TSR_key instead
+                }
+              }
+            }
+          };
+          if (nextHistory.unmaskOnReload ?? this.options.unmaskOnReload ?? false) {
+            nextHistory.state.__tempKey = this.tempLocationKey;
+          }
+        }
+        nextHistory.state.__hashScrollIntoViewOptions = hashScrollIntoView ?? this.options.defaultHashScrollIntoView ?? true;
+        this.shouldViewTransition = viewTransition;
+        this.history[next.replace ? "replace" : "push"](
+          nextHistory.href,
+          nextHistory.state,
+          { ignoreBlocker }
+        );
+      }
+      this.resetNextScroll = next.resetScroll ?? true;
+      if (!this.history.subscribers.size) {
+        this.load();
+      }
+      return this.commitLocationPromise;
+    };
+    this.buildAndCommitLocation = ({
+      replace,
+      resetScroll,
+      hashScrollIntoView,
+      viewTransition,
+      ignoreBlocker,
+      href,
+      ...rest
+    } = {}) => {
+      if (href) {
+        const currentIndex = this.history.location.state.__TSR_index;
+        const parsed = parseHref(href, {
+          __TSR_index: replace ? currentIndex : currentIndex + 1
+        });
+        rest.to = parsed.pathname;
+        rest.search = this.options.parseSearch(parsed.search);
+        rest.hash = parsed.hash.slice(1);
+      }
+      const location2 = this.buildLocation({
+        ...rest,
+        _includeValidateSearch: true
+      });
+      return this.commitLocation({
+        ...location2,
+        viewTransition,
+        replace,
+        resetScroll,
+        hashScrollIntoView,
+        ignoreBlocker
+      });
+    };
+    this.navigate = ({ to, reloadDocument, href, ...rest }) => {
+      if (!reloadDocument && href) {
+        try {
+          new URL(`${href}`);
+          reloadDocument = true;
+        } catch {
+        }
+      }
+      if (reloadDocument) {
+        if (!href) {
+          const location2 = this.buildLocation({ to, ...rest });
+          href = this.history.createHref(location2.href);
+        }
+        if (rest.replace) {
+          window.location.replace(href);
+        } else {
+          window.location.href = href;
+        }
+        return Promise.resolve();
+      }
+      return this.buildAndCommitLocation({
+        ...rest,
+        href,
+        to,
+        _isNavigate: true
+      });
+    };
+    this.beforeLoad = () => {
+      this.cancelMatches();
+      this.updateLatestLocation();
+      if (this.isServer) {
+        const nextLocation = this.buildLocation({
+          to: this.latestLocation.pathname,
+          search: true,
+          params: true,
+          hash: true,
+          state: true,
+          _includeValidateSearch: true
+        });
+        const normalizeUrl = (url) => {
+          try {
+            return encodeURI(decodeURI(url));
+          } catch {
+            return url;
+          }
+        };
+        if (trimPath(normalizeUrl(this.latestLocation.href)) !== trimPath(normalizeUrl(nextLocation.href))) {
+          throw redirect({ href: nextLocation.href });
+        }
+      }
+      const pendingMatches = this.matchRoutes(this.latestLocation);
+      this.__store.setState((s) => ({
+        ...s,
+        status: "pending",
+        statusCode: 200,
+        isLoading: true,
+        location: this.latestLocation,
+        pendingMatches,
+        // If a cached moved to pendingMatches, remove it from cachedMatches
+        cachedMatches: s.cachedMatches.filter(
+          (d) => !pendingMatches.some((e) => e.id === d.id)
+        )
+      }));
+    };
+    this.load = async (opts) => {
+      let redirect2;
+      let notFound;
+      let loadPromise;
+      loadPromise = new Promise((resolve) => {
+        this.startTransition(async () => {
+          var _a2;
+          try {
+            this.beforeLoad();
+            const next = this.latestLocation;
+            const prevLocation = this.state.resolvedLocation;
+            if (!this.state.redirect) {
+              this.emit({
+                type: "onBeforeNavigate",
+                ...getLocationChangeInfo({
+                  resolvedLocation: prevLocation,
+                  location: next
+                })
+              });
+            }
+            this.emit({
+              type: "onBeforeLoad",
+              ...getLocationChangeInfo({
+                resolvedLocation: prevLocation,
+                location: next
+              })
+            });
+            await loadMatches({
+              router: this,
+              sync: opts == null ? void 0 : opts.sync,
+              matches: this.state.pendingMatches,
+              location: next,
+              updateMatch: this.updateMatch,
+              // eslint-disable-next-line @typescript-eslint/require-await
+              onReady: async () => {
+                this.startViewTransition(async () => {
+                  let exitingMatches;
+                  let enteringMatches;
+                  let stayingMatches;
+                  batch(() => {
+                    this.__store.setState((s) => {
+                      const previousMatches = s.matches;
+                      const newMatches = s.pendingMatches || s.matches;
+                      exitingMatches = previousMatches.filter(
+                        (match) => !newMatches.some((d) => d.id === match.id)
+                      );
+                      enteringMatches = newMatches.filter(
+                        (match) => !previousMatches.some((d) => d.id === match.id)
+                      );
+                      stayingMatches = previousMatches.filter(
+                        (match) => newMatches.some((d) => d.id === match.id)
+                      );
+                      return {
+                        ...s,
+                        isLoading: false,
+                        loadedAt: Date.now(),
+                        matches: newMatches,
+                        pendingMatches: void 0,
+                        cachedMatches: [
+                          ...s.cachedMatches,
+                          ...exitingMatches.filter((d) => d.status !== "error")
+                        ]
+                      };
+                    });
+                    this.clearExpiredCache();
+                  });
+                  [
+                    [exitingMatches, "onLeave"],
+                    [enteringMatches, "onEnter"],
+                    [stayingMatches, "onStay"]
+                  ].forEach(([matches, hook]) => {
+                    matches.forEach((match) => {
+                      var _a22, _b2;
+                      (_b2 = (_a22 = this.looseRoutesById[match.routeId].options)[hook]) == null ? void 0 : _b2.call(_a22, match);
+                    });
+                  });
+                });
+              }
+            });
+          } catch (err) {
+            if (isRedirect(err)) {
+              redirect2 = err;
+              if (!this.isServer) {
+                this.navigate({
+                  ...redirect2.options,
+                  replace: true,
+                  ignoreBlocker: true
+                });
+              }
+            } else if (isNotFound(err)) {
+              notFound = err;
+            }
+            this.__store.setState((s) => ({
+              ...s,
+              statusCode: redirect2 ? redirect2.status : notFound ? 404 : s.matches.some((d) => d.status === "error") ? 500 : 200,
+              redirect: redirect2
+            }));
+          }
+          if (this.latestLoadPromise === loadPromise) {
+            (_a2 = this.commitLocationPromise) == null ? void 0 : _a2.resolve();
+            this.latestLoadPromise = void 0;
+            this.commitLocationPromise = void 0;
+          }
+          resolve();
+        });
+      });
+      this.latestLoadPromise = loadPromise;
+      await loadPromise;
+      while (this.latestLoadPromise && loadPromise !== this.latestLoadPromise) {
+        await this.latestLoadPromise;
+      }
+      if (this.hasNotFoundMatch()) {
+        this.__store.setState((s) => ({
+          ...s,
+          statusCode: 404
+        }));
+      }
+    };
+    this.startViewTransition = (fn) => {
+      const shouldViewTransition = this.shouldViewTransition ?? this.options.defaultViewTransition;
+      delete this.shouldViewTransition;
+      if (shouldViewTransition && typeof document !== "undefined" && "startViewTransition" in document && typeof document.startViewTransition === "function") {
+        let startViewTransitionParams;
+        if (typeof shouldViewTransition === "object" && this.isViewTransitionTypesSupported) {
+          const next = this.latestLocation;
+          const prevLocation = this.state.resolvedLocation;
+          const resolvedViewTransitionTypes = typeof shouldViewTransition.types === "function" ? shouldViewTransition.types(
+            getLocationChangeInfo({
+              resolvedLocation: prevLocation,
+              location: next
+            })
+          ) : shouldViewTransition.types;
+          startViewTransitionParams = {
+            update: fn,
+            types: resolvedViewTransitionTypes
+          };
+        } else {
+          startViewTransitionParams = fn;
+        }
+        document.startViewTransition(startViewTransitionParams);
+      } else {
+        fn();
+      }
+    };
+    this.updateMatch = (id, updater) => {
+      var _a2;
+      const matchesKey = ((_a2 = this.state.pendingMatches) == null ? void 0 : _a2.some((d) => d.id === id)) ? "pendingMatches" : this.state.matches.some((d) => d.id === id) ? "matches" : this.state.cachedMatches.some((d) => d.id === id) ? "cachedMatches" : "";
+      if (matchesKey) {
+        this.__store.setState((s) => {
+          var _a22;
+          return {
+            ...s,
+            [matchesKey]: (_a22 = s[matchesKey]) == null ? void 0 : _a22.map((d) => d.id === id ? updater(d) : d)
+          };
+        });
+      }
+    };
+    this.getMatch = (matchId) => {
+      var _a2;
+      const findFn = (d) => d.id === matchId;
+      return this.state.cachedMatches.find(findFn) ?? ((_a2 = this.state.pendingMatches) == null ? void 0 : _a2.find(findFn)) ?? this.state.matches.find(findFn);
+    };
+    this.invalidate = (opts) => {
+      const invalidate = (d) => {
+        var _a2;
+        if (((_a2 = opts == null ? void 0 : opts.filter) == null ? void 0 : _a2.call(opts, d)) ?? true) {
+          return {
+            ...d,
+            invalid: true,
+            ...(opts == null ? void 0 : opts.forcePending) || d.status === "error" ? { status: "pending", error: void 0 } : void 0
+          };
+        }
+        return d;
+      };
+      this.__store.setState((s) => {
+        var _a2;
+        return {
+          ...s,
+          matches: s.matches.map(invalidate),
+          cachedMatches: s.cachedMatches.map(invalidate),
+          pendingMatches: (_a2 = s.pendingMatches) == null ? void 0 : _a2.map(invalidate)
+        };
+      });
+      this.shouldViewTransition = false;
+      return this.load({ sync: opts == null ? void 0 : opts.sync });
+    };
+    this.resolveRedirect = (redirect2) => {
+      if (!redirect2.options.href) {
+        redirect2.options.href = this.buildLocation(redirect2.options).href;
+        redirect2.headers.set("Location", redirect2.options.href);
+      }
+      if (!redirect2.headers.get("Location")) {
+        redirect2.headers.set("Location", redirect2.options.href);
+      }
+      return redirect2;
+    };
+    this.clearCache = (opts) => {
+      const filter = opts == null ? void 0 : opts.filter;
+      if (filter !== void 0) {
+        this.__store.setState((s) => {
+          return {
+            ...s,
+            cachedMatches: s.cachedMatches.filter(
+              (m) => !filter(m)
+            )
+          };
+        });
+      } else {
+        this.__store.setState((s) => {
+          return {
+            ...s,
+            cachedMatches: []
+          };
+        });
+      }
+    };
+    this.clearExpiredCache = () => {
+      const filter = (d) => {
+        const route = this.looseRoutesById[d.routeId];
+        if (!route.options.loader) {
+          return true;
+        }
+        const gcTime = (d.preload ? route.options.preloadGcTime ?? this.options.defaultPreloadGcTime : route.options.gcTime ?? this.options.defaultGcTime) ?? 5 * 60 * 1e3;
+        const isError = d.status === "error";
+        if (isError) return true;
+        const gcEligible = Date.now() - d.updatedAt >= gcTime;
+        return gcEligible;
+      };
+      this.clearCache({ filter });
+    };
+    this.loadRouteChunk = loadRouteChunk;
+    this.preloadRoute = async (opts) => {
+      const next = this.buildLocation(opts);
+      let matches = this.matchRoutes(next, {
+        throwOnError: true,
+        preload: true,
+        dest: opts
+      });
+      const activeMatchIds = new Set(
+        [...this.state.matches, ...this.state.pendingMatches ?? []].map(
+          (d) => d.id
+        )
+      );
+      const loadedMatchIds = /* @__PURE__ */ new Set([
+        ...activeMatchIds,
+        ...this.state.cachedMatches.map((d) => d.id)
+      ]);
+      batch(() => {
+        matches.forEach((match) => {
+          if (!loadedMatchIds.has(match.id)) {
+            this.__store.setState((s) => ({
+              ...s,
+              cachedMatches: [...s.cachedMatches, match]
+            }));
+          }
+        });
+      });
+      try {
+        matches = await loadMatches({
+          router: this,
+          matches,
+          location: next,
+          preload: true,
+          updateMatch: (id, updater) => {
+            if (activeMatchIds.has(id)) {
+              matches = matches.map((d) => d.id === id ? updater(d) : d);
+            } else {
+              this.updateMatch(id, updater);
+            }
+          }
+        });
+        return matches;
+      } catch (err) {
+        if (isRedirect(err)) {
+          if (err.options.reloadDocument) {
+            return void 0;
+          }
+          return await this.preloadRoute({
+            ...err.options,
+            _fromLocation: next
+          });
+        }
+        if (!isNotFound(err)) {
+          console.error(err);
+        }
+        return void 0;
+      }
+    };
+    this.matchRoute = (location2, opts) => {
+      const matchLocation = {
+        ...location2,
+        to: location2.to ? this.resolvePathWithBase(
+          location2.from || "",
+          location2.to
+        ) : void 0,
+        params: location2.params || {},
+        leaveParams: true
+      };
+      const next = this.buildLocation(matchLocation);
+      if ((opts == null ? void 0 : opts.pending) && this.state.status !== "pending") {
+        return false;
+      }
+      const pending = (opts == null ? void 0 : opts.pending) === void 0 ? !this.state.isLoading : opts.pending;
+      const baseLocation = pending ? this.latestLocation : this.state.resolvedLocation || this.state.location;
+      const match = matchPathname(
+        this.basepath,
+        baseLocation.pathname,
+        {
+          ...opts,
+          to: next.pathname
+        },
+        this.parsePathnameCache
+      );
+      if (!match) {
+        return false;
+      }
+      if (location2.params) {
+        if (!deepEqual(match, location2.params, { partial: true })) {
+          return false;
+        }
+      }
+      if (match && ((opts == null ? void 0 : opts.includeSearch) ?? true)) {
+        return deepEqual(baseLocation.search, next.search, { partial: true }) ? match : false;
+      }
+      return match;
+    };
+    this.hasNotFoundMatch = () => {
+      return this.__store.state.matches.some(
+        (d) => d.status === "notFound" || d.globalNotFound
+      );
+    };
+    this.update({
+      defaultPreloadDelay: 50,
+      defaultPendingMs: 1e3,
+      defaultPendingMinMs: 500,
+      context: void 0,
+      ...options2,
+      caseSensitive: options2.caseSensitive ?? false,
+      notFoundMode: options2.notFoundMode ?? "fuzzy",
+      stringifySearch: options2.stringifySearch ?? defaultStringifySearch,
+      parseSearch: options2.parseSearch ?? defaultParseSearch
+    });
+    if (typeof document !== "undefined") {
+      self.__TSR_ROUTER__ = this;
+    }
+  }
+  isShell() {
+    return !!this.options.isShell;
+  }
+  isPrerendering() {
+    return !!this.options.isPrerendering;
+  }
+  get state() {
+    return this.__store.state;
+  }
+  get looseRoutesById() {
+    return this.routesById;
+  }
+  matchRoutesInternal(next, opts) {
+    var _a2;
+    const { foundRoute, matchedRoutes, routeParams } = this.getMatchedRoutes(
+      next.pathname,
+      (_a2 = opts == null ? void 0 : opts.dest) == null ? void 0 : _a2.to
+    );
+    let isGlobalNotFound = false;
+    if (
+      // If we found a route, and it's not an index route and we have left over path
+      foundRoute ? foundRoute.path !== "/" && routeParams["**"] : (
+        // Or if we didn't find a route and we have left over path
+        trimPathRight(next.pathname)
+      )
+    ) {
+      if (this.options.notFoundRoute) {
+        matchedRoutes.push(this.options.notFoundRoute);
+      } else {
+        isGlobalNotFound = true;
+      }
+    }
+    const globalNotFoundRouteId = (() => {
+      if (!isGlobalNotFound) {
+        return void 0;
+      }
+      if (this.options.notFoundMode !== "root") {
+        for (let i = matchedRoutes.length - 1; i >= 0; i--) {
+          const route = matchedRoutes[i];
+          if (route.children) {
+            return route.id;
+          }
+        }
+      }
+      return rootRouteId;
+    })();
+    const matches = [];
+    const getParentContext = (parentMatch) => {
+      const parentMatchId = parentMatch == null ? void 0 : parentMatch.id;
+      const parentContext = !parentMatchId ? this.options.context ?? void 0 : parentMatch.context ?? this.options.context ?? void 0;
+      return parentContext;
+    };
+    matchedRoutes.forEach((route, index2) => {
+      var _a22, _b2, _c2;
+      const parentMatch = matches[index2 - 1];
+      const [preMatchSearch, strictMatchSearch, searchError] = (() => {
+        const parentSearch = (parentMatch == null ? void 0 : parentMatch.search) ?? next.search;
+        const parentStrictSearch = (parentMatch == null ? void 0 : parentMatch._strictSearch) ?? void 0;
+        try {
+          const strictSearch = validateSearch(route.options.validateSearch, { ...parentSearch }) ?? void 0;
+          return [
+            {
+              ...parentSearch,
+              ...strictSearch
+            },
+            { ...parentStrictSearch, ...strictSearch },
+            void 0
+          ];
+        } catch (err) {
+          let searchParamError = err;
+          if (!(err instanceof SearchParamError)) {
+            searchParamError = new SearchParamError(err.message, {
+              cause: err
+            });
+          }
+          if (opts == null ? void 0 : opts.throwOnError) {
+            throw searchParamError;
+          }
+          return [parentSearch, {}, searchParamError];
+        }
+      })();
+      const loaderDeps = ((_b2 = (_a22 = route.options).loaderDeps) == null ? void 0 : _b2.call(_a22, {
+        search: preMatchSearch
+      })) ?? "";
+      const loaderDepsHash = loaderDeps ? JSON.stringify(loaderDeps) : "";
+      const { interpolatedPath, usedParams } = interpolatePath({
+        path: route.fullPath,
+        params: routeParams,
+        decodeCharMap: this.pathParamsDecodeCharMap
+      });
+      const matchId = interpolatePath({
+        path: route.id,
+        params: routeParams,
+        leaveWildcards: true,
+        decodeCharMap: this.pathParamsDecodeCharMap,
+        parseCache: this.parsePathnameCache
+      }).interpolatedPath + loaderDepsHash;
+      const existingMatch = this.getMatch(matchId);
+      const previousMatch = this.state.matches.find(
+        (d) => d.routeId === route.id
+      );
+      const strictParams = (existingMatch == null ? void 0 : existingMatch._strictParams) ?? usedParams;
+      let paramsError = void 0;
+      if (!existingMatch) {
+        const strictParseParams = ((_c2 = route.options.params) == null ? void 0 : _c2.parse) ?? route.options.parseParams;
+        if (strictParseParams) {
+          try {
+            Object.assign(
+              strictParams,
+              strictParseParams(strictParams)
+            );
+          } catch (err) {
+            paramsError = new PathParamError(err.message, {
+              cause: err
+            });
+            if (opts == null ? void 0 : opts.throwOnError) {
+              throw paramsError;
+            }
+          }
+        }
+      }
+      Object.assign(routeParams, strictParams);
+      const cause = previousMatch ? "stay" : "enter";
+      let match;
+      if (existingMatch) {
+        match = {
+          ...existingMatch,
+          cause,
+          params: previousMatch ? replaceEqualDeep(previousMatch.params, routeParams) : routeParams,
+          _strictParams: strictParams,
+          search: previousMatch ? replaceEqualDeep(previousMatch.search, preMatchSearch) : replaceEqualDeep(existingMatch.search, preMatchSearch),
+          _strictSearch: strictMatchSearch
+        };
+      } else {
+        const status = route.options.loader || route.options.beforeLoad || route.lazyFn || routeNeedsPreload(route) ? "pending" : "success";
+        match = {
+          id: matchId,
+          index: index2,
+          routeId: route.id,
+          params: previousMatch ? replaceEqualDeep(previousMatch.params, routeParams) : routeParams,
+          _strictParams: strictParams,
+          pathname: joinPaths([this.basepath, interpolatedPath]),
+          updatedAt: Date.now(),
+          search: previousMatch ? replaceEqualDeep(previousMatch.search, preMatchSearch) : preMatchSearch,
+          _strictSearch: strictMatchSearch,
+          searchError: void 0,
+          status,
+          isFetching: false,
+          error: void 0,
+          paramsError,
+          __routeContext: void 0,
+          _nonReactive: {
+            loadPromise: createControlledPromise()
+          },
+          __beforeLoadContext: void 0,
+          context: {},
+          abortController: new AbortController(),
+          fetchCount: 0,
+          cause,
+          loaderDeps: previousMatch ? replaceEqualDeep(previousMatch.loaderDeps, loaderDeps) : loaderDeps,
+          invalid: false,
+          preload: false,
+          links: void 0,
+          scripts: void 0,
+          headScripts: void 0,
+          meta: void 0,
+          staticData: route.options.staticData || {},
+          fullPath: route.fullPath
+        };
+      }
+      if (!(opts == null ? void 0 : opts.preload)) {
+        match.globalNotFound = globalNotFoundRouteId === route.id;
+      }
+      match.searchError = searchError;
+      const parentContext = getParentContext(parentMatch);
+      match.context = {
+        ...parentContext,
+        ...match.__routeContext,
+        ...match.__beforeLoadContext
+      };
+      matches.push(match);
+    });
+    matches.forEach((match, index2) => {
+      const route = this.looseRoutesById[match.routeId];
+      const existingMatch = this.getMatch(match.id);
+      if (!existingMatch && (opts == null ? void 0 : opts._buildLocation) !== true) {
+        const parentMatch = matches[index2 - 1];
+        const parentContext = getParentContext(parentMatch);
+        if (route.options.context) {
+          const contextFnContext = {
+            deps: match.loaderDeps,
+            params: match.params,
+            context: parentContext ?? {},
+            location: next,
+            navigate: (opts2) => this.navigate({ ...opts2, _fromLocation: next }),
+            buildLocation: this.buildLocation,
+            cause: match.cause,
+            abortController: match.abortController,
+            preload: !!match.preload,
+            matches
+          };
+          match.__routeContext = route.options.context(contextFnContext) ?? void 0;
+        }
+        match.context = {
+          ...parentContext,
+          ...match.__routeContext,
+          ...match.__beforeLoadContext
+        };
+      }
+    });
+    return matches;
+  }
+}
+class SearchParamError extends Error {
+}
+class PathParamError extends Error {
+}
+function getInitialRouterState(location2) {
+  return {
+    loadedAt: 0,
+    isLoading: false,
+    isTransitioning: false,
+    status: "idle",
+    resolvedLocation: void 0,
+    location: location2,
+    matches: [],
+    pendingMatches: [],
+    cachedMatches: [],
+    statusCode: 200
+  };
+}
+function validateSearch(validateSearch2, input) {
+  if (validateSearch2 == null) return {};
+  if ("~standard" in validateSearch2) {
+    const result = validateSearch2["~standard"].validate(input);
+    if (result instanceof Promise)
+      throw new SearchParamError("Async validation not supported");
+    if (result.issues)
+      throw new SearchParamError(JSON.stringify(result.issues, void 0, 2), {
+        cause: result
+      });
+    return result.value;
+  }
+  if ("parse" in validateSearch2) {
+    return validateSearch2.parse(input);
+  }
+  if (typeof validateSearch2 === "function") {
+    return validateSearch2(input);
+  }
+  return {};
+}
+function getMatchedRoutes({
+  pathname,
+  routePathname,
+  basepath,
+  caseSensitive,
+  routesByPath,
+  routesById,
+  flatRoutes,
+  parseCache
+}) {
+  let routeParams = {};
+  const trimmedPath = trimPathRight(pathname);
+  const getMatchedParams = (route) => {
+    var _a2;
+    const result = matchPathname(
+      basepath,
+      trimmedPath,
+      {
+        to: route.fullPath,
+        caseSensitive: ((_a2 = route.options) == null ? void 0 : _a2.caseSensitive) ?? caseSensitive,
+        // we need fuzzy matching for `notFoundMode: 'fuzzy'`
+        fuzzy: true
+      },
+      parseCache
+    );
+    return result;
+  };
+  let foundRoute = routePathname !== void 0 ? routesByPath[routePathname] : void 0;
+  if (foundRoute) {
+    routeParams = getMatchedParams(foundRoute);
+  } else {
+    let fuzzyMatch = void 0;
+    for (const route of flatRoutes) {
+      const matchedParams = getMatchedParams(route);
+      if (matchedParams) {
+        if (route.path !== "/" && matchedParams["**"]) {
+          if (!fuzzyMatch) {
+            fuzzyMatch = { foundRoute: route, routeParams: matchedParams };
+          }
+        } else {
+          foundRoute = route;
+          routeParams = matchedParams;
+          break;
+        }
+      }
+    }
+    if (!foundRoute && fuzzyMatch) {
+      foundRoute = fuzzyMatch.foundRoute;
+      routeParams = fuzzyMatch.routeParams;
+    }
+  }
+  let routeCursor = foundRoute || routesById[rootRouteId];
+  const matchedRoutes = [routeCursor];
+  while (routeCursor.parentRoute) {
+    routeCursor = routeCursor.parentRoute;
+    matchedRoutes.push(routeCursor);
+  }
+  matchedRoutes.reverse();
+  return { matchedRoutes, routeParams, foundRoute };
+}
+function applySearchMiddleware({
+  search,
+  dest,
+  destRoutes,
+  _includeValidateSearch
+}) {
+  const allMiddlewares = destRoutes.reduce(
+    (acc, route) => {
+      var _a2;
+      const middlewares = [];
+      if ("search" in route.options) {
+        if ((_a2 = route.options.search) == null ? void 0 : _a2.middlewares) {
+          middlewares.push(...route.options.search.middlewares);
+        }
+      } else if (route.options.preSearchFilters || route.options.postSearchFilters) {
+        const legacyMiddleware = ({
+          search: search2,
+          next
+        }) => {
+          let nextSearch = search2;
+          if ("preSearchFilters" in route.options && route.options.preSearchFilters) {
+            nextSearch = route.options.preSearchFilters.reduce(
+              (prev, next2) => next2(prev),
+              search2
+            );
+          }
+          const result = next(nextSearch);
+          if ("postSearchFilters" in route.options && route.options.postSearchFilters) {
+            return route.options.postSearchFilters.reduce(
+              (prev, next2) => next2(prev),
+              result
+            );
+          }
+          return result;
+        };
+        middlewares.push(legacyMiddleware);
+      }
+      if (_includeValidateSearch && route.options.validateSearch) {
+        const validate = ({ search: search2, next }) => {
+          const result = next(search2);
+          try {
+            const validatedSearch = {
+              ...result,
+              ...validateSearch(route.options.validateSearch, result) ?? void 0
+            };
+            return validatedSearch;
+          } catch {
+            return result;
+          }
+        };
+        middlewares.push(validate);
+      }
+      return acc.concat(middlewares);
+    },
+    []
+  ) ?? [];
+  const final = ({ search: search2 }) => {
+    if (!dest.search) {
+      return {};
+    }
+    if (dest.search === true) {
+      return search2;
+    }
+    return functionalUpdate(dest.search, search2);
+  };
+  allMiddlewares.push(final);
+  const applyNext = (index2, currentSearch) => {
+    if (index2 >= allMiddlewares.length) {
+      return currentSearch;
+    }
+    const middleware = allMiddlewares[index2];
+    const next = (newSearch) => {
+      return applyNext(index2 + 1, newSearch);
+    };
+    return middleware({ search: currentSearch, next });
+  };
+  return applyNext(0, search);
+}
+const preloadWarning = "Error preloading route! ☝️";
+class BaseRoute {
+  constructor(options2) {
+    this.init = (opts) => {
+      var _a2, _b2;
+      this.originalIndex = opts.originalIndex;
+      const options22 = this.options;
+      const isRoot = !(options22 == null ? void 0 : options22.path) && !(options22 == null ? void 0 : options22.id);
+      this.parentRoute = (_b2 = (_a2 = this.options).getParentRoute) == null ? void 0 : _b2.call(_a2);
+      if (isRoot) {
+        this._path = rootRouteId;
+      } else if (!this.parentRoute) {
+        invariant(
+          false
+        );
+      }
+      let path = isRoot ? rootRouteId : options22 == null ? void 0 : options22.path;
+      if (path && path !== "/") {
+        path = trimPathLeft(path);
+      }
+      const customId = (options22 == null ? void 0 : options22.id) || path;
+      let id = isRoot ? rootRouteId : joinPaths([
+        this.parentRoute.id === rootRouteId ? "" : this.parentRoute.id,
+        customId
+      ]);
+      if (path === rootRouteId) {
+        path = "/";
+      }
+      if (id !== rootRouteId) {
+        id = joinPaths(["/", id]);
+      }
+      const fullPath = id === rootRouteId ? "/" : joinPaths([this.parentRoute.fullPath, path]);
+      this._path = path;
+      this._id = id;
+      this._fullPath = fullPath;
+      this._to = fullPath;
+    };
+    this.clone = (other) => {
+      this._path = other._path;
+      this._id = other._id;
+      this._fullPath = other._fullPath;
+      this._to = other._to;
+      this.options.getParentRoute = other.options.getParentRoute;
+      this.children = other.children;
+    };
+    this.addChildren = (children) => {
+      return this._addFileChildren(children);
+    };
+    this._addFileChildren = (children) => {
+      if (Array.isArray(children)) {
+        this.children = children;
+      }
+      if (typeof children === "object" && children !== null) {
+        this.children = Object.values(children);
+      }
+      return this;
+    };
+    this._addFileTypes = () => {
+      return this;
+    };
+    this.updateLoader = (options22) => {
+      Object.assign(this.options, options22);
+      return this;
+    };
+    this.update = (options22) => {
+      Object.assign(this.options, options22);
+      return this;
+    };
+    this.lazy = (lazyFn) => {
+      this.lazyFn = lazyFn;
+      return this;
+    };
+    this.options = options2 || {};
+    this.isRoot = !(options2 == null ? void 0 : options2.getParentRoute);
+    if ((options2 == null ? void 0 : options2.id) && (options2 == null ? void 0 : options2.path)) {
+      throw new Error(`Route cannot have both an 'id' and a 'path' option.`);
+    }
+  }
+  get to() {
+    return this._to;
+  }
+  get id() {
+    return this._id;
+  }
+  get path() {
+    return this._path;
+  }
+  get fullPath() {
+    return this._fullPath;
+  }
+}
+class BaseRootRoute extends BaseRoute {
+  constructor(options2) {
+    super(options2);
+  }
+}
+function CatchBoundary(props) {
+  const errorComponent = props.errorComponent ?? ErrorComponent;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    CatchBoundaryImpl,
+    {
+      getResetKey: props.getResetKey,
+      onCatch: props.onCatch,
+      children: ({ error, reset }) => {
+        if (error) {
+          return reactExports.createElement(errorComponent, {
+            error,
+            reset
+          });
+        }
+        return props.children;
+      }
+    }
+  );
+}
+class CatchBoundaryImpl extends reactExports.Component {
+  constructor() {
+    super(...arguments);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromProps(props) {
+    return { resetKey: props.getResetKey() };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  reset() {
+    this.setState({ error: null });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.error && prevState.resetKey !== this.state.resetKey) {
+      this.reset();
+    }
+  }
+  componentDidCatch(error, errorInfo) {
+    if (this.props.onCatch) {
+      this.props.onCatch(error, errorInfo);
+    }
+  }
+  render() {
+    return this.props.children({
+      error: this.state.resetKey !== this.props.getResetKey() ? null : this.state.error,
+      reset: () => {
+        this.reset();
+      }
+    });
+  }
+}
+function ErrorComponent({ error }) {
+  const [show, setShow] = reactExports.useState(false);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { padding: ".5rem", maxWidth: "100%" }, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: ".5rem" }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { style: { fontSize: "1rem" }, children: "Something went wrong!" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          style: {
+            appearance: "none",
+            fontSize: ".6em",
+            border: "1px solid currentColor",
+            padding: ".1rem .2rem",
+            fontWeight: "bold",
+            borderRadius: ".25rem"
+          },
+          onClick: () => setShow((d) => !d),
+          children: show ? "Hide Error" : "Show Error"
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: ".25rem" } }),
+    show ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "pre",
+      {
+        style: {
+          fontSize: ".7em",
+          border: "1px solid red",
+          borderRadius: ".25rem",
+          padding: ".3rem",
+          color: "red",
+          overflow: "auto"
+        },
+        children: error.message ? /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: error.message }) : null
+      }
+    ) }) : null
+  ] });
+}
+function ClientOnly({ children, fallback = null }) {
+  return useHydrated() ? /* @__PURE__ */ jsxRuntimeExports.jsx(React$4.Fragment, { children }) : /* @__PURE__ */ jsxRuntimeExports.jsx(React$4.Fragment, { children: fallback });
+}
+function useHydrated() {
+  return React$4.useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  );
+}
+function subscribe() {
+  return () => {
+  };
+}
+var withSelector = { exports: {} };
+var withSelector_production = {};
+var shim$2 = { exports: {} };
+var useSyncExternalStoreShim_production = {};
+/**
+ * @license React
+ * use-sync-external-store-shim.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var React$1 = reactExports;
+function is$1(x, y) {
+  return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+}
+var objectIs$1 = "function" === typeof Object.is ? Object.is : is$1, useState = React$1.useState, useEffect$1 = React$1.useEffect, useLayoutEffect$1 = React$1.useLayoutEffect, useDebugValue$1 = React$1.useDebugValue;
+function useSyncExternalStore$2(subscribe2, getSnapshot) {
+  var value = getSnapshot(), _useState = useState({ inst: { value, getSnapshot } }), inst = _useState[0].inst, forceUpdate = _useState[1];
+  useLayoutEffect$1(
+    function() {
+      inst.value = value;
+      inst.getSnapshot = getSnapshot;
+      checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+    },
+    [subscribe2, value, getSnapshot]
+  );
+  useEffect$1(
+    function() {
+      checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+      return subscribe2(function() {
+        checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+      });
+    },
+    [subscribe2]
+  );
+  useDebugValue$1(value);
+  return value;
+}
+function checkIfSnapshotChanged(inst) {
+  var latestGetSnapshot = inst.getSnapshot;
+  inst = inst.value;
+  try {
+    var nextValue = latestGetSnapshot();
+    return !objectIs$1(inst, nextValue);
+  } catch (error) {
+    return true;
+  }
+}
+function useSyncExternalStore$1(subscribe2, getSnapshot) {
+  return getSnapshot();
+}
+var shim$1 = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+useSyncExternalStoreShim_production.useSyncExternalStore = void 0 !== React$1.useSyncExternalStore ? React$1.useSyncExternalStore : shim$1;
+{
+  shim$2.exports = useSyncExternalStoreShim_production;
+}
+var shimExports = shim$2.exports;
+/**
+ * @license React
+ * use-sync-external-store-shim/with-selector.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var React = reactExports, shim = shimExports;
+function is(x, y) {
+  return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+}
+var objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim.useSyncExternalStore, useRef = React.useRef, useEffect = React.useEffect, useMemo = React.useMemo, useDebugValue = React.useDebugValue;
+withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector, isEqual) {
+  var instRef = useRef(null);
+  if (null === instRef.current) {
+    var inst = { hasValue: false, value: null };
+    instRef.current = inst;
+  } else inst = instRef.current;
+  instRef = useMemo(
+    function() {
+      function memoizedSelector(nextSnapshot) {
+        if (!hasMemo) {
+          hasMemo = true;
+          memoizedSnapshot = nextSnapshot;
+          nextSnapshot = selector(nextSnapshot);
+          if (void 0 !== isEqual && inst.hasValue) {
+            var currentSelection = inst.value;
+            if (isEqual(currentSelection, nextSnapshot))
+              return memoizedSelection = currentSelection;
+          }
+          return memoizedSelection = nextSnapshot;
+        }
+        currentSelection = memoizedSelection;
+        if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
+        var nextSelection = selector(nextSnapshot);
+        if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
+          return memoizedSnapshot = nextSnapshot, currentSelection;
+        memoizedSnapshot = nextSnapshot;
+        return memoizedSelection = nextSelection;
+      }
+      var hasMemo = false, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
+      return [
+        function() {
+          return memoizedSelector(getSnapshot());
+        },
+        null === maybeGetServerSnapshot ? void 0 : function() {
+          return memoizedSelector(maybeGetServerSnapshot());
+        }
+      ];
+    },
+    [getSnapshot, getServerSnapshot, selector, isEqual]
+  );
+  var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
+  useEffect(
+    function() {
+      inst.hasValue = true;
+      inst.value = value;
+    },
+    [value]
+  );
+  useDebugValue(value);
+  return value;
+};
+{
+  withSelector.exports = withSelector_production;
+}
+var withSelectorExports = withSelector.exports;
+function useStore(store, selector = (d) => d) {
+  const slice = withSelectorExports.useSyncExternalStoreWithSelector(
+    store.subscribe,
+    () => store.state,
+    () => store.state,
+    selector,
+    shallow
+  );
+  return slice;
+}
+function shallow(objA, objB) {
+  if (Object.is(objA, objB)) {
+    return true;
+  }
+  if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) {
+    return false;
+  }
+  if (objA instanceof Map && objB instanceof Map) {
+    if (objA.size !== objB.size) return false;
+    for (const [k, v] of objA) {
+      if (!objB.has(k) || !Object.is(v, objB.get(k))) return false;
+    }
+    return true;
+  }
+  if (objA instanceof Set && objB instanceof Set) {
+    if (objA.size !== objB.size) return false;
+    for (const v of objA) {
+      if (!objB.has(v)) return false;
+    }
+    return true;
+  }
+  if (objA instanceof Date && objB instanceof Date) {
+    if (objA.getTime() !== objB.getTime()) return false;
+    return true;
+  }
+  const keysA = getOwnKeys(objA);
+  if (keysA.length !== getOwnKeys(objB).length) {
+    return false;
+  }
+  for (let i = 0; i < keysA.length; i++) {
+    if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !Object.is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+  return true;
+}
+function getOwnKeys(obj) {
+  return Object.keys(obj).concat(
+    Object.getOwnPropertySymbols(obj)
+  );
+}
+const routerContext = reactExports.createContext(null);
+function getRouterContext() {
+  if (typeof document === "undefined") {
+    return routerContext;
+  }
+  if (window.__TSR_ROUTER_CONTEXT__) {
+    return window.__TSR_ROUTER_CONTEXT__;
+  }
+  window.__TSR_ROUTER_CONTEXT__ = routerContext;
+  return routerContext;
+}
+function useRouter(opts) {
+  const value = reactExports.useContext(getRouterContext());
+  warning(
+    !(((opts == null ? void 0 : opts.warn) ?? true) && !value)
+  );
+  return value;
+}
+function useRouterState(opts) {
+  const contextRouter = useRouter({
+    warn: (opts == null ? void 0 : opts.router) === void 0
+  });
+  const router2 = (opts == null ? void 0 : opts.router) || contextRouter;
+  const previousResult = reactExports.useRef(void 0);
+  return useStore(router2.__store, (state) => {
+    if (opts == null ? void 0 : opts.select) {
+      if (opts.structuralSharing ?? router2.options.defaultStructuralSharing) {
+        const newSlice = replaceEqualDeep(
+          previousResult.current,
+          opts.select(state)
+        );
+        previousResult.current = newSlice;
+        return newSlice;
+      }
+      return opts.select(state);
+    }
+    return state;
+  });
+}
+const matchContext = reactExports.createContext(void 0);
+const dummyMatchContext = reactExports.createContext(
+  void 0
+);
+function useMatch(opts) {
+  const nearestMatchId = reactExports.useContext(
+    opts.from ? dummyMatchContext : matchContext
+  );
+  const matchSelection = useRouterState({
+    select: (state) => {
+      const match = state.matches.find(
+        (d) => opts.from ? opts.from === d.routeId : d.id === nearestMatchId
+      );
+      invariant(
+        !((opts.shouldThrow ?? true) && !match),
+        `Could not find ${opts.from ? `an active match from "${opts.from}"` : "a nearest match!"}`
+      );
+      if (match === void 0) {
+        return void 0;
+      }
+      return opts.select ? opts.select(match) : match;
+    },
+    structuralSharing: opts.structuralSharing
+  });
+  return matchSelection;
+}
+function useLoaderData(opts) {
+  return useMatch({
+    from: opts.from,
+    strict: opts.strict,
+    structuralSharing: opts.structuralSharing,
+    select: (s) => {
+      return opts.select ? opts.select(s.loaderData) : s.loaderData;
+    }
+  });
+}
+function useLoaderDeps(opts) {
+  const { select, ...rest } = opts;
+  return useMatch({
+    ...rest,
+    select: (s) => {
+      return select ? select(s.loaderDeps) : s.loaderDeps;
+    }
+  });
+}
+function useParams(opts) {
+  return useMatch({
+    from: opts.from,
+    shouldThrow: opts.shouldThrow,
+    structuralSharing: opts.structuralSharing,
+    strict: opts.strict,
+    select: (match) => {
+      const params = opts.strict === false ? match.params : match._strictParams;
+      return opts.select ? opts.select(params) : params;
+    }
+  });
+}
+function useSearch(opts) {
+  return useMatch({
+    from: opts.from,
+    strict: opts.strict,
+    shouldThrow: opts.shouldThrow,
+    structuralSharing: opts.structuralSharing,
+    select: (match) => {
+      return opts.select ? opts.select(match.search) : match.search;
+    }
+  });
+}
+function useNavigate(_defaultOpts) {
+  const router2 = useRouter();
+  return reactExports.useCallback(
+    (options2) => {
+      return router2.navigate({
+        ...options2,
+        from: options2.from ?? (_defaultOpts == null ? void 0 : _defaultOpts.from)
+      });
+    },
+    [_defaultOpts == null ? void 0 : _defaultOpts.from, router2]
+  );
+}
+const useLayoutEffect = typeof window !== "undefined" ? reactExports.useLayoutEffect : reactExports.useEffect;
+function usePrevious(value) {
+  const ref = reactExports.useRef({
+    value,
+    prev: null
+  });
+  const current = ref.current.value;
+  if (value !== current) {
+    ref.current = {
+      value,
+      prev: current
+    };
+  }
+  return ref.current.prev;
+}
+function useIntersectionObserver(ref, callback, intersectionObserverOptions2 = {}, options2 = {}) {
+  reactExports.useEffect(() => {
+    if (!ref.current || options2.disabled || typeof IntersectionObserver !== "function") {
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      callback(entry);
+    }, intersectionObserverOptions2);
+    observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, [callback, intersectionObserverOptions2, options2.disabled, ref]);
+}
+function useForwardedRef(ref) {
+  const innerRef = reactExports.useRef(null);
+  reactExports.useImperativeHandle(ref, () => innerRef.current, []);
+  return innerRef;
+}
+function useLinkProps(options2, forwardedRef) {
+  const router2 = useRouter();
+  const [isTransitioning, setIsTransitioning] = reactExports.useState(false);
+  const hasRenderFetched = reactExports.useRef(false);
+  const innerRef = useForwardedRef(forwardedRef);
+  const {
+    // custom props
+    activeProps,
+    inactiveProps,
+    activeOptions,
+    to,
+    preload: userPreload,
+    preloadDelay: userPreloadDelay,
+    hashScrollIntoView,
+    replace,
+    startTransition: startTransition2,
+    resetScroll,
+    viewTransition,
+    // element props
+    children,
+    target,
+    disabled,
+    style: style2,
+    className,
+    onClick,
+    onFocus,
+    onMouseEnter,
+    onMouseLeave,
+    onTouchStart,
+    ignoreBlocker,
+    // prevent these from being returned
+    params: _params,
+    search: _search,
+    hash: _hash,
+    state: _state,
+    mask: _mask,
+    reloadDocument: _reloadDocument,
+    unsafeRelative: _unsafeRelative,
+    from: _from,
+    _fromLocation,
+    ...propsSafeToSpread
+  } = options2;
+  const type = reactExports.useMemo(() => {
+    try {
+      new URL(to);
+      return "external";
+    } catch {
+    }
+    return "internal";
+  }, [to]);
+  const currentSearch = useRouterState({
+    select: (s) => s.location.search,
+    structuralSharing: true
+  });
+  const from = options2.from;
+  const _options2 = reactExports.useMemo(
+    () => {
+      return { ...options2, from };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      router2,
+      currentSearch,
+      from,
+      options2._fromLocation,
+      options2.hash,
+      options2.to,
+      options2.search,
+      options2.params,
+      options2.state,
+      options2.mask,
+      options2.unsafeRelative
+    ]
+  );
+  const next = reactExports.useMemo(
+    () => router2.buildLocation({ ..._options2 }),
+    [router2, _options2]
+  );
+  const isExternal = type === "external";
+  const preload2 = options2.reloadDocument || isExternal ? false : userPreload ?? router2.options.defaultPreload;
+  const preloadDelay = userPreloadDelay ?? router2.options.defaultPreloadDelay ?? 0;
+  const isActive = useRouterState({
+    select: (s) => {
+      if (isExternal) return false;
+      if (activeOptions == null ? void 0 : activeOptions.exact) {
+        const testExact = exactPathTest(
+          s.location.pathname,
+          next.pathname,
+          router2.basepath
+        );
+        if (!testExact) {
+          return false;
+        }
+      } else {
+        const currentPathSplit = removeTrailingSlash(
+          s.location.pathname,
+          router2.basepath
+        );
+        const nextPathSplit = removeTrailingSlash(
+          next.pathname,
+          router2.basepath
+        );
+        const pathIsFuzzyEqual = currentPathSplit.startsWith(nextPathSplit) && (currentPathSplit.length === nextPathSplit.length || currentPathSplit[nextPathSplit.length] === "/");
+        if (!pathIsFuzzyEqual) {
+          return false;
+        }
+      }
+      if ((activeOptions == null ? void 0 : activeOptions.includeSearch) ?? true) {
+        const searchTest = deepEqual(s.location.search, next.search, {
+          partial: !(activeOptions == null ? void 0 : activeOptions.exact),
+          ignoreUndefined: !(activeOptions == null ? void 0 : activeOptions.explicitUndefined)
+        });
+        if (!searchTest) {
+          return false;
+        }
+      }
+      if (activeOptions == null ? void 0 : activeOptions.includeHash) {
+        return s.location.hash === next.hash;
+      }
+      return true;
+    }
+  });
+  const doPreload = reactExports.useCallback(() => {
+    router2.preloadRoute({ ..._options2 }).catch((err) => {
+      console.warn(err);
+      console.warn(preloadWarning);
+    });
+  }, [router2, _options2]);
+  const preloadViewportIoCallback = reactExports.useCallback(
+    (entry) => {
+      if (entry == null ? void 0 : entry.isIntersecting) {
+        doPreload();
+      }
+    },
+    [doPreload]
+  );
+  useIntersectionObserver(
+    innerRef,
+    preloadViewportIoCallback,
+    intersectionObserverOptions,
+    { disabled: !!disabled || !(preload2 === "viewport") }
+  );
+  reactExports.useEffect(() => {
+    if (hasRenderFetched.current) {
+      return;
+    }
+    if (!disabled && preload2 === "render") {
+      doPreload();
+      hasRenderFetched.current = true;
+    }
+  }, [disabled, doPreload, preload2]);
+  const handleClick = (e) => {
+    const elementTarget = e.currentTarget.target;
+    const effectiveTarget = target !== void 0 ? target : elementTarget;
+    if (!disabled && !isCtrlEvent(e) && !e.defaultPrevented && (!effectiveTarget || effectiveTarget === "_self") && e.button === 0) {
+      e.preventDefault();
+      reactDomExports.flushSync(() => {
+        setIsTransitioning(true);
+      });
+      const unsub = router2.subscribe("onResolved", () => {
+        unsub();
+        setIsTransitioning(false);
+      });
+      router2.navigate({
+        ..._options2,
+        replace,
+        resetScroll,
+        hashScrollIntoView,
+        startTransition: startTransition2,
+        viewTransition,
+        ignoreBlocker
+      });
+    }
+  };
+  if (isExternal) {
+    return {
+      ...propsSafeToSpread,
+      ref: innerRef,
+      type,
+      href: to,
+      ...children && { children },
+      ...target && { target },
+      ...disabled && { disabled },
+      ...style2 && { style: style2 },
+      ...className && { className },
+      ...onClick && { onClick },
+      ...onFocus && { onFocus },
+      ...onMouseEnter && { onMouseEnter },
+      ...onMouseLeave && { onMouseLeave },
+      ...onTouchStart && { onTouchStart }
+    };
+  }
+  const handleFocus = (_) => {
+    if (disabled) return;
+    if (preload2) {
+      doPreload();
+    }
+  };
+  const handleTouchStart = handleFocus;
+  const handleEnter = (e) => {
+    if (disabled || !preload2) return;
+    if (!preloadDelay) {
+      doPreload();
+    } else {
+      const eventTarget = e.target;
+      if (timeoutMap.has(eventTarget)) {
+        return;
+      }
+      const id = setTimeout(() => {
+        timeoutMap.delete(eventTarget);
+        doPreload();
+      }, preloadDelay);
+      timeoutMap.set(eventTarget, id);
+    }
+  };
+  const handleLeave = (e) => {
+    if (disabled || !preload2 || !preloadDelay) return;
+    const eventTarget = e.target;
+    const id = timeoutMap.get(eventTarget);
+    if (id) {
+      clearTimeout(id);
+      timeoutMap.delete(eventTarget);
+    }
+  };
+  const resolvedActiveProps = isActive ? functionalUpdate(activeProps, {}) ?? STATIC_ACTIVE_OBJECT : STATIC_EMPTY_OBJECT;
+  const resolvedInactiveProps = isActive ? STATIC_EMPTY_OBJECT : functionalUpdate(inactiveProps, {}) ?? STATIC_EMPTY_OBJECT;
+  const resolvedClassName = [
+    className,
+    resolvedActiveProps.className,
+    resolvedInactiveProps.className
+  ].filter(Boolean).join(" ");
+  const resolvedStyle = (style2 || resolvedActiveProps.style || resolvedInactiveProps.style) && {
+    ...style2,
+    ...resolvedActiveProps.style,
+    ...resolvedInactiveProps.style
+  };
+  return {
+    ...propsSafeToSpread,
+    ...resolvedActiveProps,
+    ...resolvedInactiveProps,
+    href: disabled ? void 0 : next.maskedLocation ? router2.history.createHref(next.maskedLocation.href) : router2.history.createHref(next.href),
+    ref: innerRef,
+    onClick: composeHandlers([onClick, handleClick]),
+    onFocus: composeHandlers([onFocus, handleFocus]),
+    onMouseEnter: composeHandlers([onMouseEnter, handleEnter]),
+    onMouseLeave: composeHandlers([onMouseLeave, handleLeave]),
+    onTouchStart: composeHandlers([onTouchStart, handleTouchStart]),
+    disabled: !!disabled,
+    target,
+    ...resolvedStyle && { style: resolvedStyle },
+    ...resolvedClassName && { className: resolvedClassName },
+    ...disabled && STATIC_DISABLED_PROPS,
+    ...isActive && STATIC_ACTIVE_PROPS,
+    ...isTransitioning && STATIC_TRANSITIONING_PROPS
+  };
+}
+const STATIC_EMPTY_OBJECT = {};
+const STATIC_ACTIVE_OBJECT = { className: "active" };
+const STATIC_DISABLED_PROPS = { role: "link", "aria-disabled": true };
+const STATIC_ACTIVE_PROPS = { "data-status": "active", "aria-current": "page" };
+const STATIC_TRANSITIONING_PROPS = { "data-transitioning": "transitioning" };
+const timeoutMap = /* @__PURE__ */ new WeakMap();
+const intersectionObserverOptions = {
+  rootMargin: "100px"
+};
+const composeHandlers = (handlers) => (e) => {
+  for (const handler of handlers) {
+    if (!handler) continue;
+    if (e.defaultPrevented) return;
+    handler(e);
+  }
+};
+const Link = reactExports.forwardRef(
+  (props, ref) => {
+    const { _asChild, ...rest } = props;
+    const {
+      type: _type,
+      ref: innerRef,
+      ...linkProps
+    } = useLinkProps(rest, ref);
+    const children = typeof rest.children === "function" ? rest.children({
+      isActive: linkProps["data-status"] === "active"
+    }) : rest.children;
+    if (_asChild === void 0) {
+      delete linkProps.disabled;
+    }
+    return reactExports.createElement(
+      _asChild ? _asChild : "a",
+      {
+        ...linkProps,
+        ref: innerRef
+      },
+      children
+    );
+  }
+);
+function isCtrlEvent(e) {
+  return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
+}
+class Route extends BaseRoute {
+  /**
+   * @deprecated Use the `createRoute` function instead.
+   */
+  constructor(options2) {
+    super(options2);
+    this.useMatch = (opts) => {
+      return useMatch({
+        select: opts == null ? void 0 : opts.select,
+        from: this.id,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing
+      });
+    };
+    this.useRouteContext = (opts) => {
+      return useMatch({
+        ...opts,
+        from: this.id,
+        select: (d) => (opts == null ? void 0 : opts.select) ? opts.select(d.context) : d.context
+      });
+    };
+    this.useSearch = (opts) => {
+      return useSearch({
+        select: opts == null ? void 0 : opts.select,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing,
+        from: this.id
+      });
+    };
+    this.useParams = (opts) => {
+      return useParams({
+        select: opts == null ? void 0 : opts.select,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing,
+        from: this.id
+      });
+    };
+    this.useLoaderDeps = (opts) => {
+      return useLoaderDeps({ ...opts, from: this.id });
+    };
+    this.useLoaderData = (opts) => {
+      return useLoaderData({ ...opts, from: this.id });
+    };
+    this.useNavigate = () => {
+      return useNavigate({ from: this.fullPath });
+    };
+    this.Link = React$4.forwardRef(
+      (props, ref) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
+      }
+    );
+    this.$$typeof = Symbol.for("react.memo");
+  }
+}
+function createRoute(options2) {
+  return new Route(options2);
+}
+class RootRoute extends BaseRootRoute {
+  /**
+   * @deprecated `RootRoute` is now an internal implementation detail. Use `createRootRoute()` instead.
+   */
+  constructor(options2) {
+    super(options2);
+    this.useMatch = (opts) => {
+      return useMatch({
+        select: opts == null ? void 0 : opts.select,
+        from: this.id,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing
+      });
+    };
+    this.useRouteContext = (opts) => {
+      return useMatch({
+        ...opts,
+        from: this.id,
+        select: (d) => (opts == null ? void 0 : opts.select) ? opts.select(d.context) : d.context
+      });
+    };
+    this.useSearch = (opts) => {
+      return useSearch({
+        select: opts == null ? void 0 : opts.select,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing,
+        from: this.id
+      });
+    };
+    this.useParams = (opts) => {
+      return useParams({
+        select: opts == null ? void 0 : opts.select,
+        structuralSharing: opts == null ? void 0 : opts.structuralSharing,
+        from: this.id
+      });
+    };
+    this.useLoaderDeps = (opts) => {
+      return useLoaderDeps({ ...opts, from: this.id });
+    };
+    this.useLoaderData = (opts) => {
+      return useLoaderData({ ...opts, from: this.id });
+    };
+    this.useNavigate = () => {
+      return useNavigate({ from: this.fullPath });
+    };
+    this.Link = React$4.forwardRef(
+      (props, ref) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
+      }
+    );
+    this.$$typeof = Symbol.for("react.memo");
+  }
+}
+function createRootRoute(options2) {
+  return new RootRoute(options2);
+}
+function createFileRoute(path) {
+  if (typeof path === "object") {
+    return new FileRoute(path, {
+      silent: true
+    }).createRoute(path);
+  }
+  return new FileRoute(path, {
+    silent: true
+  }).createRoute;
+}
+class FileRoute {
+  constructor(path, _opts) {
+    this.path = path;
+    this.createRoute = (options2) => {
+      warning(
+        this.silent
+      );
+      const route = createRoute(options2);
+      route.isRoot = false;
+      return route;
+    };
+    this.silent = _opts == null ? void 0 : _opts.silent;
+  }
+}
+class LazyRoute {
+  constructor(opts) {
+    this.useMatch = (opts2) => {
+      return useMatch({
+        select: opts2 == null ? void 0 : opts2.select,
+        from: this.options.id,
+        structuralSharing: opts2 == null ? void 0 : opts2.structuralSharing
+      });
+    };
+    this.useRouteContext = (opts2) => {
+      return useMatch({
+        from: this.options.id,
+        select: (d) => (opts2 == null ? void 0 : opts2.select) ? opts2.select(d.context) : d.context
+      });
+    };
+    this.useSearch = (opts2) => {
+      return useSearch({
+        select: opts2 == null ? void 0 : opts2.select,
+        structuralSharing: opts2 == null ? void 0 : opts2.structuralSharing,
+        from: this.options.id
+      });
+    };
+    this.useParams = (opts2) => {
+      return useParams({
+        select: opts2 == null ? void 0 : opts2.select,
+        structuralSharing: opts2 == null ? void 0 : opts2.structuralSharing,
+        from: this.options.id
+      });
+    };
+    this.useLoaderDeps = (opts2) => {
+      return useLoaderDeps({ ...opts2, from: this.options.id });
+    };
+    this.useLoaderData = (opts2) => {
+      return useLoaderData({ ...opts2, from: this.options.id });
+    };
+    this.useNavigate = () => {
+      const router2 = useRouter();
+      return useNavigate({ from: router2.routesById[this.options.id].fullPath });
+    };
+    this.options = opts;
+    this.$$typeof = Symbol.for("react.memo");
+  }
+}
+function createLazyFileRoute(id) {
+  if (typeof id === "object") {
+    return new LazyRoute(id);
+  }
+  return (opts) => new LazyRoute({ id, ...opts });
+}
+function Transitioner() {
+  const router2 = useRouter();
+  const mountLoadForRouter = reactExports.useRef({ router: router2, mounted: false });
+  const [isTransitioning, setIsTransitioning] = reactExports.useState(false);
+  const { hasPendingMatches, isLoading } = useRouterState({
+    select: (s) => ({
+      isLoading: s.isLoading,
+      hasPendingMatches: s.matches.some((d) => d.status === "pending")
+    }),
+    structuralSharing: true
+  });
+  const previousIsLoading = usePrevious(isLoading);
+  const isAnyPending = isLoading || isTransitioning || hasPendingMatches;
+  const previousIsAnyPending = usePrevious(isAnyPending);
+  const isPagePending = isLoading || hasPendingMatches;
+  const previousIsPagePending = usePrevious(isPagePending);
+  router2.startTransition = (fn) => {
+    setIsTransitioning(true);
+    reactExports.startTransition(() => {
+      fn();
+      setIsTransitioning(false);
+    });
+  };
+  reactExports.useEffect(() => {
+    const unsub = router2.history.subscribe(router2.load);
+    const nextLocation = router2.buildLocation({
+      to: router2.latestLocation.pathname,
+      search: true,
+      params: true,
+      hash: true,
+      state: true,
+      _includeValidateSearch: true
+    });
+    if (trimPathRight(router2.latestLocation.href) !== trimPathRight(nextLocation.href)) {
+      router2.commitLocation({ ...nextLocation, replace: true });
+    }
+    return () => {
+      unsub();
+    };
+  }, [router2, router2.history]);
+  useLayoutEffect(() => {
+    if (
+      // if we are hydrating from SSR, loading is triggered in ssr-client
+      typeof window !== "undefined" && router2.ssr || mountLoadForRouter.current.router === router2 && mountLoadForRouter.current.mounted
+    ) {
+      return;
+    }
+    mountLoadForRouter.current = { router: router2, mounted: true };
+    const tryLoad = async () => {
+      try {
+        await router2.load();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    tryLoad();
+  }, [router2]);
+  useLayoutEffect(() => {
+    if (previousIsLoading && !isLoading) {
+      router2.emit({
+        type: "onLoad",
+        // When the new URL has committed, when the new matches have been loaded into state.matches
+        ...getLocationChangeInfo(router2.state)
+      });
+    }
+  }, [previousIsLoading, router2, isLoading]);
+  useLayoutEffect(() => {
+    if (previousIsPagePending && !isPagePending) {
+      router2.emit({
+        type: "onBeforeRouteMount",
+        ...getLocationChangeInfo(router2.state)
+      });
+    }
+  }, [isPagePending, previousIsPagePending, router2]);
+  useLayoutEffect(() => {
+    if (previousIsAnyPending && !isAnyPending) {
+      router2.emit({
+        type: "onResolved",
+        ...getLocationChangeInfo(router2.state)
+      });
+      router2.__store.setState((s) => ({
+        ...s,
+        status: "idle",
+        resolvedLocation: s.location
+      }));
+      handleHashScroll(router2);
+    }
+  }, [isAnyPending, previousIsAnyPending, router2]);
+  return null;
+}
+function CatchNotFound(props) {
+  const resetKey = useRouterState({
+    select: (s) => `not-found-${s.location.pathname}-${s.status}`
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    CatchBoundary,
+    {
+      getResetKey: () => resetKey,
+      onCatch: (error, errorInfo) => {
+        var _a2;
+        if (isNotFound(error)) {
+          (_a2 = props.onCatch) == null ? void 0 : _a2.call(props, error, errorInfo);
+        } else {
+          throw error;
+        }
+      },
+      errorComponent: ({ error }) => {
+        var _a2;
+        if (isNotFound(error)) {
+          return (_a2 = props.fallback) == null ? void 0 : _a2.call(props, error);
+        } else {
+          throw error;
+        }
+      },
+      children: props.children
+    }
+  );
+}
+function DefaultGlobalNotFound() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Not Found" });
+}
+function SafeFragment(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: props.children });
+}
+function renderRouteNotFound(router2, route, data) {
+  if (!route.options.notFoundComponent) {
+    if (router2.options.defaultNotFoundComponent) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(router2.options.defaultNotFoundComponent, { data });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(DefaultGlobalNotFound, {});
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(route.options.notFoundComponent, { data });
+}
+function ScriptOnce({
+  children
+}) {
+  if (typeof document !== "undefined") {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "script",
+    {
+      className: "$tsr",
+      dangerouslySetInnerHTML: {
+        __html: [children].filter(Boolean).join("\n")
+      }
+    }
+  );
+}
+function ScrollRestoration() {
+  const router2 = useRouter();
+  const getKey = router2.options.getScrollRestorationKey || defaultGetScrollRestorationKey;
+  const userKey = getKey(router2.latestLocation);
+  const resolvedKey = userKey !== defaultGetScrollRestorationKey(router2.latestLocation) ? userKey : void 0;
+  if (!router2.isScrollRestoring || !router2.isServer) {
+    return null;
+  }
+  const restoreScrollOptions = {
+    storageKey,
+    shouldScrollRestoration: true
+  };
+  if (resolvedKey) {
+    restoreScrollOptions.key = resolvedKey;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ScriptOnce,
+    {
+      children: `(${restoreScroll.toString()})(${JSON.stringify(restoreScrollOptions)})`
+    }
+  );
+}
+const Match = reactExports.memo(function MatchImpl({
+  matchId
+}) {
+  var _a2, _b2;
+  const router2 = useRouter();
+  const matchState = useRouterState({
+    select: (s) => {
+      const match = s.matches.find((d) => d.id === matchId);
+      invariant(
+        match
+      );
+      return {
+        routeId: match.routeId,
+        ssr: match.ssr,
+        _displayPending: match._displayPending
+      };
+    },
+    structuralSharing: true
+  });
+  const route = router2.routesById[matchState.routeId];
+  const PendingComponent = route.options.pendingComponent ?? router2.options.defaultPendingComponent;
+  const pendingElement = PendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(PendingComponent, {}) : null;
+  const routeErrorComponent = route.options.errorComponent ?? router2.options.defaultErrorComponent;
+  const routeOnCatch = route.options.onCatch ?? router2.options.defaultOnCatch;
+  const routeNotFoundComponent = route.isRoot ? (
+    // If it's the root route, use the globalNotFound option, with fallback to the notFoundRoute's component
+    route.options.notFoundComponent ?? ((_a2 = router2.options.notFoundRoute) == null ? void 0 : _a2.options.component)
+  ) : route.options.notFoundComponent;
+  const resolvedNoSsr = matchState.ssr === false || matchState.ssr === "data-only";
+  const ResolvedSuspenseBoundary = (
+    // If we're on the root route, allow forcefully wrapping in suspense
+    (!route.isRoot || route.options.wrapInSuspense || resolvedNoSsr) && (route.options.wrapInSuspense ?? PendingComponent ?? (((_b2 = route.options.errorComponent) == null ? void 0 : _b2.preload) || resolvedNoSsr)) ? reactExports.Suspense : SafeFragment
+  );
+  const ResolvedCatchBoundary = routeErrorComponent ? CatchBoundary : SafeFragment;
+  const ResolvedNotFoundBoundary = routeNotFoundComponent ? CatchNotFound : SafeFragment;
+  const resetKey = useRouterState({
+    select: (s) => s.loadedAt
+  });
+  const parentRouteId = useRouterState({
+    select: (s) => {
+      var _a22;
+      const index2 = s.matches.findIndex((d) => d.id === matchId);
+      return (_a22 = s.matches[index2 - 1]) == null ? void 0 : _a22.routeId;
+    }
+  });
+  const ShellComponent = route.isRoot ? route.options.shellComponent ?? SafeFragment : SafeFragment;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ShellComponent, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(matchContext.Provider, { value: matchId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResolvedSuspenseBoundary, { fallback: pendingElement, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ResolvedCatchBoundary,
+      {
+        getResetKey: () => resetKey,
+        errorComponent: routeErrorComponent || ErrorComponent,
+        onCatch: (error, errorInfo) => {
+          if (isNotFound(error)) throw error;
+          routeOnCatch == null ? void 0 : routeOnCatch(error, errorInfo);
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          ResolvedNotFoundBoundary,
+          {
+            fallback: (error) => {
+              if (!routeNotFoundComponent || error.routeId && error.routeId !== matchState.routeId || !error.routeId && !route.isRoot)
+                throw error;
+              return reactExports.createElement(routeNotFoundComponent, error);
+            },
+            children: resolvedNoSsr || matchState._displayPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(ClientOnly, { fallback: pendingElement, children: /* @__PURE__ */ jsxRuntimeExports.jsx(MatchInner, { matchId }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(MatchInner, { matchId })
+          }
+        )
+      }
+    ) }) }),
+    parentRouteId === rootRouteId && router2.options.scrollRestoration ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(OnRendered, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollRestoration, {})
+    ] }) : null
+  ] });
+});
+function OnRendered() {
+  const router2 = useRouter();
+  const prevLocationRef = reactExports.useRef(
+    void 0
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "script",
+    {
+      suppressHydrationWarning: true,
+      ref: (el) => {
+        if (el && (prevLocationRef.current === void 0 || prevLocationRef.current.href !== router2.latestLocation.href)) {
+          router2.emit({
+            type: "onRendered",
+            ...getLocationChangeInfo(router2.state)
+          });
+          prevLocationRef.current = router2.latestLocation;
+        }
+      }
+    },
+    router2.latestLocation.state.__TSR_key
+  );
+}
+const MatchInner = reactExports.memo(function MatchInnerImpl({
+  matchId
+}) {
+  var _a2, _b2, _c2, _d2;
+  const router2 = useRouter();
+  const { match, key, routeId } = useRouterState({
+    select: (s) => {
+      const match2 = s.matches.find((d) => d.id === matchId);
+      const routeId2 = match2.routeId;
+      const remountFn = router2.routesById[routeId2].options.remountDeps ?? router2.options.defaultRemountDeps;
+      const remountDeps = remountFn == null ? void 0 : remountFn({
+        routeId: routeId2,
+        loaderDeps: match2.loaderDeps,
+        params: match2._strictParams,
+        search: match2._strictSearch
+      });
+      const key2 = remountDeps ? JSON.stringify(remountDeps) : void 0;
+      return {
+        key: key2,
+        routeId: routeId2,
+        match: {
+          id: match2.id,
+          status: match2.status,
+          error: match2.error,
+          _forcePending: match2._forcePending,
+          _displayPending: match2._displayPending
+        }
+      };
+    },
+    structuralSharing: true
+  });
+  const route = router2.routesById[routeId];
+  const out = reactExports.useMemo(() => {
+    const Comp = route.options.component ?? router2.options.defaultComponent;
+    if (Comp) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, {}, key);
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {});
+  }, [key, route.options.component, router2.options.defaultComponent]);
+  if (match._displayPending) {
+    throw (_a2 = router2.getMatch(match.id)) == null ? void 0 : _a2._nonReactive.displayPendingPromise;
+  }
+  if (match._forcePending) {
+    throw (_b2 = router2.getMatch(match.id)) == null ? void 0 : _b2._nonReactive.minPendingPromise;
+  }
+  if (match.status === "pending") {
+    const pendingMinMs = route.options.pendingMinMs ?? router2.options.defaultPendingMinMs;
+    if (pendingMinMs) {
+      const routerMatch = router2.getMatch(match.id);
+      if (routerMatch && !routerMatch._nonReactive.minPendingPromise) {
+        if (!router2.isServer) {
+          const minPendingPromise = createControlledPromise();
+          routerMatch._nonReactive.minPendingPromise = minPendingPromise;
+          setTimeout(() => {
+            minPendingPromise.resolve();
+            routerMatch._nonReactive.minPendingPromise = void 0;
+          }, pendingMinMs);
+        }
+      }
+    }
+    throw (_c2 = router2.getMatch(match.id)) == null ? void 0 : _c2._nonReactive.loadPromise;
+  }
+  if (match.status === "notFound") {
+    invariant(isNotFound(match.error));
+    return renderRouteNotFound(router2, route, match.error);
+  }
+  if (match.status === "redirected") {
+    invariant(isRedirect(match.error));
+    throw (_d2 = router2.getMatch(match.id)) == null ? void 0 : _d2._nonReactive.loadPromise;
+  }
+  if (match.status === "error") {
+    if (router2.isServer) {
+      const RouteErrorComponent = (route.options.errorComponent ?? router2.options.defaultErrorComponent) || ErrorComponent;
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        RouteErrorComponent,
+        {
+          error: match.error,
+          reset: void 0,
+          info: {
+            componentStack: ""
+          }
+        }
+      );
+    }
+    throw match.error;
+  }
+  return out;
+});
+const Outlet = reactExports.memo(function OutletImpl() {
+  const router2 = useRouter();
+  const matchId = reactExports.useContext(matchContext);
+  const routeId = useRouterState({
+    select: (s) => {
+      var _a2;
+      return (_a2 = s.matches.find((d) => d.id === matchId)) == null ? void 0 : _a2.routeId;
+    }
+  });
+  const route = router2.routesById[routeId];
+  const parentGlobalNotFound = useRouterState({
+    select: (s) => {
+      const matches = s.matches;
+      const parentMatch = matches.find((d) => d.id === matchId);
+      invariant(
+        parentMatch
+      );
+      return parentMatch.globalNotFound;
+    }
+  });
+  const childMatchId = useRouterState({
+    select: (s) => {
+      var _a2;
+      const matches = s.matches;
+      const index2 = matches.findIndex((d) => d.id === matchId);
+      return (_a2 = matches[index2 + 1]) == null ? void 0 : _a2.id;
+    }
+  });
+  const pendingElement = router2.options.defaultPendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(router2.options.defaultPendingComponent, {}) : null;
+  if (parentGlobalNotFound) {
+    return renderRouteNotFound(router2, route, void 0);
+  }
+  if (!childMatchId) {
+    return null;
+  }
+  const nextMatch = /* @__PURE__ */ jsxRuntimeExports.jsx(Match, { matchId: childMatchId });
+  if (matchId === rootRouteId) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: pendingElement, children: nextMatch });
+  }
+  return nextMatch;
+});
+function Matches() {
+  const router2 = useRouter();
+  const pendingElement = router2.options.defaultPendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(router2.options.defaultPendingComponent, {}) : null;
+  const ResolvedSuspense = router2.isServer || typeof document !== "undefined" && router2.ssr ? SafeFragment : reactExports.Suspense;
+  const inner = /* @__PURE__ */ jsxRuntimeExports.jsxs(ResolvedSuspense, { fallback: pendingElement, children: [
+    !router2.isServer && /* @__PURE__ */ jsxRuntimeExports.jsx(Transitioner, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(MatchesInner, {})
+  ] });
+  return router2.options.InnerWrap ? /* @__PURE__ */ jsxRuntimeExports.jsx(router2.options.InnerWrap, { children: inner }) : inner;
+}
+function MatchesInner() {
+  const router2 = useRouter();
+  const matchId = useRouterState({
+    select: (s) => {
+      var _a2;
+      return (_a2 = s.matches[0]) == null ? void 0 : _a2.id;
+    }
+  });
+  const resetKey = useRouterState({
+    select: (s) => s.loadedAt
+  });
+  const matchComponent = matchId ? /* @__PURE__ */ jsxRuntimeExports.jsx(Match, { matchId }) : null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(matchContext.Provider, { value: matchId, children: router2.options.disableGlobalCatchBoundary ? matchComponent : /* @__PURE__ */ jsxRuntimeExports.jsx(
+    CatchBoundary,
+    {
+      getResetKey: () => resetKey,
+      errorComponent: ErrorComponent,
+      onCatch: (error) => {
+        warning(false, error.message || error.toString());
+      },
+      children: matchComponent
+    }
+  ) });
+}
+const createRouter = (options2) => {
+  return new Router(options2);
+};
+class Router extends RouterCore {
+  constructor(options2) {
+    super(options2);
+  }
+}
+if (typeof globalThis !== "undefined") {
+  globalThis.createFileRoute = createFileRoute;
+  globalThis.createLazyFileRoute = createLazyFileRoute;
+} else if (typeof window !== "undefined") {
+  window.createFileRoute = createFileRoute;
+  window.createLazyFileRoute = createLazyFileRoute;
+}
+function RouterContextProvider({
+  router: router2,
+  children,
+  ...rest
+}) {
+  if (Object.keys(rest).length > 0) {
+    router2.update({
+      ...router2.options,
+      ...rest,
+      context: {
+        ...router2.options.context,
+        ...rest.context
+      }
+    });
+  }
+  const routerContext2 = getRouterContext();
+  const provider = /* @__PURE__ */ jsxRuntimeExports.jsx(routerContext2.Provider, { value: router2, children });
+  if (router2.options.Wrap) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(router2.options.Wrap, { children: provider });
+  }
+  return provider;
+}
+function RouterProvider({ router: router2, ...rest }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterContextProvider, { router: router2, ...rest, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Matches, {}) });
+}
+function useLocation(opts) {
+  return useRouterState({
+    select: (state) => state.location
+  });
+}
 function useScrollReveal() {
   const ref = reactExports.useRef(null);
   reactExports.useEffect(() => {
@@ -14012,7 +19230,7 @@ function AboutSection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "Heart of Everything" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-5", children: "Founded in 2005 in Mumbai, JPM Enterprises began as a small workshop with a single vision: to create furniture that stands the test of time. Today, we are one of India's most trusted names in luxury sofa design and manufacturing." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-5", children: "Founded in 2005 in Hisar, JPM Enterprises began as a small workshop with a single vision: to create furniture that stands the test of time. Today, we are one of India's most trusted names in luxury sofa design and manufacturing." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-5", children: "Every JPM piece is born from a deep respect for traditional craftsmanship, enriched with contemporary design sensibility. Our master craftsmen hand-select materials, hand-stitch upholstery, and hand-finish every detail — because we believe furniture should be as beautiful to make as it is to own." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-10", children: "We don't just build sofas. We build heirlooms — pieces that become the anchor of your living space, companions for years of memories." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-8", children: stats.map((stat) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col", children: [
@@ -14056,30 +19274,35 @@ function AboutSection() {
 const products = [
   {
     id: 1,
+    slug: "modern-sofa",
     name: "Modern Sofa",
     description: "Clean lines and contemporary elegance for the modern home.",
     image: "/assets/generated/sofa-modern.dim_800x600.jpg"
   },
   {
     id: 2,
+    slug: "luxury-leather-sofa",
     name: "Luxury Leather Sofa",
     description: "Premium full-grain leather with hand-stitched detailing.",
     image: "/assets/generated/sofa-leather.dim_800x600.jpg"
   },
   {
     id: 3,
+    slug: "minimalist-fabric-sofa",
     name: "Minimalist Fabric Sofa",
     description: "Soft linen blend upholstery in a timeless Scandinavian form.",
     image: "/assets/generated/sofa-fabric.dim_800x600.jpg"
   },
   {
     id: 4,
+    slug: "l-shape-sofa",
     name: "L-Shape Sofa",
     description: "Generous sectional for spacious living, built to impress.",
     image: "/assets/generated/sofa-lshape.dim_800x600.jpg"
   },
   {
     id: 5,
+    slug: "recliner-sofa",
     name: "Recliner Sofa",
     description: "Motorized comfort with premium fabric and whisper-quiet mechanism.",
     image: "/assets/generated/sofa-recliner.dim_800x600.jpg"
@@ -14088,6 +19311,7 @@ const products = [
 function CollectionSection() {
   const headerRef = useScrollReveal();
   const gridRef = reactExports.useRef(null);
+  const navigate = useNavigate();
   reactExports.useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -14163,6 +19387,10 @@ function CollectionSection() {
                   {
                     type: "button",
                     "data-ocid": `collection.view_button.${product.id}`,
+                    onClick: () => navigate({
+                      to: "/product/$productId",
+                      params: { productId: product.slug }
+                    }),
                     className: "font-general text-xs font-semibold tracking-wider uppercase px-5 py-2.5 border transition-all duration-300",
                     style: {
                       borderColor: "oklch(0.65 0.12 75)",
@@ -14293,7 +19521,48 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$k = [
+const __iconNode$s = [
+  ["path", { d: "M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3", key: "irtipd" }],
+  [
+    "path",
+    {
+      d: "M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z",
+      key: "1qyhux"
+    }
+  ],
+  ["path", { d: "M5 18v2", key: "ppbyun" }],
+  ["path", { d: "M19 18v2", key: "gy7782" }]
+];
+const Armchair = createLucideIcon("armchair", __iconNode$s);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$r = [
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
+];
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$r);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$q = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+];
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$q);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$p = [
   [
     "path",
     {
@@ -14303,50 +19572,69 @@ const __iconNode$k = [
   ],
   ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
 ];
-const Award = createLucideIcon("award", __iconNode$k);
+const Award = createLucideIcon("award", __iconNode$p);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$j = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$j);
+const __iconNode$o = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$o);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$i = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$i);
+const __iconNode$n = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$n);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$h = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$h);
+const __iconNode$m = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$m);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$g = [
+const __iconNode$l = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$l);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$k = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+];
+const CircleCheck = createLucideIcon("circle-check", __iconNode$k);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$j = [
   ["path", { d: "M6 3h12l4 6-10 13L2 9Z", key: "1pcd5k" }],
   ["path", { d: "M11 3 8 9l4 13 4-13-3-6", key: "1fcu3u" }],
   ["path", { d: "M2 9h20", key: "16fsjt" }]
 ];
-const Gem = createLucideIcon("gem", __iconNode$g);
+const Gem = createLucideIcon("gem", __iconNode$j);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$f = [
+const __iconNode$i = [
   [
     "path",
     {
@@ -14355,14 +19643,14 @@ const __iconNode$f = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$f);
+const Heart = createLucideIcon("heart", __iconNode$i);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$e = [
+const __iconNode$h = [
   ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
   [
     "path",
@@ -14372,14 +19660,14 @@ const __iconNode$e = [
     }
   ]
 ];
-const House = createLucideIcon("house", __iconNode$e);
+const House = createLucideIcon("house", __iconNode$h);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$d = [
+const __iconNode$g = [
   [
     "path",
     {
@@ -14402,25 +19690,25 @@ const __iconNode$d = [
     }
   ]
 ];
-const Layers = createLucideIcon("layers", __iconNode$d);
+const Layers = createLucideIcon("layers", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$c = [
+const __iconNode$f = [
   ["path", { d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7", key: "132q7q" }],
   ["rect", { x: "2", y: "4", width: "20", height: "16", rx: "2", key: "izxlao" }]
 ];
-const Mail = createLucideIcon("mail", __iconNode$c);
+const Mail = createLucideIcon("mail", __iconNode$f);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$b = [
+const __iconNode$e = [
   [
     "path",
     {
@@ -14430,7 +19718,44 @@ const __iconNode$b = [
   ],
   ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }]
 ];
-const MapPin = createLucideIcon("map-pin", __iconNode$b);
+const MapPin = createLucideIcon("map-pin", __iconNode$e);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$d = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "m21 3-7 7", key: "1l2asr" }],
+  ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
+  ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
+];
+const Maximize2 = createLucideIcon("maximize-2", __iconNode$d);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$c = [
+  ["path", { d: "M4 12h16", key: "1lakjw" }],
+  ["path", { d: "M4 18h16", key: "19g7jn" }],
+  ["path", { d: "M4 6h16", key: "1o0s65" }]
+];
+const Menu = createLucideIcon("menu", __iconNode$c);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$b = [
+  ["path", { d: "m18 8 4 4-4 4", key: "1ak13k" }],
+  ["path", { d: "M2 12h20", key: "9i4pu4" }],
+  ["path", { d: "m6 8-4 4 4 4", key: "15zrgr" }]
+];
+const MoveHorizontal = createLucideIcon("move-horizontal", __iconNode$b);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -14438,12 +19763,15 @@ const MapPin = createLucideIcon("map-pin", __iconNode$b);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$a = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "m21 3-7 7", key: "1l2asr" }],
-  ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
-  ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
+  [
+    "path",
+    { d: "m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z", key: "irua1i" }
+  ],
+  ["path", { d: "m5 2 5 5", key: "1lls2c" }],
+  ["path", { d: "M2 13h15", key: "1hkzvu" }],
+  ["path", { d: "M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z", key: "xk76lq" }]
 ];
-const Maximize2 = createLucideIcon("maximize-2", __iconNode$a);
+const PaintBucket = createLucideIcon("paint-bucket", __iconNode$a);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -14451,18 +19779,6 @@ const Maximize2 = createLucideIcon("maximize-2", __iconNode$a);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$9 = [
-  ["path", { d: "M4 12h16", key: "1lakjw" }],
-  ["path", { d: "M4 18h16", key: "19g7jn" }],
-  ["path", { d: "M4 6h16", key: "1o0s65" }]
-];
-const Menu = createLucideIcon("menu", __iconNode$9);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$8 = [
   [
     "path",
     {
@@ -14475,14 +19791,14 @@ const __iconNode$8 = [
   ["circle", { cx: "6.5", cy: "12.5", r: ".5", fill: "currentColor", key: "qy21gx" }],
   ["circle", { cx: "8.5", cy: "7.5", r: ".5", fill: "currentColor", key: "fotxhn" }]
 ];
-const Palette = createLucideIcon("palette", __iconNode$8);
+const Palette = createLucideIcon("palette", __iconNode$9);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$7 = [
+const __iconNode$8 = [
   [
     "path",
     {
@@ -14500,14 +19816,14 @@ const __iconNode$7 = [
   ["path", { d: "m2.3 2.3 7.286 7.286", key: "1wuzzi" }],
   ["circle", { cx: "11", cy: "11", r: "2", key: "xmgehs" }]
 ];
-const PenTool = createLucideIcon("pen-tool", __iconNode$7);
+const PenTool = createLucideIcon("pen-tool", __iconNode$8);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$6 = [
+const __iconNode$7 = [
   [
     "path",
     {
@@ -14516,14 +19832,14 @@ const __iconNode$6 = [
     }
   ]
 ];
-const Phone = createLucideIcon("phone", __iconNode$6);
+const Phone = createLucideIcon("phone", __iconNode$7);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$5 = [
+const __iconNode$6 = [
   [
     "path",
     {
@@ -14539,14 +19855,14 @@ const __iconNode$5 = [
     }
   ]
 ];
-const Quote = createLucideIcon("quote", __iconNode$5);
+const Quote = createLucideIcon("quote", __iconNode$6);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$4 = [
+const __iconNode$5 = [
   [
     "path",
     {
@@ -14559,7 +19875,27 @@ const __iconNode$4 = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$4);
+const Ruler = createLucideIcon("ruler", __iconNode$5);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  ["path", { d: "M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3", key: "1dgpiv" }],
+  [
+    "path",
+    {
+      d: "M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z",
+      key: "xacw8m"
+    }
+  ],
+  ["path", { d: "M4 18v2", key: "jwo5n2" }],
+  ["path", { d: "M20 18v2", key: "1ar1qi" }],
+  ["path", { d: "M12 4v9", key: "oqhhn3" }]
+];
+const Sofa = createLucideIcon("sofa", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -14614,9 +19950,63 @@ const __iconNode = [
   ["line", { x1: "8", x2: "14", y1: "11", y2: "11", key: "durymu" }]
 ];
 const ZoomIn = createLucideIcon("zoom-in", __iconNode);
+function validateForm(fields) {
+  const errors = {};
+  if (!fields.name.trim()) {
+    errors.name = "Name is required";
+  } else if (fields.name.trim().length < 2) {
+    errors.name = "Name must be at least 2 characters";
+  }
+  if (!fields.email.trim()) {
+    errors.email = "Please enter a valid email";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.trim())) {
+    errors.email = "Please enter a valid email";
+  }
+  const digitsOnly = fields.phone.replace(/\D/g, "");
+  if (!fields.phone.trim()) {
+    errors.phone = "Enter a valid phone number";
+  } else if (!/^\d+$/.test(digitsOnly) || digitsOnly.length < 10 || digitsOnly.length > 15) {
+    errors.phone = "Enter a valid phone number";
+  }
+  if (!fields.message.trim()) {
+    errors.message = "Message must be at least 10 characters";
+  } else if (fields.message.trim().length < 10) {
+    errors.message = "Message must be at least 10 characters";
+  }
+  return errors;
+}
+const errorBorder = "oklch(0.55 0.2 25)";
+const normalBorder = "oklch(0.87 0.02 80)";
+const goldBorder = "oklch(0.65 0.12 75)";
 function ContactSection() {
   const leftRef = useScrollReveal();
   const rightRef = useScrollReveal();
+  const [fields, setFields] = reactExports.useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  const [errors, setErrors] = reactExports.useState({});
+  const [submitted, setSubmitted] = reactExports.useState(false);
+  const handleChange = (field, value) => {
+    setFields((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: void 0 }));
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm(fields);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setSubmitted(true);
+    setFields({ name: "", email: "", phone: "", message: "" });
+    setErrors({});
+  };
+  const inputBorderColor = (field) => errors[field] ? errorBorder : normalBorder;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", className: "py-24 bg-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-16", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: leftRef, className: "reveal", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -14641,7 +20031,7 @@ function ContactSection() {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-1", children: "Phone" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-foreground font-medium", children: "+91 98765 43210" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-foreground font-medium", children: "+91 94683 96001" })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-4", children: [
@@ -14655,7 +20045,7 @@ function ContactSection() {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-1", children: "Email" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-foreground font-medium", children: "info@jpmenterprises.com" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-foreground font-medium", children: "jpmenterprises2602@gmail.com" })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-4", children: [
@@ -14669,11 +20059,7 @@ function ContactSection() {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-1", children: "Address" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-foreground font-medium", children: [
-              "45 Furniture Hub, Design District,",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              "Mumbai, India — 400 001"
-            ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-foreground font-medium", children: "Plot No. 1/1 & 1/2, Paschim Vihar, Phase-III, Kaimri Road, Opp. Ananda Hospital, Hisar, District- Hisar, Haryana-125001." })
           ] })
         ] })
       ] })
@@ -14685,7 +20071,56 @@ function ContactSection() {
         style: { border: "1px solid oklch(0.87 0.02 80)" },
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground mb-6", children: "Send an Inquiry" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-5", onSubmit: (e) => e.preventDefault(), children: [
+          submitted ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              "data-ocid": "contact.success_state",
+              className: "py-10 text-center",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5",
+                    style: { background: "oklch(0.65 0.12 75 / 0.15)" },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "svg",
+                      {
+                        role: "img",
+                        "aria-label": "Success checkmark",
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        stroke: "oklch(0.55 0.14 65)",
+                        strokeWidth: "2.5",
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: "Success" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("polyline", { points: "20 6 9 17 4 12" })
+                        ]
+                      }
+                    )
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-xl font-semibold text-foreground mb-2", children: "Inquiry Sent!" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground leading-relaxed", children: "Your inquiry has been sent successfully. Our team will contact you soon." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setSubmitted(false),
+                    className: "mt-6 font-general text-xs font-semibold tracking-wider uppercase px-5 py-2.5 border transition-all duration-300",
+                    style: {
+                      borderColor: "oklch(0.65 0.12 75)",
+                      color: "oklch(0.65 0.12 75)"
+                    },
+                    children: "Send Another"
+                  }
+                )
+              ]
+            }
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-5", onSubmit: handleSubmit, noValidate: true, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "label",
@@ -14701,20 +20136,33 @@ function ContactSection() {
                   id: "contact-name",
                   type: "text",
                   placeholder: "Your full name",
+                  value: fields.name,
+                  onChange: (e) => handleChange("name", e.target.value),
                   "data-ocid": "contact.name_input",
                   className: "w-full px-4 py-3 font-general text-sm bg-input border rounded-sm outline-none transition-all duration-200",
                   style: {
-                    borderColor: "oklch(0.87 0.02 80)",
+                    borderColor: inputBorderColor("name"),
                     color: "oklch(0.12 0.01 60)"
                   },
                   onFocus: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.65 0.12 75)";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    if (!errors.name) {
+                      e.currentTarget.style.borderColor = goldBorder;
+                      e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    }
                   },
                   onBlur: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.87 0.02 80)";
+                    e.currentTarget.style.borderColor = errors.name ? errorBorder : normalBorder;
                     e.currentTarget.style.boxShadow = "none";
                   }
+                }
+              ),
+              errors.name && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  "data-ocid": "contact.name_input.error_state",
+                  className: "mt-1.5 font-general text-xs",
+                  style: { color: errorBorder },
+                  children: errors.name
                 }
               )
             ] }),
@@ -14733,20 +20181,33 @@ function ContactSection() {
                   id: "contact-email",
                   type: "email",
                   placeholder: "your@email.com",
+                  value: fields.email,
+                  onChange: (e) => handleChange("email", e.target.value),
                   "data-ocid": "contact.email_input",
                   className: "w-full px-4 py-3 font-general text-sm bg-input border rounded-sm outline-none transition-all duration-200",
                   style: {
-                    borderColor: "oklch(0.87 0.02 80)",
+                    borderColor: inputBorderColor("email"),
                     color: "oklch(0.12 0.01 60)"
                   },
                   onFocus: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.65 0.12 75)";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    if (!errors.email) {
+                      e.currentTarget.style.borderColor = goldBorder;
+                      e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    }
                   },
                   onBlur: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.87 0.02 80)";
+                    e.currentTarget.style.borderColor = errors.email ? errorBorder : normalBorder;
                     e.currentTarget.style.boxShadow = "none";
                   }
+                }
+              ),
+              errors.email && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  "data-ocid": "contact.email_input.error_state",
+                  className: "mt-1.5 font-general text-xs",
+                  style: { color: errorBorder },
+                  children: errors.email
                 }
               )
             ] }),
@@ -14765,20 +20226,33 @@ function ContactSection() {
                   id: "contact-phone",
                   type: "tel",
                   placeholder: "+91 XXXXX XXXXX",
+                  value: fields.phone,
+                  onChange: (e) => handleChange("phone", e.target.value),
                   "data-ocid": "contact.phone_input",
                   className: "w-full px-4 py-3 font-general text-sm bg-input border rounded-sm outline-none transition-all duration-200",
                   style: {
-                    borderColor: "oklch(0.87 0.02 80)",
+                    borderColor: inputBorderColor("phone"),
                     color: "oklch(0.12 0.01 60)"
                   },
                   onFocus: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.65 0.12 75)";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    if (!errors.phone) {
+                      e.currentTarget.style.borderColor = goldBorder;
+                      e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    }
                   },
                   onBlur: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.87 0.02 80)";
+                    e.currentTarget.style.borderColor = errors.phone ? errorBorder : normalBorder;
                     e.currentTarget.style.boxShadow = "none";
                   }
+                }
+              ),
+              errors.phone && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  "data-ocid": "contact.phone_input.error_state",
+                  className: "mt-1.5 font-general text-xs",
+                  style: { color: errorBorder },
+                  children: errors.phone
                 }
               )
             ] }),
@@ -14797,20 +20271,33 @@ function ContactSection() {
                   id: "contact-message",
                   rows: 4,
                   placeholder: "Tell us about your dream sofa...",
+                  value: fields.message,
+                  onChange: (e) => handleChange("message", e.target.value),
                   "data-ocid": "contact.message_textarea",
                   className: "w-full px-4 py-3 font-general text-sm bg-input border rounded-sm outline-none transition-all duration-200 resize-none",
                   style: {
-                    borderColor: "oklch(0.87 0.02 80)",
+                    borderColor: inputBorderColor("message"),
                     color: "oklch(0.12 0.01 60)"
                   },
                   onFocus: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.65 0.12 75)";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    if (!errors.message) {
+                      e.currentTarget.style.borderColor = goldBorder;
+                      e.currentTarget.style.boxShadow = "0 0 0 3px oklch(0.65 0.12 75 / 0.15)";
+                    }
                   },
                   onBlur: (e) => {
-                    e.currentTarget.style.borderColor = "oklch(0.87 0.02 80)";
+                    e.currentTarget.style.borderColor = errors.message ? errorBorder : normalBorder;
                     e.currentTarget.style.boxShadow = "none";
                   }
+                }
+              ),
+              errors.message && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  "data-ocid": "contact.message_textarea.error_state",
+                  className: "mt-1.5 font-general text-xs",
+                  style: { color: errorBorder },
+                  children: errors.message
                 }
               )
             ] }),
@@ -14834,7 +20321,7 @@ function ContactSection() {
     ) })
   ] }) }) });
 }
-const steps = [
+const steps$1 = [
   {
     number: "01",
     icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Palette, { size: 22 }),
@@ -14869,6 +20356,7 @@ const options = [
 function CustomDesignSection() {
   const leftRef = useScrollReveal();
   const stepsRef = reactExports.useRef(null);
+  const navigate = useNavigate();
   reactExports.useEffect(() => {
     const container = stepsRef.current;
     if (!container) return;
@@ -14924,6 +20412,7 @@ function CustomDesignSection() {
         {
           type: "button",
           "data-ocid": "custom.start_button",
+          onClick: () => navigate({ to: "/custom-design" }),
           className: "font-general px-8 py-4 text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-1",
           style: {
             background: "oklch(0.65 0.12 75)",
@@ -14934,7 +20423,7 @@ function CustomDesignSection() {
         }
       )
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: stepsRef, className: "grid grid-cols-1 sm:grid-cols-2 gap-6", children: steps.map((step, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: stepsRef, className: "grid grid-cols-1 sm:grid-cols-2 gap-6", children: steps$1.map((step, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
         className: "step-item bg-card p-6 rounded-sm",
@@ -14978,7 +20467,7 @@ var DefaultContext = {
   style: void 0,
   attr: void 0
 };
-var IconContext = React$2.createContext && /* @__PURE__ */ React$2.createContext(DefaultContext);
+var IconContext = React$4.createContext && /* @__PURE__ */ React$4.createContext(DefaultContext);
 var _excluded = ["attr", "size", "title"];
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
@@ -15065,12 +20554,12 @@ function _toPrimitive(t, r) {
   return ("string" === r ? String : Number)(t);
 }
 function Tree2Element(tree) {
-  return tree && tree.map((node, i) => /* @__PURE__ */ React$2.createElement(node.tag, _objectSpread({
+  return tree && tree.map((node, i) => /* @__PURE__ */ React$4.createElement(node.tag, _objectSpread({
     key: i
   }, node.attr), Tree2Element(node.child)));
 }
 function GenIcon(data) {
-  return (props) => /* @__PURE__ */ React$2.createElement(IconBase, _extends({
+  return (props) => /* @__PURE__ */ React$4.createElement(IconBase, _extends({
     attr: _objectSpread({}, data.attr)
   }, props), Tree2Element(data.child));
 }
@@ -15085,7 +20574,7 @@ function IconBase(props) {
     var className;
     if (conf.className) className = conf.className;
     if (props.className) className = (className ? className + " " : "") + props.className;
-    return /* @__PURE__ */ React$2.createElement("svg", _extends({
+    return /* @__PURE__ */ React$4.createElement("svg", _extends({
       stroke: "currentColor",
       fill: "currentColor",
       strokeWidth: "0"
@@ -15097,9 +20586,9 @@ function IconBase(props) {
       height: computedSize,
       width: computedSize,
       xmlns: "http://www.w3.org/2000/svg"
-    }), title && /* @__PURE__ */ React$2.createElement("title", null, title), props.children);
+    }), title && /* @__PURE__ */ React$4.createElement("title", null, title), props.children);
   };
-  return IconContext !== void 0 ? /* @__PURE__ */ React$2.createElement(IconContext.Consumer, null, (conf) => elem(conf)) : elem(DefaultContext);
+  return IconContext !== void 0 ? /* @__PURE__ */ React$4.createElement(IconContext.Consumer, null, (conf) => elem(conf)) : elem(DefaultContext);
 }
 function SiFacebook(props) {
   return GenIcon({ "attr": { "role": "img", "viewBox": "0 0 24 24" }, "child": [{ "tag": "path", "attr": { "d": "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" }, "child": [] }] })(props);
@@ -15113,31 +20602,48 @@ function SiLinkedin(props) {
 function SiPinterest(props) {
   return GenIcon({ "attr": { "role": "img", "viewBox": "0 0 24 24" }, "child": [{ "tag": "path", "attr": { "d": "M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" }, "child": [] }] })(props);
 }
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
 const quickLinks = [
-  "Home",
-  "Collection",
-  "Custom Design",
-  "Why Us",
-  "Gallery",
-  "Contact"
+  { label: "Home", section: "home" },
+  { label: "Collection", section: "collection" },
+  { label: "Custom Design", section: "custom-design" },
+  { label: "Why Us", section: "why-us" },
+  { label: "Gallery", section: "gallery" },
+  { label: "Contact", section: "contact" }
 ];
-const services = [
-  "Custom Sofas",
-  "Fabric Selection",
-  "Interior Consultation",
-  "Delivery & Installation"
+const serviceLinks = [
+  { label: "Custom Sofas", anchor: "custom-sofas" },
+  { label: "Fabric Selection", anchor: "fabric-selection" },
+  { label: "Interior Consultation", anchor: "interior-consultation" },
+  { label: "Delivery & Installation", anchor: "delivery-installation" }
 ];
 const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
 const socialLinks = [
-  { Icon: SiInstagram, label: "Instagram", href: "https://instagram.com" },
+  {
+    Icon: SiInstagram,
+    label: "Instagram",
+    href: "https://instagram.com/jpmenterpriseshissar"
+  },
   { Icon: SiFacebook, label: "Facebook", href: "https://facebook.com" },
   { Icon: SiPinterest, label: "Pinterest", href: "https://pinterest.com" },
   { Icon: SiLinkedin, label: "LinkedIn", href: "https://linkedin.com" }
 ];
 function Footer() {
-  const scrollTo = (id) => {
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+  const handleQuickLink = (section) => {
+    if (window.location.pathname === "/") {
+      scrollToSection(section);
+    } else {
+      navigate({ to: "/" });
+      setTimeout(() => scrollToSection(section), 350);
+    }
+  };
+  const handleServiceLink = (anchor) => {
+    navigate({ to: "/services" });
+    setTimeout(() => scrollToSection(anchor), 350);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "footer",
@@ -15203,7 +20709,8 @@ function Footer() {
               "button",
               {
                 type: "button",
-                onClick: () => scrollTo(`#${link.toLowerCase().replace(" ", "-")}`),
+                onClick: () => handleQuickLink(link.section),
+                "data-ocid": `footer.${link.section.replace("-", "_")}_link`,
                 className: "font-general text-sm transition-colors duration-200 text-left",
                 style: { color: "oklch(0.7 0.015 80)" },
                 onMouseEnter: (e) => {
@@ -15212,9 +20719,9 @@ function Footer() {
                 onMouseLeave: (e) => {
                   e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                 },
-                children: link
+                children: link.label
               }
-            ) }, link)) })
+            ) }, link.label)) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -15225,14 +20732,23 @@ function Footer() {
                 children: "Services"
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: services.map((service) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "span",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: serviceLinks.map((service) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
               {
-                className: "font-general text-sm",
+                type: "button",
+                onClick: () => handleServiceLink(service.anchor),
+                "data-ocid": `footer.${service.anchor.replace("-", "_")}_link`,
+                className: "font-general text-sm transition-colors duration-200 text-left",
                 style: { color: "oklch(0.7 0.015 80)" },
-                children: service
+                onMouseEnter: (e) => {
+                  e.currentTarget.style.color = "oklch(0.65 0.12 75)";
+                },
+                onMouseLeave: (e) => {
+                  e.currentTarget.style.color = "oklch(0.7 0.015 80)";
+                },
+                children: service.label
               }
-            ) }, service)) })
+            ) }, service.label)) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -15244,22 +20760,18 @@ function Footer() {
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "p",
                 {
                   className: "font-general text-sm",
                   style: { color: "oklch(0.7 0.015 80)" },
-                  children: [
-                    "45 Furniture Hub, Design District,",
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                    "Mumbai, India — 400 001"
-                  ]
+                  children: "Plot No. 1/1 & 1/2, Paschim Vihar, Phase-III, Kaimri Road, Opp. Ananda Hospital, Hisar, District- Hisar, Haryana-125001."
                 }
               ) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "a",
                 {
-                  href: "tel:+919876543210",
+                  href: "tel:+919468396001",
                   className: "font-general text-sm transition-colors",
                   style: { color: "oklch(0.7 0.015 80)" },
                   onMouseEnter: (e) => {
@@ -15268,13 +20780,13 @@ function Footer() {
                   onMouseLeave: (e) => {
                     e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                   },
-                  children: "+91 98765 43210"
+                  children: "+91 94683 96001"
                 }
               ) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "a",
                 {
-                  href: "mailto:info@jpmenterprises.com",
+                  href: "mailto:jpmenterprises2602@gmail.com",
                   className: "font-general text-sm transition-colors",
                   style: { color: "oklch(0.7 0.015 80)" },
                   onMouseEnter: (e) => {
@@ -15283,7 +20795,7 @@ function Footer() {
                   onMouseLeave: (e) => {
                     e.currentTarget.style.color = "oklch(0.7 0.015 80)";
                   },
-                  children: "info@jpmenterprises.com"
+                  children: "jpmenterprises2602@gmail.com"
                 }
               ) })
             ] })
@@ -15618,6 +21130,8 @@ function Navbar() {
   const [scrolled, setScrolled] = reactExports.useState(false);
   const [menuOpen, setMenuOpen] = reactExports.useState(false);
   const [active, setActive] = reactExports.useState("#home");
+  const navigate = useNavigate();
+  const location2 = useLocation();
   reactExports.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
@@ -15626,8 +21140,13 @@ function Navbar() {
   const handleNav = (href) => {
     setActive(href);
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    const sectionId = href.replace("#", "");
+    if (location2.pathname === "/") {
+      scrollToSection(sectionId);
+    } else {
+      navigate({ to: "/" });
+      setTimeout(() => scrollToSection(sectionId), 350);
+    }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "header",
@@ -15649,7 +21168,7 @@ function Navbar() {
                 {
                   src: "/assets/uploads/image-1.png",
                   alt: "JPM Enterprises",
-                  className: "h-12 w-auto object-contain"
+                  className: "h-14 w-auto object-contain"
                 }
               )
             }
@@ -16005,7 +21524,1055 @@ function WhyChooseSection() {
     )
   ] }) });
 }
-function App() {
+const stepCount = 6;
+const styleOptions = [
+  {
+    value: "L-Shape",
+    label: "L-Shape",
+    description: "Perfect for open-plan living spaces with a bold corner arrangement.",
+    image: "/assets/generated/sofa-lshape.dim_800x600.jpg",
+    Icon: Sofa
+  },
+  {
+    value: "Recliner",
+    label: "Recliner",
+    description: "Ultimate comfort with adjustable recline positions for relaxation.",
+    image: "/assets/generated/sofa-recliner.dim_800x600.jpg",
+    Icon: MoveHorizontal
+  },
+  {
+    value: "3-Seater",
+    label: "3-Seater",
+    description: "Classic proportions, ideal for families and everyday lounging.",
+    image: "/assets/generated/sofa-modern.dim_800x600.jpg",
+    Icon: Armchair
+  },
+  {
+    value: "Custom",
+    label: "Custom",
+    description: "Fully bespoke. We build exactly to your unique vision and space.",
+    image: "/assets/generated/hero-sofa.dim_1600x900.jpg",
+    Icon: Sparkles
+  }
+];
+const fabricOptions = [
+  {
+    value: "Linen",
+    image: "/assets/generated/sofa-fabric.dim_800x600.jpg",
+    fill: "linear-gradient(135deg, #ede2cf 0%, #e7dbc8 48%, #f5ecdd 100%)"
+  },
+  {
+    value: "Velvet",
+    image: "/assets/generated/gallery-5.dim_600x800.jpg",
+    fill: "linear-gradient(135deg, #7e6bb2 0%, #8f7fc0 55%, #9988c9 100%)"
+  },
+  {
+    value: "Leather",
+    image: "/assets/generated/sofa-leather.dim_800x600.jpg",
+    fill: "linear-gradient(135deg, #8f6243 0%, #9a6d4d 55%, #aa7d5b 100%)"
+  },
+  {
+    value: "Microfiber",
+    image: "/assets/generated/gallery-2.dim_800x600.jpg",
+    fill: "linear-gradient(135deg, #c3bfc0 0%, #b1adaf 55%, #cbc7c8 100%)"
+  },
+  {
+    value: "Cotton",
+    image: "/assets/generated/gallery-1.dim_600x800.jpg",
+    fill: "linear-gradient(135deg, #eddabd 0%, #efe2cc 50%, #f7eddc 100%)"
+  },
+  {
+    value: "Suede",
+    image: "/assets/generated/about-craftsmanship.dim_800x600.jpg",
+    fill: "linear-gradient(135deg, #b08d64 0%, #b9986f 52%, #c3a47d 100%)"
+  }
+];
+const colorOptions = [
+  { value: "Ivory", swatch: "#F1ECE0" },
+  { value: "Charcoal", swatch: "#494743" },
+  { value: "Sand", swatch: "#D8BA92" },
+  { value: "Slate Blue", swatch: "#7383A3" },
+  { value: "Forest Green", swatch: "#567249" },
+  { value: "Warm White", swatch: "#F7F4EE" },
+  { value: "Blush", swatch: "#F0B79C" },
+  { value: "Midnight", swatch: "#20203A" }
+];
+const cardBorder = "oklch(0.84 0.03 80)";
+const gold = "oklch(0.65 0.12 75)";
+const goldDark = "oklch(0.58 0.13 68)";
+function summaryLine(style2, fabric, tone) {
+  return `Crafted in ${fabric.toLowerCase()} with a ${tone.toLowerCase()} palette for a ${style2.toLowerCase()} sofa silhouette.`;
+}
+function formatCentimeters(value) {
+  return `${value}cm`;
+}
+function SofaConfigurator() {
+  const [currentStep, setCurrentStep] = reactExports.useState(0);
+  const [isComplete, setIsComplete] = reactExports.useState(false);
+  const [style2, setStyle] = reactExports.useState("L-Shape");
+  const [fabric, setFabric] = reactExports.useState("Microfiber");
+  const [tone, setTone] = reactExports.useState("Warm White");
+  const [width, setWidth] = reactExports.useState(200);
+  const [depth, setDepth] = reactExports.useState(110);
+  const [notes, setNotes] = reactExports.useState("");
+  const [name, setName] = reactExports.useState("");
+  const [phone, setPhone] = reactExports.useState("");
+  const selectedStyle = styleOptions.find((option) => option.value === style2);
+  const progressWidth = `${(currentStep + 1) / stepCount * 100}%`;
+  const phoneDigits = phone.replace(/\D/g, "");
+  const canSubmit = name.trim().length >= 2 && phoneDigits.length >= 10;
+  const goNext = () => {
+    if (currentStep === stepCount - 1) {
+      if (!canSubmit) return;
+      setIsComplete(true);
+      return;
+    }
+    setCurrentStep((step) => Math.min(step + 1, stepCount - 1));
+  };
+  const goBack = () => {
+    setCurrentStep((step) => Math.max(step - 1, 0));
+  };
+  const resetWizard = () => {
+    setCurrentStep(0);
+    setIsComplete(false);
+    setStyle("L-Shape");
+    setFabric("Microfiber");
+    setTone("Warm White");
+    setWidth(200);
+    setDepth(110);
+    setNotes("");
+    setName("");
+    setPhone("");
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-[720px] mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: "relative overflow-hidden rounded-[26px] bg-white shadow-[0_28px_70px_oklch(0.58_0.08_65_/_0.18)]",
+      style: { border: "1px solid oklch(0.92 0.01 82)" },
+      children: [
+        !isComplete && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute left-0 top-0 h-1.5 transition-all duration-300",
+            style: {
+              width: progressWidth,
+              background: `linear-gradient(90deg, ${gold}, oklch(0.74 0.13 82))`
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute inset-0 pointer-events-none",
+            style: {
+              background: "radial-gradient(circle at top center, oklch(0.98 0.01 84), transparent 55%)"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "relative px-6 py-8 sm:px-10 sm:py-10 animate-[fadeIn_0.35s_ease]",
+            children: isComplete ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-8 sm:py-12", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center mb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-20 h-20 rounded-full flex items-center justify-center",
+                  style: {
+                    border: `2px solid ${gold}`,
+                    background: "oklch(0.98 0.01 82)"
+                  },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 38, style: { color: goldDark } })
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-8", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-4xl font-bold text-foreground mb-4", children: "Your Sofa Journey Begins!" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-lg text-secondary-foreground leading-relaxed max-w-2xl mx-auto", children: [
+                  "Thank you, ",
+                  name.trim() || "there",
+                  ". Our craftsmen will reach out at ",
+                  phone || "your number",
+                  " within 24 hours."
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "rounded-[18px] p-6 mb-8",
+                  style: {
+                    border: `1px solid ${cardBorder}`,
+                    background: "oklch(0.98 0.008 85)"
+                  },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 font-general text-lg", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, className: "font-semibold", children: "Style:" }),
+                      " ",
+                      style2
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, className: "font-semibold", children: "Fabric:" }),
+                      " ",
+                      fabric
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, className: "font-semibold", children: "Color:" }),
+                      " ",
+                      tone
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, className: "font-semibold", children: "Size:" }),
+                      " ",
+                      formatCentimeters(width),
+                      " x ",
+                      formatCentimeters(depth)
+                    ] })
+                  ] })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  onClick: resetWizard,
+                  className: "font-general px-10 py-4 text-sm font-semibold tracking-[0.18em] uppercase transition-all duration-300 hover:-translate-y-0.5",
+                  style: {
+                    background: gold,
+                    color: "oklch(0.12 0.01 60)",
+                    boxShadow: "0 14px 24px oklch(0.65 0.12 75 / 0.22)"
+                  },
+                  children: "Start Over"
+                }
+              ) })
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-8", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "p",
+                  {
+                    className: "font-general text-sm font-semibold tracking-[0.28em] uppercase mb-4",
+                    style: { color: goldDark },
+                    children: [
+                      "Step ",
+                      currentStep + 1,
+                      " of ",
+                      stepCount
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-playfair text-4xl font-bold text-foreground mb-3", children: [
+                  currentStep === 0 && "Choose Your Sofa Style",
+                  currentStep === 1 && "Select Your Fabric",
+                  currentStep === 2 && "Pick Your Color",
+                  currentStep === 3 && "Define Your Size",
+                  currentStep === 4 && "Any Special Requests?",
+                  currentStep === 5 && "Almost There!"
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-lg text-secondary-foreground leading-relaxed", children: [
+                  currentStep === 0 && "Select the silhouette that best fits your space and lifestyle.",
+                  currentStep === 1 && "Each material tells a story. Choose yours.",
+                  currentStep === 2 && "Your color sets the mood of the entire room.",
+                  currentStep === 3 && "We craft to your exact dimensions with no compromise.",
+                  currentStep === 4 && "Share details that will make your sofa truly yours.",
+                  currentStep === 5 && "Let us know how to reach you to begin your journey."
+                ] })
+              ] }),
+              currentStep === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4", children: styleOptions.map((option) => {
+                const selected = style2 === option.value;
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setStyle(option.value),
+                    className: "relative overflow-hidden rounded-[18px] border p-5 text-left transition-all duration-200 hover:-translate-y-0.5",
+                    style: {
+                      borderColor: selected ? gold : cardBorder,
+                      background: selected ? "oklch(0.97 0.015 82)" : "oklch(0.985 0.005 82)",
+                      boxShadow: selected ? "0 10px 28px oklch(0.65 0.12 75 / 0.14)" : "none"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: "absolute inset-0 opacity-20",
+                          style: {
+                            backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.88)), url('${option.image}')`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center"
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "div",
+                          {
+                            className: "w-12 h-12 rounded-2xl flex items-center justify-center mb-4",
+                            style: {
+                              background: selected ? gold : "oklch(0.92 0.012 82)",
+                              color: selected ? "oklch(0.12 0.01 60)" : "oklch(0.42 0.03 60)"
+                            },
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(option.Icon, { size: 24 })
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground mb-2", children: option.label }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm leading-7 text-secondary-foreground", children: option.description })
+                      ] })
+                    ]
+                  },
+                  option.value
+                );
+              }) }),
+              currentStep === 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", children: fabricOptions.map((option) => {
+                const selected = fabric === option.value;
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setFabric(option.value),
+                    className: "overflow-hidden rounded-[18px] border text-left transition-all duration-200 hover:-translate-y-0.5",
+                    style: {
+                      borderColor: selected ? gold : cardBorder,
+                      background: "oklch(0.985 0.005 82)",
+                      boxShadow: selected ? "0 10px 28px oklch(0.65 0.12 75 / 0.14)" : "none"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: "h-20 sm:h-24",
+                          style: {
+                            background: option.fill
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between px-4 py-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-base font-semibold text-foreground", children: option.value }),
+                        selected && /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { size: 18, style: { color: goldDark } })
+                      ] })
+                    ]
+                  },
+                  option.value
+                );
+              }) }),
+              currentStep === 2 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap items-start gap-5 sm:gap-4", children: colorOptions.map((option) => {
+                  const selected = tone === option.value;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => setTone(option.value),
+                      className: "flex flex-col items-center gap-3 transition-transform duration-200 hover:-translate-y-0.5",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: "w-14 h-14 rounded-full border-[3px]",
+                            style: {
+                              background: option.swatch,
+                              borderColor: selected ? gold : "oklch(0.83 0.03 82)",
+                              boxShadow: selected ? "0 0 0 5px oklch(0.65 0.12 75 / 0.15)" : "none"
+                            }
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-sm text-secondary-foreground", children: option.value })
+                      ]
+                    },
+                    option.value
+                  );
+                }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "mt-10 rounded-[18px] border overflow-hidden",
+                    style: { borderColor: cardBorder },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: "h-40 sm:h-44",
+                          style: {
+                            backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.15), rgba(15,13,10,0.1)), url('${(selectedStyle == null ? void 0 : selectedStyle.image) ?? styleOptions[0].image}')`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center"
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-5 py-4 bg-white/90", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(PaintBucket, { size: 18, style: { color: goldDark } }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm font-semibold tracking-[0.16em] uppercase text-muted-foreground", children: "Current Mood" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-base text-secondary-foreground", children: summaryLine(style2, fabric, tone) })
+                      ] })
+                    ]
+                  }
+                )
+              ] }),
+              currentStep === 3 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-10", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between mb-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "label",
+                      {
+                        htmlFor: "sofa-width",
+                        className: "font-general text-2xl font-semibold uppercase text-foreground",
+                        children: "Width"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-2xl font-semibold", style: { color: goldDark }, children: [
+                      formatCentimeters(width),
+                      " ",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base font-medium text-muted-foreground", children: "cm" })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      id: "sofa-width",
+                      type: "range",
+                      min: "100",
+                      max: "300",
+                      step: "10",
+                      value: width,
+                      onChange: (event) => setWidth(Number(event.target.value)),
+                      className: "jpm-range"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mt-2 font-general text-sm text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "100cm" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "300cm" })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between mb-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "label",
+                      {
+                        htmlFor: "sofa-depth",
+                        className: "font-general text-2xl font-semibold uppercase text-foreground",
+                        children: "Depth"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-2xl font-semibold", style: { color: goldDark }, children: [
+                      formatCentimeters(depth),
+                      " ",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base font-medium text-muted-foreground", children: "cm" })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      id: "sofa-depth",
+                      type: "range",
+                      min: "80",
+                      max: "150",
+                      step: "5",
+                      value: depth,
+                      onChange: (event) => setDepth(Number(event.target.value)),
+                      className: "jpm-range"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mt-2 font-general text-sm text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "80cm" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "150cm" })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "rounded-[18px] border px-5 py-4 flex items-center justify-center gap-3",
+                    style: {
+                      borderColor: cardBorder,
+                      background: "oklch(0.98 0.01 82)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Sofa, { size: 18, style: { color: goldDark } }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-base text-secondary-foreground", children: [
+                        "Your sofa:",
+                        " ",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold", style: { color: goldDark }, children: formatCentimeters(width) }),
+                        " ",
+                        "wide x",
+                        " ",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold", style: { color: goldDark }, children: formatCentimeters(depth) }),
+                        " ",
+                        "deep"
+                      ] })
+                    ]
+                  }
+                )
+              ] }),
+              currentStep === 4 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "textarea",
+                  {
+                    value: notes,
+                    onChange: (event) => setNotes(event.target.value),
+                    rows: 7,
+                    placeholder: "Anything special? Tell us about special dimensions, fabric details, delivery requirements or finishing touches.",
+                    className: "w-full rounded-[18px] border px-4 py-4 font-general text-lg leading-8 outline-none resize-none transition-colors",
+                    style: {
+                      borderColor: cardBorder,
+                      background: "oklch(0.985 0.005 82)",
+                      color: "oklch(0.16 0.01 60)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground mt-3", children: "Optional. Skip if no special requests." })
+              ] }),
+              currentStep === 5 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "label",
+                    {
+                      htmlFor: "custom-name",
+                      className: "block font-general text-sm font-semibold tracking-[0.16em] uppercase text-foreground mb-3",
+                      children: [
+                        "Your Name ",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, children: "*" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      id: "custom-name",
+                      value: name,
+                      onChange: (event) => setName(event.target.value),
+                      placeholder: "Your full name",
+                      className: "w-full rounded-[14px] border px-4 py-4 font-general text-lg outline-none transition-colors",
+                      style: {
+                        borderColor: cardBorder,
+                        background: "oklch(0.985 0.005 82)",
+                        color: "oklch(0.16 0.01 60)"
+                      }
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "label",
+                    {
+                      htmlFor: "custom-phone",
+                      className: "block font-general text-sm font-semibold tracking-[0.16em] uppercase text-foreground mb-3",
+                      children: [
+                        "Phone Number ",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: goldDark }, children: "*" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      id: "custom-phone",
+                      value: phone,
+                      onChange: (event) => setPhone(event.target.value),
+                      placeholder: "10-15 digit number",
+                      className: "w-full rounded-[14px] border px-4 py-4 font-general text-lg outline-none transition-colors",
+                      style: {
+                        borderColor: cardBorder,
+                        background: "oklch(0.985 0.005 82)",
+                        color: "oklch(0.16 0.01 60)"
+                      }
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "rounded-[18px] border p-5",
+                    style: {
+                      borderColor: cardBorder,
+                      background: "oklch(0.98 0.01 82)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "p",
+                        {
+                          className: "font-general text-sm font-semibold tracking-[0.16em] uppercase mb-4",
+                          style: { color: goldDark },
+                          children: "Your Configuration"
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 font-general text-base", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Style" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: style2 })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Fabric" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: fabric })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Color" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: tone })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Size" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+                            formatCentimeters(width),
+                            " x ",
+                            formatCentimeters(depth)
+                          ] })
+                        ] })
+                      ] })
+                    ]
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4 mt-10", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: goBack,
+                    disabled: currentStep === 0,
+                    className: "inline-flex items-center gap-2 rounded-[14px] px-7 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200",
+                    style: {
+                      border: `2px solid ${currentStep === 0 ? "oklch(0.9 0.01 82)" : gold}`,
+                      color: currentStep === 0 ? "oklch(0.78 0.01 82)" : goldDark,
+                      background: "white"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { size: 16 }),
+                      "Back"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: goNext,
+                    disabled: currentStep === stepCount - 1 && !canSubmit,
+                    className: "inline-flex items-center gap-2 rounded-[14px] px-8 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200 hover:-translate-y-0.5",
+                    style: {
+                      background: currentStep === stepCount - 1 && !canSubmit ? "oklch(0.84 0.02 82)" : gold,
+                      color: currentStep === stepCount - 1 && !canSubmit ? "oklch(0.55 0.02 70)" : "oklch(0.12 0.01 60)",
+                      boxShadow: currentStep === stepCount - 1 && !canSubmit ? "none" : "0 12px 24px oklch(0.65 0.12 75 / 0.22)"
+                    },
+                    children: [
+                      currentStep === stepCount - 1 ? "Build My Sofa ✦" : "Next",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 16 })
+                    ]
+                  }
+                )
+              ] })
+            ] })
+          },
+          isComplete ? "complete" : currentStep
+        )
+      ]
+    }
+  ) });
+}
+const steps = [
+  {
+    number: "01",
+    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Palette, { size: 22 }),
+    title: "Choose Design",
+    desc: "Browse our curated catalogue or share your vision with our designers."
+  },
+  {
+    number: "02",
+    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Layers, { size: 22 }),
+    title: "Select Material",
+    desc: "Choose from premium leathers, linens, velvets, and more."
+  },
+  {
+    number: "03",
+    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Ruler, { size: 22 }),
+    title: "Customize Size",
+    desc: "We build to your exact dimensions — no compromise, no off-the-shelf."
+  },
+  {
+    number: "04",
+    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(House, { size: 22 }),
+    title: "Get It Built",
+    desc: "Our craftsmen bring your vision to life and deliver to your door."
+  }
+];
+function CustomDesignPage() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "section",
+        {
+          className: "pt-36 pb-20 text-center",
+          style: { background: "oklch(0.97 0.008 80)" },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto px-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-4",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: "Bespoke Craftsmanship"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-playfair text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight", children: [
+              "Design Your ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "Perfect Sofa" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed text-lg", children: "Every JPM sofa is crafted to your exact specifications. Choose your style, material, size, and colour — our master craftsmen bring your vision to life." })
+          ] })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-20 bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center mb-14", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl lg:text-4xl font-bold text-foreground", children: "How It Works" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: steps.map((step) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "bg-card p-6 rounded-sm",
+            style: { border: "1px solid oklch(0.87 0.02 80)" },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0",
+                    style: { background: "oklch(0.65 0.12 75)" },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(0.12 0.01 60)" }, children: step.icon })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "font-playfair text-2xl font-bold",
+                    style: { color: "oklch(0.65 0.12 75 / 0.3)" },
+                    children: step.number
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-lg font-semibold text-foreground mb-2", children: step.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground leading-relaxed", children: step.desc })
+            ]
+          },
+          step.number
+        )) })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "section",
+        {
+          className: "py-20",
+          style: { background: "oklch(0.97 0.008 80)" },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-12", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-3",
+                  style: { color: "oklch(0.65 0.12 75)" },
+                  children: "Get Started"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl lg:text-4xl font-bold text-foreground", children: "Build Your Custom Sofa" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-muted-foreground mt-3 max-w-xl mx-auto", children: "Walk through our guided configurator — it takes less than two minutes." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SofaConfigurator, {})
+          ] })
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
+}
+function ProductDetailPage() {
+  const { productId } = useParams({ strict: false });
+  const navigate = useNavigate();
+  const product = products.find((p) => p.slug === productId);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "pt-28 pb-24", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          type: "button",
+          onClick: () => window.history.back(),
+          "data-ocid": "product.back_button",
+          className: "flex items-center gap-2 font-general text-sm font-semibold tracking-wider uppercase mb-10 transition-all duration-200 hover:-translate-x-1",
+          style: { color: "oklch(0.65 0.12 75)" },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { size: 16 }),
+            "Back to Collection"
+          ]
+        }
+      ),
+      !product ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center py-24", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-3xl font-bold text-foreground mb-3", children: "Product Not Found" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-muted-foreground mb-8", children: "The product you're looking for doesn't exist." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            onClick: () => navigate({ to: "/" }),
+            className: "font-general px-8 py-4 text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-1",
+            style: {
+              background: "oklch(0.65 0.12 75)",
+              color: "oklch(0.12 0.01 60)"
+            },
+            children: "Go Home"
+          }
+        )
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-16 items-start", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "rounded-sm overflow-hidden",
+            style: { border: "1px solid oklch(0.87 0.02 80)" },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: product.image,
+                alt: product.name,
+                className: "w-full h-full object-cover"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-3",
+              style: { color: "oklch(0.65 0.12 75)" },
+              children: "JPM Enterprises"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-playfair text-4xl lg:text-5xl font-bold text-foreground mb-6", children: product.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-10", children: product.description }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4 mb-10", children: [
+            ["Material", "Premium Grade A Fabric / Full-grain Leather"],
+            ["Frame", "Solid hardwood kiln-dried frame"],
+            ["Cushions", "High-density foam with feather-down blend"],
+            ["Warranty", "5-year manufacturer warranty"]
+          ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "flex gap-4 py-3",
+              style: { borderBottom: "1px solid oklch(0.87 0.02 80)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-xs font-semibold tracking-wider uppercase text-muted-foreground w-28 flex-shrink-0", children: label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-sm text-foreground", children: value })
+              ]
+            },
+            label
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "product.inquiry_button",
+                onClick: () => {
+                  navigate({ to: "/" });
+                  setTimeout(() => scrollToSection("contact"), 350);
+                },
+                className: "font-general px-8 py-4 text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-1",
+                style: {
+                  background: "oklch(0.65 0.12 75)",
+                  color: "oklch(0.12 0.01 60)",
+                  boxShadow: "0 4px 20px oklch(0.65 0.12 75 / 0.3)"
+                },
+                children: "Request a Quote"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "product.customize_button",
+                onClick: () => navigate({
+                  to: "/custom-design",
+                  search: { product: product.slug }
+                }),
+                className: "font-general px-8 py-4 text-sm font-semibold tracking-wider uppercase border-2 transition-all duration-300 hover:-translate-y-1",
+                style: {
+                  borderColor: "oklch(0.65 0.12 75)",
+                  color: "oklch(0.65 0.12 75)"
+                },
+                children: "Customize This"
+              }
+            )
+          ] })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
+}
+const services = [
+  {
+    id: "custom-sofas",
+    ocid: "services.custom_sofas_section",
+    label: "Custom Sofas",
+    tagline: "Crafted to Your Vision",
+    description: "At JPM Enterprises, every sofa begins with your story. Our bespoke creation process starts with a personal consultation where our designers listen — truly listen — to your aesthetic preferences, lifestyle needs, and spatial requirements. From a detailed sketch through to the final stitch, every step is done by hand in our Hisar workshop. We source only Grade-A materials: kiln-dried hardwood frames, tempered steel springs, and premium upholstery fabrics that stand the test of time.",
+    features: [
+      "Personal design consultation",
+      "Handcrafted by master upholsterers",
+      "400+ fabric and leather swatches",
+      "Exact-dimension builds — no standard sizing",
+      "60–90 day delivery from final approval"
+    ]
+  },
+  {
+    id: "fabric-selection",
+    ocid: "services.fabric_selection_section",
+    label: "Fabric Selection",
+    tagline: "Luxury Materials for Every Taste",
+    description: "Choosing the right material is as important as the form. Our fabric library spans over 400 options — imported European linens with a natural weave, supple full-grain Italian leathers that deepen in character over time, performance velvets that resist wear while maintaining opulence, and moisture-wicking microfibers ideal for family homes. Our material consultants will guide you through texture, durability, and colorfastness so your sofa remains beautiful for decades.",
+    features: [
+      "Full-grain Italian and Indian leathers",
+      "Belgian linen and Belgian velvet",
+      "Performance and pet-friendly microfibers",
+      "Boucle, chenille, and woven jacquards",
+      "Custom fabric sourcing on request"
+    ]
+  },
+  {
+    id: "interior-consultation",
+    ocid: "services.interior_consultation_section",
+    label: "Interior Consultation",
+    tagline: "Design Guidance from Experts",
+    description: "Unsure where to begin? Our complimentary interior consultation service pairs you with a certified design professional who will visit your home, assess the existing palette, lighting, and traffic flow, and provide tailored recommendations for sofa form, finish, and placement. We work alongside your interior designer or independently — whatever suits you best. The goal is a living space that feels cohesive, considered, and unmistakably yours.",
+    features: [
+      "Complimentary home visit (Hisar area)",
+      "Certified interior design professionals",
+      "3D space planning and mood boards",
+      "Coordination with existing décor",
+      "Post-delivery styling walkthrough"
+    ]
+  },
+  {
+    id: "delivery-installation",
+    ocid: "services.delivery_installation_section",
+    label: "Delivery & Installation",
+    tagline: "White-Glove Service to Your Door",
+    description: "Your custom sofa deserves a delivery experience that matches its craftsmanship. Our dedicated logistics team handles every detail: protective wrapping in breathable cotton covers, climate-controlled transport, and a two-person installation crew who will carefully place, assemble, and position your sofa — then remove all packaging. We operate from Hisar with extended service across India. International shipping is available on request.",
+    features: [
+      "Climate-controlled vehicle transport",
+      "Two-person white-glove delivery team",
+      "Full assembly and placement service",
+      "Packaging removal and site clean-up",
+      "Pan-India and international delivery available"
+    ]
+  }
+];
+function ServicesPage() {
+  reactExports.useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      setTimeout(() => scrollToSection(hash), 200);
+    }
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "section",
+        {
+          className: "pt-36 pb-20 text-center",
+          style: { background: "oklch(0.97 0.008 80)" },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto px-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-4",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: "What We Offer"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-playfair text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight", children: [
+              "Our ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "Services" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed text-lg", children: "From bespoke creation to white-glove delivery, every JPM service is designed to make your experience as exceptional as the furniture itself." })
+          ] })
+        }
+      ),
+      services.map((service, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "section",
+        {
+          id: service.id,
+          "data-ocid": service.ocid,
+          className: "py-20",
+          style: {
+            background: i % 2 === 0 ? "oklch(1 0 0)" : "oklch(0.97 0.008 80)"
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: `grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${i % 2 !== 0 ? "lg:grid-flow-dense" : ""}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: i % 2 !== 0 ? "lg:col-start-2" : "", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "p",
+                    {
+                      className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-3",
+                      style: { color: "oklch(0.65 0.12 75)" },
+                      children: service.tagline
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl lg:text-4xl font-bold text-foreground mb-6", children: service.label }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-8", children: service.description }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: service.features.map((feat) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0",
+                        style: { background: "oklch(0.65 0.12 75)" }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-sm text-foreground", children: feat })
+                  ] }, feat)) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: i % 2 !== 0 ? "lg:col-start-1" : "", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "rounded-sm p-10 flex flex-col items-center justify-center text-center min-h-64",
+                    style: {
+                      border: "1px solid oklch(0.87 0.02 80)",
+                      background: i % 2 === 0 ? "oklch(0.97 0.008 80)" : "oklch(1 0 0)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: "w-16 h-16 rounded-full flex items-center justify-center mb-6",
+                          style: { background: "oklch(0.65 0.12 75 / 0.12)" },
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "span",
+                            {
+                              className: "font-playfair text-3xl font-bold",
+                              style: { color: "oklch(0.65 0.12 75)" },
+                              children: String(i + 1).padStart(2, "0")
+                            }
+                          )
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground mb-3", children: service.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "p",
+                        {
+                          className: "font-general text-sm",
+                          style: { color: "oklch(0.65 0.12 75)" },
+                          children: service.tagline
+                        }
+                      )
+                    ]
+                  }
+                ) })
+              ]
+            }
+          ) })
+        },
+        service.id
+      ))
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
+}
+function HomePage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
@@ -16020,6 +22587,37 @@ function App() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
+}
+const rootRoute = createRootRoute();
+const homeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/",
+  component: HomePage
+});
+const productRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/product/$productId",
+  component: ProductDetailPage
+});
+const customDesignRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/custom-design",
+  component: CustomDesignPage
+});
+const servicesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/services",
+  component: ServicesPage
+});
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  productRoute,
+  customDesignRoute,
+  servicesRoute
+]);
+const router = createRouter({ routeTree });
+function App() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, { router });
 }
 const alphabet = "abcdefghijklmnopqrstuvwxyz234567";
 const lookupTable = /* @__PURE__ */ Object.create(null);

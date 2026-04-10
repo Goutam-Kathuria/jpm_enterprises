@@ -1,33 +1,39 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const products = [
   {
     id: 1,
+    slug: "modern-sofa",
     name: "Modern Sofa",
     description: "Clean lines and contemporary elegance for the modern home.",
     image: "/assets/generated/sofa-modern.dim_800x600.jpg",
   },
   {
     id: 2,
+    slug: "luxury-leather-sofa",
     name: "Luxury Leather Sofa",
     description: "Premium full-grain leather with hand-stitched detailing.",
     image: "/assets/generated/sofa-leather.dim_800x600.jpg",
   },
   {
     id: 3,
+    slug: "minimalist-fabric-sofa",
     name: "Minimalist Fabric Sofa",
     description: "Soft linen blend upholstery in a timeless Scandinavian form.",
     image: "/assets/generated/sofa-fabric.dim_800x600.jpg",
   },
   {
     id: 4,
+    slug: "l-shape-sofa",
     name: "L-Shape Sofa",
     description: "Generous sectional for spacious living, built to impress.",
     image: "/assets/generated/sofa-lshape.dim_800x600.jpg",
   },
   {
     id: 5,
+    slug: "recliner-sofa",
     name: "Recliner Sofa",
     description:
       "Motorized comfort with premium fabric and whisper-quiet mechanism.",
@@ -35,9 +41,12 @@ const products = [
   },
 ];
 
+export { products };
+
 export function CollectionSection() {
   const headerRef = useScrollReveal();
   const gridRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const grid = gridRef.current;
@@ -124,6 +133,12 @@ export function CollectionSection() {
                 <button
                   type="button"
                   data-ocid={`collection.view_button.${product.id}`}
+                  onClick={() =>
+                    navigate({
+                      to: "/product/$productId",
+                      params: { productId: product.slug },
+                    })
+                  }
                   className="font-general text-xs font-semibold tracking-wider uppercase px-5 py-2.5 border transition-all duration-300"
                   style={{
                     borderColor: "oklch(0.65 0.12 75)",
