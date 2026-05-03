@@ -1,4 +1,5 @@
 import {
+  Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
@@ -13,6 +14,7 @@ import { GallerySection } from "./components/GallerySection";
 import { HeroSection } from "./components/HeroSection";
 import { Navbar } from "./components/Navbar";
 import { TestimonialsSection } from "./components/TestimonialsSection";
+import { WebsiteAnalyticsPing } from "./components/WebsiteAnalyticsPing";
 import { WhyChooseSection } from "./components/WhyChooseSection";
 import {
   buildLocalBusinessSchema,
@@ -21,6 +23,7 @@ import {
 } from "./lib/seo";
 import { useWebsiteSettings } from "./lib/websiteApi";
 import { CustomDesignPage } from "./pages/CustomDesignPage";
+import { Toaster } from "./components/ui/sonner";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ServicesPage } from "./pages/ServicesPage";
 
@@ -60,7 +63,18 @@ function HomePage() {
   );
 }
 
-const rootRoute = createRootRoute();
+function AppRootLayout() {
+  return (
+    <>
+      <WebsiteAnalyticsPing />
+      <Outlet />
+    </>
+  );
+}
+
+const rootRoute = createRootRoute({
+  component: AppRootLayout,
+});
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -102,5 +116,10 @@ declare module "@tanstack/react-router" {
 }
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster richColors position="top-center" />
+    </>
+  );
 }

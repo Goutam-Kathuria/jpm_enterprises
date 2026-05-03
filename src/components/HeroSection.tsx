@@ -1,8 +1,11 @@
 import { ArrowUpRight, ChevronDown, Mail, Phone } from "lucide-react";
 import {
+  resolveWebsiteApiBaseUrl,
+  resolveWebsiteAssetUrl,
   useWebsiteCategories,
-  useWebsiteProducts,
+  useWebsiteContent,
   useWebsiteSettings,
+  type HeroSectionContent,
 } from "../lib/websiteApi";
 
 function getPhoneHref(phone: string) {
@@ -10,18 +13,85 @@ function getPhoneHref(phone: string) {
   return digits ? `tel:${digits}` : "";
 }
 
-export function HeroSection() {
-  const { data: categories = [] } = useWebsiteCategories();
-  const { data: products = [] } = useWebsiteProducts();
-  const { data: settings } = useWebsiteSettings();
+function normalizeText(value: string | undefined) {
+  return value?.trim() ?? "";
+}
 
-  const highlightedCollections = categories.slice(0, 3);
-  const phoneHref = getPhoneHref(settings?.enquiryPhone ?? "");
+const FALLBACK_HIGHLIGHT_LABEL = "Curated collection";
+
+export function HeroSection() {
+  const { data: categories = [], isSuccess: categoriesReady } = useWebsiteCategories();
+  const { data: settings } = useWebsiteSettings();
+  const { data: cmsData } = useWebsiteContent("hero");
+
+  const content = cmsData as HeroSectionContent | null | undefined;
+  const baseUrl = resolveWebsiteApiBaseUrl();
+
+  const eyebrowText =
+    normalizeText(content?.eyebrowText) || "Handcrafted luxury furniture from Hisar";
+  const headlineLine1 = normalizeText(content?.headlineLine1) || "Crafted for";
+  const headlineAccent =
+    normalizeText(content?.headlineAccent) || "beautiful living.";
+  const subheading =
+    normalizeText(content?.subheading) ||
+    "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
+  const caption =
+    normalizeText(content?.caption) ||
+    "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living.";
+  const primaryCtaLabel = normalizeText(content?.primaryCtaLabel) || "Explore Collections";
+  const secondaryCtaLabel = normalizeText(content?.secondaryCtaLabel) || "Start Custom Design";
+  const highlightsCardTitle =
+    normalizeText(content?.highlightsCardTitle) || "Collection Highlights";
+  const deskHeading = normalizeText(content?.deskHeading) || "Speak with the design desk";
+
+  const defaultBgPath = "/assets/generated/hero-sofa.dim_1600x900.jpg";
+  const backgroundPath = normalizeText(content?.backgroundImageUrl) || defaultBgPath;
+  const backgroundImageCss = /^https?:\/\//i.test(backgroundPath)
+    ? backgroundPath
+    : resolveWebsiteAssetUrl(backgroundPath, baseUrl) || backgroundPath;
+
+  const highlightedCollections = categories.slice(0, 8);
+  const cmsHighlights = Array.isArray(content?.highlights)
+    ? content?.highlights
+    : [];
+
+  const highlightRows = (() => {
+    if (!cmsHighlights.length && categoriesReady) {
+      return highlightedCollections.map((collection) => ({
+        title: collection.name,
+        subtitle: FALLBACK_HIGHLIGHT_LABEL,
+        image: collection.image,
+      }));
+    }
+
+    return cmsHighlights.map((entry, index) => {
+      const fallback = highlightedCollections[index];
+      const explicitImage = normalizeText(entry?.imageUrl);
+
+      const imageUrl =
+        (explicitImage
+          ? resolveWebsiteAssetUrl(explicitImage, baseUrl) || explicitImage
+          : "") ||
+        fallback?.image ||
+        "";
+
+      return {
+        title: normalizeText(entry?.title) || fallback?.name || `Highlight ${index + 1}`,
+        subtitle: normalizeText(entry?.subtitle) || FALLBACK_HIGHLIGHT_LABEL,
+        image: imageUrl,
+      };
+    });
+  })();
+
+  const deskPhone =
+    normalizeText(content?.deskPhone) || normalizeText(settings?.enquiryPhone);
+  const deskEmail =
+    normalizeText(content?.deskEmail) || normalizeText(settings?.enquiryEmail);
+
+  const phoneHref = getPhoneHref(deskPhone);
 
   const scrollToCollection = () => {
-    document
-      .querySelector("#collection")
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#collection")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -29,7 +99,7 @@ export function HeroSection() {
       id="home"
       className="relative flex min-h-screen items-center overflow-hidden"
       style={{
-        backgroundImage: `url('/assets/generated/hero-sofa.dim_1600x900.jpg')`,
+        backgroundImage: `url('${backgroundImageCss}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
@@ -50,21 +120,17 @@ export function HeroSection() {
             className="hero-label mb-6 font-general text-sm font-semibold uppercase tracking-[0.32em]"
             style={{ color: "oklch(0.78 0.12 82)" }}
           >
-            Handcrafted luxury furniture from Hisar
+            {eyebrowText}
           </p>
 
           <h1 className="hero-title font-playfair text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-8xl">
-            Crafted for
+            {headlineLine1}
             <br />
-            <span className="italic text-[oklch(0.85_0.09_84)]">
-              beautiful living.
-            </span>
+            <span className="italic text-[oklch(0.85_0.09_84)]">{headlineAccent}</span>
           </h1>
 
           <p className="hero-sub mt-6 max-w-2xl font-general text-lg leading-relaxed text-white/80 sm:text-xl">
-            Discover collection-led sofa experiences, tailored comfort, and a
-            custom design journey built around your home, your taste, and your
-            dimensions.
+            {subheading}
           </p>
 
           <div className="hero-cta mt-10 flex flex-wrap gap-4">
@@ -80,7 +146,7 @@ export function HeroSection() {
                 boxShadow: "0 20px 35px oklch(0.65 0.12 75 / 0.28)",
               }}
             >
-              Explore Collections
+              {primaryCtaLabel}
               <ArrowUpRight size={16} />
             </button>
             <button
@@ -97,15 +163,12 @@ export function HeroSection() {
                 background: "oklch(1 0 0 / 0.08)",
               }}
             >
-              Start Custom Design
+              {secondaryCtaLabel}
             </button>
           </div>
 
           <div className="mt-10 max-w-2xl text-sm font-general leading-relaxed text-white/75">
-            <p>
-              Every furniture piece is designed for lasting comfort, rich textures,
-              and a polished finish that brings out the best in modern living.
-            </p>
+            <p>{caption}</p>
           </div>
         </div>
 
@@ -122,13 +185,13 @@ export function HeroSection() {
               className="font-general text-xs font-semibold uppercase tracking-[0.28em]"
               style={{ color: "oklch(0.82 0.11 82)" }}
             >
-              Collection Highlights
+              {highlightsCardTitle}
             </p>
             <div className="mt-6 space-y-4">
-              {highlightedCollections.length > 0 ? (
-                highlightedCollections.map((collection, index) => (
+              {highlightRows.length > 0 ? (
+                highlightRows.map((row, index) => (
                   <div
-                    key={collection.id}
+                    key={`${row.title}-${index}`}
                     className="flex items-center gap-4 rounded-[22px] px-4 py-3"
                     style={{
                       background:
@@ -137,17 +200,23 @@ export function HeroSection() {
                           : "oklch(1 0 0 / 0.06)",
                     }}
                   >
-                    <img
-                      src={collection.image}
-                      alt={collection.name}
-                      className="h-14 w-16 rounded-2xl object-cover"
-                    />
+                    {row.image ? (
+                      <img
+                        src={row.image}
+                        alt={row.title}
+                        className="h-14 w-16 rounded-2xl object-cover"
+                      />
+                    ) : (
+                      <div
+                        className="h-14 w-16 shrink-0 rounded-2xl"
+                        style={{ background: "oklch(1 0 0 / 0.12)" }}
+                        aria-hidden
+                      />
+                    )}
                     <div>
-                      <p className="font-playfair text-lg font-semibold">
-                        {collection.name}
-                      </p>
+                      <p className="font-playfair text-lg font-semibold">{row.title}</p>
                       <p className="font-general text-xs uppercase tracking-[0.16em] text-white/60">
-                        Curated collection
+                        {row.subtitle}
                       </p>
                     </div>
                   </div>
@@ -158,14 +227,14 @@ export function HeroSection() {
                   style={{ background: "oklch(1 0 0 / 0.08)" }}
                 >
                   <p className="font-general text-sm leading-relaxed text-white/70">
-                    Collection-led design previews will appear here as soon as
-                    the website collections load.
+                    Collection-led design previews will appear here as soon as the website
+                    collections load.
                   </p>
                 </div>
               )}
             </div>
 
-            {settings?.enquiryPhone || settings?.enquiryEmail ? (
+            {deskPhone || deskEmail ? (
               <div
                 className="mt-6 rounded-[24px] px-5 py-4"
                 style={{
@@ -173,29 +242,18 @@ export function HeroSection() {
                   border: "1px solid oklch(0.65 0.12 75 / 0.18)",
                 }}
               >
-                <p className="mb-3 font-playfair text-xl font-semibold">
-                  Speak with the design desk
-                </p>
+                <p className="mb-3 font-playfair text-xl font-semibold">{deskHeading}</p>
                 <div className="space-y-3 font-general text-sm text-white/78">
-                  {settings.enquiryPhone ? (
-                    <a href={phoneHref} className="flex items-center gap-3">
-                      <Phone
-                        size={15}
-                        style={{ color: "oklch(0.82 0.11 82)" }}
-                      />
-                      {settings.enquiryPhone}
+                  {deskPhone ? (
+                    <a href={phoneHref || undefined} className="flex items-center gap-3">
+                      <Phone size={15} style={{ color: "oklch(0.82 0.11 82)" }} />
+                      {deskPhone}
                     </a>
                   ) : null}
-                  {settings.enquiryEmail ? (
-                    <a
-                      href={`mailto:${settings.enquiryEmail}`}
-                      className="flex items-center gap-3"
-                    >
-                      <Mail
-                        size={15}
-                        style={{ color: "oklch(0.82 0.11 82)" }}
-                      />
-                      {settings.enquiryEmail}
+                  {deskEmail ? (
+                    <a href={`mailto:${deskEmail}`} className="flex items-center gap-3">
+                      <Mail size={15} style={{ color: "oklch(0.82 0.11 82)" }} />
+                      {deskEmail}
                     </a>
                   ) : null}
                 </div>
@@ -211,9 +269,7 @@ export function HeroSection() {
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60 transition-colors hover:text-white"
         aria-label="Scroll down"
       >
-        <span className="font-general text-xs uppercase tracking-[0.26em]">
-          Scroll
-        </span>
+        <span className="font-general text-xs uppercase tracking-[0.26em]">Scroll</span>
         <ChevronDown size={20} className="hero-scroll" />
       </button>
     </section>

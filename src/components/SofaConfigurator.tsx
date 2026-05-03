@@ -12,6 +12,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { submitWebsiteInquiry } from "../lib/websiteApi";
 
 type SofaStyle = "L-Shape" | "Recliner" | "3-Seater" | "Custom";
 type Fabric =
@@ -143,6 +145,28 @@ function formatCentimeters(value: number): string {
   return `${value}cm`;
 }
 
+function buildCustomDesignMessage(params: {
+  style: SofaStyle;
+  fabric: Fabric;
+  tone: Tone;
+  width: number;
+  depth: number;
+  notes: string;
+}) {
+  const lines = [
+    "Custom sofa enquiry — configuration summary",
+    "",
+    `Style: ${params.style}`,
+    `Fabric: ${params.fabric}`,
+    `Color: ${params.tone}`,
+    `Size: ${formatCentimeters(params.width)} x ${formatCentimeters(params.depth)}`,
+  ];
+  if (params.notes.trim()) {
+    lines.push("", "Notes:", params.notes.trim());
+  }
+  return lines.join("\n");
+}
+
 export function SofaConfigurator() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -154,16 +178,49 @@ export function SofaConfigurator() {
   const [notes, setNotes] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const selectedStyle = styleOptions.find((option) => option.value === style);
   const progressWidth = `${((currentStep + 1) / stepCount) * 100}%`;
   const phoneDigits = phone.replace(/\D/g, "");
   const canSubmit = name.trim().length >= 2 && phoneDigits.length >= 10;
 
-  const goNext = () => {
+  const goNext = async () => {
     if (currentStep === stepCount - 1) {
-      if (!canSubmit) return;
-      setIsComplete(true);
+      if (!canSubmit || submitting) return;
+      setSubmitting(true);
+      try {
+        await submitWebsiteInquiry({
+          name: name.trim(),
+          email: "",
+          phone: phone.trim(),
+          message: buildCustomDesignMessage({
+            style,
+            fabric,
+            tone,
+            width,
+            depth,
+            notes,
+          }),
+          source: "custom_design",
+          meta: {
+            style,
+            fabric,
+            tone,
+            widthCm: width,
+            depthCm: depth,
+            notes: notes.trim() || undefined,
+          },
+        });
+        toast.success("Request received — we will reach out shortly.");
+        setIsComplete(true);
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Could not submit your request.";
+        toast.error(message);
+      } finally {
+        setSubmitting(false);
+      }
       return;
     }
     setCurrentStep((step) => Math.min(step + 1, stepCount - 1));
@@ -176,6 +233,7 @@ export function SofaConfigurator() {
   const resetWizard = () => {
     setCurrentStep(0);
     setIsComplete(false);
+    setSubmitting(false);
     setStyle("L-Shape");
     setFabric("Microfiber");
     setTone("Warm White");
@@ -698,9 +756,11 @@ export function SofaConfigurator() {
 
                 <button
                   type="button"
-                  onClick={goNext}
-                  disabled={currentStep === stepCount - 1 && !canSubmit}
-                  className="inline-flex items-center gap-2 rounded-[14px] px-8 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200 hover:-translate-y-0.5"
+                  onClick={() => void goNext()}
+                  disabled={
+                    (currentStep === stepCount - 1 && !canSubmit) || submitting
+                  }
+                  className="inline-flex items-center gap-2 rounded-[14px] px-8 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60"
                   style={{
                     background:
                       currentStep === stepCount - 1 && !canSubmit
@@ -716,7 +776,11 @@ export function SofaConfigurator() {
                         : "0 12px 24px oklch(0.65 0.12 75 / 0.22)",
                   }}
                 >
-                  {currentStep === stepCount - 1 ? "Build My Sofa ✦" : "Next"}
+                  {currentStep === stepCount - 1
+                    ? submitting
+                      ? "Sending…"
+                      : "Build My Sofa ✦"
+                    : "Next"}
                   <ArrowRight size={16} />
                 </button>
               </div>

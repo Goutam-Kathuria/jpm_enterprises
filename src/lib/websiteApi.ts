@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
+// const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
+const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "http://localhost:7000/jpm";
 
 const FALLBACK_CATEGORY_IMAGES = [
   "/assets/generated/hero-sofa.dim_1600x900.jpg",
@@ -271,6 +272,155 @@ async function requestWebsiteApi<T>(path: string, init: RequestInit = {}) {
   }
 
   return { data: responseData as T, baseUrl };
+}
+
+async function requestWebsiteOptional<T>(path: string, init: RequestInit = {}) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const headers = new Headers(init.headers);
+  headers.set("Accept", "application/json");
+
+  const response = await fetch(joinUrl(baseUrl, path), {
+    ...init,
+    headers,
+  });
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+  const responseData = isJson ? await response.json() : await response.text();
+
+  if (!response.ok) {
+    const message =
+      typeof responseData === "object" &&
+      responseData !== null &&
+      "message" in responseData &&
+      typeof responseData.message === "string"
+        ? responseData.message
+        : response.statusText || "Request failed.";
+    throw new Error(message);
+  }
+
+  return { data: responseData as T, baseUrl };
+}
+
+export interface HeroSectionContent {
+  eyebrowText?: string;
+  headlineLine1?: string;
+  headlineAccent?: string;
+  subheading?: string;
+  caption?: string;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  backgroundImageUrl?: string;
+  highlightsCardTitle?: string;
+  highlights?: { title?: string; subtitle?: string; imageUrl?: string }[];
+  deskHeading?: string;
+  deskPhone?: string;
+  deskEmail?: string;
+}
+
+export interface WhyChooseSectionContent {
+  overline?: string;
+  heading?: string;
+  description?: string;
+  items?: { iconKey?: string; title?: string; description?: string }[];
+}
+
+export interface OurStorySectionContent {
+  overline?: string;
+  headingLine1?: string;
+  headingAccent?: string;
+  paragraphs?: string[];
+  stats?: { value?: string; label?: string }[];
+  imageUrl?: string;
+}
+
+interface WebsiteContentResponse {
+  content?: { modelKey?: string; data?: Record<string, unknown> } | null;
+}
+
+export async function getWebsiteContentByKey(modelKey: string): Promise<
+  Record<string, unknown> | null
+> {
+  const trimmed = normalizeText(modelKey);
+  if (!trimmed) return null;
+
+  const result = await requestWebsiteOptional<WebsiteContentResponse>(
+    `/website/content/${encodeURIComponent(trimmed)}`,
+  );
+
+  const payload = result?.data?.content;
+  if (!payload?.data || typeof payload.data !== "object") {
+    return null;
+  }
+
+  return payload.data as Record<string, unknown>;
+}
+
+export function useWebsiteContent(modelKey: string) {
+  const key = normalizeText(modelKey);
+
+  return useQuery({
+    queryKey: ["website", "content", key],
+    queryFn: async () => (key ? getWebsiteContentByKey(key) : null),
+    staleTime: 60 * 1000,
+    enabled: key.length > 0,
+  });
+}
+
+export interface SubmitWebsiteInquiryInput {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  source: "contact_page" | "custom_design";
+  meta?: Record<string, unknown>;
+}
+
+export async function submitWebsiteInquiry(input: SubmitWebsiteInquiryInput) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(joinUrl(baseUrl, "/website/inquiries"), {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
+
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const message =
+      typeof payload === "object" &&
+      payload !== null &&
+      "message" in payload &&
+      typeof payload.message === "string"
+        ? payload.message
+        : "Could not send your enquiry.";
+    throw new Error(message);
+  }
+
+  return payload as { message?: string; inquiry?: { id?: string; createdAt?: string } };
+}
+
+export async function trackWebsitePageView(path?: string) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  try {
+    await fetch(joinUrl(baseUrl, "/website/analytics/track"), {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ path: path ? path.slice(0, 512) : "" }),
+    });
+  } catch {
+    /* intentionally quiet — analytics must not break UX */
+  }
 }
 
 function normalizeCategory(

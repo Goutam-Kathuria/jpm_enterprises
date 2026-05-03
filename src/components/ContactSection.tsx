@@ -2,7 +2,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { SiFacebook, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
 import { useScrollReveal } from "../hooks/useScrollReveal";
-import { useWebsiteSettings } from "../lib/websiteApi";
+import { submitWebsiteInquiry, useWebsiteSettings } from "../lib/websiteApi";
+import { toast } from "sonner";
 
 interface FormFields {
   name: string;
@@ -58,6 +59,7 @@ export function ContactSection() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const socialLinks = [
     {
@@ -86,7 +88,7 @@ export function ContactSection() {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const validationErrors = validateForm(fields);
@@ -96,23 +98,30 @@ export function ContactSection() {
       return;
     }
 
-    if (settings?.enquiryEmail) {
-      const subject = encodeURIComponent(`JPM inquiry from ${fields.name}`);
-      const body = encodeURIComponent(
-        `Name: ${fields.name}\nEmail: ${fields.email}\nPhone: ${fields.phone}\n\nMessage:\n${fields.message}`,
-      );
-
-      window.location.href = `mailto:${settings.enquiryEmail}?subject=${subject}&body=${body}`;
+    setSubmitting(true);
+    try {
+      await submitWebsiteInquiry({
+        name: fields.name.trim(),
+        email: fields.email.trim(),
+        phone: fields.phone.trim(),
+        message: fields.message.trim(),
+        source: "contact_page",
+      });
+      setSubmitted(true);
+      setErrors({});
+      setFields({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      toast.success("Thank you — we received your enquiry.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Something went wrong.";
+      toast.error(message);
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitted(true);
-    setErrors({});
-    setFields({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
   };
 
   return (
@@ -124,10 +133,10 @@ export function ContactSection() {
               className="mb-4 font-general text-sm font-semibold uppercase tracking-[0.25em]"
               style={{ color: "oklch(0.65 0.12 75)" }}
             >
-              Settings-Wired Contact
+              Contact
             </p>
             <h2 className="font-playfair text-4xl font-bold text-foreground lg:text-5xl">
-              Every contact detail now comes from the backend settings
+              All contact information is dynamically managed through the admin settings.
             </h2>
             <p className="mt-6 max-w-xl font-general text-base leading-relaxed text-secondary-foreground">
               Phone number, email, address, and social profiles are no longer
@@ -236,9 +245,8 @@ export function ContactSection() {
                 Send an inquiry
               </h3>
               <p className="mt-3 font-general text-sm leading-relaxed text-muted-foreground">
-                This form opens a pre-filled mail draft using the settings
-                email, so the contact flow is useful even before a dedicated
-                inquiry API exists.
+                Submit the form and our team will reply using the contact details
+                stored in admin settings.
               </p>
 
               {submitted ? (
@@ -264,12 +272,11 @@ export function ContactSection() {
                     </svg>
                   </div>
                   <p className="font-playfair text-2xl font-semibold text-foreground">
-                    Inquiry draft opened
+                    Enquiry received
                   </p>
                   <p className="mx-auto mt-3 max-w-md font-general text-sm leading-relaxed text-muted-foreground">
-                    Your message has been prepared using the current settings
-                    email. If your mail client didn&apos;t open, you can still
-                    use the contact details on the left.
+                    Thank you for reaching out. We will get back to you shortly
+                    using the details you provided.
                   </p>
                   <button
                     type="button"
@@ -379,8 +386,9 @@ export function ContactSection() {
 
                   <button
                     type="submit"
+                    disabled={submitting}
                     data-ocid="contact.submit_button"
-                    className="w-full rounded-full px-6 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5"
+                    className="w-full rounded-full px-6 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
                     style={{
                       background:
                         "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
@@ -388,7 +396,7 @@ export function ContactSection() {
                       boxShadow: "0 18px 34px oklch(0.65 0.12 75 / 0.22)",
                     }}
                   >
-                    Send Inquiry
+                    {submitting ? "Sending…" : "Send Inquiry"}
                   </button>
                 </form>
               )}
