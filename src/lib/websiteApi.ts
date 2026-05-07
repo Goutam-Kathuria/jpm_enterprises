@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-// const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
-const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "http://localhost:7000/jpm";
+const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
+// const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "http://localhost:7000/jpm";
 
 const FALLBACK_CATEGORY_IMAGES = [
   "/assets/generated/hero-sofa.dim_1600x900.jpg",

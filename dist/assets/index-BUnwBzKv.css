@@ -2127,6 +2127,9 @@ h1,
 .text-white\/80 {
   color: rgb(255 255 255 / 0.8);
 }
+.overline {
+  text-decoration-line: overline;
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -2917,6 +2920,10 @@ h1,
 
 .disabled\:opacity-50:disabled {
   opacity: 0.5;
+}
+
+.disabled\:opacity-60:disabled {
+  opacity: 0.6;
 }
 
 .group\/menu-item:focus-within .group-focus-within\/menu-item\:opacity-100 {

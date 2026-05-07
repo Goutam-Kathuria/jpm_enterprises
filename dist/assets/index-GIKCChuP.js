@@ -55,8 +55,8 @@ var _provider, _providerCalled, _a, _focused, _cleanup, _setup, _b, _online, _cl
     fetch(link.href, fetchOpts);
   }
 })();
-function getDefaultExportFromCjs(x) {
-  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+function getDefaultExportFromCjs(x2) {
+  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
@@ -292,9 +292,9 @@ function replaceEqualDeep$1(a, b) {
       copy[key] = bItem;
       continue;
     }
-    const v = replaceEqualDeep$1(aItem, bItem);
-    copy[key] = v;
-    if (v === aItem) equalItems++;
+    const v2 = replaceEqualDeep$1(aItem, bItem);
+    copy[key] = v2;
+    if (v2 === aItem) equalItems++;
   }
   return aSize === bSize && equalItems === aSize ? a : copy;
 }
@@ -312,11 +312,11 @@ function shallowEqualObjects(a, b) {
 function isPlainArray$1(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
-function isPlainObject$1(o) {
-  if (!hasObjectPrototype$1(o)) {
+function isPlainObject$1(o2) {
+  if (!hasObjectPrototype$1(o2)) {
     return false;
   }
-  const ctor = o.constructor;
+  const ctor = o2.constructor;
   if (ctor === void 0) {
     return true;
   }
@@ -327,13 +327,13 @@ function isPlainObject$1(o) {
   if (!prot.hasOwnProperty("isPrototypeOf")) {
     return false;
   }
-  if (Object.getPrototypeOf(o) !== Object.prototype) {
+  if (Object.getPrototypeOf(o2) !== Object.prototype) {
     return false;
   }
   return true;
 }
-function hasObjectPrototype$1(o) {
-  return Object.prototype.toString.call(o) === "[object Object]";
+function hasObjectPrototype$1(o2) {
+  return Object.prototype.toString.call(o2) === "[object Object]";
 }
 function sleep(timeout) {
   return new Promise((resolve) => {
@@ -863,13 +863,13 @@ var Query = (_e = class extends Removable {
   }
   onFocus() {
     var _a2;
-    const observer = this.observers.find((x) => x.shouldFetchOnWindowFocus());
+    const observer = this.observers.find((x2) => x2.shouldFetchOnWindowFocus());
     observer == null ? void 0 : observer.refetch({ cancelRefetch: false });
     (_a2 = __privateGet(this, _retryer)) == null ? void 0 : _a2.continue();
   }
   onOnline() {
     var _a2;
-    const observer = this.observers.find((x) => x.shouldFetchOnReconnect());
+    const observer = this.observers.find((x2) => x2.shouldFetchOnReconnect());
     observer == null ? void 0 : observer.refetch({ cancelRefetch: false });
     (_a2 = __privateGet(this, _retryer)) == null ? void 0 : _a2.continue();
   }
@@ -882,7 +882,7 @@ var Query = (_e = class extends Removable {
   }
   removeObserver(observer) {
     if (this.observers.includes(observer)) {
-      this.observers = this.observers.filter((x) => x !== observer);
+      this.observers = this.observers.filter((x2) => x2 !== observer);
       if (!this.observers.length) {
         if (__privateGet(this, _retryer)) {
           if (__privateGet(this, _abortSignalConsumed)) {
@@ -921,7 +921,7 @@ var Query = (_e = class extends Removable {
       this.setOptions(options2);
     }
     if (!this.options.queryFn) {
-      const observer = this.observers.find((x) => x.options.queryFn);
+      const observer = this.observers.find((x2) => x2.options.queryFn);
       if (observer) {
         this.setOptions(observer.options);
       }
@@ -1740,7 +1740,7 @@ var Mutation = (_g = class extends Removable {
     }
   }
   removeObserver(observer) {
-    __privateSet(this, _observers, __privateGet(this, _observers).filter((x) => x !== observer));
+    __privateSet(this, _observers, __privateGet(this, _observers).filter((x2) => x2 !== observer));
     this.scheduleGc();
     __privateGet(this, _mutationCache).notify({
       type: "observerRemoved",
@@ -1763,7 +1763,7 @@ var Mutation = (_g = class extends Removable {
     this.execute(this.state.variables);
   }
   async execute(variables) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t2;
     const onContinue = () => {
       __privateMethod(this, _Mutation_instances, dispatch_fn2).call(this, { type: "continue" });
     };
@@ -1879,7 +1879,7 @@ var Mutation = (_g = class extends Removable {
           this,
           mutationFnContext
         ));
-        await ((_t = (_s = this.options).onSettled) == null ? void 0 : _t.call(
+        await ((_t2 = (_s = this.options).onSettled) == null ? void 0 : _t2.call(
           _s,
           void 0,
           error,
@@ -2079,7 +2079,7 @@ var MutationCache = (_h = class extends Subscribable {
     });
   }
   resumePausedMutations() {
-    const pausedMutations = this.getAll().filter((x) => x.state.isPaused);
+    const pausedMutations = this.getAll().filter((x2) => x2.state.isPaused);
     return notifyManager.batch(
       () => Promise.all(
         pausedMutations.map((mutation) => mutation.continue().catch(noop$6))
@@ -2906,7 +2906,7 @@ react_production.version = "19.1.1";
   react.exports = react_production;
 }
 var reactExports = react.exports;
-const React$4 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const o = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
 var QueryClientContext = reactExports.createContext(
   void 0
 );
@@ -3493,6 +3493,7 @@ function checkDCE$1() {
   reactDom.exports = reactDom_production;
 }
 var reactDomExports = reactDom.exports;
+const vt = /* @__PURE__ */ getDefaultExportFromCjs(reactDomExports);
 /**
  * @license React
  * react-dom-client.production.js
@@ -3665,7 +3666,7 @@ function getComponentNameFromType(type) {
         type = type._init;
         try {
           return getComponentNameFromType(type(innerType));
-        } catch (x) {
+        } catch (x2) {
         }
     }
   return null;
@@ -3740,9 +3741,9 @@ function setIsStrictModeForDevtools(newIsStrictMode) {
     }
 }
 var clz32 = Math.clz32 ? Math.clz32 : clz32Fallback, log = Math.log, LN2 = Math.LN2;
-function clz32Fallback(x) {
-  x >>>= 0;
-  return 0 === x ? 32 : 31 - (log(x) / LN2 | 0) | 0;
+function clz32Fallback(x2) {
+  x2 >>>= 0;
+  return 0 === x2 ? 32 : 31 - (log(x2) / LN2 | 0) | 0;
 }
 var nextTransitionLane = 256, nextRetryLane = 4194304;
 function getHighestPriorityLanes(lanes) {
@@ -4092,10 +4093,10 @@ function describeBuiltInComponentFrame(name) {
   if (void 0 === prefix$1)
     try {
       throw Error();
-    } catch (x) {
-      var match = x.stack.trim().match(/\n( *(at )?)/);
+    } catch (x2) {
+      var match = x2.stack.trim().match(/\n( *(at )?)/);
       prefix$1 = match && match[1] || "";
-      suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
+      suffix = -1 < x2.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x2.stack.indexOf("@") ? "@unknown:0:0" : "";
     }
   return "\n" + prefix$1 + name + suffix;
 }
@@ -4121,8 +4122,8 @@ function describeNativeComponentFrame(fn, construct) {
             if ("object" === typeof Reflect && Reflect.construct) {
               try {
                 Reflect.construct(Fake, []);
-              } catch (x) {
-                var control = x;
+              } catch (x2) {
+                var control = x2;
               }
               Reflect.construct(fn, [], Fake);
             } else {
@@ -4222,8 +4223,8 @@ function getStackByFiberInDevAndProd(workInProgress2) {
       info += describeFiber(workInProgress2), workInProgress2 = workInProgress2.return;
     while (workInProgress2);
     return info;
-  } catch (x) {
-    return "\nError generating stack: " + x.message + "\n" + x.stack;
+  } catch (x2) {
+    return "\nError generating stack: " + x2.message + "\n" + x2.stack;
   }
 }
 function getToStringValue(value) {
@@ -5000,8 +5001,8 @@ function getTargetInstForInputOrChangeEvent(domEventName, targetInst) {
   if ("input" === domEventName || "change" === domEventName)
     return getInstIfValueChanged(targetInst);
 }
-function is$2(x, y) {
-  return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+function is$2(x2, y) {
+  return x2 === y && (0 !== x2 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
 }
 var objectIs$2 = "function" === typeof Object.is ? Object.is : is$2;
 function shallowEqual(objA, objB) {
@@ -6523,9 +6524,9 @@ function updateActionStateImpl(stateHook, currentStateHook, action) {
   if ("object" === typeof currentStateHook && null !== currentStateHook && "function" === typeof currentStateHook.then)
     try {
       var state = useThenable(currentStateHook);
-    } catch (x) {
-      if (x === SuspenseException) throw SuspenseActionException;
-      throw x;
+    } catch (x2) {
+      if (x2 === SuspenseException) throw SuspenseActionException;
+      throw x2;
     }
   else state = currentStateHook;
   currentStateHook = updateWorkInProgressHook();
@@ -7613,9 +7614,9 @@ function createChildReconciler(shouldTrackSideEffects) {
       );
       thenableState = null;
       return firstChildFiber;
-    } catch (x) {
-      if (x === SuspenseException || x === SuspenseActionException) throw x;
-      var fiber = createFiberImplClass(29, x, null, returnFiber.mode);
+    } catch (x2) {
+      if (x2 === SuspenseException || x2 === SuspenseActionException) throw x2;
+      var fiber = createFiberImplClass(29, x2, null, returnFiber.mode);
       fiber.lanes = lanes;
       fiber.return = returnFiber;
       return fiber;
@@ -15260,31 +15261,31 @@ function replaceEqualDeep(prev, _next) {
       copy[key] = n;
       continue;
     }
-    const v = replaceEqualDeep(p, n);
-    copy[key] = v;
-    if (v === p) equalItems++;
+    const v2 = replaceEqualDeep(p, n);
+    copy[key] = v2;
+    if (v2 === p) equalItems++;
   }
   return prevSize === nextSize && equalItems === prevSize ? prev : copy;
 }
-function getEnumerableOwnKeys(o) {
+function getEnumerableOwnKeys(o2) {
   const keys = [];
-  const names = Object.getOwnPropertyNames(o);
+  const names = Object.getOwnPropertyNames(o2);
   for (const name of names) {
-    if (!Object.prototype.propertyIsEnumerable.call(o, name)) return false;
+    if (!Object.prototype.propertyIsEnumerable.call(o2, name)) return false;
     keys.push(name);
   }
-  const symbols = Object.getOwnPropertySymbols(o);
+  const symbols = Object.getOwnPropertySymbols(o2);
   for (const symbol of symbols) {
-    if (!Object.prototype.propertyIsEnumerable.call(o, symbol)) return false;
+    if (!Object.prototype.propertyIsEnumerable.call(o2, symbol)) return false;
     keys.push(symbol);
   }
   return keys;
 }
-function isPlainObject(o) {
-  if (!hasObjectPrototype(o)) {
+function isPlainObject(o2) {
+  if (!hasObjectPrototype(o2)) {
     return false;
   }
-  const ctor = o.constructor;
+  const ctor = o2.constructor;
   if (typeof ctor === "undefined") {
     return true;
   }
@@ -15297,8 +15298,8 @@ function isPlainObject(o) {
   }
   return true;
 }
-function hasObjectPrototype(o) {
-  return Object.prototype.toString.call(o) === "[object Object]";
+function hasObjectPrototype(o2) {
+  return Object.prototype.toString.call(o2) === "[object Object]";
 }
 function isPlainArray(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
@@ -18484,10 +18485,10 @@ function ErrorComponent({ error }) {
   ] });
 }
 function ClientOnly({ children, fallback = null }) {
-  return useHydrated() ? /* @__PURE__ */ jsxRuntimeExports.jsx(React$4.Fragment, { children }) : /* @__PURE__ */ jsxRuntimeExports.jsx(React$4.Fragment, { children: fallback });
+  return useHydrated() ? /* @__PURE__ */ jsxRuntimeExports.jsx(o.Fragment, { children }) : /* @__PURE__ */ jsxRuntimeExports.jsx(o.Fragment, { children: fallback });
 }
 function useHydrated() {
-  return React$4.useSyncExternalStore(
+  return o.useSyncExternalStore(
     subscribe,
     () => true,
     () => false
@@ -18511,8 +18512,8 @@ var useSyncExternalStoreShim_production = {};
  * LICENSE file in the root directory of this source tree.
  */
 var React$1 = reactExports;
-function is$1(x, y) {
-  return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+function is$1(x2, y) {
+  return x2 === y && (0 !== x2 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
 }
 var objectIs$1 = "function" === typeof Object.is ? Object.is : is$1, useState = React$1.useState, useEffect$1 = React$1.useEffect, useLayoutEffect$1 = React$1.useLayoutEffect, useDebugValue$1 = React$1.useDebugValue;
 function useSyncExternalStore$2(subscribe2, getSnapshot) {
@@ -18566,8 +18567,8 @@ var shimExports = shim$2.exports;
  * LICENSE file in the root directory of this source tree.
  */
 var React = reactExports, shim = shimExports;
-function is(x, y) {
-  return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+function is(x2, y) {
+  return x2 === y && (0 !== x2 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
 }
 var objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim.useSyncExternalStore, useRef = React.useRef, useEffect = React.useEffect, useMemo = React.useMemo, useDebugValue = React.useDebugValue;
 withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector, isEqual) {
@@ -18644,15 +18645,15 @@ function shallow(objA, objB) {
   }
   if (objA instanceof Map && objB instanceof Map) {
     if (objA.size !== objB.size) return false;
-    for (const [k, v] of objA) {
-      if (!objB.has(k) || !Object.is(v, objB.get(k))) return false;
+    for (const [k, v2] of objA) {
+      if (!objB.has(k) || !Object.is(v2, objB.get(k))) return false;
     }
     return true;
   }
   if (objA instanceof Set && objB instanceof Set) {
     if (objA.size !== objB.size) return false;
-    for (const v of objA) {
-      if (!objB.has(v)) return false;
+    for (const v2 of objA) {
+      if (!objB.has(v2)) return false;
     }
     return true;
   }
@@ -19171,7 +19172,7 @@ class Route extends BaseRoute {
     this.useNavigate = () => {
       return useNavigate({ from: this.fullPath });
     };
-    this.Link = React$4.forwardRef(
+    this.Link = o.forwardRef(
       (props, ref) => {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
       }
@@ -19225,7 +19226,7 @@ class RootRoute extends BaseRootRoute {
     this.useNavigate = () => {
       return useNavigate({ from: this.fullPath });
     };
-    this.Link = React$4.forwardRef(
+    this.Link = o.forwardRef(
       (props, ref) => {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
       }
@@ -19804,14 +19805,397 @@ function useScrollReveal() {
   }, []);
   return ref;
 }
-const stats = [
+const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
+const FALLBACK_CATEGORY_IMAGES = [
+  "/assets/generated/hero-sofa.dim_1600x900.jpg",
+  "/assets/generated/sofa-modern.dim_800x600.jpg",
+  "/assets/generated/sofa-lshape.dim_800x600.jpg",
+  "/assets/generated/sofa-leather.dim_800x600.jpg"
+];
+const FALLBACK_PRODUCT_IMAGES = [
+  "/assets/generated/sofa-modern.dim_800x600.jpg",
+  "/assets/generated/sofa-leather.dim_800x600.jpg",
+  "/assets/generated/sofa-fabric.dim_800x600.jpg",
+  "/assets/generated/sofa-lshape.dim_800x600.jpg",
+  "/assets/generated/sofa-recliner.dim_800x600.jpg"
+];
+const FALLBACK_GALLERY_IMAGES = [
+  "/assets/generated/gallery-1.dim_600x800.jpg",
+  "/assets/generated/gallery-2.dim_800x600.jpg",
+  "/assets/generated/gallery-3.dim_600x700.jpg",
+  "/assets/generated/gallery-4.dim_800x600.jpg",
+  "/assets/generated/gallery-5.dim_600x800.jpg",
+  "/assets/generated/gallery-6.dim_800x500.jpg"
+];
+const EMPTY_WEBSITE_SETTINGS = {
+  enquiryEmail: "",
+  enquiryPhone: "",
+  address: "",
+  facebookUrl: "",
+  instagramUrl: "",
+  twitterUrl: "",
+  linkedinUrl: ""
+};
+function normalizeText$1(value) {
+  return (value == null ? void 0 : value.trim()) ?? "";
+}
+function stripTrailingSlash(value) {
+  return value.replace(/\/+$/, "");
+}
+function joinUrl(baseUrl, path) {
+  return `${stripTrailingSlash(baseUrl)}/${path.replace(/^\/+/, "")}`;
+}
+function pickFallbackImage(images, index2) {
+  return images[index2 % images.length];
+}
+function toSlug(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+function toStringArray(values) {
+  return Array.isArray(values) ? values.map((value) => normalizeText$1(value)).filter((value) => value.length > 0) : [];
+}
+function resolveWebsiteApiBaseUrl(value) {
+  return stripTrailingSlash(
+    normalizeText$1(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
+  );
+}
+function resolveWebsiteAssetUrl(assetPath, baseUrl) {
+  const normalizedAssetPath = normalizeText$1(assetPath);
+  if (!normalizedAssetPath) {
+    return "";
+  }
+  if (/^https?:\/\//i.test(normalizedAssetPath)) {
+    return normalizedAssetPath;
+  }
+  try {
+    if (typeof window !== "undefined") {
+      const absoluteBaseUrl = new URL(baseUrl, window.location.origin);
+      return new URL(normalizedAssetPath, absoluteBaseUrl).toString();
+    }
+    const serverBaseUrl = baseUrl.startsWith("http") ? baseUrl : DEFAULT_LOCAL_WEBSITE_API_BASE_URL;
+    return new URL(normalizedAssetPath, serverBaseUrl).toString();
+  } catch {
+    return normalizedAssetPath;
+  }
+}
+async function requestWebsiteApi(path, init = {}) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const headers = new Headers(init.headers);
+  headers.set("Accept", "application/json");
+  const response = await fetch(joinUrl(baseUrl, path), {
+    ...init,
+    headers
+  });
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+  const responseData = isJson ? await response.json() : await response.text();
+  if (!response.ok) {
+    const message = typeof responseData === "object" && responseData !== null && "message" in responseData && typeof responseData.message === "string" ? responseData.message : response.statusText || "Request failed.";
+    throw new Error(message);
+  }
+  return { data: responseData, baseUrl };
+}
+async function requestWebsiteOptional(path, init = {}) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const headers = new Headers(init.headers);
+  headers.set("Accept", "application/json");
+  const response = await fetch(joinUrl(baseUrl, path), {
+    ...init,
+    headers
+  });
+  if (response.status === 404) {
+    return null;
+  }
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+  const responseData = isJson ? await response.json() : await response.text();
+  if (!response.ok) {
+    const message = typeof responseData === "object" && responseData !== null && "message" in responseData && typeof responseData.message === "string" ? responseData.message : response.statusText || "Request failed.";
+    throw new Error(message);
+  }
+  return { data: responseData, baseUrl };
+}
+async function getWebsiteContentByKey(modelKey) {
+  var _a2;
+  const trimmed = normalizeText$1(modelKey);
+  if (!trimmed) return null;
+  const result = await requestWebsiteOptional(
+    `/website/content/${encodeURIComponent(trimmed)}`
+  );
+  const payload = (_a2 = result == null ? void 0 : result.data) == null ? void 0 : _a2.content;
+  if (!(payload == null ? void 0 : payload.data) || typeof payload.data !== "object") {
+    return null;
+  }
+  return payload.data;
+}
+function useWebsiteContent(modelKey) {
+  const key = normalizeText$1(modelKey);
+  return useQuery({
+    queryKey: ["website", "content", key],
+    queryFn: async () => key ? getWebsiteContentByKey(key) : null,
+    staleTime: 60 * 1e3,
+    enabled: key.length > 0
+  });
+}
+async function submitWebsiteInquiry(input) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(joinUrl(baseUrl, "/website/inquiries"), {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(input)
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const message = typeof payload === "object" && payload !== null && "message" in payload && typeof payload.message === "string" ? payload.message : "Could not send your enquiry.";
+    throw new Error(message);
+  }
+  return payload;
+}
+async function trackWebsitePageView(path) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  try {
+    await fetch(joinUrl(baseUrl, "/website/analytics/track"), {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ path: path ? path.slice(0, 512) : "" })
+    });
+  } catch {
+  }
+}
+function normalizeCategory(category, baseUrl, index2) {
+  const name = normalizeText$1(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
+  const slug = normalizeText$1(category == null ? void 0 : category.slug) || toSlug(name);
+  const description = normalizeText$1(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
+  return {
+    id: normalizeText$1(category == null ? void 0 : category._id) || `category-${slug || index2}`,
+    name,
+    slug,
+    image: resolveWebsiteAssetUrl(normalizeText$1(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
+    description,
+    tags: toStringArray(category == null ? void 0 : category.tags),
+    order: typeof (category == null ? void 0 : category.order) === "number" ? category.order : index2,
+    metaTitle: normalizeText$1(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
+    metaDescription: normalizeText$1(category == null ? void 0 : category.metaDescription) || description
+  };
+}
+function normalizeCategorySummary(category, baseUrl, index2) {
+  if (!category || typeof category === "string") {
+    return null;
+  }
+  const normalizedCategory = normalizeCategory(category, baseUrl, index2);
+  return {
+    id: normalizedCategory.id,
+    name: normalizedCategory.name,
+    slug: normalizedCategory.slug,
+    image: normalizedCategory.image,
+    description: normalizedCategory.description
+  };
+}
+function normalizeProduct(product, baseUrl, index2) {
+  const name = normalizeText$1(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
+  const slug = normalizeText$1(product == null ? void 0 : product.slug) || toSlug(name);
+  const gallery = toStringArray(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
+  const image = resolveWebsiteAssetUrl(normalizeText$1(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
+  const shortDescription = normalizeText$1(product == null ? void 0 : product.shortDescription) || normalizeText$1(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
+  const description = normalizeText$1(product == null ? void 0 : product.description) || shortDescription;
+  return {
+    id: normalizeText$1(product == null ? void 0 : product._id) || `product-${slug || index2}`,
+    name,
+    slug,
+    image,
+    gallery: Array.from(/* @__PURE__ */ new Set([image, ...gallery])),
+    shortDescription,
+    description,
+    material: normalizeText$1(product == null ? void 0 : product.material),
+    frame: normalizeText$1(product == null ? void 0 : product.frame),
+    cushions: normalizeText$1(product == null ? void 0 : product.cushions),
+    warranty: normalizeText$1(product == null ? void 0 : product.warranty),
+    tags: toStringArray(product == null ? void 0 : product.tags),
+    category: normalizeCategorySummary(product == null ? void 0 : product.categoryId, baseUrl, index2),
+    order: typeof (product == null ? void 0 : product.order) === "number" ? product.order : index2,
+    metaTitle: normalizeText$1(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
+    metaDescription: normalizeText$1(product == null ? void 0 : product.metaDescription) || shortDescription
+  };
+}
+function normalizeGalleryItem(item, baseUrl, index2) {
+  return {
+    id: normalizeText$1(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText$1(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
+    alt: `JPM Enterprises gallery showcase ${index2 + 1}`,
+    createdAt: normalizeText$1(item == null ? void 0 : item.createdAt)
+  };
+}
+function normalizeReview(review, baseUrl, index2) {
+  return {
+    id: normalizeText$1(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
+    name: normalizeText$1(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
+    profilePic: resolveWebsiteAssetUrl(
+      normalizeText$1(review == null ? void 0 : review.profilePic),
+      baseUrl
+    ),
+    description: normalizeText$1(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
+    createdAt: normalizeText$1(review == null ? void 0 : review.createdAt)
+  };
+}
+function normalizeSettings(settings) {
+  return {
+    enquiryEmail: normalizeText$1(settings == null ? void 0 : settings.enquiryEmail),
+    enquiryPhone: normalizeText$1(settings == null ? void 0 : settings.enquiryPhone),
+    address: normalizeText$1(settings == null ? void 0 : settings.address),
+    facebookUrl: normalizeText$1(settings == null ? void 0 : settings.facebookUrl),
+    instagramUrl: normalizeText$1(settings == null ? void 0 : settings.instagramUrl),
+    twitterUrl: normalizeText$1(settings == null ? void 0 : settings.twitterUrl),
+    linkedinUrl: normalizeText$1(settings == null ? void 0 : settings.linkedinUrl)
+  };
+}
+async function getWebsiteSettings() {
+  const response = await requestWebsiteApi("/website/settings");
+  return normalizeSettings(response.data.setting);
+}
+async function getWebsiteCategories() {
+  const response = await requestWebsiteApi(
+    "/website/categories"
+  );
+  return (response.data.categories ?? []).map(
+    (category, index2) => normalizeCategory(category, response.baseUrl, index2)
+  );
+}
+async function getWebsiteProducts(filters) {
+  const searchParams = new URLSearchParams();
+  if (normalizeText$1(filters == null ? void 0 : filters.categorySlug)) {
+    searchParams.set("categorySlug", normalizeText$1(filters == null ? void 0 : filters.categorySlug));
+  }
+  if (normalizeText$1(filters == null ? void 0 : filters.categoryId)) {
+    searchParams.set("categoryId", normalizeText$1(filters == null ? void 0 : filters.categoryId));
+  }
+  const query = searchParams.toString();
+  const response = await requestWebsiteApi(
+    `/website/products${query ? `?${query}` : ""}`
+  );
+  return (response.data.products ?? []).map(
+    (product, index2) => normalizeProduct(product, response.baseUrl, index2)
+  );
+}
+async function getWebsiteGallery() {
+  const response = await requestWebsiteApi("/website/gallery");
+  return (response.data.gallery ?? []).map(
+    (item, index2) => normalizeGalleryItem(item, response.baseUrl, index2)
+  );
+}
+async function getWebsiteReviews() {
+  const response = await requestWebsiteApi("/website/reviews");
+  return (response.data.reviews ?? []).map(
+    (review, index2) => normalizeReview(review, response.baseUrl, index2)
+  );
+}
+async function getWebsiteProductBySlug(slug) {
+  const response = await requestWebsiteApi(
+    `/website/products/${encodeURIComponent(slug)}`
+  );
+  return {
+    product: response.data.product ? normalizeProduct(response.data.product, response.baseUrl, 0) : null,
+    relatedProducts: (response.data.relatedProducts ?? []).map(
+      (product, index2) => normalizeProduct(product, response.baseUrl, index2 + 1)
+    )
+  };
+}
+function useWebsiteSettings() {
+  return useQuery({
+    queryKey: ["website", "settings"],
+    queryFn: getWebsiteSettings,
+    staleTime: 5 * 60 * 1e3,
+    placeholderData: EMPTY_WEBSITE_SETTINGS
+  });
+}
+function useWebsiteCategories() {
+  return useQuery({
+    queryKey: ["website", "categories"],
+    queryFn: getWebsiteCategories,
+    staleTime: 60 * 1e3
+  });
+}
+function useWebsiteProducts(filters) {
+  const categorySlug = normalizeText$1(filters == null ? void 0 : filters.categorySlug);
+  const categoryId = normalizeText$1(filters == null ? void 0 : filters.categoryId);
+  return useQuery({
+    queryKey: ["website", "products", categorySlug, categoryId],
+    queryFn: () => getWebsiteProducts({ categorySlug, categoryId }),
+    staleTime: 60 * 1e3
+  });
+}
+function useWebsiteGallery() {
+  return useQuery({
+    queryKey: ["website", "gallery"],
+    queryFn: getWebsiteGallery,
+    staleTime: 60 * 1e3
+  });
+}
+function useWebsiteReviews() {
+  return useQuery({
+    queryKey: ["website", "reviews"],
+    queryFn: getWebsiteReviews,
+    staleTime: 60 * 1e3
+  });
+}
+function useWebsiteProduct(slug) {
+  const productSlug = normalizeText$1(slug);
+  return useQuery({
+    queryKey: ["website", "product", productSlug],
+    queryFn: () => getWebsiteProductBySlug(productSlug),
+    enabled: productSlug.length > 0,
+    staleTime: 60 * 1e3
+  });
+}
+const DEFAULT_STATS = [
   { value: "500+", label: "Happy Clients" },
   { value: "15+", label: "Years Experience" },
   { value: "1000+", label: "Sofas Crafted" }
 ];
+const DEFAULT_PARAGRAPHS = [
+  "Founded in 2005 in Hisar, JPM Enterprises began as a small workshop with a single vision: to create furniture that stands the test of time. Today, we are one of India's most trusted names in luxury sofa design and manufacturing.",
+  "Every JPM piece is born from a deep respect for traditional craftsmanship, enriched with contemporary design sensibility. Our master craftsmen hand-select materials, hand-stitch upholstery, and hand-finish every detail — because we believe furniture should be as beautiful to make as it is to own.",
+  "We don't just build sofas. We build heirlooms — pieces that become the anchor of your living space, companions for years of memories."
+];
 function AboutSection() {
+  var _a2, _b2, _c2, _d2;
+  const { data: cmsData } = useWebsiteContent("our_story");
   const leftRef = useScrollReveal();
   const rightRef = useScrollReveal();
+  const content = cmsData;
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const overline = ((_a2 = content == null ? void 0 : content.overline) == null ? void 0 : _a2.trim()) || "Our Story";
+  const headingLine1 = ((_b2 = content == null ? void 0 : content.headingLine1) == null ? void 0 : _b2.trim()) || "Craftsmanship at the";
+  const headingAccent = ((_c2 = content == null ? void 0 : content.headingAccent) == null ? void 0 : _c2.trim()) || "Heart of Everything";
+  const paragraphs = (() => {
+    const raw = Array.isArray(content == null ? void 0 : content.paragraphs) ? content.paragraphs : null;
+    if (raw == null ? void 0 : raw.length) {
+      return raw.map((p) => String(p).trim()).filter(Boolean);
+    }
+    return DEFAULT_PARAGRAPHS;
+  })();
+  const stats = (() => {
+    const raw = Array.isArray(content == null ? void 0 : content.stats) ? content.stats : null;
+    if (raw == null ? void 0 : raw.length) {
+      return raw.map((s, index2) => {
+        var _a3, _b3;
+        const fb = DEFAULT_STATS[index2] ?? { value: "", label: "" };
+        return {
+          value: ((_a3 = s == null ? void 0 : s.value) == null ? void 0 : _a3.trim()) || fb.value,
+          label: ((_b3 = s == null ? void 0 : s.label) == null ? void 0 : _b3.trim()) || fb.label
+        };
+      }).filter((s) => s.value || s.label);
+    }
+    return DEFAULT_STATS;
+  })();
+  const defaultImagePath = "/assets/generated/about-craftsmanship.dim_800x600.jpg";
+  const imagePath = ((_d2 = content == null ? void 0 : content.imageUrl) == null ? void 0 : _d2.trim()) || defaultImagePath;
+  const imageSrc = resolveWebsiteAssetUrl(imagePath, baseUrl) || imagePath;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "about", className: "py-24 bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-16 items-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: leftRef, className: "reveal", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -19819,17 +20203,22 @@ function AboutSection() {
         {
           className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-4",
           style: { color: "oklch(0.65 0.12 75)" },
-          children: "Our Story"
+          children: overline
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "font-playfair text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight", children: [
-        "Craftsmanship at the",
+        headingLine1,
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "Heart of Everything" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: headingAccent })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-5", children: "Founded in 2005 in Hisar, JPM Enterprises began as a small workshop with a single vision: to create furniture that stands the test of time. Today, we are one of India's most trusted names in luxury sofa design and manufacturing." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-5", children: "Every JPM piece is born from a deep respect for traditional craftsmanship, enriched with contemporary design sensibility. Our master craftsmen hand-select materials, hand-stitch upholstery, and hand-finish every detail — because we believe furniture should be as beautiful to make as it is to own." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-secondary-foreground leading-relaxed mb-10", children: "We don't just build sofas. We build heirlooms — pieces that become the anchor of your living space, companions for years of memories." }),
+      paragraphs.map((paragraph, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "p",
+        {
+          className: `font-general text-secondary-foreground leading-relaxed ${index2 === paragraphs.length - 1 ? "mb-10" : "mb-5"}`,
+          children: paragraph
+        },
+        index2
+      )),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-8", children: stats.map((stat) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "span",
@@ -19846,7 +20235,7 @@ function AboutSection() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
-          src: "/assets/generated/about-craftsmanship.dim_800x600.jpg",
+          src: imageSrc,
           alt: "JPM Enterprises craftsmanship",
           loading: "lazy",
           className: "w-full h-auto object-cover rounded-sm",
@@ -20413,280 +20802,6 @@ const __iconNode = [
   ["line", { x1: "8", x2: "14", y1: "11", y2: "11", key: "durymu" }]
 ];
 const ZoomIn = createLucideIcon("zoom-in", __iconNode);
-const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
-const FALLBACK_CATEGORY_IMAGES = [
-  "/assets/generated/hero-sofa.dim_1600x900.jpg",
-  "/assets/generated/sofa-modern.dim_800x600.jpg",
-  "/assets/generated/sofa-lshape.dim_800x600.jpg",
-  "/assets/generated/sofa-leather.dim_800x600.jpg"
-];
-const FALLBACK_PRODUCT_IMAGES = [
-  "/assets/generated/sofa-modern.dim_800x600.jpg",
-  "/assets/generated/sofa-leather.dim_800x600.jpg",
-  "/assets/generated/sofa-fabric.dim_800x600.jpg",
-  "/assets/generated/sofa-lshape.dim_800x600.jpg",
-  "/assets/generated/sofa-recliner.dim_800x600.jpg"
-];
-const FALLBACK_GALLERY_IMAGES = [
-  "/assets/generated/gallery-1.dim_600x800.jpg",
-  "/assets/generated/gallery-2.dim_800x600.jpg",
-  "/assets/generated/gallery-3.dim_600x700.jpg",
-  "/assets/generated/gallery-4.dim_800x600.jpg",
-  "/assets/generated/gallery-5.dim_600x800.jpg",
-  "/assets/generated/gallery-6.dim_800x500.jpg"
-];
-const EMPTY_WEBSITE_SETTINGS = {
-  enquiryEmail: "",
-  enquiryPhone: "",
-  address: "",
-  facebookUrl: "",
-  instagramUrl: "",
-  twitterUrl: "",
-  linkedinUrl: ""
-};
-function normalizeText(value) {
-  return (value == null ? void 0 : value.trim()) ?? "";
-}
-function stripTrailingSlash(value) {
-  return value.replace(/\/+$/, "");
-}
-function joinUrl(baseUrl, path) {
-  return `${stripTrailingSlash(baseUrl)}/${path.replace(/^\/+/, "")}`;
-}
-function pickFallbackImage(images, index2) {
-  return images[index2 % images.length];
-}
-function toSlug(value) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
-function toStringArray(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText(value)).filter((value) => value.length > 0) : [];
-}
-function resolveWebsiteApiBaseUrl(value) {
-  return stripTrailingSlash(
-    normalizeText(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
-  );
-}
-function resolveWebsiteAssetUrl(assetPath, baseUrl) {
-  const normalizedAssetPath = normalizeText(assetPath);
-  if (!normalizedAssetPath) {
-    return "";
-  }
-  if (/^https?:\/\//i.test(normalizedAssetPath)) {
-    return normalizedAssetPath;
-  }
-  try {
-    if (typeof window !== "undefined") {
-      const absoluteBaseUrl = new URL(baseUrl, window.location.origin);
-      return new URL(normalizedAssetPath, absoluteBaseUrl).toString();
-    }
-    const serverBaseUrl = baseUrl.startsWith("http") ? baseUrl : DEFAULT_LOCAL_WEBSITE_API_BASE_URL;
-    return new URL(normalizedAssetPath, serverBaseUrl).toString();
-  } catch {
-    return normalizedAssetPath;
-  }
-}
-async function requestWebsiteApi(path, init = {}) {
-  const baseUrl = resolveWebsiteApiBaseUrl();
-  const headers = new Headers(init.headers);
-  headers.set("Accept", "application/json");
-  const response = await fetch(joinUrl(baseUrl, path), {
-    ...init,
-    headers
-  });
-  const contentType = response.headers.get("content-type") ?? "";
-  const isJson = contentType.includes("application/json");
-  const responseData = isJson ? await response.json() : await response.text();
-  if (!response.ok) {
-    const message = typeof responseData === "object" && responseData !== null && "message" in responseData && typeof responseData.message === "string" ? responseData.message : response.statusText || "Request failed.";
-    throw new Error(message);
-  }
-  return { data: responseData, baseUrl };
-}
-function normalizeCategory(category, baseUrl, index2) {
-  const name = normalizeText(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
-  const slug = normalizeText(category == null ? void 0 : category.slug) || toSlug(name);
-  const description = normalizeText(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
-  return {
-    id: normalizeText(category == null ? void 0 : category._id) || `category-${slug || index2}`,
-    name,
-    slug,
-    image: resolveWebsiteAssetUrl(normalizeText(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
-    description,
-    tags: toStringArray(category == null ? void 0 : category.tags),
-    order: typeof (category == null ? void 0 : category.order) === "number" ? category.order : index2,
-    metaTitle: normalizeText(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
-    metaDescription: normalizeText(category == null ? void 0 : category.metaDescription) || description
-  };
-}
-function normalizeCategorySummary(category, baseUrl, index2) {
-  if (!category || typeof category === "string") {
-    return null;
-  }
-  const normalizedCategory = normalizeCategory(category, baseUrl, index2);
-  return {
-    id: normalizedCategory.id,
-    name: normalizedCategory.name,
-    slug: normalizedCategory.slug,
-    image: normalizedCategory.image,
-    description: normalizedCategory.description
-  };
-}
-function normalizeProduct(product, baseUrl, index2) {
-  const name = normalizeText(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
-  const slug = normalizeText(product == null ? void 0 : product.slug) || toSlug(name);
-  const gallery = toStringArray(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
-  const image = resolveWebsiteAssetUrl(normalizeText(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
-  const shortDescription = normalizeText(product == null ? void 0 : product.shortDescription) || normalizeText(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
-  const description = normalizeText(product == null ? void 0 : product.description) || shortDescription;
-  return {
-    id: normalizeText(product == null ? void 0 : product._id) || `product-${slug || index2}`,
-    name,
-    slug,
-    image,
-    gallery: Array.from(/* @__PURE__ */ new Set([image, ...gallery])),
-    shortDescription,
-    description,
-    material: normalizeText(product == null ? void 0 : product.material),
-    frame: normalizeText(product == null ? void 0 : product.frame),
-    cushions: normalizeText(product == null ? void 0 : product.cushions),
-    warranty: normalizeText(product == null ? void 0 : product.warranty),
-    tags: toStringArray(product == null ? void 0 : product.tags),
-    category: normalizeCategorySummary(product == null ? void 0 : product.categoryId, baseUrl, index2),
-    order: typeof (product == null ? void 0 : product.order) === "number" ? product.order : index2,
-    metaTitle: normalizeText(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
-    metaDescription: normalizeText(product == null ? void 0 : product.metaDescription) || shortDescription
-  };
-}
-function normalizeGalleryItem(item, baseUrl, index2) {
-  return {
-    id: normalizeText(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
-    image: resolveWebsiteAssetUrl(normalizeText(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
-    alt: `JPM Enterprises gallery showcase ${index2 + 1}`,
-    createdAt: normalizeText(item == null ? void 0 : item.createdAt)
-  };
-}
-function normalizeReview(review, baseUrl, index2) {
-  return {
-    id: normalizeText(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
-    name: normalizeText(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
-    profilePic: resolveWebsiteAssetUrl(
-      normalizeText(review == null ? void 0 : review.profilePic),
-      baseUrl
-    ),
-    description: normalizeText(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
-    createdAt: normalizeText(review == null ? void 0 : review.createdAt)
-  };
-}
-function normalizeSettings(settings) {
-  return {
-    enquiryEmail: normalizeText(settings == null ? void 0 : settings.enquiryEmail),
-    enquiryPhone: normalizeText(settings == null ? void 0 : settings.enquiryPhone),
-    address: normalizeText(settings == null ? void 0 : settings.address),
-    facebookUrl: normalizeText(settings == null ? void 0 : settings.facebookUrl),
-    instagramUrl: normalizeText(settings == null ? void 0 : settings.instagramUrl),
-    twitterUrl: normalizeText(settings == null ? void 0 : settings.twitterUrl),
-    linkedinUrl: normalizeText(settings == null ? void 0 : settings.linkedinUrl)
-  };
-}
-async function getWebsiteSettings() {
-  const response = await requestWebsiteApi("/website/settings");
-  return normalizeSettings(response.data.setting);
-}
-async function getWebsiteCategories() {
-  const response = await requestWebsiteApi(
-    "/website/categories"
-  );
-  return (response.data.categories ?? []).map(
-    (category, index2) => normalizeCategory(category, response.baseUrl, index2)
-  );
-}
-async function getWebsiteProducts(filters) {
-  const searchParams = new URLSearchParams();
-  if (normalizeText(filters == null ? void 0 : filters.categorySlug)) {
-    searchParams.set("categorySlug", normalizeText(filters == null ? void 0 : filters.categorySlug));
-  }
-  if (normalizeText(filters == null ? void 0 : filters.categoryId)) {
-    searchParams.set("categoryId", normalizeText(filters == null ? void 0 : filters.categoryId));
-  }
-  const query = searchParams.toString();
-  const response = await requestWebsiteApi(
-    `/website/products${query ? `?${query}` : ""}`
-  );
-  return (response.data.products ?? []).map(
-    (product, index2) => normalizeProduct(product, response.baseUrl, index2)
-  );
-}
-async function getWebsiteGallery() {
-  const response = await requestWebsiteApi("/website/gallery");
-  return (response.data.gallery ?? []).map(
-    (item, index2) => normalizeGalleryItem(item, response.baseUrl, index2)
-  );
-}
-async function getWebsiteReviews() {
-  const response = await requestWebsiteApi("/website/reviews");
-  return (response.data.reviews ?? []).map(
-    (review, index2) => normalizeReview(review, response.baseUrl, index2)
-  );
-}
-async function getWebsiteProductBySlug(slug) {
-  const response = await requestWebsiteApi(
-    `/website/products/${encodeURIComponent(slug)}`
-  );
-  return {
-    product: response.data.product ? normalizeProduct(response.data.product, response.baseUrl, 0) : null,
-    relatedProducts: (response.data.relatedProducts ?? []).map(
-      (product, index2) => normalizeProduct(product, response.baseUrl, index2 + 1)
-    )
-  };
-}
-function useWebsiteSettings() {
-  return useQuery({
-    queryKey: ["website", "settings"],
-    queryFn: getWebsiteSettings,
-    staleTime: 5 * 60 * 1e3,
-    placeholderData: EMPTY_WEBSITE_SETTINGS
-  });
-}
-function useWebsiteCategories() {
-  return useQuery({
-    queryKey: ["website", "categories"],
-    queryFn: getWebsiteCategories,
-    staleTime: 60 * 1e3
-  });
-}
-function useWebsiteProducts(filters) {
-  const categorySlug = normalizeText(filters == null ? void 0 : filters.categorySlug);
-  const categoryId = normalizeText(filters == null ? void 0 : filters.categoryId);
-  return useQuery({
-    queryKey: ["website", "products", categorySlug, categoryId],
-    queryFn: () => getWebsiteProducts({ categorySlug, categoryId }),
-    staleTime: 60 * 1e3
-  });
-}
-function useWebsiteGallery() {
-  return useQuery({
-    queryKey: ["website", "gallery"],
-    queryFn: getWebsiteGallery,
-    staleTime: 60 * 1e3
-  });
-}
-function useWebsiteReviews() {
-  return useQuery({
-    queryKey: ["website", "reviews"],
-    queryFn: getWebsiteReviews,
-    staleTime: 60 * 1e3
-  });
-}
-function useWebsiteProduct(slug) {
-  const productSlug = normalizeText(slug);
-  return useQuery({
-    queryKey: ["website", "product", productSlug],
-    queryFn: () => getWebsiteProductBySlug(productSlug),
-    enabled: productSlug.length > 0,
-    staleTime: 60 * 1e3
-  });
-}
 const ALL_COLLECTIONS_SLUG = "all";
 const CATEGORY_LOADING_KEYS = [
   "loading-alpha",
@@ -21106,7 +21221,7 @@ var DefaultContext = {
   style: void 0,
   attr: void 0
 };
-var IconContext = React$4.createContext && /* @__PURE__ */ React$4.createContext(DefaultContext);
+var IconContext = o.createContext && /* @__PURE__ */ o.createContext(DefaultContext);
 var _excluded = ["attr", "size", "title"];
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
@@ -21151,10 +21266,10 @@ function _extends() {
 function ownKeys(e, r) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r && (o = o.filter(function(r2) {
+    var o2 = Object.getOwnPropertySymbols(e);
+    r && (o2 = o2.filter(function(r2) {
       return Object.getOwnPropertyDescriptor(e, r2).enumerable;
-    })), t.push.apply(t, o);
+    })), t.push.apply(t, o2);
   }
   return t;
 }
@@ -21193,12 +21308,12 @@ function _toPrimitive(t, r) {
   return ("string" === r ? String : Number)(t);
 }
 function Tree2Element(tree) {
-  return tree && tree.map((node, i) => /* @__PURE__ */ React$4.createElement(node.tag, _objectSpread({
+  return tree && tree.map((node, i) => /* @__PURE__ */ o.createElement(node.tag, _objectSpread({
     key: i
   }, node.attr), Tree2Element(node.child)));
 }
 function GenIcon(data) {
-  return (props) => /* @__PURE__ */ React$4.createElement(IconBase, _extends({
+  return (props) => /* @__PURE__ */ o.createElement(IconBase, _extends({
     attr: _objectSpread({}, data.attr)
   }, props), Tree2Element(data.child));
 }
@@ -21213,7 +21328,7 @@ function IconBase(props) {
     var className;
     if (conf.className) className = conf.className;
     if (props.className) className = (className ? className + " " : "") + props.className;
-    return /* @__PURE__ */ React$4.createElement("svg", _extends({
+    return /* @__PURE__ */ o.createElement("svg", _extends({
       stroke: "currentColor",
       fill: "currentColor",
       strokeWidth: "0"
@@ -21225,9 +21340,9 @@ function IconBase(props) {
       height: computedSize,
       width: computedSize,
       xmlns: "http://www.w3.org/2000/svg"
-    }), title && /* @__PURE__ */ React$4.createElement("title", null, title), props.children);
+    }), title && /* @__PURE__ */ o.createElement("title", null, title), props.children);
   };
-  return IconContext !== void 0 ? /* @__PURE__ */ React$4.createElement(IconContext.Consumer, null, (conf) => elem(conf)) : elem(DefaultContext);
+  return IconContext !== void 0 ? /* @__PURE__ */ o.createElement(IconContext.Consumer, null, (conf) => elem(conf)) : elem(DefaultContext);
 }
 function SiFacebook(props) {
   return GenIcon({ "attr": { "role": "img", "viewBox": "0 0 24 24" }, "child": [{ "tag": "path", "attr": { "d": "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" }, "child": [] }] })(props);
@@ -21241,6 +21356,282 @@ function SiLinkedin(props) {
 function SiX(props) {
   return GenIcon({ "attr": { "role": "img", "viewBox": "0 0 24 24" }, "child": [{ "tag": "path", "attr": { "d": "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" }, "child": [] }] })(props);
 }
+var jt = (n) => {
+  switch (n) {
+    case "success":
+      return ee;
+    case "info":
+      return ae;
+    case "warning":
+      return oe;
+    case "error":
+      return se;
+    default:
+      return null;
+  }
+}, te = Array(12).fill(0), Yt = ({ visible: n, className: e }) => o.createElement("div", { className: ["sonner-loading-wrapper", e].filter(Boolean).join(" "), "data-visible": n }, o.createElement("div", { className: "sonner-spinner" }, te.map((t, a) => o.createElement("div", { className: "sonner-loading-bar", key: `spinner-bar-${a}` })))), ee = o.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20", fill: "currentColor", height: "20", width: "20" }, o.createElement("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z", clipRule: "evenodd" })), oe = o.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "currentColor", height: "20", width: "20" }, o.createElement("path", { fillRule: "evenodd", d: "M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z", clipRule: "evenodd" })), ae = o.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20", fill: "currentColor", height: "20", width: "20" }, o.createElement("path", { fillRule: "evenodd", d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z", clipRule: "evenodd" })), se = o.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20", fill: "currentColor", height: "20", width: "20" }, o.createElement("path", { fillRule: "evenodd", d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z", clipRule: "evenodd" })), Ot = o.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "12", height: "12", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }, o.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), o.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }));
+var Ft = () => {
+  let [n, e] = o.useState(document.hidden);
+  return o.useEffect(() => {
+    let t = () => {
+      e(document.hidden);
+    };
+    return document.addEventListener("visibilitychange", t), () => window.removeEventListener("visibilitychange", t);
+  }, []), n;
+};
+var bt = 1, yt = class {
+  constructor() {
+    this.subscribe = (e) => (this.subscribers.push(e), () => {
+      let t = this.subscribers.indexOf(e);
+      this.subscribers.splice(t, 1);
+    });
+    this.publish = (e) => {
+      this.subscribers.forEach((t) => t(e));
+    };
+    this.addToast = (e) => {
+      this.publish(e), this.toasts = [...this.toasts, e];
+    };
+    this.create = (e) => {
+      var S;
+      let { message: t, ...a } = e, u = typeof (e == null ? void 0 : e.id) == "number" || ((S = e.id) == null ? void 0 : S.length) > 0 ? e.id : bt++, f = this.toasts.find((g) => g.id === u), w = e.dismissible === void 0 ? true : e.dismissible;
+      return this.dismissedToasts.has(u) && this.dismissedToasts.delete(u), f ? this.toasts = this.toasts.map((g) => g.id === u ? (this.publish({ ...g, ...e, id: u, title: t }), { ...g, ...e, id: u, dismissible: w, title: t }) : g) : this.addToast({ title: t, ...a, dismissible: w, id: u }), u;
+    };
+    this.dismiss = (e) => (this.dismissedToasts.add(e), e || this.toasts.forEach((t) => {
+      this.subscribers.forEach((a) => a({ id: t.id, dismiss: true }));
+    }), this.subscribers.forEach((t) => t({ id: e, dismiss: true })), e);
+    this.message = (e, t) => this.create({ ...t, message: e });
+    this.error = (e, t) => this.create({ ...t, message: e, type: "error" });
+    this.success = (e, t) => this.create({ ...t, type: "success", message: e });
+    this.info = (e, t) => this.create({ ...t, type: "info", message: e });
+    this.warning = (e, t) => this.create({ ...t, type: "warning", message: e });
+    this.loading = (e, t) => this.create({ ...t, type: "loading", message: e });
+    this.promise = (e, t) => {
+      if (!t) return;
+      let a;
+      t.loading !== void 0 && (a = this.create({ ...t, promise: e, type: "loading", message: t.loading, description: typeof t.description != "function" ? t.description : void 0 }));
+      let u = e instanceof Promise ? e : e(), f = a !== void 0, w, S = u.then(async (i) => {
+        if (w = ["resolve", i], o.isValidElement(i)) f = false, this.create({ id: a, type: "default", message: i });
+        else if (ie(i) && !i.ok) {
+          f = false;
+          let T = typeof t.error == "function" ? await t.error(`HTTP error! status: ${i.status}`) : t.error, F = typeof t.description == "function" ? await t.description(`HTTP error! status: ${i.status}`) : t.description;
+          this.create({ id: a, type: "error", message: T, description: F });
+        } else if (t.success !== void 0) {
+          f = false;
+          let T = typeof t.success == "function" ? await t.success(i) : t.success, F = typeof t.description == "function" ? await t.description(i) : t.description;
+          this.create({ id: a, type: "success", message: T, description: F });
+        }
+      }).catch(async (i) => {
+        if (w = ["reject", i], t.error !== void 0) {
+          f = false;
+          let D = typeof t.error == "function" ? await t.error(i) : t.error, T = typeof t.description == "function" ? await t.description(i) : t.description;
+          this.create({ id: a, type: "error", message: D, description: T });
+        }
+      }).finally(() => {
+        var i;
+        f && (this.dismiss(a), a = void 0), (i = t.finally) == null || i.call(t);
+      }), g = () => new Promise((i, D) => S.then(() => w[0] === "reject" ? D(w[1]) : i(w[1])).catch(D));
+      return typeof a != "string" && typeof a != "number" ? { unwrap: g } : Object.assign(a, { unwrap: g });
+    };
+    this.custom = (e, t) => {
+      let a = (t == null ? void 0 : t.id) || bt++;
+      return this.create({ jsx: e(a), id: a, ...t }), a;
+    };
+    this.getActiveToasts = () => this.toasts.filter((e) => !this.dismissedToasts.has(e.id));
+    this.subscribers = [], this.toasts = [], this.dismissedToasts = /* @__PURE__ */ new Set();
+  }
+}, v = new yt(), ne = (n, e) => {
+  let t = (e == null ? void 0 : e.id) || bt++;
+  return v.addToast({ title: n, ...e, id: t }), t;
+}, ie = (n) => n && typeof n == "object" && "ok" in n && typeof n.ok == "boolean" && "status" in n && typeof n.status == "number", le = ne, ce = () => v.toasts, de = () => v.getActiveToasts(), ue = Object.assign(le, { success: v.success, info: v.info, warning: v.warning, error: v.error, custom: v.custom, message: v.message, promise: v.promise, dismiss: v.dismiss, loading: v.loading }, { getHistory: ce, getToasts: de });
+function wt(n, { insertAt: e } = {}) {
+  if (typeof document == "undefined") return;
+  let t = document.head || document.getElementsByTagName("head")[0], a = document.createElement("style");
+  a.type = "text/css", e === "top" && t.firstChild ? t.insertBefore(a, t.firstChild) : t.appendChild(a), a.styleSheet ? a.styleSheet.cssText = n : a.appendChild(document.createTextNode(n));
+}
+wt(`:where(html[dir="ltr"]),:where([data-sonner-toaster][dir="ltr"]){--toast-icon-margin-start: -3px;--toast-icon-margin-end: 4px;--toast-svg-margin-start: -1px;--toast-svg-margin-end: 0px;--toast-button-margin-start: auto;--toast-button-margin-end: 0;--toast-close-button-start: 0;--toast-close-button-end: unset;--toast-close-button-transform: translate(-35%, -35%)}:where(html[dir="rtl"]),:where([data-sonner-toaster][dir="rtl"]){--toast-icon-margin-start: 4px;--toast-icon-margin-end: -3px;--toast-svg-margin-start: 0px;--toast-svg-margin-end: -1px;--toast-button-margin-start: 0;--toast-button-margin-end: auto;--toast-close-button-start: unset;--toast-close-button-end: 0;--toast-close-button-transform: translate(35%, -35%)}:where([data-sonner-toaster]){position:fixed;width:var(--width);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;--gray1: hsl(0, 0%, 99%);--gray2: hsl(0, 0%, 97.3%);--gray3: hsl(0, 0%, 95.1%);--gray4: hsl(0, 0%, 93%);--gray5: hsl(0, 0%, 90.9%);--gray6: hsl(0, 0%, 88.7%);--gray7: hsl(0, 0%, 85.8%);--gray8: hsl(0, 0%, 78%);--gray9: hsl(0, 0%, 56.1%);--gray10: hsl(0, 0%, 52.3%);--gray11: hsl(0, 0%, 43.5%);--gray12: hsl(0, 0%, 9%);--border-radius: 8px;box-sizing:border-box;padding:0;margin:0;list-style:none;outline:none;z-index:999999999;transition:transform .4s ease}:where([data-sonner-toaster][data-lifted="true"]){transform:translateY(-10px)}@media (hover: none) and (pointer: coarse){:where([data-sonner-toaster][data-lifted="true"]){transform:none}}:where([data-sonner-toaster][data-x-position="right"]){right:var(--offset-right)}:where([data-sonner-toaster][data-x-position="left"]){left:var(--offset-left)}:where([data-sonner-toaster][data-x-position="center"]){left:50%;transform:translate(-50%)}:where([data-sonner-toaster][data-y-position="top"]){top:var(--offset-top)}:where([data-sonner-toaster][data-y-position="bottom"]){bottom:var(--offset-bottom)}:where([data-sonner-toast]){--y: translateY(100%);--lift-amount: calc(var(--lift) * var(--gap));z-index:var(--z-index);position:absolute;opacity:0;transform:var(--y);filter:blur(0);touch-action:none;transition:transform .4s,opacity .4s,height .4s,box-shadow .2s;box-sizing:border-box;outline:none;overflow-wrap:anywhere}:where([data-sonner-toast][data-styled="true"]){padding:16px;background:var(--normal-bg);border:1px solid var(--normal-border);color:var(--normal-text);border-radius:var(--border-radius);box-shadow:0 4px 12px #0000001a;width:var(--width);font-size:13px;display:flex;align-items:center;gap:6px}:where([data-sonner-toast]:focus-visible){box-shadow:0 4px 12px #0000001a,0 0 0 2px #0003}:where([data-sonner-toast][data-y-position="top"]){top:0;--y: translateY(-100%);--lift: 1;--lift-amount: calc(1 * var(--gap))}:where([data-sonner-toast][data-y-position="bottom"]){bottom:0;--y: translateY(100%);--lift: -1;--lift-amount: calc(var(--lift) * var(--gap))}:where([data-sonner-toast]) :where([data-description]){font-weight:400;line-height:1.4;color:inherit}:where([data-sonner-toast]) :where([data-title]){font-weight:500;line-height:1.5;color:inherit}:where([data-sonner-toast]) :where([data-icon]){display:flex;height:16px;width:16px;position:relative;justify-content:flex-start;align-items:center;flex-shrink:0;margin-left:var(--toast-icon-margin-start);margin-right:var(--toast-icon-margin-end)}:where([data-sonner-toast][data-promise="true"]) :where([data-icon])>svg{opacity:0;transform:scale(.8);transform-origin:center;animation:sonner-fade-in .3s ease forwards}:where([data-sonner-toast]) :where([data-icon])>*{flex-shrink:0}:where([data-sonner-toast]) :where([data-icon]) svg{margin-left:var(--toast-svg-margin-start);margin-right:var(--toast-svg-margin-end)}:where([data-sonner-toast]) :where([data-content]){display:flex;flex-direction:column;gap:2px}[data-sonner-toast][data-styled=true] [data-button]{border-radius:4px;padding-left:8px;padding-right:8px;height:24px;font-size:12px;color:var(--normal-bg);background:var(--normal-text);margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end);border:none;cursor:pointer;outline:none;display:flex;align-items:center;flex-shrink:0;transition:opacity .4s,box-shadow .2s}:where([data-sonner-toast]) :where([data-button]):focus-visible{box-shadow:0 0 0 2px #0006}:where([data-sonner-toast]) :where([data-button]):first-of-type{margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end)}:where([data-sonner-toast]) :where([data-cancel]){color:var(--normal-text);background:rgba(0,0,0,.08)}:where([data-sonner-toast][data-theme="dark"]) :where([data-cancel]){background:rgba(255,255,255,.3)}:where([data-sonner-toast]) :where([data-close-button]){position:absolute;left:var(--toast-close-button-start);right:var(--toast-close-button-end);top:0;height:20px;width:20px;display:flex;justify-content:center;align-items:center;padding:0;color:var(--gray12);border:1px solid var(--gray4);transform:var(--toast-close-button-transform);border-radius:50%;cursor:pointer;z-index:1;transition:opacity .1s,background .2s,border-color .2s}[data-sonner-toast] [data-close-button]{background:var(--gray1)}:where([data-sonner-toast]) :where([data-close-button]):focus-visible{box-shadow:0 4px 12px #0000001a,0 0 0 2px #0003}:where([data-sonner-toast]) :where([data-disabled="true"]){cursor:not-allowed}:where([data-sonner-toast]):hover :where([data-close-button]):hover{background:var(--gray2);border-color:var(--gray5)}:where([data-sonner-toast][data-swiping="true"]):before{content:"";position:absolute;left:-50%;right:-50%;height:100%;z-index:-1}:where([data-sonner-toast][data-y-position="top"][data-swiping="true"]):before{bottom:50%;transform:scaleY(3) translateY(50%)}:where([data-sonner-toast][data-y-position="bottom"][data-swiping="true"]):before{top:50%;transform:scaleY(3) translateY(-50%)}:where([data-sonner-toast][data-swiping="false"][data-removed="true"]):before{content:"";position:absolute;inset:0;transform:scaleY(2)}:where([data-sonner-toast]):after{content:"";position:absolute;left:0;height:calc(var(--gap) + 1px);bottom:100%;width:100%}:where([data-sonner-toast][data-mounted="true"]){--y: translateY(0);opacity:1}:where([data-sonner-toast][data-expanded="false"][data-front="false"]){--scale: var(--toasts-before) * .05 + 1;--y: translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));height:var(--front-toast-height)}:where([data-sonner-toast])>*{transition:opacity .4s}:where([data-sonner-toast][data-expanded="false"][data-front="false"][data-styled="true"])>*{opacity:0}:where([data-sonner-toast][data-visible="false"]){opacity:0;pointer-events:none}:where([data-sonner-toast][data-mounted="true"][data-expanded="true"]){--y: translateY(calc(var(--lift) * var(--offset)));height:var(--initial-height)}:where([data-sonner-toast][data-removed="true"][data-front="true"][data-swipe-out="false"]){--y: translateY(calc(var(--lift) * -100%));opacity:0}:where([data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="true"]){--y: translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));opacity:0}:where([data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="false"]){--y: translateY(40%);opacity:0;transition:transform .5s,opacity .2s}:where([data-sonner-toast][data-removed="true"][data-front="false"]):before{height:calc(var(--initial-height) + 20%)}[data-sonner-toast][data-swiping=true]{transform:var(--y) translateY(var(--swipe-amount-y, 0px)) translate(var(--swipe-amount-x, 0px));transition:none}[data-sonner-toast][data-swiped=true]{user-select:none}[data-sonner-toast][data-swipe-out=true][data-y-position=bottom],[data-sonner-toast][data-swipe-out=true][data-y-position=top]{animation-duration:.2s;animation-timing-function:ease-out;animation-fill-mode:forwards}[data-sonner-toast][data-swipe-out=true][data-swipe-direction=left]{animation-name:swipe-out-left}[data-sonner-toast][data-swipe-out=true][data-swipe-direction=right]{animation-name:swipe-out-right}[data-sonner-toast][data-swipe-out=true][data-swipe-direction=up]{animation-name:swipe-out-up}[data-sonner-toast][data-swipe-out=true][data-swipe-direction=down]{animation-name:swipe-out-down}@keyframes swipe-out-left{0%{transform:var(--y) translate(var(--swipe-amount-x));opacity:1}to{transform:var(--y) translate(calc(var(--swipe-amount-x) - 100%));opacity:0}}@keyframes swipe-out-right{0%{transform:var(--y) translate(var(--swipe-amount-x));opacity:1}to{transform:var(--y) translate(calc(var(--swipe-amount-x) + 100%));opacity:0}}@keyframes swipe-out-up{0%{transform:var(--y) translateY(var(--swipe-amount-y));opacity:1}to{transform:var(--y) translateY(calc(var(--swipe-amount-y) - 100%));opacity:0}}@keyframes swipe-out-down{0%{transform:var(--y) translateY(var(--swipe-amount-y));opacity:1}to{transform:var(--y) translateY(calc(var(--swipe-amount-y) + 100%));opacity:0}}@media (max-width: 600px){[data-sonner-toaster]{position:fixed;right:var(--mobile-offset-right);left:var(--mobile-offset-left);width:100%}[data-sonner-toaster][dir=rtl]{left:calc(var(--mobile-offset-left) * -1)}[data-sonner-toaster] [data-sonner-toast]{left:0;right:0;width:calc(100% - var(--mobile-offset-left) * 2)}[data-sonner-toaster][data-x-position=left]{left:var(--mobile-offset-left)}[data-sonner-toaster][data-y-position=bottom]{bottom:var(--mobile-offset-bottom)}[data-sonner-toaster][data-y-position=top]{top:var(--mobile-offset-top)}[data-sonner-toaster][data-x-position=center]{left:var(--mobile-offset-left);right:var(--mobile-offset-right);transform:none}}[data-sonner-toaster][data-theme=light]{--normal-bg: #fff;--normal-border: var(--gray4);--normal-text: var(--gray12);--success-bg: hsl(143, 85%, 96%);--success-border: hsl(145, 92%, 91%);--success-text: hsl(140, 100%, 27%);--info-bg: hsl(208, 100%, 97%);--info-border: hsl(221, 91%, 91%);--info-text: hsl(210, 92%, 45%);--warning-bg: hsl(49, 100%, 97%);--warning-border: hsl(49, 91%, 91%);--warning-text: hsl(31, 92%, 45%);--error-bg: hsl(359, 100%, 97%);--error-border: hsl(359, 100%, 94%);--error-text: hsl(360, 100%, 45%)}[data-sonner-toaster][data-theme=light] [data-sonner-toast][data-invert=true]{--normal-bg: #000;--normal-border: hsl(0, 0%, 20%);--normal-text: var(--gray1)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast][data-invert=true]{--normal-bg: #fff;--normal-border: var(--gray3);--normal-text: var(--gray12)}[data-sonner-toaster][data-theme=dark]{--normal-bg: #000;--normal-bg-hover: hsl(0, 0%, 12%);--normal-border: hsl(0, 0%, 20%);--normal-border-hover: hsl(0, 0%, 25%);--normal-text: var(--gray1);--success-bg: hsl(150, 100%, 6%);--success-border: hsl(147, 100%, 12%);--success-text: hsl(150, 86%, 65%);--info-bg: hsl(215, 100%, 6%);--info-border: hsl(223, 100%, 12%);--info-text: hsl(216, 87%, 65%);--warning-bg: hsl(64, 100%, 6%);--warning-border: hsl(60, 100%, 12%);--warning-text: hsl(46, 87%, 65%);--error-bg: hsl(358, 76%, 10%);--error-border: hsl(357, 89%, 16%);--error-text: hsl(358, 100%, 81%)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast] [data-close-button]{background:var(--normal-bg);border-color:var(--normal-border);color:var(--normal-text)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast] [data-close-button]:hover{background:var(--normal-bg-hover);border-color:var(--normal-border-hover)}[data-rich-colors=true][data-sonner-toast][data-type=success],[data-rich-colors=true][data-sonner-toast][data-type=success] [data-close-button]{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text)}[data-rich-colors=true][data-sonner-toast][data-type=info],[data-rich-colors=true][data-sonner-toast][data-type=info] [data-close-button]{background:var(--info-bg);border-color:var(--info-border);color:var(--info-text)}[data-rich-colors=true][data-sonner-toast][data-type=warning],[data-rich-colors=true][data-sonner-toast][data-type=warning] [data-close-button]{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-text)}[data-rich-colors=true][data-sonner-toast][data-type=error],[data-rich-colors=true][data-sonner-toast][data-type=error] [data-close-button]{background:var(--error-bg);border-color:var(--error-border);color:var(--error-text)}.sonner-loading-wrapper{--size: 16px;height:var(--size);width:var(--size);position:absolute;inset:0;z-index:10}.sonner-loading-wrapper[data-visible=false]{transform-origin:center;animation:sonner-fade-out .2s ease forwards}.sonner-spinner{position:relative;top:50%;left:50%;height:var(--size);width:var(--size)}.sonner-loading-bar{animation:sonner-spin 1.2s linear infinite;background:var(--gray11);border-radius:6px;height:8%;left:-10%;position:absolute;top:-3.9%;width:24%}.sonner-loading-bar:nth-child(1){animation-delay:-1.2s;transform:rotate(.0001deg) translate(146%)}.sonner-loading-bar:nth-child(2){animation-delay:-1.1s;transform:rotate(30deg) translate(146%)}.sonner-loading-bar:nth-child(3){animation-delay:-1s;transform:rotate(60deg) translate(146%)}.sonner-loading-bar:nth-child(4){animation-delay:-.9s;transform:rotate(90deg) translate(146%)}.sonner-loading-bar:nth-child(5){animation-delay:-.8s;transform:rotate(120deg) translate(146%)}.sonner-loading-bar:nth-child(6){animation-delay:-.7s;transform:rotate(150deg) translate(146%)}.sonner-loading-bar:nth-child(7){animation-delay:-.6s;transform:rotate(180deg) translate(146%)}.sonner-loading-bar:nth-child(8){animation-delay:-.5s;transform:rotate(210deg) translate(146%)}.sonner-loading-bar:nth-child(9){animation-delay:-.4s;transform:rotate(240deg) translate(146%)}.sonner-loading-bar:nth-child(10){animation-delay:-.3s;transform:rotate(270deg) translate(146%)}.sonner-loading-bar:nth-child(11){animation-delay:-.2s;transform:rotate(300deg) translate(146%)}.sonner-loading-bar:nth-child(12){animation-delay:-.1s;transform:rotate(330deg) translate(146%)}@keyframes sonner-fade-in{0%{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}@keyframes sonner-fade-out{0%{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.8)}}@keyframes sonner-spin{0%{opacity:1}to{opacity:.15}}@media (prefers-reduced-motion){[data-sonner-toast],[data-sonner-toast]>*,.sonner-loading-bar{transition:none!important;animation:none!important}}.sonner-loader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transform-origin:center;transition:opacity .2s,transform .2s}.sonner-loader[data-visible=false]{opacity:0;transform:scale(.8) translate(-50%,-50%)}
+`);
+function tt(n) {
+  return n.label !== void 0;
+}
+var pe = 3, me = "32px", ge = "16px", Wt = 4e3, he = 356, be = 14, ye = 20, we = 200;
+function M$1(...n) {
+  return n.filter(Boolean).join(" ");
+}
+function xe(n) {
+  let [e, t] = n.split("-"), a = [];
+  return e && a.push(e), t && a.push(t), a;
+}
+var ve = (n) => {
+  var Dt, Pt, Nt, Bt, Ct, kt, It, Mt, Ht, At, Lt;
+  let { invert: e, toast: t, unstyled: a, interacting: u, setHeights: f, visibleToasts: w, heights: S, index: g, toasts: i, expanded: D, removeToast: T, defaultRichColors: F, closeButton: et, style: ut, cancelButtonStyle: ft, actionButtonStyle: l, className: ot = "", descriptionClassName: at = "", duration: X2, position: st, gap: pt, loadingIcon: rt, expandByDefault: B, classNames: s, icons: P, closeButtonAriaLabel: nt = "Close toast", pauseWhenPageIsHidden: it } = n, [Y, C] = o.useState(null), [lt, J] = o.useState(null), [W, H] = o.useState(false), [A, mt] = o.useState(false), [L, z2] = o.useState(false), [ct, d] = o.useState(false), [h, y] = o.useState(false), [R, j] = o.useState(0), [p, _] = o.useState(0), O = o.useRef(t.duration || X2 || Wt), G = o.useRef(null), k = o.useRef(null), Vt = g === 0, Ut = g + 1 <= w, N = t.type, V = t.dismissible !== false, Kt = t.className || "", Xt = t.descriptionClassName || "", dt = o.useMemo(() => S.findIndex((r) => r.toastId === t.id) || 0, [S, t.id]), Jt = o.useMemo(() => {
+    var r;
+    return (r = t.closeButton) != null ? r : et;
+  }, [t.closeButton, et]), Tt = o.useMemo(() => t.duration || X2 || Wt, [t.duration, X2]), gt = o.useRef(0), U2 = o.useRef(0), St = o.useRef(0), K = o.useRef(null), [Gt, Qt] = st.split("-"), Rt = o.useMemo(() => S.reduce((r, m, c) => c >= dt ? r : r + m.height, 0), [S, dt]), Et = Ft(), qt = t.invert || e, ht = N === "loading";
+  U2.current = o.useMemo(() => dt * pt + Rt, [dt, Rt]), o.useEffect(() => {
+    O.current = Tt;
+  }, [Tt]), o.useEffect(() => {
+    H(true);
+  }, []), o.useEffect(() => {
+    let r = k.current;
+    if (r) {
+      let m = r.getBoundingClientRect().height;
+      return _(m), f((c) => [{ toastId: t.id, height: m, position: t.position }, ...c]), () => f((c) => c.filter((b) => b.toastId !== t.id));
+    }
+  }, [f, t.id]), o.useLayoutEffect(() => {
+    if (!W) return;
+    let r = k.current, m = r.style.height;
+    r.style.height = "auto";
+    let c = r.getBoundingClientRect().height;
+    r.style.height = m, _(c), f((b) => b.find((x2) => x2.toastId === t.id) ? b.map((x2) => x2.toastId === t.id ? { ...x2, height: c } : x2) : [{ toastId: t.id, height: c, position: t.position }, ...b]);
+  }, [W, t.title, t.description, f, t.id]);
+  let $ = o.useCallback(() => {
+    mt(true), j(U2.current), f((r) => r.filter((m) => m.toastId !== t.id)), setTimeout(() => {
+      T(t);
+    }, we);
+  }, [t, T, f, U2]);
+  o.useEffect(() => {
+    if (t.promise && N === "loading" || t.duration === 1 / 0 || t.type === "loading") return;
+    let r;
+    return D || u || it && Et ? (() => {
+      if (St.current < gt.current) {
+        let b = (/* @__PURE__ */ new Date()).getTime() - gt.current;
+        O.current = O.current - b;
+      }
+      St.current = (/* @__PURE__ */ new Date()).getTime();
+    })() : (() => {
+      O.current !== 1 / 0 && (gt.current = (/* @__PURE__ */ new Date()).getTime(), r = setTimeout(() => {
+        var b;
+        (b = t.onAutoClose) == null || b.call(t, t), $();
+      }, O.current));
+    })(), () => clearTimeout(r);
+  }, [D, u, t, N, it, Et, $]), o.useEffect(() => {
+    t.delete && $();
+  }, [$, t.delete]);
+  function Zt() {
+    var r, m, c;
+    return P != null && P.loading ? o.createElement("div", { className: M$1(s == null ? void 0 : s.loader, (r = t == null ? void 0 : t.classNames) == null ? void 0 : r.loader, "sonner-loader"), "data-visible": N === "loading" }, P.loading) : rt ? o.createElement("div", { className: M$1(s == null ? void 0 : s.loader, (m = t == null ? void 0 : t.classNames) == null ? void 0 : m.loader, "sonner-loader"), "data-visible": N === "loading" }, rt) : o.createElement(Yt, { className: M$1(s == null ? void 0 : s.loader, (c = t == null ? void 0 : t.classNames) == null ? void 0 : c.loader), visible: N === "loading" });
+  }
+  return o.createElement("li", { tabIndex: 0, ref: k, className: M$1(ot, Kt, s == null ? void 0 : s.toast, (Dt = t == null ? void 0 : t.classNames) == null ? void 0 : Dt.toast, s == null ? void 0 : s.default, s == null ? void 0 : s[N], (Pt = t == null ? void 0 : t.classNames) == null ? void 0 : Pt[N]), "data-sonner-toast": "", "data-rich-colors": (Nt = t.richColors) != null ? Nt : F, "data-styled": !(t.jsx || t.unstyled || a), "data-mounted": W, "data-promise": !!t.promise, "data-swiped": h, "data-removed": A, "data-visible": Ut, "data-y-position": Gt, "data-x-position": Qt, "data-index": g, "data-front": Vt, "data-swiping": L, "data-dismissible": V, "data-type": N, "data-invert": qt, "data-swipe-out": ct, "data-swipe-direction": lt, "data-expanded": !!(D || B && W), style: { "--index": g, "--toasts-before": g, "--z-index": i.length - g, "--offset": `${A ? R : U2.current}px`, "--initial-height": B ? "auto" : `${p}px`, ...ut, ...t.style }, onDragEnd: () => {
+    z2(false), C(null), K.current = null;
+  }, onPointerDown: (r) => {
+    ht || !V || (G.current = /* @__PURE__ */ new Date(), j(U2.current), r.target.setPointerCapture(r.pointerId), r.target.tagName !== "BUTTON" && (z2(true), K.current = { x: r.clientX, y: r.clientY }));
+  }, onPointerUp: () => {
+    var x2, Q, q, Z;
+    if (ct || !V) return;
+    K.current = null;
+    let r = Number(((x2 = k.current) == null ? void 0 : x2.style.getPropertyValue("--swipe-amount-x").replace("px", "")) || 0), m = Number(((Q = k.current) == null ? void 0 : Q.style.getPropertyValue("--swipe-amount-y").replace("px", "")) || 0), c = (/* @__PURE__ */ new Date()).getTime() - ((q = G.current) == null ? void 0 : q.getTime()), b = Y === "x" ? r : m, I = Math.abs(b) / c;
+    if (Math.abs(b) >= ye || I > 0.11) {
+      j(U2.current), (Z = t.onDismiss) == null || Z.call(t, t), J(Y === "x" ? r > 0 ? "right" : "left" : m > 0 ? "down" : "up"), $(), d(true), y(false);
+      return;
+    }
+    z2(false), C(null);
+  }, onPointerMove: (r) => {
+    var Q, q, Z, zt;
+    if (!K.current || !V || ((Q = window.getSelection()) == null ? void 0 : Q.toString().length) > 0) return;
+    let c = r.clientY - K.current.y, b = r.clientX - K.current.x, I = (q = n.swipeDirections) != null ? q : xe(st);
+    !Y && (Math.abs(b) > 1 || Math.abs(c) > 1) && C(Math.abs(b) > Math.abs(c) ? "x" : "y");
+    let x2 = { x: 0, y: 0 };
+    Y === "y" ? (I.includes("top") || I.includes("bottom")) && (I.includes("top") && c < 0 || I.includes("bottom") && c > 0) && (x2.y = c) : Y === "x" && (I.includes("left") || I.includes("right")) && (I.includes("left") && b < 0 || I.includes("right") && b > 0) && (x2.x = b), (Math.abs(x2.x) > 0 || Math.abs(x2.y) > 0) && y(true), (Z = k.current) == null || Z.style.setProperty("--swipe-amount-x", `${x2.x}px`), (zt = k.current) == null || zt.style.setProperty("--swipe-amount-y", `${x2.y}px`);
+  } }, Jt && !t.jsx ? o.createElement("button", { "aria-label": nt, "data-disabled": ht, "data-close-button": true, onClick: ht || !V ? () => {
+  } : () => {
+    var r;
+    $(), (r = t.onDismiss) == null || r.call(t, t);
+  }, className: M$1(s == null ? void 0 : s.closeButton, (Bt = t == null ? void 0 : t.classNames) == null ? void 0 : Bt.closeButton) }, (Ct = P == null ? void 0 : P.close) != null ? Ct : Ot) : null, t.jsx || reactExports.isValidElement(t.title) ? t.jsx ? t.jsx : typeof t.title == "function" ? t.title() : t.title : o.createElement(o.Fragment, null, N || t.icon || t.promise ? o.createElement("div", { "data-icon": "", className: M$1(s == null ? void 0 : s.icon, (kt = t == null ? void 0 : t.classNames) == null ? void 0 : kt.icon) }, t.promise || t.type === "loading" && !t.icon ? t.icon || Zt() : null, t.type !== "loading" ? t.icon || (P == null ? void 0 : P[N]) || jt(N) : null) : null, o.createElement("div", { "data-content": "", className: M$1(s == null ? void 0 : s.content, (It = t == null ? void 0 : t.classNames) == null ? void 0 : It.content) }, o.createElement("div", { "data-title": "", className: M$1(s == null ? void 0 : s.title, (Mt = t == null ? void 0 : t.classNames) == null ? void 0 : Mt.title) }, typeof t.title == "function" ? t.title() : t.title), t.description ? o.createElement("div", { "data-description": "", className: M$1(at, Xt, s == null ? void 0 : s.description, (Ht = t == null ? void 0 : t.classNames) == null ? void 0 : Ht.description) }, typeof t.description == "function" ? t.description() : t.description) : null), reactExports.isValidElement(t.cancel) ? t.cancel : t.cancel && tt(t.cancel) ? o.createElement("button", { "data-button": true, "data-cancel": true, style: t.cancelButtonStyle || ft, onClick: (r) => {
+    var m, c;
+    tt(t.cancel) && V && ((c = (m = t.cancel).onClick) == null || c.call(m, r), $());
+  }, className: M$1(s == null ? void 0 : s.cancelButton, (At = t == null ? void 0 : t.classNames) == null ? void 0 : At.cancelButton) }, t.cancel.label) : null, reactExports.isValidElement(t.action) ? t.action : t.action && tt(t.action) ? o.createElement("button", { "data-button": true, "data-action": true, style: t.actionButtonStyle || l, onClick: (r) => {
+    var m, c;
+    tt(t.action) && ((c = (m = t.action).onClick) == null || c.call(m, r), !r.defaultPrevented && $());
+  }, className: M$1(s == null ? void 0 : s.actionButton, (Lt = t == null ? void 0 : t.classNames) == null ? void 0 : Lt.actionButton) }, t.action.label) : null));
+};
+function _t() {
+  if (typeof window == "undefined" || typeof document == "undefined") return "ltr";
+  let n = document.documentElement.getAttribute("dir");
+  return n === "auto" || !n ? window.getComputedStyle(document.documentElement).direction : n;
+}
+function Te(n, e) {
+  let t = {};
+  return [n, e].forEach((a, u) => {
+    let f = u === 1, w = f ? "--mobile-offset" : "--offset", S = f ? ge : me;
+    function g(i) {
+      ["top", "right", "bottom", "left"].forEach((D) => {
+        t[`${w}-${D}`] = typeof i == "number" ? `${i}px` : i;
+      });
+    }
+    typeof a == "number" || typeof a == "string" ? g(a) : typeof a == "object" ? ["top", "right", "bottom", "left"].forEach((i) => {
+      a[i] === void 0 ? t[`${w}-${i}`] = S : t[`${w}-${i}`] = typeof a[i] == "number" ? `${a[i]}px` : a[i];
+    }) : g(S);
+  }), t;
+}
+var $e = reactExports.forwardRef(function(e, t) {
+  let { invert: a, position: u = "bottom-right", hotkey: f = ["altKey", "KeyT"], expand: w, closeButton: S, className: g, offset: i, mobileOffset: D, theme: T = "light", richColors: F, duration: et, style: ut, visibleToasts: ft = pe, toastOptions: l, dir: ot = _t(), gap: at = be, loadingIcon: X2, icons: st, containerAriaLabel: pt = "Notifications", pauseWhenPageIsHidden: rt } = e, [B, s] = o.useState([]), P = o.useMemo(() => Array.from(new Set([u].concat(B.filter((d) => d.position).map((d) => d.position)))), [B, u]), [nt, it] = o.useState([]), [Y, C] = o.useState(false), [lt, J] = o.useState(false), [W, H] = o.useState(T !== "system" ? T : typeof window != "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"), A = o.useRef(null), mt = f.join("+").replace(/Key/g, "").replace(/Digit/g, ""), L = o.useRef(null), z2 = o.useRef(false), ct = o.useCallback((d) => {
+    s((h) => {
+      var y;
+      return (y = h.find((R) => R.id === d.id)) != null && y.delete || v.dismiss(d.id), h.filter(({ id: R }) => R !== d.id);
+    });
+  }, []);
+  return o.useEffect(() => v.subscribe((d) => {
+    if (d.dismiss) {
+      s((h) => h.map((y) => y.id === d.id ? { ...y, delete: true } : y));
+      return;
+    }
+    setTimeout(() => {
+      vt.flushSync(() => {
+        s((h) => {
+          let y = h.findIndex((R) => R.id === d.id);
+          return y !== -1 ? [...h.slice(0, y), { ...h[y], ...d }, ...h.slice(y + 1)] : [d, ...h];
+        });
+      });
+    });
+  }), []), o.useEffect(() => {
+    if (T !== "system") {
+      H(T);
+      return;
+    }
+    if (T === "system" && (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? H("dark") : H("light")), typeof window == "undefined") return;
+    let d = window.matchMedia("(prefers-color-scheme: dark)");
+    try {
+      d.addEventListener("change", ({ matches: h }) => {
+        H(h ? "dark" : "light");
+      });
+    } catch (h) {
+      d.addListener(({ matches: y }) => {
+        try {
+          H(y ? "dark" : "light");
+        } catch (R) {
+          console.error(R);
+        }
+      });
+    }
+  }, [T]), o.useEffect(() => {
+    B.length <= 1 && C(false);
+  }, [B]), o.useEffect(() => {
+    let d = (h) => {
+      var R, j;
+      f.every((p) => h[p] || h.code === p) && (C(true), (R = A.current) == null || R.focus()), h.code === "Escape" && (document.activeElement === A.current || (j = A.current) != null && j.contains(document.activeElement)) && C(false);
+    };
+    return document.addEventListener("keydown", d), () => document.removeEventListener("keydown", d);
+  }, [f]), o.useEffect(() => {
+    if (A.current) return () => {
+      L.current && (L.current.focus({ preventScroll: true }), L.current = null, z2.current = false);
+    };
+  }, [A.current]), o.createElement("section", { ref: t, "aria-label": `${pt} ${mt}`, tabIndex: -1, "aria-live": "polite", "aria-relevant": "additions text", "aria-atomic": "false", suppressHydrationWarning: true }, P.map((d, h) => {
+    var j;
+    let [y, R] = d.split("-");
+    return B.length ? o.createElement("ol", { key: d, dir: ot === "auto" ? _t() : ot, tabIndex: -1, ref: A, className: g, "data-sonner-toaster": true, "data-theme": W, "data-y-position": y, "data-lifted": Y && B.length > 1 && !w, "data-x-position": R, style: { "--front-toast-height": `${((j = nt[0]) == null ? void 0 : j.height) || 0}px`, "--width": `${he}px`, "--gap": `${at}px`, ...ut, ...Te(i, D) }, onBlur: (p) => {
+      z2.current && !p.currentTarget.contains(p.relatedTarget) && (z2.current = false, L.current && (L.current.focus({ preventScroll: true }), L.current = null));
+    }, onFocus: (p) => {
+      p.target instanceof HTMLElement && p.target.dataset.dismissible === "false" || z2.current || (z2.current = true, L.current = p.relatedTarget);
+    }, onMouseEnter: () => C(true), onMouseMove: () => C(true), onMouseLeave: () => {
+      lt || C(false);
+    }, onDragEnd: () => C(false), onPointerDown: (p) => {
+      p.target instanceof HTMLElement && p.target.dataset.dismissible === "false" || J(true);
+    }, onPointerUp: () => J(false) }, B.filter((p) => !p.position && h === 0 || p.position === d).map((p, _) => {
+      var O, G;
+      return o.createElement(ve, { key: p.id, icons: st, index: _, toast: p, defaultRichColors: F, duration: (O = l == null ? void 0 : l.duration) != null ? O : et, className: l == null ? void 0 : l.className, descriptionClassName: l == null ? void 0 : l.descriptionClassName, invert: a, visibleToasts: ft, closeButton: (G = l == null ? void 0 : l.closeButton) != null ? G : S, interacting: lt, position: d, style: l == null ? void 0 : l.style, unstyled: l == null ? void 0 : l.unstyled, classNames: l == null ? void 0 : l.classNames, cancelButtonStyle: l == null ? void 0 : l.cancelButtonStyle, actionButtonStyle: l == null ? void 0 : l.actionButtonStyle, removeToast: ct, toasts: B.filter((k) => k.position == p.position), heights: nt.filter((k) => k.position == p.position), setHeights: it, expandByDefault: w, gap: at, loadingIcon: X2, expanded: Y, pauseWhenPageIsHidden: rt, swipeDirections: e.swipeDirections });
+    })) : null;
+  }));
+});
 function validateForm(fields) {
   const errors = {};
   if (fields.name.trim().length < 2) {
@@ -21274,6 +21665,7 @@ function ContactSection() {
   });
   const [errors, setErrors] = reactExports.useState({});
   const [submitted, setSubmitted] = reactExports.useState(false);
+  const [submitting, setSubmitting] = reactExports.useState(false);
   const socialLinks = [
     {
       Icon: SiInstagram,
@@ -21298,33 +21690,37 @@ function ContactSection() {
       setErrors((previous) => ({ ...previous, [field]: void 0 }));
     }
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = validateForm(fields);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    if (settings == null ? void 0 : settings.enquiryEmail) {
-      const subject = encodeURIComponent(`JPM inquiry from ${fields.name}`);
-      const body = encodeURIComponent(
-        `Name: ${fields.name}
-Email: ${fields.email}
-Phone: ${fields.phone}
-
-Message:
-${fields.message}`
-      );
-      window.location.href = `mailto:${settings.enquiryEmail}?subject=${subject}&body=${body}`;
+    setSubmitting(true);
+    try {
+      await submitWebsiteInquiry({
+        name: fields.name.trim(),
+        email: fields.email.trim(),
+        phone: fields.phone.trim(),
+        message: fields.message.trim(),
+        source: "contact_page"
+      });
+      setSubmitted(true);
+      setErrors({});
+      setFields({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+      ue.success("Thank you — we received your enquiry.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Something went wrong.";
+      ue.error(message);
+    } finally {
+      setSubmitting(false);
     }
-    setSubmitted(true);
-    setErrors({});
-    setFields({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", className: "bg-secondary py-24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-12 lg:grid-cols-[0.95fr_1.05fr]", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: leftRef, className: "reveal", children: [
@@ -21333,10 +21729,10 @@ ${fields.message}`
         {
           className: "mb-4 font-general text-sm font-semibold uppercase tracking-[0.25em]",
           style: { color: "oklch(0.65 0.12 75)" },
-          children: "Settings-Wired Contact"
+          children: "Contact"
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl font-bold text-foreground lg:text-5xl", children: "Every contact detail now comes from the backend settings" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl font-bold text-foreground lg:text-5xl", children: "All contact information is dynamically managed through the admin settings." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 max-w-xl font-general text-base leading-relaxed text-secondary-foreground", children: "Phone number, email, address, and social profiles are no longer hardcoded. Update them once in settings and the website will stay in sync." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 space-y-5", children: [
         (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -21434,7 +21830,7 @@ ${fields.message}`
         style: { border: "1px solid oklch(0.9 0.015 82)" },
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Send an inquiry" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: "This form opens a pre-filled mail draft using the settings email, so the contact flow is useful even before a dedicated inquiry API exists." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: "Submit the form and our team will reply using the contact details stored in admin settings." }),
           submitted ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-14 text-center", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "div",
@@ -21462,8 +21858,8 @@ ${fields.message}`
                 )
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "Inquiry draft opened" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-3 max-w-md font-general text-sm leading-relaxed text-muted-foreground", children: "Your message has been prepared using the current settings email. If your mail client didn't open, you can still use the contact details on the left." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "Enquiry received" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-3 max-w-md font-general text-sm leading-relaxed text-muted-foreground", children: "Thank you for reaching out. We will get back to you shortly using the details you provided." }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
@@ -21574,14 +21970,15 @@ ${fields.message}`
                   "button",
                   {
                     type: "submit",
+                    disabled: submitting,
                     "data-ocid": "contact.submit_button",
-                    className: "w-full rounded-full px-6 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5",
+                    className: "w-full rounded-full px-6 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60",
                     style: {
                       background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
                       color: "oklch(0.12 0.01 60)",
                       boxShadow: "0 18px 34px oklch(0.65 0.12 75 / 0.22)"
                     },
-                    children: "Send Inquiry"
+                    children: submitting ? "Sending…" : "Send Inquiry"
                   }
                 )
               ]
@@ -22164,12 +22561,52 @@ function getPhoneHref$2(phone) {
   const digits = phone.replace(/[^\d+]/g, "");
   return digits ? `tel:${digits}` : "";
 }
+function normalizeText(value) {
+  return (value == null ? void 0 : value.trim()) ?? "";
+}
+const FALLBACK_HIGHLIGHT_LABEL = "Curated collection";
 function HeroSection() {
-  const { data: categories = [] } = useWebsiteCategories();
-  const { data: products = [] } = useWebsiteProducts();
+  const { data: categories = [], isSuccess: categoriesReady } = useWebsiteCategories();
   const { data: settings } = useWebsiteSettings();
-  const highlightedCollections = categories.slice(0, 3);
-  const phoneHref = getPhoneHref$2((settings == null ? void 0 : settings.enquiryPhone) ?? "");
+  const { data: cmsData } = useWebsiteContent("hero");
+  const content = cmsData;
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const eyebrowText = normalizeText(content == null ? void 0 : content.eyebrowText) || "Handcrafted luxury furniture from Hisar";
+  const headlineLine1 = normalizeText(content == null ? void 0 : content.headlineLine1) || "Crafted for";
+  const headlineAccent = normalizeText(content == null ? void 0 : content.headlineAccent) || "beautiful living.";
+  const subheading = normalizeText(content == null ? void 0 : content.subheading) || "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
+  const caption = normalizeText(content == null ? void 0 : content.caption) || "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living.";
+  const primaryCtaLabel = normalizeText(content == null ? void 0 : content.primaryCtaLabel) || "Explore Collections";
+  const secondaryCtaLabel = normalizeText(content == null ? void 0 : content.secondaryCtaLabel) || "Start Custom Design";
+  const highlightsCardTitle = normalizeText(content == null ? void 0 : content.highlightsCardTitle) || "Collection Highlights";
+  const deskHeading = normalizeText(content == null ? void 0 : content.deskHeading) || "Speak with the design desk";
+  const defaultBgPath = "/assets/generated/hero-sofa.dim_1600x900.jpg";
+  const backgroundPath = normalizeText(content == null ? void 0 : content.backgroundImageUrl) || defaultBgPath;
+  const backgroundImageCss = /^https?:\/\//i.test(backgroundPath) ? backgroundPath : resolveWebsiteAssetUrl(backgroundPath, baseUrl) || backgroundPath;
+  const highlightedCollections = categories.slice(0, 8);
+  const cmsHighlights = Array.isArray(content == null ? void 0 : content.highlights) ? content == null ? void 0 : content.highlights : [];
+  const highlightRows = (() => {
+    if (!cmsHighlights.length && categoriesReady) {
+      return highlightedCollections.map((collection) => ({
+        title: collection.name,
+        subtitle: FALLBACK_HIGHLIGHT_LABEL,
+        image: collection.image
+      }));
+    }
+    return cmsHighlights.map((entry, index2) => {
+      const fallback = highlightedCollections[index2];
+      const explicitImage = normalizeText(entry == null ? void 0 : entry.imageUrl);
+      const imageUrl = (explicitImage ? resolveWebsiteAssetUrl(explicitImage, baseUrl) || explicitImage : "") || (fallback == null ? void 0 : fallback.image) || "";
+      return {
+        title: normalizeText(entry == null ? void 0 : entry.title) || (fallback == null ? void 0 : fallback.name) || `Highlight ${index2 + 1}`,
+        subtitle: normalizeText(entry == null ? void 0 : entry.subtitle) || FALLBACK_HIGHLIGHT_LABEL,
+        image: imageUrl
+      };
+    });
+  })();
+  const deskPhone = normalizeText(content == null ? void 0 : content.deskPhone) || normalizeText(settings == null ? void 0 : settings.enquiryPhone);
+  const deskEmail = normalizeText(content == null ? void 0 : content.deskEmail) || normalizeText(settings == null ? void 0 : settings.enquiryEmail);
+  const phoneHref = getPhoneHref$2(deskPhone);
   const scrollToCollection = () => {
     var _a2;
     (_a2 = document.querySelector("#collection")) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
@@ -22180,7 +22617,7 @@ function HeroSection() {
       id: "home",
       className: "relative flex min-h-screen items-center overflow-hidden",
       style: {
-        backgroundImage: `url('/assets/generated/hero-sofa.dim_1600x900.jpg')`,
+        backgroundImage: `url('${backgroundImageCss}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed"
@@ -22203,15 +22640,15 @@ function HeroSection() {
               {
                 className: "hero-label mb-6 font-general text-sm font-semibold uppercase tracking-[0.32em]",
                 style: { color: "oklch(0.78 0.12 82)" },
-                children: "Handcrafted luxury furniture from Hisar"
+                children: eyebrowText
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "hero-title font-playfair text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-8xl", children: [
-              "Crafted for",
+              headlineLine1,
               /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-[oklch(0.85_0.09_84)]", children: "beautiful living." })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-[oklch(0.85_0.09_84)]", children: headlineAccent })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub mt-6 max-w-2xl font-general text-lg leading-relaxed text-white/80 sm:text-xl", children: "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub mt-6 max-w-2xl font-general text-lg leading-relaxed text-white/80 sm:text-xl", children: subheading }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hero-cta mt-10 flex flex-wrap gap-4", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "button",
@@ -22226,7 +22663,7 @@ function HeroSection() {
                     boxShadow: "0 20px 35px oklch(0.65 0.12 75 / 0.28)"
                   },
                   children: [
-                    "Explore Collections",
+                    primaryCtaLabel,
                     /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 16 })
                   ]
                 }
@@ -22245,11 +22682,11 @@ function HeroSection() {
                     borderColor: "oklch(1 0 0 / 0.28)",
                     background: "oklch(1 0 0 / 0.08)"
                   },
-                  children: "Start Custom Design"
+                  children: secondaryCtaLabel
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 max-w-2xl text-sm font-general leading-relaxed text-white/75", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living." }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 max-w-2xl text-sm font-general leading-relaxed text-white/75", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: caption }) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden self-end lg:block", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
@@ -22265,10 +22702,10 @@ function HeroSection() {
                   {
                     className: "font-general text-xs font-semibold uppercase tracking-[0.28em]",
                     style: { color: "oklch(0.82 0.11 82)" },
-                    children: "Collection Highlights"
+                    children: highlightsCardTitle
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 space-y-4", children: highlightedCollections.length > 0 ? highlightedCollections.map((collection, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 space-y-4", children: highlightRows.length > 0 ? highlightRows.map((row, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "div",
                   {
                     className: "flex items-center gap-4 rounded-[22px] px-4 py-3",
@@ -22276,21 +22713,28 @@ function HeroSection() {
                       background: index2 === 0 ? "oklch(1 0 0 / 0.12)" : "oklch(1 0 0 / 0.06)"
                     },
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      row.image ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "img",
                         {
-                          src: collection.image,
-                          alt: collection.name,
+                          src: row.image,
+                          alt: row.title,
                           className: "h-14 w-16 rounded-2xl object-cover"
+                        }
+                      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: "h-14 w-16 shrink-0 rounded-2xl",
+                          style: { background: "oklch(1 0 0 / 0.12)" },
+                          "aria-hidden": true
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-lg font-semibold", children: collection.name }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs uppercase tracking-[0.16em] text-white/60", children: "Curated collection" })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-lg font-semibold", children: row.title }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs uppercase tracking-[0.16em] text-white/60", children: row.subtitle })
                       ] })
                     ]
                   },
-                  collection.id
+                  `${row.title}-${index2}`
                 )) : /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "div",
                   {
@@ -22299,7 +22743,7 @@ function HeroSection() {
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm leading-relaxed text-white/70", children: "Collection-led design previews will appear here as soon as the website collections load." })
                   }
                 ) }),
-                (settings == null ? void 0 : settings.enquiryPhone) || (settings == null ? void 0 : settings.enquiryEmail) ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                deskPhone || deskEmail ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "div",
                   {
                     className: "mt-6 rounded-[24px] px-5 py-4",
@@ -22308,35 +22752,16 @@ function HeroSection() {
                       border: "1px solid oklch(0.65 0.12 75 / 0.18)"
                     },
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-3 font-playfair text-xl font-semibold", children: "Speak with the design desk" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-3 font-playfair text-xl font-semibold", children: deskHeading }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 font-general text-sm text-white/78", children: [
-                        settings.enquiryPhone ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: phoneHref, className: "flex items-center gap-3", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            Phone,
-                            {
-                              size: 15,
-                              style: { color: "oklch(0.82 0.11 82)" }
-                            }
-                          ),
-                          settings.enquiryPhone
+                        deskPhone ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: phoneHref || void 0, className: "flex items-center gap-3", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { size: 15, style: { color: "oklch(0.82 0.11 82)" } }),
+                          deskPhone
                         ] }) : null,
-                        settings.enquiryEmail ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "a",
-                          {
-                            href: `mailto:${settings.enquiryEmail}`,
-                            className: "flex items-center gap-3",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                                Mail,
-                                {
-                                  size: 15,
-                                  style: { color: "oklch(0.82 0.11 82)" }
-                                }
-                              ),
-                              settings.enquiryEmail
-                            ]
-                          }
-                        ) : null
+                        deskEmail ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `mailto:${deskEmail}`, className: "flex items-center gap-3", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { size: 15, style: { color: "oklch(0.82 0.11 82)" } }),
+                          deskEmail
+                        ] }) : null
                       ] })
                     ]
                   }
@@ -22813,36 +23238,73 @@ function TestimonialsSection() {
     ) : null
   ] }) });
 }
-const features = [
+const SESSION_KEY = "jpm_pv_tracked";
+function WebsiteAnalyticsPing() {
+  reactExports.useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (sessionStorage.getItem(SESSION_KEY)) return;
+      sessionStorage.setItem(SESSION_KEY, "1");
+    } catch {
+      return;
+    }
+    void trackWebsitePageView(window.location.pathname || "/");
+  }, []);
+  return null;
+}
+const ICON_MAP = {
+  gem: Gem,
+  award: Award,
+  pen: PenTool,
+  heart: Heart,
+  sparkles: Sparkles
+};
+const DEFAULT_FEATURES = [
   {
-    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Gem, { size: 24 }),
+    iconKey: "gem",
     title: "Premium Materials",
     desc: "We source only the finest fabrics, leathers, and structural materials from trusted suppliers worldwide."
   },
   {
-    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { size: 24 }),
+    iconKey: "award",
     title: "Expert Craftsmanship",
     desc: "Our artisans bring decades of experience to every seam, stitch, and joint in your furniture."
   },
   {
-    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(PenTool, { size: 24 }),
+    iconKey: "pen",
     title: "Custom Designs",
     desc: "No two homes are alike. We create fully bespoke pieces tailored to your exact specification."
   },
   {
-    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Heart, { size: 24 }),
+    iconKey: "heart",
     title: "Long Lasting Comfort",
     desc: "Engineered for durability with high-density foam and hardwood frames built to last decades."
   },
   {
-    icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 24 }),
+    iconKey: "sparkles",
     title: "Elegant Modern Styles",
     desc: "Timeless aesthetics that complement contemporary interiors with understated sophistication."
   }
 ];
 function WhyChooseSection() {
+  var _a2, _b2, _c2;
+  const { data: cmsData } = useWebsiteContent("why_choose_us");
   const headerRef = useScrollReveal();
   const gridRef = reactExports.useRef(null);
+  const content = cmsData;
+  const overline = ((_a2 = content == null ? void 0 : content.overline) == null ? void 0 : _a2.trim()) || "The JPM Difference";
+  const heading = ((_b2 = content == null ? void 0 : content.heading) == null ? void 0 : _b2.trim()) || "Why Choose JPM Enterprises";
+  const description = ((_c2 = content == null ? void 0 : content.description) == null ? void 0 : _c2.trim()) || "Two decades of passionate craftsmanship have earned us the trust of homeowners, architects, and interior designers across India.";
+  const itemsRaw = Array.isArray(content == null ? void 0 : content.items) ? content == null ? void 0 : content.items : null;
+  const items = (itemsRaw && itemsRaw.length > 0 ? itemsRaw.map((entry, index2) => {
+    var _a3, _b3, _c3, _d2;
+    const fallback = DEFAULT_FEATURES[index2] ?? DEFAULT_FEATURES[0];
+    return {
+      iconKey: ((_b3 = (_a3 = entry == null ? void 0 : entry.iconKey) == null ? void 0 : _a3.trim()) == null ? void 0 : _b3.toLowerCase()) || fallback.iconKey,
+      title: ((_c3 = entry == null ? void 0 : entry.title) == null ? void 0 : _c3.trim()) || fallback.title,
+      desc: ((_d2 = entry == null ? void 0 : entry.description) == null ? void 0 : _d2.trim()) || fallback.desc
+    };
+  }) : DEFAULT_FEATURES).slice(0, 12);
   reactExports.useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -22860,7 +23322,7 @@ function WhyChooseSection() {
     );
     for (const card of cards) observer.observe(card);
     return () => observer.disconnect();
-  }, []);
+  }, [items]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "why-us", className: "py-24 bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto px-6 lg:px-8", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: headerRef, className: "reveal text-center mb-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -22868,57 +23330,60 @@ function WhyChooseSection() {
         {
           className: "font-general text-sm font-semibold tracking-[0.25em] uppercase mb-3",
           style: { color: "oklch(0.65 0.12 75)" },
-          children: "The JPM Difference"
+          children: overline
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl lg:text-5xl font-bold text-foreground mb-4", children: "Why Choose JPM Enterprises" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-muted-foreground max-w-lg mx-auto leading-relaxed", children: "Two decades of passionate craftsmanship have earned us the trust of homeowners, architects, and interior designers across India." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl lg:text-5xl font-bold text-foreground mb-4", children: heading }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-muted-foreground max-w-lg mx-auto leading-relaxed", children: description })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
       {
         ref: gridRef,
         className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
-        children: features.map((feature, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            className: "feature-card group bg-card p-8 rounded-sm cursor-default",
-            style: {
-              opacity: 0,
-              transform: "translateY(30px)",
-              transition: `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s, box-shadow 0.3s ease`,
-              border: "1px solid oklch(0.87 0.02 80)"
+        children: items.map((feature, i) => {
+          const IconComponent = ICON_MAP[feature.iconKey] ?? Sparkles;
+          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "feature-card group bg-card p-8 rounded-sm cursor-default",
+              style: {
+                opacity: 0,
+                transform: "translateY(30px)",
+                transition: `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s, box-shadow 0.3s ease`,
+                border: "1px solid oklch(0.87 0.02 80)"
+              },
+              onMouseEnter: (e) => {
+                e.currentTarget.style.boxShadow = "0 8px 40px oklch(0.65 0.12 75 / 0.18)";
+                e.currentTarget.style.transform = "translateY(-6px)";
+              },
+              onMouseLeave: (e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.transform = "translateY(0)";
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-12 h-12 rounded-full flex items-center justify-center mb-5",
+                    style: { background: "oklch(0.65 0.12 75 / 0.15)" },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(0.55 0.14 65)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(IconComponent, { size: 24 }) })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-xl font-semibold text-foreground mb-3", children: feature.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground leading-relaxed", children: feature.desc }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "mt-5 h-px transition-all duration-300 group-hover:opacity-100 opacity-0",
+                    style: { background: "oklch(0.65 0.12 75)" }
+                  }
+                )
+              ]
             },
-            onMouseEnter: (e) => {
-              e.currentTarget.style.boxShadow = "0 8px 40px oklch(0.65 0.12 75 / 0.18)";
-              e.currentTarget.style.transform = "translateY(-6px)";
-            },
-            onMouseLeave: (e) => {
-              e.currentTarget.style.boxShadow = "none";
-              e.currentTarget.style.transform = "translateY(0)";
-            },
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: "w-12 h-12 rounded-full flex items-center justify-center mb-5",
-                  style: { background: "oklch(0.65 0.12 75 / 0.15)" },
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(0.55 0.14 65)" }, children: feature.icon })
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-xl font-semibold text-foreground mb-3", children: feature.title }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground leading-relaxed", children: feature.desc }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: "mt-5 h-px transition-all duration-300 group-hover:opacity-100 opacity-0",
-                  style: { background: "oklch(0.65 0.12 75)" }
-                }
-              )
-            ]
-          },
-          feature.title
-        ))
+            `${feature.title}-${i}`
+          );
+        })
       }
     )
   ] }) });
@@ -23177,6 +23642,20 @@ function summaryLine(style2, fabric, tone) {
 function formatCentimeters(value) {
   return `${value}cm`;
 }
+function buildCustomDesignMessage(params) {
+  const lines = [
+    "Custom sofa enquiry — configuration summary",
+    "",
+    `Style: ${params.style}`,
+    `Fabric: ${params.fabric}`,
+    `Color: ${params.tone}`,
+    `Size: ${formatCentimeters(params.width)} x ${formatCentimeters(params.depth)}`
+  ];
+  if (params.notes.trim()) {
+    lines.push("", "Notes:", params.notes.trim());
+  }
+  return lines.join("\n");
+}
 function SofaConfigurator() {
   const [currentStep, setCurrentStep] = reactExports.useState(0);
   const [isComplete, setIsComplete] = reactExports.useState(false);
@@ -23188,14 +23667,46 @@ function SofaConfigurator() {
   const [notes, setNotes] = reactExports.useState("");
   const [name, setName] = reactExports.useState("");
   const [phone, setPhone] = reactExports.useState("");
+  const [submitting, setSubmitting] = reactExports.useState(false);
   const selectedStyle = styleOptions.find((option) => option.value === style2);
   const progressWidth = `${(currentStep + 1) / stepCount * 100}%`;
   const phoneDigits = phone.replace(/\D/g, "");
   const canSubmit = name.trim().length >= 2 && phoneDigits.length >= 10;
-  const goNext = () => {
+  const goNext = async () => {
     if (currentStep === stepCount - 1) {
-      if (!canSubmit) return;
-      setIsComplete(true);
+      if (!canSubmit || submitting) return;
+      setSubmitting(true);
+      try {
+        await submitWebsiteInquiry({
+          name: name.trim(),
+          email: "",
+          phone: phone.trim(),
+          message: buildCustomDesignMessage({
+            style: style2,
+            fabric,
+            tone,
+            width,
+            depth,
+            notes
+          }),
+          source: "custom_design",
+          meta: {
+            style: style2,
+            fabric,
+            tone,
+            widthCm: width,
+            depthCm: depth,
+            notes: notes.trim() || void 0
+          }
+        });
+        ue.success("Request received — we will reach out shortly.");
+        setIsComplete(true);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Could not submit your request.";
+        ue.error(message);
+      } finally {
+        setSubmitting(false);
+      }
       return;
     }
     setCurrentStep((step) => Math.min(step + 1, stepCount - 1));
@@ -23206,6 +23717,7 @@ function SofaConfigurator() {
   const resetWizard = () => {
     setCurrentStep(0);
     setIsComplete(false);
+    setSubmitting(false);
     setStyle("L-Shape");
     setFabric("Microfiber");
     setTone("Warm White");
@@ -23742,16 +24254,16 @@ function SofaConfigurator() {
                   "button",
                   {
                     type: "button",
-                    onClick: goNext,
-                    disabled: currentStep === stepCount - 1 && !canSubmit,
-                    className: "inline-flex items-center gap-2 rounded-[14px] px-8 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200 hover:-translate-y-0.5",
+                    onClick: () => void goNext(),
+                    disabled: currentStep === stepCount - 1 && !canSubmit || submitting,
+                    className: "inline-flex items-center gap-2 rounded-[14px] px-8 py-4 font-general text-sm font-semibold tracking-[0.16em] uppercase transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60",
                     style: {
                       background: currentStep === stepCount - 1 && !canSubmit ? "oklch(0.84 0.02 82)" : gold,
                       color: currentStep === stepCount - 1 && !canSubmit ? "oklch(0.55 0.02 70)" : "oklch(0.12 0.01 60)",
                       boxShadow: currentStep === stepCount - 1 && !canSubmit ? "none" : "0 12px 24px oklch(0.65 0.12 75 / 0.22)"
                     },
                     children: [
-                      currentStep === stepCount - 1 ? "Build My Sofa ✦" : "Next",
+                      currentStep === stepCount - 1 ? submitting ? "Sending…" : "Build My Sofa ✦" : "Next",
                       /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 16 })
                     ]
                   }
@@ -23903,6 +24415,52 @@ function CustomDesignPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
+var M = (e, i, s, u, m, a, l, h) => {
+  let d = document.documentElement, w = ["light", "dark"];
+  function p(n) {
+    (Array.isArray(e) ? e : [e]).forEach((y) => {
+      let k = y === "class", S = k && a ? m.map((f) => a[f] || f) : m;
+      k ? (d.classList.remove(...S), d.classList.add(a && a[n] ? a[n] : n)) : d.setAttribute(y, n);
+    }), R(n);
+  }
+  function R(n) {
+    h && w.includes(n) && (d.style.colorScheme = n);
+  }
+  function c() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  if (u) p(u);
+  else try {
+    let n = localStorage.getItem(i) || s, y = l && n === "system" ? c() : n;
+    p(y);
+  } catch (n) {
+  }
+};
+var x = reactExports.createContext(void 0), U = { setTheme: (e) => {
+}, themes: [] }, z = () => {
+  var e;
+  return (e = reactExports.useContext(x)) != null ? e : U;
+};
+reactExports.memo(({ forcedTheme: e, storageKey: i, attribute: s, enableSystem: u, enableColorScheme: m, defaultTheme: a, value: l, themes: h, nonce: d, scriptProps: w }) => {
+  let p = JSON.stringify([s, i, a, e, h, l, u, m]).slice(1, -1);
+  return reactExports.createElement("script", { ...w, suppressHydrationWarning: true, nonce: typeof window == "undefined" ? d : "", dangerouslySetInnerHTML: { __html: `(${M.toString()})(${p})` } });
+});
+const Toaster = ({ ...props }) => {
+  const { theme = "system" } = z();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    $e,
+    {
+      theme,
+      className: "toaster group",
+      style: {
+        "--normal-bg": "var(--popover)",
+        "--normal-text": "var(--popover-foreground)",
+        "--normal-border": "var(--border)"
+      },
+      ...props
+    }
+  );
+};
 const DETAIL_SKELETON_KEYS = [
   "detail-skeleton-a",
   "detail-skeleton-b",
@@ -24485,7 +25043,15 @@ function HomePage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-const rootRoute = createRootRoute();
+function AppRootLayout() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(WebsiteAnalyticsPing, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {})
+  ] });
+}
+const rootRoute = createRootRoute({
+  component: AppRootLayout
+});
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
@@ -24514,7 +25080,10 @@ const routeTree = rootRoute.addChildren([
 ]);
 const router = createRouter({ routeTree });
 function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, { router });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, { router }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, { richColors: true, position: "top-center" })
+  ] });
 }
 const alphabet = "abcdefghijklmnopqrstuvwxyz234567";
 const lookupTable = /* @__PURE__ */ Object.create(null);
@@ -24552,7 +25121,7 @@ function base32Decode(input) {
   let skip = 0;
   let byte = 0;
   const output = new Uint8Array(input.length * 4 / 3 | 0);
-  let o = 0;
+  let o2 = 0;
   function decodeChar(char) {
     let val = lookupTable[char.toLowerCase()];
     if (val === void 0) {
@@ -24562,7 +25131,7 @@ function base32Decode(input) {
     byte |= val >>> skip;
     skip += 5;
     if (skip >= 8) {
-      output[o++] = byte;
+      output[o2++] = byte;
       skip -= 8;
       if (skip > 0) {
         byte = val << 5 - skip & 255;
@@ -24574,7 +25143,7 @@ function base32Decode(input) {
   for (const c of input) {
     decodeChar(c);
   }
-  return output.slice(0, o);
+  return output.slice(0, o2);
 }
 const lookUpTable = new Uint32Array([
   0,
@@ -25121,17 +25690,17 @@ const SHA512_IV = /* @__PURE__ */ Uint32Array.from([
 ]);
 const U32_MASK64 = /* @__PURE__ */ BigInt(2 ** 32 - 1);
 const _32n = /* @__PURE__ */ BigInt(32);
-function fromBig(n, le = false) {
-  if (le)
+function fromBig(n, le2 = false) {
+  if (le2)
     return { h: Number(n & U32_MASK64), l: Number(n >> _32n & U32_MASK64) };
   return { h: Number(n >> _32n & U32_MASK64) | 0, l: Number(n & U32_MASK64) | 0 };
 }
-function split(lst, le = false) {
+function split(lst, le2 = false) {
   const len = lst.length;
   let Ah = new Uint32Array(len);
   let Al = new Uint32Array(len);
   for (let i = 0; i < len; i++) {
-    const { h, l } = fromBig(lst[i], le);
+    const { h, l } = fromBig(lst[i], le2);
     [Ah[i], Al[i]] = [h, l];
   }
   return [Ah, Al];
@@ -25857,10 +26426,10 @@ class PipeArrayBuffer {
       throw new Error("Amount must be a positive integer");
     }
     const b = new Uint8Array((this._buffer.byteLength + amount) * 1.2 | 0);
-    const v = new Uint8Array(b.buffer, 0, this._view.byteLength + amount);
-    v.set(this._view);
+    const v2 = new Uint8Array(b.buffer, 0, this._view.byteLength + amount);
+    v2.set(this._view);
     this._buffer = b;
-    this._view = v;
+    this._view = v2;
   }
 }
 function uint8FromBufLike$1(bufLike) {
@@ -26099,7 +26668,7 @@ var IDLTypeIds;
 })(IDLTypeIds || (IDLTypeIds = {}));
 const toReadableString_max = 400;
 function zipWith(xs, ys, f) {
-  return xs.map((x, i) => f(x, ys[i]));
+  return xs.map((x2, i) => f(x2, ys[i]));
 }
 var IdlTypeName;
 (function(IdlTypeName2) {
@@ -26129,8 +26698,8 @@ class Type {
   display() {
     return this.name;
   }
-  valueToString(x) {
-    return toReadableString(x);
+  valueToString(x2) {
+    return toReadableString(x2);
   }
   /* Implement `T` in the IDL spec, only needed for non-primitive types */
   buildTypeTable(typeTable) {
@@ -26172,11 +26741,11 @@ class EmptyClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.EmptyClass;
   }
-  accept(v, d) {
-    return v.visitEmpty(this, d);
+  accept(v2, d) {
+    return v2.visitEmpty(this, d);
   }
-  covariant(x) {
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+  covariant(x2) {
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue() {
     throw new Error("Empty cannot appear as a function argument");
@@ -26201,16 +26770,16 @@ class BoolClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.BoolClass;
   }
-  accept(v, d) {
-    return v.visitBool(this, d);
+  accept(v2, d) {
+    return v2.visitBool(this, d);
   }
-  covariant(x) {
-    if (typeof x === "boolean")
+  covariant(x2) {
+    if (typeof x2 === "boolean")
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    return new Uint8Array([x ? 1 : 0]);
+  encodeValue(x2) {
+    return new Uint8Array([x2 ? 1 : 0]);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Bool);
@@ -26237,13 +26806,13 @@ class NullClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.NullClass;
   }
-  accept(v, d) {
-    return v.visitNull(this, d);
+  accept(v2, d) {
+    return v2.visitNull(this, d);
   }
-  covariant(x) {
-    if (x === null)
+  covariant(x2) {
+    if (x2 === null)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue() {
     return new Uint8Array(0);
@@ -26266,8 +26835,8 @@ class ReservedClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.ReservedClass;
   }
-  accept(v, d) {
-    return v.visitReserved(this, d);
+  accept(v2, d) {
+    return v2.visitReserved(this, d);
   }
   covariant(_x) {
     return true;
@@ -26295,16 +26864,16 @@ class IntClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.IntClass;
   }
-  accept(v, d) {
-    return v.visitInt(this, d);
+  accept(v2, d) {
+    return v2.visitInt(this, d);
   }
-  covariant(x) {
-    if (typeof x === "bigint" || Number.isInteger(x))
+  covariant(x2) {
+    if (typeof x2 === "bigint" || Number.isInteger(x2))
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    return slebEncode(x);
+  encodeValue(x2) {
+    return slebEncode(x2);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Int);
@@ -26316,8 +26885,8 @@ class IntClass extends PrimitiveType {
   get name() {
     return "int";
   }
-  valueToString(x) {
-    return x.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class NatClass extends PrimitiveType {
@@ -26327,16 +26896,16 @@ class NatClass extends PrimitiveType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.NatClass;
   }
-  accept(v, d) {
-    return v.visitNat(this, d);
+  accept(v2, d) {
+    return v2.visitNat(this, d);
   }
-  covariant(x) {
-    if (typeof x === "bigint" && x >= BigInt(0) || Number.isInteger(x) && x >= 0)
+  covariant(x2) {
+    if (typeof x2 === "bigint" && x2 >= BigInt(0) || Number.isInteger(x2) && x2 >= 0)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    return lebEncode(x);
+  encodeValue(x2) {
+    return lebEncode(x2);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Nat);
@@ -26348,8 +26917,8 @@ class NatClass extends PrimitiveType {
   get name() {
     return "nat";
   }
-  valueToString(x) {
-    return x.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FloatClass extends PrimitiveType {
@@ -26366,21 +26935,21 @@ class FloatClass extends PrimitiveType {
       throw new Error("not a valid float type");
     }
   }
-  accept(v, d) {
-    return v.visitFloat(this, d);
+  accept(v2, d) {
+    return v2.visitFloat(this, d);
   }
-  covariant(x) {
-    if (typeof x === "number" || x instanceof Number)
+  covariant(x2) {
+    if (typeof x2 === "number" || x2 instanceof Number)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
+  encodeValue(x2) {
     const buf = new ArrayBuffer(this._bits / 8);
     const view = new DataView(buf);
     if (this._bits === 32) {
-      view.setFloat32(0, x, true);
+      view.setFloat32(0, x2, true);
     } else {
-      view.setFloat64(0, x, true);
+      view.setFloat64(0, x2, true);
     }
     return new Uint8Array(buf);
   }
@@ -26401,8 +26970,8 @@ class FloatClass extends PrimitiveType {
   get name() {
     return "float" + this._bits;
   }
-  valueToString(x) {
-    return x.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FixedIntClass extends PrimitiveType {
@@ -26416,27 +26985,27 @@ class FixedIntClass extends PrimitiveType {
     super();
     this._bits = _bits;
   }
-  accept(v, d) {
-    return v.visitFixedInt(this, d);
+  accept(v2, d) {
+    return v2.visitFixedInt(this, d);
   }
-  covariant(x) {
+  covariant(x2) {
     const min = iexp2(this._bits - 1) * BigInt(-1);
     const max = iexp2(this._bits - 1) - BigInt(1);
     let ok = false;
-    if (typeof x === "bigint") {
-      ok = x >= min && x <= max;
-    } else if (Number.isInteger(x)) {
-      const v = BigInt(x);
-      ok = v >= min && v <= max;
+    if (typeof x2 === "bigint") {
+      ok = x2 >= min && x2 <= max;
+    } else if (Number.isInteger(x2)) {
+      const v2 = BigInt(x2);
+      ok = v2 >= min && v2 <= max;
     } else {
       ok = false;
     }
     if (ok)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    return writeIntLE(x, this._bits / 8);
+  encodeValue(x2) {
+    return writeIntLE(x2, this._bits / 8);
   }
   encodeType() {
     const offset = Math.log2(this._bits) - 3;
@@ -26454,8 +27023,8 @@ class FixedIntClass extends PrimitiveType {
   get name() {
     return `int${this._bits}`;
   }
-  valueToString(x) {
-    return x.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FixedNatClass extends PrimitiveType {
@@ -26469,26 +27038,26 @@ class FixedNatClass extends PrimitiveType {
     super();
     this._bits = _bits;
   }
-  accept(v, d) {
-    return v.visitFixedNat(this, d);
+  accept(v2, d) {
+    return v2.visitFixedNat(this, d);
   }
-  covariant(x) {
+  covariant(x2) {
     const max = iexp2(this._bits);
     let ok = false;
-    if (typeof x === "bigint" && x >= BigInt(0)) {
-      ok = x < max;
-    } else if (Number.isInteger(x) && x >= 0) {
-      const v = BigInt(x);
-      ok = v < max;
+    if (typeof x2 === "bigint" && x2 >= BigInt(0)) {
+      ok = x2 < max;
+    } else if (Number.isInteger(x2) && x2 >= 0) {
+      const v2 = BigInt(x2);
+      ok = v2 < max;
     } else {
       ok = false;
     }
     if (ok)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    return writeUIntLE(x, this._bits / 8);
+  encodeValue(x2) {
+    return writeUIntLE(x2, this._bits / 8);
   }
   encodeType() {
     const offset = Math.log2(this._bits) - 3;
@@ -26506,8 +27075,8 @@ class FixedNatClass extends PrimitiveType {
   get name() {
     return `nat${this._bits}`;
   }
-  valueToString(x) {
-    return x.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class VecClass extends ConstructType {
@@ -26525,14 +27094,14 @@ class VecClass extends ConstructType {
       this._blobOptimization = true;
     }
   }
-  accept(v, d) {
-    return v.visitVec(this, this._type, d);
+  accept(v2, d) {
+    return v2.visitVec(this, this._type, d);
   }
-  covariant(x) {
+  covariant(x2) {
     const bits = this._type instanceof FixedNatClass ? this._type._bits : this._type instanceof FixedIntClass ? this._type._bits : 0;
-    if (ArrayBuffer.isView(x) && bits == x.BYTES_PER_ELEMENT * 8 || Array.isArray(x) && x.every((v, idx) => {
+    if (ArrayBuffer.isView(x2) && bits == x2.BYTES_PER_ELEMENT * 8 || Array.isArray(x2) && x2.every((v2, idx) => {
       try {
-        return this._type.covariant(v);
+        return this._type.covariant(v2);
       } catch (e) {
         throw new Error(`Invalid ${this.display()} argument: 
 
@@ -26540,51 +27109,51 @@ index ${idx} -> ${e.message}`);
       }
     }))
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    const len = lebEncode(x.length);
+  encodeValue(x2) {
+    const len = lebEncode(x2.length);
     if (this._blobOptimization) {
-      return concat(len, new Uint8Array(x));
+      return concat(len, new Uint8Array(x2));
     }
-    if (ArrayBuffer.isView(x)) {
-      if (x instanceof Int16Array || x instanceof Uint16Array) {
-        const buffer = new DataView(new ArrayBuffer(x.length * 2));
-        for (let i = 0; i < x.length; i++) {
-          if (x instanceof Int16Array) {
-            buffer.setInt16(i * 2, x[i], true);
+    if (ArrayBuffer.isView(x2)) {
+      if (x2 instanceof Int16Array || x2 instanceof Uint16Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 2));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof Int16Array) {
+            buffer.setInt16(i * 2, x2[i], true);
           } else {
-            buffer.setUint16(i * 2, x[i], true);
+            buffer.setUint16(i * 2, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
-      } else if (x instanceof Int32Array || x instanceof Uint32Array) {
-        const buffer = new DataView(new ArrayBuffer(x.length * 4));
-        for (let i = 0; i < x.length; i++) {
-          if (x instanceof Int32Array) {
-            buffer.setInt32(i * 4, x[i], true);
+      } else if (x2 instanceof Int32Array || x2 instanceof Uint32Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 4));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof Int32Array) {
+            buffer.setInt32(i * 4, x2[i], true);
           } else {
-            buffer.setUint32(i * 4, x[i], true);
+            buffer.setUint32(i * 4, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
-      } else if (x instanceof BigInt64Array || x instanceof BigUint64Array) {
-        const buffer = new DataView(new ArrayBuffer(x.length * 8));
-        for (let i = 0; i < x.length; i++) {
-          if (x instanceof BigInt64Array) {
-            buffer.setBigInt64(i * 8, x[i], true);
+      } else if (x2 instanceof BigInt64Array || x2 instanceof BigUint64Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 8));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof BigInt64Array) {
+            buffer.setBigInt64(i * 8, x2[i], true);
           } else {
-            buffer.setBigUint64(i * 8, x[i], true);
+            buffer.setBigUint64(i * 8, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
       } else {
-        return concat(len, new Uint8Array(x.buffer, x.byteOffset, x.byteLength));
+        return concat(len, new Uint8Array(x2.buffer, x2.byteOffset, x2.byteLength));
       }
     }
-    const buf = new PipeArrayBuffer(new Uint8Array(len.byteLength + x.length), 0);
+    const buf = new PipeArrayBuffer(new Uint8Array(len.byteLength + x2.length), 0);
     buf.write(len);
-    for (const d of x) {
+    for (const d of x2) {
       const encoded = this._type.encodeValue(d);
       buf.write(new Uint8Array(encoded));
     }
@@ -26664,8 +27233,8 @@ index ${idx} -> ${e.message}`);
   display() {
     return `vec ${this._type.display()}`;
   }
-  valueToString(x) {
-    const elements = x.map((e) => this._type.valueToString(e));
+  valueToString(x2) {
+    const elements = x2.map((e) => this._type.valueToString(e));
     return "vec {" + elements.join("; ") + "}";
   }
 }
@@ -26680,25 +27249,25 @@ class OptClass extends ConstructType {
     super();
     this._type = _type;
   }
-  accept(v, d) {
-    return v.visitOpt(this, this._type, d);
+  accept(v2, d) {
+    return v2.visitOpt(this, this._type, d);
   }
-  covariant(x) {
+  covariant(x2) {
     try {
-      if (Array.isArray(x) && (x.length === 0 || x.length === 1 && this._type.covariant(x[0])))
+      if (Array.isArray(x2) && (x2.length === 0 || x2.length === 1 && this._type.covariant(x2[0])))
         return true;
     } catch (e) {
-      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)} 
+      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)} 
 
 -> ${e.message}`);
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    if (x.length === 0) {
+  encodeValue(x2) {
+    if (x2.length === 0) {
       return new Uint8Array([0]);
     } else {
-      return concat(new Uint8Array([1]), this._type.encodeValue(x[0]));
+      return concat(new Uint8Array([1]), this._type.encodeValue(x2[0]));
     }
   }
   _buildTypeTableImpl(typeTable) {
@@ -26729,8 +27298,8 @@ class OptClass extends ConstructType {
         case 1: {
           const checkpoint = b.save();
           try {
-            const v = this._type.decodeValue(b, wireType._type);
-            return [v];
+            const v2 = this._type.decodeValue(b, wireType._type);
+            return [v2];
           } catch (e) {
             b.restore(checkpoint);
             wireType._type.decodeValue(b, wireType._type);
@@ -26749,8 +27318,8 @@ class OptClass extends ConstructType {
     } else {
       const checkpoint = b.save();
       try {
-        const v = this._type.decodeValue(b, t);
-        return [v];
+        const v2 = this._type.decodeValue(b, t);
+        return [v2];
       } catch (e) {
         b.restore(checkpoint);
         wireType.decodeValue(b, t);
@@ -26764,11 +27333,11 @@ class OptClass extends ConstructType {
   display() {
     return `opt ${this._type.display()}`;
   }
-  valueToString(x) {
-    if (x.length === 0) {
+  valueToString(x2) {
+    if (x2.length === 0) {
       return "null";
     } else {
-      return `opt ${this._type.valueToString(x[0])}`;
+      return `opt ${this._type.valueToString(x2[0])}`;
     }
   }
 }
@@ -26783,8 +27352,8 @@ class RecordClass extends ConstructType {
     super();
     this._fields = Object.entries(fields).sort((a, b) => idlLabelToId(a[0]) - idlLabelToId(b[0]));
   }
-  accept(v, d) {
-    return v.visitRecord(this, this._fields, d);
+  accept(v2, d) {
+    return v2.visitRecord(this, this._fields, d);
   }
   tryAsTuple() {
     const res = [];
@@ -26797,13 +27366,13 @@ class RecordClass extends ConstructType {
     }
     return res;
   }
-  covariant(x) {
-    if (typeof x === "object" && this._fields.every(([k, t]) => {
-      if (!x.hasOwnProperty(k)) {
+  covariant(x2) {
+    if (typeof x2 === "object" && this._fields.every(([k, t]) => {
+      if (!x2.hasOwnProperty(k)) {
         throw new Error(`Record is missing key "${k}".`);
       }
       try {
-        return t.covariant(x[k]);
+        return t.covariant(x2[k]);
       } catch (e) {
         throw new Error(`Invalid ${this.display()} argument: 
 
@@ -26811,10 +27380,10 @@ field ${k} -> ${e.message}`);
       }
     }))
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    const values = this._fields.map(([key]) => x[key]);
+  encodeValue(x2) {
+    const values = this._fields.map(([key]) => x2[key]);
     const bufs = zipWith(this._fields, values, ([, c], d) => c.encodeValue(d));
     return concat(...bufs);
   }
@@ -26830,7 +27399,7 @@ field ${k} -> ${e.message}`);
     if (!(record instanceof RecordClass)) {
       throw new Error("Not a record type");
     }
-    const x = {};
+    const x2 = {};
     let expectedRecordIdx = 0;
     let actualRecordIdx = 0;
     while (actualRecordIdx < record._fields.length) {
@@ -26844,12 +27413,12 @@ field ${k} -> ${e.message}`);
       const expectedId = idlLabelToId(this._fields[expectedRecordIdx][0]);
       const actualId = idlLabelToId(hash);
       if (expectedId === actualId) {
-        x[expectKey] = expectType.decodeValue(b, type);
+        x2[expectKey] = expectType.decodeValue(b, type);
         expectedRecordIdx++;
         actualRecordIdx++;
       } else if (actualId > expectedId) {
         if (expectType instanceof OptClass || expectType instanceof ReservedClass) {
-          x[expectKey] = [];
+          x2[expectKey] = [];
           expectedRecordIdx++;
         } else {
           throw new Error("Cannot find required field " + expectKey);
@@ -26861,12 +27430,12 @@ field ${k} -> ${e.message}`);
     }
     for (const [expectKey, expectType] of this._fields.slice(expectedRecordIdx)) {
       if (expectType instanceof OptClass || expectType instanceof ReservedClass) {
-        x[expectKey] = [];
+        x2[expectKey] = [];
       } else {
         throw new Error("Cannot find required field " + expectKey);
       }
     }
-    return x;
+    return x2;
   }
   get fieldsAsObject() {
     const fields = {};
@@ -26883,8 +27452,8 @@ field ${k} -> ${e.message}`);
     const fields = this._fields.map(([key, value]) => key + ":" + value.display());
     return `record {${fields.join("; ")}}`;
   }
-  valueToString(x) {
-    const values = this._fields.map(([key]) => x[key]);
+  valueToString(x2) {
+    const values = this._fields.map(([key]) => x2[key]);
     const fields = zipWith(this._fields, values, ([k, c], d) => k + "=" + c.valueToString(d));
     return `record {${fields.join("; ")}}`;
   }
@@ -26900,13 +27469,13 @@ class VariantClass extends ConstructType {
     super();
     this._fields = Object.entries(fields).sort((a, b) => idlLabelToId(a[0]) - idlLabelToId(b[0]));
   }
-  accept(v, d) {
-    return v.visitVariant(this, this._fields, d);
+  accept(v2, d) {
+    return v2.visitVariant(this, this._fields, d);
   }
-  covariant(x) {
-    if (typeof x === "object" && Object.entries(x).length === 1 && this._fields.every(([k, v]) => {
+  covariant(x2) {
+    if (typeof x2 === "object" && Object.entries(x2).length === 1 && this._fields.every(([k, v2]) => {
       try {
-        return !x.hasOwnProperty(k) || v.covariant(x[k]);
+        return !x2.hasOwnProperty(k) || v2.covariant(x2[k]);
       } catch (e) {
         throw new Error(`Invalid ${this.display()} argument: 
 
@@ -26914,18 +27483,18 @@ variant ${k} -> ${e.message}`);
       }
     }))
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
+  encodeValue(x2) {
     for (let i = 0; i < this._fields.length; i++) {
       const [name, type] = this._fields[i];
-      if (x.hasOwnProperty(name)) {
+      if (x2.hasOwnProperty(name)) {
         const idx = lebEncode(i);
-        const buf = type.encodeValue(x[name]);
+        const buf = type.encodeValue(x2[name]);
         return concat(idx, buf);
       }
     }
-    throw Error("Variant has no data: " + x);
+    throw Error("Variant has no data: " + x2);
   }
   _buildTypeTableImpl(typeTable) {
     this._fields.forEach(([, type]) => {
@@ -26962,10 +27531,10 @@ variant ${k} -> ${e.message}`);
     const fields = this._fields.map(([key, type]) => key + (type.name === "null" ? "" : `:${type.display()}`));
     return `variant {${fields.join("; ")}}`;
   }
-  valueToString(x) {
+  valueToString(x2) {
     for (const [name, type] of this._fields) {
-      if (x.hasOwnProperty(name)) {
-        const value = type.valueToString(x[name]);
+      if (x2.hasOwnProperty(name)) {
+        const value = type.valueToString(x2[name]);
         if (value === "null") {
           return `variant {${name}}`;
         } else {
@@ -26973,7 +27542,7 @@ variant ${k} -> ${e.message}`);
         }
       }
     }
-    throw new Error("Variant has no data: " + x);
+    throw new Error("Variant has no data: " + x2);
   }
   get alternativesAsObject() {
     const alternatives = {};
@@ -26994,11 +27563,11 @@ const _RecClass = class _RecClass extends ConstructType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.RecClass;
   }
-  accept(v, d) {
+  accept(v2, d) {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return v.visitRec(this, this._type, d);
+    return v2.visitRec(this, this._type, d);
   }
   fill(t) {
     this._type = t;
@@ -27006,16 +27575,16 @@ const _RecClass = class _RecClass extends ConstructType {
   getType() {
     return this._type;
   }
-  covariant(x) {
-    if (this._type ? this._type.covariant(x) : false)
+  covariant(x2) {
+    if (this._type ? this._type.covariant(x2) : false)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
+  encodeValue(x2) {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return this._type.encodeValue(x);
+    return this._type.encodeValue(x2);
   }
   _buildTypeTableImpl(typeTable) {
     if (!this._type) {
@@ -27040,18 +27609,18 @@ const _RecClass = class _RecClass extends ConstructType {
     }
     return `μ${this.name}.${this._type.name}`;
   }
-  valueToString(x) {
+  valueToString(x2) {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return this._type.valueToString(x);
+    return this._type.valueToString(x2);
   }
 };
 _RecClass._counter = 0;
 let RecClass = _RecClass;
 function decodePrincipalId(b) {
-  const x = safeReadUint8(b);
-  if (x !== 1) {
+  const x2 = safeReadUint8(b);
+  if (x2 !== 1) {
     throw new Error("Cannot decode principal");
   }
   const len = Number(lebDecode(b));
@@ -27064,11 +27633,11 @@ class FuncClass extends ConstructType {
   static [Symbol.hasInstance](instance) {
     return instance.typeName === IdlTypeName.FuncClass;
   }
-  static argsToString(types, v) {
-    if (types.length !== v.length) {
+  static argsToString(types, v2) {
+    if (types.length !== v2.length) {
       throw new Error("arity mismatch");
     }
-    return "(" + types.map((t, i) => t.valueToString(v[i])).join(", ") + ")";
+    return "(" + types.map((t, i) => t.valueToString(v2[i])).join(", ") + ")";
   }
   constructor(argTypes, retTypes, annotations = []) {
     super();
@@ -27076,13 +27645,13 @@ class FuncClass extends ConstructType {
     this.retTypes = retTypes;
     this.annotations = annotations;
   }
-  accept(v, d) {
-    return v.visitFunc(this, d);
+  accept(v2, d) {
+    return v2.visitFunc(this, d);
   }
-  covariant(x) {
-    if (Array.isArray(x) && x.length === 2 && x[0] && x[0]._isPrincipal && typeof x[1] === "string")
+  covariant(x2) {
+    if (Array.isArray(x2) && x2.length === 2 && x2[0] && x2[0]._isPrincipal && typeof x2[1] === "string")
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue([principal, methodName]) {
     const buf = principal.toUint8Array();
@@ -27105,12 +27674,12 @@ class FuncClass extends ConstructType {
     T.add(this, concat(opCode, argLen, args, retLen, rets, annLen, anns));
   }
   decodeValue(b, t) {
-    const tt = t instanceof RecClass ? t.getType() ?? t : t;
-    if (!subtype(tt, this)) {
-      throw new Error(`Cannot decode function reference at type ${this.display()} from wire type ${tt.display()}`);
+    const tt2 = t instanceof RecClass ? t.getType() ?? t : t;
+    if (!subtype(tt2, this)) {
+      throw new Error(`Cannot decode function reference at type ${this.display()} from wire type ${tt2.display()}`);
     }
-    const x = safeReadUint8(b);
-    if (x !== 1) {
+    const x2 = safeReadUint8(b);
+    if (x2 !== 1) {
       throw new Error("Cannot decode function reference");
     }
     const canister = decodePrincipalId(b);
@@ -27166,16 +27735,16 @@ class ServiceClass extends ConstructType {
       return 0;
     });
   }
-  accept(v, d) {
-    return v.visitService(this, d);
+  accept(v2, d) {
+    return v2.visitService(this, d);
   }
-  covariant(x) {
-    if (x && x._isPrincipal)
+  covariant(x2) {
+    if (x2 && x2._isPrincipal)
       return true;
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x) {
-    const buf = x.toUint8Array();
+  encodeValue(x2) {
+    const buf = x2.toUint8Array();
     const len = lebEncode(buf.length);
     return concat(new Uint8Array([1]), len, buf);
   }
@@ -27191,9 +27760,9 @@ class ServiceClass extends ConstructType {
     T.add(this, concat(opCode, len, ...meths));
   }
   decodeValue(b, t) {
-    const tt = t instanceof RecClass ? t.getType() ?? t : t;
-    if (!subtype(tt, this)) {
-      throw new Error(`Cannot decode service reference at type ${this.display()} from wire type ${tt.display()}`);
+    const tt2 = t instanceof RecClass ? t.getType() ?? t : t;
+    if (!subtype(tt2, this)) {
+      throw new Error(`Cannot decode service reference at type ${this.display()} from wire type ${tt2.display()}`);
     }
     return decodePrincipalId(b);
   }
@@ -27201,8 +27770,8 @@ class ServiceClass extends ConstructType {
     const fields = this._fields.map(([key, value]) => key + ":" + value.name);
     return `service {${fields.join("; ")}}`;
   }
-  valueToString(x) {
-    return `service "${x.toText()}"`;
+  valueToString(x2) {
+    return `service "${x2.toText()}"`;
   }
   fieldsAsObject() {
     const fields = {};
@@ -27212,8 +27781,8 @@ class ServiceClass extends ConstructType {
     return fields;
   }
 }
-function toReadableString(x) {
-  const str = JSON.stringify(x, (_key, value) => typeof value === "bigint" ? `BigInt(${value})` : value);
+function toReadableString(x2) {
+  const str = JSON.stringify(x2, (_key, value) => typeof value === "bigint" ? `BigInt(${value})` : value);
   return str && str.length > toReadableString_max ? str.substring(0, toReadableString_max - 3) + "..." : str;
 }
 const Bool = new BoolClass();
@@ -27259,8 +27828,8 @@ class Relations {
   }
   display() {
     let result = "";
-    for (const [t1, v] of this.rels) {
-      for (const [t2, known] of v) {
+    for (const [t1, v2] of this.rels) {
+      for (const [t2, known] of v2) {
         const subty = known ? ":<" : "!<:";
         result += `${t1} ${subty} ${t2}
 `;
@@ -27456,7 +28025,7 @@ function hashOfMap(map) {
   const sorted = traversed.sort(([k1], [k2]) => {
     return compare(k1, k2);
   });
-  const concatenated = concatBytes(...sorted.map((x) => concatBytes(...x)));
+  const concatenated = concatBytes(...sorted.map((x2) => concatBytes(...x2)));
   const result = sha256(concatenated);
   return result;
 }
@@ -27591,8 +28160,8 @@ function _validateObject(object, fields, optFields = {}) {
     if (current !== expectedType || val === null)
       throw new Error(`param "${fieldName}" is invalid: expected ${expectedType}, got ${current}`);
   }
-  Object.entries(fields).forEach(([k, v]) => checkField(k, v, false));
-  Object.entries(optFields).forEach(([k, v]) => checkField(k, v, true));
+  Object.entries(fields).forEach(([k, v2]) => checkField(k, v2, false));
+  Object.entries(optFields).forEach(([k, v2]) => checkField(k, v2, true));
 }
 function memoized(fn) {
   const map = /* @__PURE__ */ new WeakMap();
@@ -27613,8 +28182,8 @@ function mod(a, b) {
   const result = a % b;
   return result >= _0n$2 ? result : b + result;
 }
-function pow2(x, power, modulo) {
-  let res = x;
+function pow2(x2, power, modulo) {
+  let res = x2;
   while (power-- > _0n$2) {
     res *= res;
     res %= modulo;
@@ -27628,17 +28197,17 @@ function invert(number, modulo) {
     throw new Error("invert: expected positive modulus, got " + modulo);
   let a = mod(number, modulo);
   let b = modulo;
-  let x = _0n$2, u = _1n$3;
+  let x2 = _0n$2, u = _1n$3;
   while (a !== _0n$2) {
     const q = b / a;
     const r = b % a;
-    const m = x - u * q;
-    b = a, a = r, x = u, u = m;
+    const m = x2 - u * q;
+    b = a, a = r, x2 = u, u = m;
   }
   const gcd = b;
   if (gcd !== _1n$3)
     throw new Error("invert: does not exist");
-  return mod(x, modulo);
+  return mod(x2, modulo);
 }
 function assertIsSquare(Fp2, root2, n) {
   if (!Fp2.eql(Fp2.sqr(root2), n))
@@ -27653,9 +28222,9 @@ function sqrt3mod4(Fp2, n) {
 function sqrt5mod8(Fp2, n) {
   const p5div8 = (Fp2.ORDER - _5n$1) / _8n$2;
   const n2 = Fp2.mul(n, _2n$2);
-  const v = Fp2.pow(n2, p5div8);
-  const nv = Fp2.mul(n, v);
-  const i = Fp2.mul(Fp2.mul(nv, _2n$2), v);
+  const v2 = Fp2.pow(n2, p5div8);
+  const nv = Fp2.mul(n, v2);
+  const i = Fp2.mul(Fp2.mul(nv, _2n$2), v2);
   const root2 = Fp2.mul(nv, Fp2.sub(i, Fp2.ONE));
   assertIsSquare(Fp2, root2, n);
   return root2;
@@ -27706,7 +28275,7 @@ function tonelliShanks(P) {
       return n;
     if (FpLegendre(Fp2, n) !== 1)
       throw new Error("Cannot find square root");
-    let M = S;
+    let M2 = S;
     let c = Fp2.mul(Fp2.ONE, cc);
     let t = Fp2.pow(n, Q);
     let R = Fp2.pow(n, Q1div2);
@@ -27718,12 +28287,12 @@ function tonelliShanks(P) {
       while (!Fp2.eql(t_tmp, Fp2.ONE)) {
         i++;
         t_tmp = Fp2.sqr(t_tmp);
-        if (i === M)
+        if (i === M2)
           throw new Error("Cannot find square root");
       }
-      const exponent = _1n$3 << BigInt(M - i - 1);
+      const exponent = _1n$3 << BigInt(M2 - i - 1);
       const b = Fp2.pow(c, exponent);
-      M = i;
+      M2 = i;
       c = Fp2.sqr(b);
       t = Fp2.mul(t, c);
       R = Fp2.mul(R, b);
@@ -28186,11 +28755,11 @@ function _createCurveFields(type, CURVE, curveOpts = {}, FpFnLE) {
 }
 /*! noble-curves - MIT License (c) 2022 Paul Miller (paulmillr.com) */
 const _0n = BigInt(0), _1n$1 = BigInt(1), _2n$1 = BigInt(2), _8n$1 = BigInt(8);
-function isEdValidXY(Fp2, CURVE, x, y) {
-  const x2 = Fp2.sqr(x);
+function isEdValidXY(Fp2, CURVE, x2, y) {
+  const x22 = Fp2.sqr(x2);
   const y2 = Fp2.sqr(y);
-  const left = Fp2.add(Fp2.mul(CURVE.a, x2), y2);
-  const right = Fp2.add(Fp2.ONE, Fp2.mul(CURVE.d, Fp2.mul(x2, y2)));
+  const left = Fp2.add(Fp2.mul(CURVE.a, x22), y2);
+  const right = Fp2.add(Fp2.ONE, Fp2.mul(CURVE.d, Fp2.mul(x22, y2)));
   return Fp2.eql(left, right);
 }
 function edwards(params, extraOpts = {}) {
@@ -28201,9 +28770,9 @@ function edwards(params, extraOpts = {}) {
   _validateObject(extraOpts, {}, { uvRatio: "function" });
   const MASK = _2n$1 << BigInt(Fn.BYTES * 8) - _1n$1;
   const modP = (n) => Fp2.create(n);
-  const uvRatio2 = extraOpts.uvRatio || ((u, v) => {
+  const uvRatio2 = extraOpts.uvRatio || ((u, v2) => {
     try {
-      return { isValid: true, value: Fp2.sqrt(Fp2.div(u, v)) };
+      return { isValid: true, value: Fp2.sqrt(Fp2.div(u, v2)) };
     } catch (e) {
       return { isValid: false, value: _0n };
     }
@@ -28224,14 +28793,14 @@ function edwards(params, extraOpts = {}) {
     const is0 = p.is0();
     if (iz == null)
       iz = is0 ? _8n$1 : Fp2.inv(Z);
-    const x = modP(X2 * iz);
+    const x2 = modP(X2 * iz);
     const y = modP(Y * iz);
     const zz = Fp2.mul(Z, iz);
     if (is0)
       return { x: _0n, y: _1n$1 };
     if (zz !== _1n$1)
       throw new Error("invZ was invalid");
-    return { x, y };
+    return { x: x2, y };
   });
   const assertValidMemo = memoized((p) => {
     const { a, d } = CURVE;
@@ -28267,10 +28836,10 @@ function edwards(params, extraOpts = {}) {
     static fromAffine(p) {
       if (p instanceof Point)
         throw new Error("extended point not allowed");
-      const { x, y } = p || {};
-      acoord("x", x);
+      const { x: x2, y } = p || {};
+      acoord("x", x2);
       acoord("y", y);
-      return new Point(x, y, _1n$1, modP(x * y));
+      return new Point(x2, y, _1n$1, modP(x2 * y));
     }
     // Uses algo from RFC8032 5.1.3.
     static fromBytes(bytes, zip215 = false) {
@@ -28286,17 +28855,17 @@ function edwards(params, extraOpts = {}) {
       aInRange("point.y", y, _0n, max);
       const y2 = modP(y * y);
       const u = modP(y2 - _1n$1);
-      const v = modP(d * y2 - a);
-      let { isValid, value: x } = uvRatio2(u, v);
+      const v2 = modP(d * y2 - a);
+      let { isValid, value: x2 } = uvRatio2(u, v2);
       if (!isValid)
         throw new Error("bad point: invalid y coordinate");
-      const isXOdd = (x & _1n$1) === _1n$1;
+      const isXOdd = (x2 & _1n$1) === _1n$1;
       const isLastByteOdd = (lastByte & 128) !== 0;
-      if (!zip215 && x === _0n && isLastByteOdd)
+      if (!zip215 && x2 === _0n && isLastByteOdd)
         throw new Error("bad point: x=0 and x_0=1");
       if (isLastByteOdd !== isXOdd)
-        x = modP(-x);
-      return Point.fromAffine({ x, y });
+        x2 = modP(-x2);
+      return Point.fromAffine({ x: x2, y });
     }
     static fromHex(bytes, zip215 = false) {
       return Point.fromBytes(ensureBytes("point", bytes), zip215);
@@ -28424,9 +28993,9 @@ function edwards(params, extraOpts = {}) {
       return this.multiplyUnsafe(cofactor);
     }
     toBytes() {
-      const { x, y } = this.toAffine();
+      const { x: x2, y } = this.toAffine();
       const bytes = Fp2.toBytes(y);
-      bytes[bytes.length - 1] |= x & _1n$1 ? 128 : 0;
+      bytes[bytes.length - 1] |= x2 & _1n$1 ? 128 : 0;
       return bytes;
     }
     toHex() {
@@ -28678,13 +29247,13 @@ const ed25519_CURVE = /* @__PURE__ */ (() => ({
   Gx: BigInt("0x216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a"),
   Gy: BigInt("0x6666666666666666666666666666666666666666666666666666666666666658")
 }))();
-function ed25519_pow_2_252_3(x) {
+function ed25519_pow_2_252_3(x2) {
   const _10n = BigInt(10), _20n = BigInt(20), _40n = BigInt(40), _80n = BigInt(80);
   const P = ed25519_CURVE_p;
-  const x2 = x * x % P;
-  const b2 = x2 * x % P;
+  const x22 = x2 * x2 % P;
+  const b2 = x22 * x2 % P;
   const b4 = pow2(b2, _2n, P) * b2 % P;
-  const b5 = pow2(b4, _1n, P) * x % P;
+  const b5 = pow2(b4, _1n, P) * x2 % P;
   const b10 = pow2(b5, _5n, P) * b5 % P;
   const b20 = pow2(b10, _10n, P) * b10 % P;
   const b40 = pow2(b20, _20n, P) * b20 % P;
@@ -28692,7 +29261,7 @@ function ed25519_pow_2_252_3(x) {
   const b160 = pow2(b80, _80n, P) * b80 % P;
   const b240 = pow2(b160, _80n, P) * b80 % P;
   const b250 = pow2(b240, _10n, P) * b10 % P;
-  const pow_p_5_8 = pow2(b250, _2n, P) * x % P;
+  const pow_p_5_8 = pow2(b250, _2n, P) * x2 % P;
   return { pow_p_5_8, b2 };
 }
 function adjustScalarBytes(bytes) {
@@ -28702,25 +29271,25 @@ function adjustScalarBytes(bytes) {
   return bytes;
 }
 const ED25519_SQRT_M1 = /* @__PURE__ */ BigInt("19681161376707505956807079304988542015446066515923890162744021073123829784752");
-function uvRatio(u, v) {
+function uvRatio(u, v2) {
   const P = ed25519_CURVE_p;
-  const v3 = mod(v * v * v, P);
-  const v7 = mod(v3 * v3 * v, P);
+  const v3 = mod(v2 * v2 * v2, P);
+  const v7 = mod(v3 * v3 * v2, P);
   const pow = ed25519_pow_2_252_3(u * v7).pow_p_5_8;
-  let x = mod(u * v3 * pow, P);
-  const vx2 = mod(v * x * x, P);
-  const root1 = x;
-  const root2 = mod(x * ED25519_SQRT_M1, P);
+  let x2 = mod(u * v3 * pow, P);
+  const vx2 = mod(v2 * x2 * x2, P);
+  const root1 = x2;
+  const root2 = mod(x2 * ED25519_SQRT_M1, P);
   const useRoot1 = vx2 === u;
   const useRoot2 = vx2 === mod(-u, P);
   const noRoot = vx2 === mod(-u * ED25519_SQRT_M1, P);
   if (useRoot1)
-    x = root1;
+    x2 = root1;
   if (useRoot2 || noRoot)
-    x = root2;
-  if (isNegativeLE(x, P))
-    x = mod(-x, P);
-  return { isValid: useRoot1 || useRoot2, value: x };
+    x2 = root2;
+  if (isNegativeLE(x2, P))
+    x2 = mod(-x2, P);
+  return { isValid: useRoot1 || useRoot2, value: x2 };
 }
 const Fp = /* @__PURE__ */ (() => Field(ed25519_CURVE.p, { isLE: true }))();
 const ed25519Defaults = /* @__PURE__ */ (() => ({
@@ -29042,11 +29611,11 @@ const _Ed25519KeyIdentity = class _Ed25519KeyIdentity extends SignIdentity {
    * @returns - true if the signature is valid, false otherwise
    */
   static verify(sig, msg, pk) {
-    const [signature, message, publicKey] = [sig, msg, pk].map((x) => {
-      if (typeof x === "string") {
-        x = hexToBytes(x);
+    const [signature, message, publicKey] = [sig, msg, pk].map((x2) => {
+      if (typeof x2 === "string") {
+        x2 = hexToBytes(x2);
       }
-      return uint8FromBufLike$1(x);
+      return uint8FromBufLike$1(x2);
     });
     return ed25519.verify(signature, message, publicKey);
   }
