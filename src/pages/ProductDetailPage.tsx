@@ -1,9 +1,14 @@
-import { useNavigate, useParams } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Mail, Phone, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
-import { buildProductSchema, useDocumentMetadata } from "../lib/seo";
+import { SeoHead } from "../components/SeoHead";
+import {
+  buildBreadcrumbSchema,
+  buildProductSchema,
+  buildWebPageSchema,
+} from "../lib/seo";
 import { useWebsiteProduct, useWebsiteSettings } from "../lib/websiteApi";
 import { scrollToSection } from "../utils/scrollToSection";
 
@@ -76,24 +81,6 @@ export function ProductDetailPage() {
     setSelectedImage(product.gallery[0] || product.image);
   }, [product]);
 
-  useDocumentMetadata({
-    title: product?.metaTitle || product?.name || "Luxury Sofa Collection",
-    description:
-      product?.metaDescription ||
-      product?.shortDescription ||
-      "Explore handcrafted sofa details from JPM Enterprises.",
-    path: product ? `/product/${product.slug}` : "/",
-    image: product?.image,
-    type: "product",
-    keywords: [
-      product?.name || "luxury sofa",
-      product?.category?.name || "furniture collection",
-      "premium handcrafted sofa",
-      "bespoke furniture India",
-    ].filter(Boolean),
-    structuredData: product ? buildProductSchema(product, settings) : undefined,
-  });
-
   const detailItems = product
     ? [
         { label: "Material", value: product.material },
@@ -105,6 +92,42 @@ export function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {product ? (
+        <SeoHead
+          title={product.metaTitle || product.name}
+          description={
+            product.metaDescription ||
+            product.shortDescription ||
+            "Explore handcrafted sofa details from JPM Enterprises."
+          }
+          path={`/product/${product.slug}`}
+          image={product.image}
+          type="product"
+          keywords={[
+            product.name,
+            product.category?.name || "furniture collection",
+            "premium handcrafted sofa",
+            "bespoke furniture India",
+          ]}
+          structuredData={[
+            buildWebPageSchema({
+              title: product.name,
+              description:
+                product.metaDescription ||
+                product.shortDescription ||
+                product.description,
+              path: `/product/${product.slug}`,
+              image: product.image,
+            }),
+            buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: "Collections", path: "/#collection" },
+              { name: product.name, path: `/product/${product.slug}` },
+            ]),
+            buildProductSchema(product, settings),
+          ]}
+        />
+      ) : null}
       <Navbar />
       <main
         className="pb-24 pt-28"
@@ -114,6 +137,26 @@ export function ProductDetailPage() {
         }}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {product ? (
+            <nav
+              aria-label="Breadcrumb"
+              className="mb-6 flex flex-wrap items-center gap-2 font-general text-xs uppercase tracking-[0.16em] text-muted-foreground"
+            >
+              <Link to="/" className="transition-colors hover:text-foreground">
+                Home
+              </Link>
+              <span>/</span>
+              <a
+                href="/#collection"
+                className="transition-colors hover:text-foreground"
+              >
+                Collections
+              </a>
+              <span>/</span>
+              <span className="text-foreground">{product.name}</span>
+            </nav>
+          ) : null}
+
           <button
             type="button"
             onClick={() =>
@@ -172,6 +215,8 @@ export function ProductDetailPage() {
                     <img
                       src={selectedImage || product.image}
                       alt={product.name}
+                      fetchPriority="high"
+                      decoding="async"
                       className="aspect-[5/4] w-full object-cover"
                     />
                   </div>
@@ -194,6 +239,8 @@ export function ProductDetailPage() {
                           <img
                             src={image}
                             alt={product.name}
+                            loading="lazy"
+                            decoding="async"
                             className="aspect-[4/3] w-full object-cover"
                           />
                         </button>
@@ -375,32 +422,41 @@ export function ProductDetailPage() {
                           boxShadow: "0 18px 38px oklch(0.12 0.01 60 / 0.05)",
                         }}
                       >
-                        <img
-                          src={relatedProduct.image}
-                          alt={relatedProduct.name}
-                          className="aspect-[4/3] w-full object-cover"
-                        />
+                        <Link
+                          to="/product/$productSlug"
+                          params={{ productSlug: relatedProduct.slug }}
+                          className="block"
+                        >
+                          <img
+                            src={relatedProduct.image}
+                            alt={relatedProduct.name}
+                            loading="lazy"
+                            decoding="async"
+                            className="aspect-[4/3] w-full object-cover"
+                          />
+                        </Link>
                         <div className="p-5">
                           <h3 className="font-playfair text-2xl font-semibold text-foreground">
-                            {relatedProduct.name}
+                            <Link
+                              to="/product/$productSlug"
+                              params={{ productSlug: relatedProduct.slug }}
+                              className="transition-colors hover:text-[oklch(0.65_0.12_75)]"
+                            >
+                              {relatedProduct.name}
+                            </Link>
                           </h3>
                           <p className="mt-2 font-general text-sm leading-relaxed text-muted-foreground">
                             {relatedProduct.shortDescription}
                           </p>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              navigate({
-                                to: "/product/$productSlug",
-                                params: { productSlug: relatedProduct.slug },
-                              })
-                            }
+                          <Link
+                            to="/product/$productSlug"
+                            params={{ productSlug: relatedProduct.slug }}
                             className="mt-5 inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]"
                             style={{ color: "oklch(0.65 0.12 75)" }}
                           >
                             View Product
                             <ArrowRight size={14} />
-                          </button>
+                          </Link>
                         </div>
                       </article>
                     ))}

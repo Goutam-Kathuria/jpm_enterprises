@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from "@tanstack/react-router";
-import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useWebsiteSettings } from "../lib/websiteApi";
 import { scrollToSection } from "../utils/scrollToSection";
@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Custom Design", href: "#custom-design" },
   { label: "Why Us", href: "#why-us" },
   { label: "Gallery", href: "#gallery" },
+  { label: "Blogs", to: "/blogs" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -44,15 +45,19 @@ export function Navbar() {
     }
 
     setMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      setActive(location.pathname);
+    }
   }, [location.pathname]);
 
   useEffect(() => {
     if (location.pathname !== "/") {
-      setActive("");
       return;
     }
 
     const sections = navLinks
+      .filter((link): link is { label: string; href: string } => Boolean(link.href))
       .map((link) => document.getElementById(link.href.slice(1)))
       .filter((section): section is HTMLElement => Boolean(section));
 
@@ -138,29 +143,48 @@ export function Navbar() {
           <img
             src="/assets/uploads/image-1.png"
             alt="JPM Enterprises"
+            decoding="async"
             className="h-16 w-auto object-contain"
           />
         </button>
 
         <ul className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <button
-                type="button"
-                onClick={() => handleNav(link.href)}
-                data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                className={`relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${
-                  isLightHeader ? "text-foreground" : "text-white"
-                }`}
-              >
-                {link.label}
-                <span
-                  className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${
-                    active === link.href ? "w-full" : "w-0"
+            <li key={link.href ?? link.to}>
+              {link.href ? (
+                <button
+                  type="button"
+                  onClick={() => handleNav(link.href)}
+                  data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
+                  className={`relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${
+                    isLightHeader ? "text-foreground" : "text-white"
                   }`}
-                  style={{ background: "oklch(0.65 0.12 75)" }}
-                />
-              </button>
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${
+                      active === link.href ? "w-full" : "w-0"
+                    }`}
+                    style={{ background: "oklch(0.65 0.12 75)" }}
+                  />
+                </button>
+              ) : (
+                <Link
+                  to={link.to!}
+                  data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
+                  className={`relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${
+                    isLightHeader ? "text-foreground" : "text-white"
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${
+                      active === link.to ? "w-full" : "w-0"
+                    }`}
+                    style={{ background: "oklch(0.65 0.12 75)" }}
+                  />
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -170,7 +194,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={handlePrimaryAction}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 whitespace-nowrap font-general text-[11px] font-semibold tracking-[0.24em] uppercase transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.24em] transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background:
                   "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
@@ -208,7 +232,7 @@ export function Navbar() {
           <ul className="space-y-6">
             {navLinks.map((link, index) => (
               <li
-                key={link.href}
+                key={link.href ?? link.to}
                 style={{
                   transitionDelay: menuOpen ? `${index * 45}ms` : "0ms",
                 }}
@@ -218,17 +242,31 @@ export function Navbar() {
                     : "translate-y-4 opacity-0"
                 }`}
               >
-                <button
-                  type="button"
-                  onClick={() => handleNav(link.href)}
-                  className="font-playfair text-3xl text-foreground transition-colors"
-                  style={{
-                    color:
-                      active === link.href ? "oklch(0.65 0.12 75)" : undefined,
-                  }}
-                >
-                  {link.label}
-                </button>
+                {link.href ? (
+                  <button
+                    type="button"
+                    onClick={() => handleNav(link.href)}
+                    className="font-playfair text-3xl text-foreground transition-colors"
+                    style={{
+                      color:
+                        active === link.href ? "oklch(0.65 0.12 75)" : undefined,
+                    }}
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link
+                    to={link.to!}
+                    onClick={() => setMenuOpen(false)}
+                    className="font-playfair text-3xl text-foreground transition-colors"
+                    style={{
+                      color:
+                        active === link.to ? "oklch(0.65 0.12 75)" : undefined,
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -242,7 +280,7 @@ export function Navbar() {
             }}
           >
             <p
-              className="mb-2 font-general text-xs font-semibold tracking-[0.25em] uppercase"
+              className="mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em]"
               style={{ color: "oklch(0.65 0.12 75)" }}
             >
               Design Support
@@ -258,7 +296,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={handlePrimaryAction}
-              className="mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold tracking-[0.2em] uppercase"
+              className="mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em]"
               style={{
                 background: "oklch(0.65 0.12 75)",
                 color: "oklch(0.12 0.01 60)",

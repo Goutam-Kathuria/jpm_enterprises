@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Layers3, Palette, Sparkles } from "lucide-react";
 import { useDeferredValue, useState, useTransition } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -237,6 +237,8 @@ export function CollectionSection() {
                       <img
                         src={category.image}
                         alt={category.name}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.8))]" />
@@ -332,12 +334,19 @@ export function CollectionSection() {
                     }}
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      <Link
+                        to="/product/$productSlug"
+                        params={{ productSlug: product.slug }}
+                        className="block h-full w-full"
+                      >
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </Link>
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.78))]" />
                       <div className="absolute left-5 top-5 flex flex-wrap gap-2">
                         <span
@@ -368,7 +377,13 @@ export function CollectionSection() {
                     <div className="space-y-5 p-6">
                       <div>
                         <h3 className="font-playfair text-2xl font-semibold text-foreground">
-                          {product.name}
+                          <Link
+                            to="/product/$productSlug"
+                            params={{ productSlug: product.slug }}
+                            className="transition-colors hover:text-[oklch(0.65_0.12_75)]"
+                          >
+                            {product.name}
+                          </Link>
                         </h3>
                         <p className="mt-3 font-general text-sm leading-relaxed text-muted-foreground">
                           {product.shortDescription || product.description}
@@ -394,15 +409,10 @@ export function CollectionSection() {
                       ) : null}
 
                       <div className="flex flex-wrap gap-3">
-                        <button
-                          type="button"
+                        <Link
+                          to="/product/$productSlug"
+                          params={{ productSlug: product.slug }}
                           data-ocid={`collection.view_button.${product.slug}`}
-                          onClick={() =>
-                            navigate({
-                              to: "/product/$productSlug",
-                              params: { productSlug: product.slug },
-                            })
-                          }
                           className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5"
                           style={{
                             background:
@@ -412,7 +422,7 @@ export function CollectionSection() {
                         >
                           View Details
                           <ArrowRight size={15} />
-                        </button>
+                        </Link>
                         <button
                           type="button"
                           onClick={() =>

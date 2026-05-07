@@ -109,6 +109,7 @@ export function AboutSection() {
                 src={imageSrc}
                 alt="JPM Enterprises craftsmanship"
                 loading="lazy"
+                decoding="async"
                 className="w-full h-auto object-cover rounded-sm"
                 style={{
                   boxShadow: "0 20px 60px oklch(0.12 0.01 60 / 0.15)",

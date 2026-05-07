@@ -17,7 +17,7 @@ var __privateWrapper = (obj, member, setter, getter) => ({
     return __privateGet(obj, member, getter);
   }
 });
-var _provider, _providerCalled, _a, _focused, _cleanup, _setup, _b, _online, _cleanup2, _setup2, _c, _gcTimeout, _d, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, dispatch_fn, _e, _client2, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _f, _client3, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _g, _mutations, _scopes, _mutationId, _h, _queries, _i, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _j, _rawKey, _derKey, _publicKey, _privateKey, _inner, _delegation, _options;
+var _provider, _providerCalled, _a, _focused, _cleanup, _setup, _b, _online, _cleanup2, _setup2, _c, _gcTimeout, _d, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, dispatch_fn, _e, _client2, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _f, _client3, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _g, _mutations, _scopes, _mutationId, _h, _queries, _i, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _j, _k, _l, _rawKey, _derKey, _publicKey, _privateKey, _inner, _delegation, _options;
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -905,7 +905,7 @@ var Query = (_e = class extends Removable {
     }
   }
   async fetch(options2, fetchOptions) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l2;
     if (this.state.fetchStatus !== "idle" && // If the promise in the retyer is already rejected, we have to definitely
     // re-start the fetch; there is a chance that the query is still in a
     // pending state when that happens
@@ -1037,8 +1037,8 @@ var Query = (_e = class extends Removable {
         error,
         this
       );
-      (_l = (_k = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l.call(
-        _k,
+      (_l2 = (_k2 = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l2.call(
+        _k2,
         this.state.data,
         error,
         this
@@ -1763,7 +1763,7 @@ var Mutation = (_g = class extends Removable {
     this.execute(this.state.variables);
   }
   async execute(variables) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t2;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l2, _m, _n, _o, _p, _q, _r, _s, _t2;
     const onContinue = () => {
       __privateMethod(this, _Mutation_instances, dispatch_fn2).call(this, { type: "continue" });
     };
@@ -1843,8 +1843,8 @@ var Mutation = (_g = class extends Removable {
         this,
         mutationFnContext
       ));
-      await ((_l = (_k = this.options).onSettled) == null ? void 0 : _l.call(
-        _k,
+      await ((_l2 = (_k2 = this.options).onSettled) == null ? void 0 : _l2.call(
+        _k2,
         data,
         null,
         variables,
@@ -2769,21 +2769,21 @@ react_production.cloneElement = function(element, config, children) {
   }
   return ReactElement(element.type, key, void 0, void 0, owner, props);
 };
-react_production.createContext = function(defaultValue) {
-  defaultValue = {
+react_production.createContext = function(defaultValue2) {
+  defaultValue2 = {
     $$typeof: REACT_CONTEXT_TYPE$1,
-    _currentValue: defaultValue,
-    _currentValue2: defaultValue,
+    _currentValue: defaultValue2,
+    _currentValue2: defaultValue2,
     _threadCount: 0,
     Provider: null,
     Consumer: null
   };
-  defaultValue.Provider = defaultValue;
-  defaultValue.Consumer = {
+  defaultValue2.Provider = defaultValue2;
+  defaultValue2.Consumer = {
     $$typeof: REACT_CONSUMER_TYPE$1,
-    _context: defaultValue
+    _context: defaultValue2
   };
-  return defaultValue;
+  return defaultValue2;
 };
 react_production.createElement = function(type, config, children) {
   var propName, props = {}, key = null;
@@ -2848,8 +2848,8 @@ react_production.useActionState = function(action, initialState, permalink) {
 react_production.useCallback = function(callback, deps) {
   return ReactSharedInternals$2.H.useCallback(callback, deps);
 };
-react_production.useContext = function(Context) {
-  return ReactSharedInternals$2.H.useContext(Context);
+react_production.useContext = function(Context2) {
+  return ReactSharedInternals$2.H.useContext(Context2);
 };
 react_production.useDebugValue = function() {
 };
@@ -3677,8 +3677,8 @@ var isArrayImpl = Array.isArray, ReactSharedInternals = React$2.__CLIENT_INTERNA
   method: null,
   action: null
 }, valueStack = [], index = -1;
-function createCursor(defaultValue) {
-  return { current: defaultValue };
+function createCursor(defaultValue2) {
+  return { current: defaultValue2 };
 }
 function pop(cursor) {
   0 > index || (cursor.current = valueStack[index], valueStack[index] = null, index--);
@@ -4310,7 +4310,7 @@ function escapeSelectorAttributeValueInsideDoubleQuotes(value) {
     }
   );
 }
-function updateInput(element, value, defaultValue, lastDefaultValue, checked, defaultChecked, type, name) {
+function updateInput(element, value, defaultValue2, lastDefaultValue, checked, defaultChecked, type, name) {
   element.name = "";
   null != type && "function" !== typeof type && "symbol" !== typeof type && "boolean" !== typeof type ? element.type = type : element.removeAttribute("type");
   if (null != value)
@@ -4321,18 +4321,18 @@ function updateInput(element, value, defaultValue, lastDefaultValue, checked, de
       element.value !== "" + getToStringValue(value) && (element.value = "" + getToStringValue(value));
   else
     "submit" !== type && "reset" !== type || element.removeAttribute("value");
-  null != value ? setDefaultValue(element, type, getToStringValue(value)) : null != defaultValue ? setDefaultValue(element, type, getToStringValue(defaultValue)) : null != lastDefaultValue && element.removeAttribute("value");
+  null != value ? setDefaultValue(element, type, getToStringValue(value)) : null != defaultValue2 ? setDefaultValue(element, type, getToStringValue(defaultValue2)) : null != lastDefaultValue && element.removeAttribute("value");
   null == checked && null != defaultChecked && (element.defaultChecked = !!defaultChecked);
   null != checked && (element.checked = checked && "function" !== typeof checked && "symbol" !== typeof checked);
   null != name && "function" !== typeof name && "symbol" !== typeof name && "boolean" !== typeof name ? element.name = "" + getToStringValue(name) : element.removeAttribute("name");
 }
-function initInput(element, value, defaultValue, checked, defaultChecked, type, name, isHydrating2) {
+function initInput(element, value, defaultValue2, checked, defaultChecked, type, name, isHydrating2) {
   null != type && "function" !== typeof type && "symbol" !== typeof type && "boolean" !== typeof type && (element.type = type);
-  if (null != value || null != defaultValue) {
+  if (null != value || null != defaultValue2) {
     if (!("submit" !== type && "reset" !== type || void 0 !== value && null !== value))
       return;
-    defaultValue = null != defaultValue ? "" + getToStringValue(defaultValue) : "";
-    value = null != value ? "" + getToStringValue(value) : defaultValue;
+    defaultValue2 = null != defaultValue2 ? "" + getToStringValue(defaultValue2) : "";
+    value = null != value ? "" + getToStringValue(value) : defaultValue2;
     isHydrating2 || value === element.value || (element.value = value);
     element.defaultValue = value;
   }
@@ -4367,30 +4367,30 @@ function updateOptions(node, multiple, propValue, setDefaultSelected) {
     null !== multiple && (multiple.selected = true);
   }
 }
-function updateTextarea(element, value, defaultValue) {
-  if (null != value && (value = "" + getToStringValue(value), value !== element.value && (element.value = value), null == defaultValue)) {
+function updateTextarea(element, value, defaultValue2) {
+  if (null != value && (value = "" + getToStringValue(value), value !== element.value && (element.value = value), null == defaultValue2)) {
     element.defaultValue !== value && (element.defaultValue = value);
     return;
   }
-  element.defaultValue = null != defaultValue ? "" + getToStringValue(defaultValue) : "";
+  element.defaultValue = null != defaultValue2 ? "" + getToStringValue(defaultValue2) : "";
 }
-function initTextarea(element, value, defaultValue, children) {
+function initTextarea(element, value, defaultValue2, children) {
   if (null == value) {
     if (null != children) {
-      if (null != defaultValue) throw Error(formatProdErrorMessage(92));
+      if (null != defaultValue2) throw Error(formatProdErrorMessage(92));
       if (isArrayImpl(children)) {
         if (1 < children.length) throw Error(formatProdErrorMessage(93));
         children = children[0];
       }
-      defaultValue = children;
+      defaultValue2 = children;
     }
-    null == defaultValue && (defaultValue = "");
-    value = defaultValue;
+    null == defaultValue2 && (defaultValue2 = "");
+    value = defaultValue2;
   }
-  defaultValue = getToStringValue(value);
-  element.defaultValue = defaultValue;
+  defaultValue2 = getToStringValue(value);
+  element.defaultValue = defaultValue2;
   children = element.textContent;
-  children === defaultValue && "" !== children && null !== children && (element.value = children);
+  children === defaultValue2 && "" !== children && null !== children && (element.value = children);
 }
 function setTextContent(node, text) {
   if (text) {
@@ -5005,7 +5005,7 @@ function is$2(x2, y) {
   return x2 === y && (0 !== x2 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
 }
 var objectIs$2 = "function" === typeof Object.is ? Object.is : is$2;
-function shallowEqual(objA, objB) {
+function shallowEqual$1(objA, objB) {
   if (objectIs$2(objA, objB)) return true;
   if ("object" !== typeof objA || null === objA || "object" !== typeof objB || null === objB)
     return false;
@@ -5074,7 +5074,7 @@ function constructSelectEvent(dispatchQueue, nativeEvent, nativeEventTarget) {
     anchorOffset: doc.anchorOffset,
     focusNode: doc.focusNode,
     focusOffset: doc.focusOffset
-  }), lastSelection && shallowEqual(lastSelection, doc) || (lastSelection = doc, doc = accumulateTwoPhaseListeners(activeElementInst, "onSelect"), 0 < doc.length && (nativeEvent = new SyntheticEvent(
+  }), lastSelection && shallowEqual$1(lastSelection, doc) || (lastSelection = doc, doc = accumulateTwoPhaseListeners(activeElementInst, "onSelect"), 0 < doc.length && (nativeEvent = new SyntheticEvent(
     "onSelect",
     "select",
     null,
@@ -7708,7 +7708,7 @@ var classComponentUpdater = {
 };
 function checkShouldComponentUpdate(workInProgress2, ctor, oldProps, newProps, oldState, newState, nextContext) {
   workInProgress2 = workInProgress2.stateNode;
-  return "function" === typeof workInProgress2.shouldComponentUpdate ? workInProgress2.shouldComponentUpdate(newProps, newState, nextContext) : ctor.prototype && ctor.prototype.isPureReactComponent ? !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState) : true;
+  return "function" === typeof workInProgress2.shouldComponentUpdate ? workInProgress2.shouldComponentUpdate(newProps, newState, nextContext) : ctor.prototype && ctor.prototype.isPureReactComponent ? !shallowEqual$1(oldProps, newProps) || !shallowEqual$1(oldState, newState) : true;
 }
 function callComponentWillReceiveProps(workInProgress2, instance, newProps, nextContext) {
   workInProgress2 = instance.state;
@@ -7935,7 +7935,7 @@ function updateMemoComponent(current, workInProgress2, Component2, nextProps, re
   if (!checkScheduledUpdateOrContext(current, renderLanes2)) {
     var prevProps = type.memoizedProps;
     Component2 = Component2.compare;
-    Component2 = null !== Component2 ? Component2 : shallowEqual;
+    Component2 = null !== Component2 ? Component2 : shallowEqual$1;
     if (Component2(prevProps, nextProps) && current.ref === workInProgress2.ref)
       return bailoutOnAlreadyFinishedWork(current, workInProgress2, renderLanes2);
   }
@@ -7948,7 +7948,7 @@ function updateMemoComponent(current, workInProgress2, Component2, nextProps, re
 function updateSimpleMemoComponent(current, workInProgress2, Component2, nextProps, renderLanes2) {
   if (null !== current) {
     var prevProps = current.memoizedProps;
-    if (shallowEqual(prevProps, nextProps) && current.ref === workInProgress2.ref)
+    if (shallowEqual$1(prevProps, nextProps) && current.ref === workInProgress2.ref)
       if (didReceiveUpdate = false, workInProgress2.pendingProps = nextProps = prevProps, checkScheduledUpdateOrContext(current, renderLanes2))
         0 !== (current.flags & 131072) && (didReceiveUpdate = true);
       else
@@ -12758,7 +12758,7 @@ function setInitialProperties(domElement, tag, props) {
       return;
     case "input":
       listenToNonDelegatedEvent("invalid", domElement);
-      var defaultValue = propKey = propValue = hasSrcSet = null, checked = null, defaultChecked = null;
+      var defaultValue2 = propKey = propValue = hasSrcSet = null, checked = null, defaultChecked = null;
       for (hasSrc in props)
         if (props.hasOwnProperty(hasSrc)) {
           var propValue$188 = props[hasSrc];
@@ -12780,7 +12780,7 @@ function setInitialProperties(domElement, tag, props) {
                 propKey = propValue$188;
                 break;
               case "defaultValue":
-                defaultValue = propValue$188;
+                defaultValue2 = propValue$188;
                 break;
               case "children":
               case "dangerouslySetInnerHTML":
@@ -12794,7 +12794,7 @@ function setInitialProperties(domElement, tag, props) {
       initInput(
         domElement,
         propKey,
-        defaultValue,
+        defaultValue2,
         checked,
         defaultChecked,
         propValue,
@@ -12807,18 +12807,18 @@ function setInitialProperties(domElement, tag, props) {
       listenToNonDelegatedEvent("invalid", domElement);
       hasSrc = propValue = propKey = null;
       for (hasSrcSet in props)
-        if (props.hasOwnProperty(hasSrcSet) && (defaultValue = props[hasSrcSet], null != defaultValue))
+        if (props.hasOwnProperty(hasSrcSet) && (defaultValue2 = props[hasSrcSet], null != defaultValue2))
           switch (hasSrcSet) {
             case "value":
-              propKey = defaultValue;
+              propKey = defaultValue2;
               break;
             case "defaultValue":
-              propValue = defaultValue;
+              propValue = defaultValue2;
               break;
             case "multiple":
-              hasSrc = defaultValue;
+              hasSrc = defaultValue2;
             default:
-              setProp(domElement, tag, hasSrcSet, defaultValue, props, null);
+              setProp(domElement, tag, hasSrcSet, defaultValue2, props, null);
           }
       tag = propKey;
       props = propValue;
@@ -12829,22 +12829,22 @@ function setInitialProperties(domElement, tag, props) {
       listenToNonDelegatedEvent("invalid", domElement);
       propKey = hasSrcSet = hasSrc = null;
       for (propValue in props)
-        if (props.hasOwnProperty(propValue) && (defaultValue = props[propValue], null != defaultValue))
+        if (props.hasOwnProperty(propValue) && (defaultValue2 = props[propValue], null != defaultValue2))
           switch (propValue) {
             case "value":
-              hasSrc = defaultValue;
+              hasSrc = defaultValue2;
               break;
             case "defaultValue":
-              hasSrcSet = defaultValue;
+              hasSrcSet = defaultValue2;
               break;
             case "children":
-              propKey = defaultValue;
+              propKey = defaultValue2;
               break;
             case "dangerouslySetInnerHTML":
-              if (null != defaultValue) throw Error(formatProdErrorMessage(91));
+              if (null != defaultValue2) throw Error(formatProdErrorMessage(91));
               break;
             default:
-              setProp(domElement, tag, propValue, defaultValue, props, null);
+              setProp(domElement, tag, propValue, defaultValue2, props, null);
           }
       initTextarea(domElement, hasSrc, hasSrcSet, propKey);
       track(domElement);
@@ -12921,8 +12921,8 @@ function setInitialProperties(domElement, tag, props) {
         return;
       }
   }
-  for (defaultValue in props)
-    props.hasOwnProperty(defaultValue) && (hasSrc = props[defaultValue], null != hasSrc && setProp(domElement, tag, defaultValue, hasSrc, props, null));
+  for (defaultValue2 in props)
+    props.hasOwnProperty(defaultValue2) && (hasSrc = props[defaultValue2], null != hasSrc && setProp(domElement, tag, defaultValue2, hasSrc, props, null));
 }
 function updateProperties(domElement, tag, lastProps, nextProps) {
   switch (tag) {
@@ -12936,7 +12936,7 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
     case "li":
       break;
     case "input":
-      var name = null, type = null, value = null, defaultValue = null, lastDefaultValue = null, checked = null, defaultChecked = null;
+      var name = null, type = null, value = null, defaultValue2 = null, lastDefaultValue = null, checked = null, defaultChecked = null;
       for (propKey in lastProps) {
         var lastProp = lastProps[propKey];
         if (lastProps.hasOwnProperty(propKey) && null != lastProp)
@@ -12972,7 +12972,7 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
               value = propKey;
               break;
             case "defaultValue":
-              defaultValue = propKey;
+              defaultValue2 = propKey;
               break;
             case "children":
             case "dangerouslySetInnerHTML":
@@ -12993,7 +12993,7 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
       updateInput(
         domElement,
         value,
-        defaultValue,
+        defaultValue2,
         lastDefaultValue,
         checked,
         defaultChecked,
@@ -13002,7 +13002,7 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
       );
       return;
     case "select":
-      propKey = value = defaultValue = propKey$205 = null;
+      propKey = value = defaultValue2 = propKey$205 = null;
       for (type in lastProps)
         if (lastDefaultValue = lastProps[type], lastProps.hasOwnProperty(type) && null != lastDefaultValue)
           switch (type) {
@@ -13027,7 +13027,7 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
               propKey$205 = type;
               break;
             case "defaultValue":
-              defaultValue = type;
+              defaultValue2 = type;
               break;
             case "multiple":
               value = type;
@@ -13041,22 +13041,22 @@ function updateProperties(domElement, tag, lastProps, nextProps) {
                 lastDefaultValue
               );
           }
-      tag = defaultValue;
+      tag = defaultValue2;
       lastProps = value;
       nextProps = propKey;
       null != propKey$205 ? updateOptions(domElement, !!lastProps, propKey$205, false) : !!nextProps !== !!lastProps && (null != tag ? updateOptions(domElement, !!lastProps, tag, true) : updateOptions(domElement, !!lastProps, lastProps ? [] : "", false));
       return;
     case "textarea":
       propKey = propKey$205 = null;
-      for (defaultValue in lastProps)
-        if (name = lastProps[defaultValue], lastProps.hasOwnProperty(defaultValue) && null != name && !nextProps.hasOwnProperty(defaultValue))
-          switch (defaultValue) {
+      for (defaultValue2 in lastProps)
+        if (name = lastProps[defaultValue2], lastProps.hasOwnProperty(defaultValue2) && null != name && !nextProps.hasOwnProperty(defaultValue2))
+          switch (defaultValue2) {
             case "value":
               break;
             case "children":
               break;
             default:
-              setProp(domElement, tag, defaultValue, null, nextProps, name);
+              setProp(domElement, tag, defaultValue2, null, nextProps, name);
           }
       for (value in nextProps)
         if (name = nextProps[value], type = lastProps[value], nextProps.hasOwnProperty(value) && (null != name || null != type))
@@ -14568,6 +14568,1114 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
+var hasElementType = typeof Element !== "undefined";
+var hasMap = typeof Map === "function";
+var hasSet = typeof Set === "function";
+var hasArrayBuffer = typeof ArrayBuffer === "function" && !!ArrayBuffer.isView;
+function equal(a, b) {
+  if (a === b) return true;
+  if (a && b && typeof a == "object" && typeof b == "object") {
+    if (a.constructor !== b.constructor) return false;
+    var length, i, keys;
+    if (Array.isArray(a)) {
+      length = a.length;
+      if (length != b.length) return false;
+      for (i = length; i-- !== 0; )
+        if (!equal(a[i], b[i])) return false;
+      return true;
+    }
+    var it;
+    if (hasMap && a instanceof Map && b instanceof Map) {
+      if (a.size !== b.size) return false;
+      it = a.entries();
+      while (!(i = it.next()).done)
+        if (!b.has(i.value[0])) return false;
+      it = a.entries();
+      while (!(i = it.next()).done)
+        if (!equal(i.value[1], b.get(i.value[0]))) return false;
+      return true;
+    }
+    if (hasSet && a instanceof Set && b instanceof Set) {
+      if (a.size !== b.size) return false;
+      it = a.entries();
+      while (!(i = it.next()).done)
+        if (!b.has(i.value[0])) return false;
+      return true;
+    }
+    if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+      length = a.length;
+      if (length != b.length) return false;
+      for (i = length; i-- !== 0; )
+        if (a[i] !== b[i]) return false;
+      return true;
+    }
+    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+    if (a.valueOf !== Object.prototype.valueOf && typeof a.valueOf === "function" && typeof b.valueOf === "function") return a.valueOf() === b.valueOf();
+    if (a.toString !== Object.prototype.toString && typeof a.toString === "function" && typeof b.toString === "function") return a.toString() === b.toString();
+    keys = Object.keys(a);
+    length = keys.length;
+    if (length !== Object.keys(b).length) return false;
+    for (i = length; i-- !== 0; )
+      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+    if (hasElementType && a instanceof Element) return false;
+    for (i = length; i-- !== 0; ) {
+      if ((keys[i] === "_owner" || keys[i] === "__v" || keys[i] === "__o") && a.$$typeof) {
+        continue;
+      }
+      if (!equal(a[keys[i]], b[keys[i]])) return false;
+    }
+    return true;
+  }
+  return a !== a && b !== b;
+}
+var reactFastCompare = function isEqual(a, b) {
+  try {
+    return equal(a, b);
+  } catch (error) {
+    if ((error.message || "").match(/stack|recursion/i)) {
+      console.warn("react-fast-compare cannot handle circular refs");
+      return false;
+    }
+    throw error;
+  }
+};
+const fastCompare = /* @__PURE__ */ getDefaultExportFromCjs(reactFastCompare);
+var invariant$1 = function(condition, format, a, b, c, d, e, f) {
+  if (!condition) {
+    var error;
+    if (format === void 0) {
+      error = new Error(
+        "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
+      );
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(
+        format.replace(/%s/g, function() {
+          return args[argIndex++];
+        })
+      );
+      error.name = "Invariant Violation";
+    }
+    error.framesToPop = 1;
+    throw error;
+  }
+};
+var browser = invariant$1;
+const invariant$2 = /* @__PURE__ */ getDefaultExportFromCjs(browser);
+var shallowequal = function shallowEqual(objA, objB, compare2, compareContext) {
+  var ret = compare2 ? compare2.call(compareContext, objA, objB) : void 0;
+  if (ret !== void 0) {
+    return !!ret;
+  }
+  if (objA === objB) {
+    return true;
+  }
+  if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
+    return false;
+  }
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+  for (var idx = 0; idx < keysA.length; idx++) {
+    var key = keysA[idx];
+    if (!bHasOwnProperty(key)) {
+      return false;
+    }
+    var valueA = objA[key];
+    var valueB = objB[key];
+    ret = compare2 ? compare2.call(compareContext, valueA, valueB, key) : void 0;
+    if (ret === false || ret === void 0 && valueA !== valueB) {
+      return false;
+    }
+  }
+  return true;
+};
+const shallowEqual2 = /* @__PURE__ */ getDefaultExportFromCjs(shallowequal);
+var TAG_NAMES = /* @__PURE__ */ ((TAG_NAMES2) => {
+  TAG_NAMES2["BASE"] = "base";
+  TAG_NAMES2["BODY"] = "body";
+  TAG_NAMES2["HEAD"] = "head";
+  TAG_NAMES2["HTML"] = "html";
+  TAG_NAMES2["LINK"] = "link";
+  TAG_NAMES2["META"] = "meta";
+  TAG_NAMES2["NOSCRIPT"] = "noscript";
+  TAG_NAMES2["SCRIPT"] = "script";
+  TAG_NAMES2["STYLE"] = "style";
+  TAG_NAMES2["TITLE"] = "title";
+  TAG_NAMES2["FRAGMENT"] = "Symbol(react.fragment)";
+  return TAG_NAMES2;
+})(TAG_NAMES || {});
+var SEO_PRIORITY_TAGS = {
+  link: { rel: ["amphtml", "canonical", "alternate"] },
+  script: { type: ["application/ld+json"] },
+  meta: {
+    charset: "",
+    name: ["generator", "robots", "description"],
+    property: [
+      "og:type",
+      "og:title",
+      "og:url",
+      "og:image",
+      "og:image:alt",
+      "og:description",
+      "twitter:url",
+      "twitter:title",
+      "twitter:description",
+      "twitter:image",
+      "twitter:image:alt",
+      "twitter:card",
+      "twitter:site"
+    ]
+  }
+};
+var VALID_TAG_NAMES = Object.values(TAG_NAMES);
+var REACT_TAG_MAP = {
+  accesskey: "accessKey",
+  charset: "charSet",
+  class: "className",
+  contenteditable: "contentEditable",
+  contextmenu: "contextMenu",
+  "http-equiv": "httpEquiv",
+  itemprop: "itemProp",
+  tabindex: "tabIndex"
+};
+var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
+  (carry, [key, value]) => {
+    carry[value] = key;
+    return carry;
+  },
+  {}
+);
+var HELMET_ATTRIBUTE = "data-rh";
+var HELMET_PROPS = {
+  DEFAULT_TITLE: "defaultTitle",
+  DEFER: "defer",
+  ENCODE_SPECIAL_CHARACTERS: "encodeSpecialCharacters",
+  ON_CHANGE_CLIENT_STATE: "onChangeClientState",
+  TITLE_TEMPLATE: "titleTemplate",
+  PRIORITIZE_SEO_TAGS: "prioritizeSeoTags"
+};
+var getInnermostProperty = (propsList, property) => {
+  for (let i = propsList.length - 1; i >= 0; i -= 1) {
+    const props = propsList[i];
+    if (Object.prototype.hasOwnProperty.call(props, property)) {
+      return props[property];
+    }
+  }
+  return null;
+};
+var getTitleFromPropsList = (propsList) => {
+  let innermostTitle = getInnermostProperty(
+    propsList,
+    "title"
+    /* TITLE */
+  );
+  const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
+  if (Array.isArray(innermostTitle)) {
+    innermostTitle = innermostTitle.join("");
+  }
+  if (innermostTemplate && innermostTitle) {
+    return innermostTemplate.replace(/%s/g, () => innermostTitle);
+  }
+  const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
+  return innermostTitle || innermostDefaultTitle || void 0;
+};
+var getOnChangeClientState = (propsList) => getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) || (() => {
+});
+var getAttributesFromPropsList = (tagType, propsList) => propsList.filter((props) => typeof props[tagType] !== "undefined").map((props) => props[tagType]).reduce((tagAttrs, current) => ({ ...tagAttrs, ...current }), {});
+var getBaseTagFromPropsList = (primaryAttributes, propsList) => propsList.filter((props) => typeof props[
+  "base"
+  /* BASE */
+] !== "undefined").map((props) => props[
+  "base"
+  /* BASE */
+]).reverse().reduce((innermostBaseTag, tag) => {
+  if (!innermostBaseTag.length) {
+    const keys = Object.keys(tag);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const lowerCaseAttributeKey = attributeKey.toLowerCase();
+      if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && tag[lowerCaseAttributeKey]) {
+        return innermostBaseTag.concat(tag);
+      }
+    }
+  }
+  return innermostBaseTag;
+}, []);
+var warn = (msg) => console && typeof console.warn === "function" && console.warn(msg);
+var getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
+  const approvedSeenTags = {};
+  return propsList.filter((props) => {
+    if (Array.isArray(props[tagName])) {
+      return true;
+    }
+    if (typeof props[tagName] !== "undefined") {
+      warn(
+        `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[tagName]}"`
+      );
+    }
+    return false;
+  }).map((props) => props[tagName]).reverse().reduce((approvedTags, instanceTags) => {
+    const instanceSeenTags = {};
+    instanceTags.filter((tag) => {
+      let primaryAttributeKey;
+      const keys2 = Object.keys(tag);
+      for (let i = 0; i < keys2.length; i += 1) {
+        const attributeKey = keys2[i];
+        const lowerCaseAttributeKey = attributeKey.toLowerCase();
+        if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && !(primaryAttributeKey === "rel" && tag[primaryAttributeKey].toLowerCase() === "canonical") && !(lowerCaseAttributeKey === "rel" && tag[lowerCaseAttributeKey].toLowerCase() === "stylesheet")) {
+          primaryAttributeKey = lowerCaseAttributeKey;
+        }
+        if (primaryAttributes.indexOf(attributeKey) !== -1 && (attributeKey === "innerHTML" || attributeKey === "cssText" || attributeKey === "itemprop")) {
+          primaryAttributeKey = attributeKey;
+        }
+      }
+      if (!primaryAttributeKey || !tag[primaryAttributeKey]) {
+        return false;
+      }
+      const value = tag[primaryAttributeKey].toLowerCase();
+      if (!approvedSeenTags[primaryAttributeKey]) {
+        approvedSeenTags[primaryAttributeKey] = {};
+      }
+      if (!instanceSeenTags[primaryAttributeKey]) {
+        instanceSeenTags[primaryAttributeKey] = {};
+      }
+      if (!approvedSeenTags[primaryAttributeKey][value]) {
+        instanceSeenTags[primaryAttributeKey][value] = true;
+        return true;
+      }
+      return false;
+    }).reverse().forEach((tag) => approvedTags.push(tag));
+    const keys = Object.keys(instanceSeenTags);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const tagUnion = {
+        ...approvedSeenTags[attributeKey],
+        ...instanceSeenTags[attributeKey]
+      };
+      approvedSeenTags[attributeKey] = tagUnion;
+    }
+    return approvedTags;
+  }, []).reverse();
+};
+var getAnyTrueFromPropsList = (propsList, checkedTag) => {
+  if (Array.isArray(propsList) && propsList.length) {
+    for (let index2 = 0; index2 < propsList.length; index2 += 1) {
+      const prop = propsList[index2];
+      if (prop[checkedTag]) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+var reducePropsToState = (propsList) => ({
+  baseTag: getBaseTagFromPropsList([
+    "href"
+    /* HREF */
+  ], propsList),
+  bodyAttributes: getAttributesFromPropsList("bodyAttributes", propsList),
+  defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
+  encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
+  htmlAttributes: getAttributesFromPropsList("htmlAttributes", propsList),
+  linkTags: getTagsFromPropsList(
+    "link",
+    [
+      "rel",
+      "href"
+      /* HREF */
+    ],
+    propsList
+  ),
+  metaTags: getTagsFromPropsList(
+    "meta",
+    [
+      "name",
+      "charset",
+      "http-equiv",
+      "property",
+      "itemprop"
+      /* ITEM_PROP */
+    ],
+    propsList
+  ),
+  noscriptTags: getTagsFromPropsList("noscript", [
+    "innerHTML"
+    /* INNER_HTML */
+  ], propsList),
+  onChangeClientState: getOnChangeClientState(propsList),
+  scriptTags: getTagsFromPropsList(
+    "script",
+    [
+      "src",
+      "innerHTML"
+      /* INNER_HTML */
+    ],
+    propsList
+  ),
+  styleTags: getTagsFromPropsList("style", [
+    "cssText"
+    /* CSS_TEXT */
+  ], propsList),
+  title: getTitleFromPropsList(propsList),
+  titleAttributes: getAttributesFromPropsList("titleAttributes", propsList),
+  prioritizeSeoTags: getAnyTrueFromPropsList(propsList, HELMET_PROPS.PRIORITIZE_SEO_TAGS)
+});
+var flattenArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray.join("") : possibleArray;
+var checkIfPropsMatch = (props, toMatch) => {
+  const keys = Object.keys(props);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (toMatch[keys[i]] && toMatch[keys[i]].includes(props[keys[i]])) {
+      return true;
+    }
+  }
+  return false;
+};
+var prioritizer = (elementsList, propsToMatch) => {
+  if (Array.isArray(elementsList)) {
+    return elementsList.reduce(
+      (acc, elementAttrs) => {
+        if (checkIfPropsMatch(elementAttrs, propsToMatch)) {
+          acc.priority.push(elementAttrs);
+        } else {
+          acc.default.push(elementAttrs);
+        }
+        return acc;
+      },
+      { priority: [], default: [] }
+    );
+  }
+  return { default: elementsList, priority: [] };
+};
+var without = (obj, key) => {
+  return {
+    ...obj,
+    [key]: void 0
+  };
+};
+var SELF_CLOSING_TAGS = [
+  "noscript",
+  "script",
+  "style"
+  /* STYLE */
+];
+var encodeSpecialCharacters = (str, encode2 = true) => {
+  if (encode2 === false) {
+    return String(str);
+  }
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+};
+var generateElementAttributesAsString = (attributes) => Object.keys(attributes).reduce((str, key) => {
+  const attr = typeof attributes[key] !== "undefined" ? `${key}="${attributes[key]}"` : `${key}`;
+  return str ? `${str} ${attr}` : attr;
+}, "");
+var generateTitleAsString = (type, title, attributes, encode2) => {
+  const attributeString = generateElementAttributesAsString(attributes);
+  const flattenedTitle = flattenArray(title);
+  return attributeString ? `<${type} ${HELMET_ATTRIBUTE}="true" ${attributeString}>${encodeSpecialCharacters(
+    flattenedTitle,
+    encode2
+  )}</${type}>` : `<${type} ${HELMET_ATTRIBUTE}="true">${encodeSpecialCharacters(
+    flattenedTitle,
+    encode2
+  )}</${type}>`;
+};
+var generateTagsAsString = (type, tags, encode2 = true) => tags.reduce((str, t) => {
+  const tag = t;
+  const attributeHtml = Object.keys(tag).filter(
+    (attribute) => !(attribute === "innerHTML" || attribute === "cssText")
+  ).reduce((string, attribute) => {
+    const attr = typeof tag[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode2)}"`;
+    return string ? `${string} ${attr}` : attr;
+  }, "");
+  const tagContent = tag.innerHTML || tag.cssText || "";
+  const isSelfClosing = SELF_CLOSING_TAGS.indexOf(type) === -1;
+  return `${str}<${type} ${HELMET_ATTRIBUTE}="true" ${attributeHtml}${isSelfClosing ? `/>` : `>${tagContent}</${type}>`}`;
+}, "");
+var convertElementAttributesToReactProps = (attributes, initProps = {}) => Object.keys(attributes).reduce((obj, key) => {
+  const mapped = REACT_TAG_MAP[key];
+  obj[mapped || key] = attributes[key];
+  return obj;
+}, initProps);
+var generateTitleAsReactComponent = (_type, title, attributes) => {
+  const initProps = {
+    key: title,
+    [HELMET_ATTRIBUTE]: true
+  };
+  const props = convertElementAttributesToReactProps(attributes, initProps);
+  return [o.createElement("title", props, title)];
+};
+var generateTagsAsReactComponent = (type, tags) => tags.map((tag, i) => {
+  const mappedTag = {
+    key: i,
+    [HELMET_ATTRIBUTE]: true
+  };
+  Object.keys(tag).forEach((attribute) => {
+    const mapped = REACT_TAG_MAP[attribute];
+    const mappedAttribute = mapped || attribute;
+    if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
+      const content = tag.innerHTML || tag.cssText;
+      mappedTag.dangerouslySetInnerHTML = { __html: content };
+    } else {
+      mappedTag[mappedAttribute] = tag[attribute];
+    }
+  });
+  return o.createElement(type, mappedTag);
+});
+var getMethodsForTag = (type, tags, encode2 = true) => {
+  switch (type) {
+    case "title":
+      return {
+        toComponent: () => generateTitleAsReactComponent(type, tags.title, tags.titleAttributes),
+        toString: () => generateTitleAsString(type, tags.title, tags.titleAttributes, encode2)
+      };
+    case "bodyAttributes":
+    case "htmlAttributes":
+      return {
+        toComponent: () => convertElementAttributesToReactProps(tags),
+        toString: () => generateElementAttributesAsString(tags)
+      };
+    default:
+      return {
+        toComponent: () => generateTagsAsReactComponent(type, tags),
+        toString: () => generateTagsAsString(type, tags, encode2)
+      };
+  }
+};
+var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode: encode2 }) => {
+  const meta = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
+  const link = prioritizer(linkTags, SEO_PRIORITY_TAGS.link);
+  const script = prioritizer(scriptTags, SEO_PRIORITY_TAGS.script);
+  const priorityMethods = {
+    toComponent: () => [
+      ...generateTagsAsReactComponent("meta", meta.priority),
+      ...generateTagsAsReactComponent("link", link.priority),
+      ...generateTagsAsReactComponent("script", script.priority)
+    ],
+    toString: () => (
+      // generate all the tags as strings and concatenate them
+      `${getMethodsForTag("meta", meta.priority, encode2)} ${getMethodsForTag(
+        "link",
+        link.priority,
+        encode2
+      )} ${getMethodsForTag("script", script.priority, encode2)}`
+    )
+  };
+  return {
+    priorityMethods,
+    metaTags: meta.default,
+    linkTags: link.default,
+    scriptTags: script.default
+  };
+};
+var mapStateOnServer = (props) => {
+  const {
+    baseTag,
+    bodyAttributes,
+    encode: encode2 = true,
+    htmlAttributes,
+    noscriptTags,
+    styleTags,
+    title = "",
+    titleAttributes,
+    prioritizeSeoTags
+  } = props;
+  let { linkTags, metaTags, scriptTags } = props;
+  let priorityMethods = {
+    toComponent: () => [],
+    toString: () => ""
+  };
+  if (prioritizeSeoTags) {
+    ({ priorityMethods, linkTags, metaTags, scriptTags } = getPriorityMethods(props));
+  }
+  return {
+    priority: priorityMethods,
+    base: getMethodsForTag("base", baseTag, encode2),
+    bodyAttributes: getMethodsForTag("bodyAttributes", bodyAttributes, encode2),
+    htmlAttributes: getMethodsForTag("htmlAttributes", htmlAttributes, encode2),
+    link: getMethodsForTag("link", linkTags, encode2),
+    meta: getMethodsForTag("meta", metaTags, encode2),
+    noscript: getMethodsForTag("noscript", noscriptTags, encode2),
+    script: getMethodsForTag("script", scriptTags, encode2),
+    style: getMethodsForTag("style", styleTags, encode2),
+    title: getMethodsForTag("title", { title, titleAttributes }, encode2)
+  };
+};
+var server_default = mapStateOnServer;
+var instances = [];
+var isDocument = !!(typeof window !== "undefined" && window.document && window.document.createElement);
+var HelmetData = class {
+  constructor(context, canUseDOM2) {
+    __publicField(this, "instances", []);
+    __publicField(this, "canUseDOM", isDocument);
+    __publicField(this, "context");
+    __publicField(this, "value", {
+      setHelmet: (serverState) => {
+        this.context.helmet = serverState;
+      },
+      helmetInstances: {
+        get: () => this.canUseDOM ? instances : this.instances,
+        add: (instance) => {
+          (this.canUseDOM ? instances : this.instances).push(instance);
+        },
+        remove: (instance) => {
+          const index2 = (this.canUseDOM ? instances : this.instances).indexOf(instance);
+          (this.canUseDOM ? instances : this.instances).splice(index2, 1);
+        }
+      }
+    });
+    this.context = context;
+    this.canUseDOM = canUseDOM2 || false;
+    if (!canUseDOM2) {
+      context.helmet = server_default({
+        baseTag: [],
+        bodyAttributes: {},
+        htmlAttributes: {},
+        linkTags: [],
+        metaTags: [],
+        noscriptTags: [],
+        scriptTags: [],
+        styleTags: [],
+        title: "",
+        titleAttributes: {}
+      });
+    }
+  }
+};
+var major = parseInt(o.version.split(".")[0], 10);
+var isReact19 = major >= 19;
+var defaultValue = {};
+var Context = o.createContext(defaultValue);
+var HelmetProvider = (_k = class extends reactExports.Component {
+  constructor(props) {
+    super(props);
+    __publicField(this, "helmetData");
+    if (isReact19) {
+      this.helmetData = null;
+    } else {
+      this.helmetData = new HelmetData(this.props.context || {}, _k.canUseDOM);
+    }
+  }
+  render() {
+    if (isReact19) {
+      return /* @__PURE__ */ o.createElement(o.Fragment, null, this.props.children);
+    }
+    return /* @__PURE__ */ o.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
+  }
+}, __publicField(_k, "canUseDOM", isDocument), _k);
+var updateTags = (type, tags) => {
+  const headElement = document.head || document.querySelector(
+    "head"
+    /* HEAD */
+  );
+  const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
+  const oldTags = [].slice.call(tagNodes);
+  const newTags = [];
+  let indexToDelete;
+  if (tags && tags.length) {
+    tags.forEach((tag) => {
+      const newElement = document.createElement(type);
+      for (const attribute in tag) {
+        if (Object.prototype.hasOwnProperty.call(tag, attribute)) {
+          if (attribute === "innerHTML") {
+            newElement.innerHTML = tag.innerHTML;
+          } else if (attribute === "cssText") {
+            const cssText = tag.cssText;
+            newElement.appendChild(document.createTextNode(cssText));
+          } else {
+            const attr = attribute;
+            const value = typeof tag[attr] === "undefined" ? "" : tag[attr];
+            newElement.setAttribute(attribute, value);
+          }
+        }
+      }
+      newElement.setAttribute(HELMET_ATTRIBUTE, "true");
+      if (oldTags.some((existingTag, index2) => {
+        indexToDelete = index2;
+        return newElement.isEqualNode(existingTag);
+      })) {
+        oldTags.splice(indexToDelete, 1);
+      } else {
+        newTags.push(newElement);
+      }
+    });
+  }
+  oldTags.forEach((tag) => {
+    var _a2;
+    return (_a2 = tag.parentNode) == null ? void 0 : _a2.removeChild(tag);
+  });
+  newTags.forEach((tag) => headElement.appendChild(tag));
+  return {
+    oldTags,
+    newTags
+  };
+};
+var updateAttributes = (tagName, attributes) => {
+  const elementTag = document.getElementsByTagName(tagName)[0];
+  if (!elementTag) {
+    return;
+  }
+  const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
+  const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(",") : [];
+  const attributesToRemove = [...helmetAttributes];
+  const attributeKeys = Object.keys(attributes);
+  for (const attribute of attributeKeys) {
+    const value = attributes[attribute] || "";
+    if (elementTag.getAttribute(attribute) !== value) {
+      elementTag.setAttribute(attribute, value);
+    }
+    if (helmetAttributes.indexOf(attribute) === -1) {
+      helmetAttributes.push(attribute);
+    }
+    const indexToSave = attributesToRemove.indexOf(attribute);
+    if (indexToSave !== -1) {
+      attributesToRemove.splice(indexToSave, 1);
+    }
+  }
+  for (let i = attributesToRemove.length - 1; i >= 0; i -= 1) {
+    elementTag.removeAttribute(attributesToRemove[i]);
+  }
+  if (helmetAttributes.length === attributesToRemove.length) {
+    elementTag.removeAttribute(HELMET_ATTRIBUTE);
+  } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")) {
+    elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
+  }
+};
+var updateTitle = (title, attributes) => {
+  if (typeof title !== "undefined" && document.title !== title) {
+    document.title = flattenArray(title);
+  }
+  updateAttributes("title", attributes);
+};
+var commitTagChanges = (newState, cb) => {
+  const {
+    baseTag,
+    bodyAttributes,
+    htmlAttributes,
+    linkTags,
+    metaTags,
+    noscriptTags,
+    onChangeClientState,
+    scriptTags,
+    styleTags,
+    title,
+    titleAttributes
+  } = newState;
+  updateAttributes("body", bodyAttributes);
+  updateAttributes("html", htmlAttributes);
+  updateTitle(title, titleAttributes);
+  const tagUpdates = {
+    baseTag: updateTags("base", baseTag),
+    linkTags: updateTags("link", linkTags),
+    metaTags: updateTags("meta", metaTags),
+    noscriptTags: updateTags("noscript", noscriptTags),
+    scriptTags: updateTags("script", scriptTags),
+    styleTags: updateTags("style", styleTags)
+  };
+  const addedTags = {};
+  const removedTags = {};
+  Object.keys(tagUpdates).forEach((tagType) => {
+    const { newTags, oldTags } = tagUpdates[tagType];
+    if (newTags.length) {
+      addedTags[tagType] = newTags;
+    }
+    if (oldTags.length) {
+      removedTags[tagType] = tagUpdates[tagType].oldTags;
+    }
+  });
+  if (cb) {
+    cb();
+  }
+  onChangeClientState(newState, addedTags, removedTags);
+};
+var _helmetCallback = null;
+var handleStateChangeOnClient = (newState) => {
+  if (_helmetCallback) {
+    cancelAnimationFrame(_helmetCallback);
+  }
+  if (newState.defer) {
+    _helmetCallback = requestAnimationFrame(() => {
+      commitTagChanges(newState, () => {
+        _helmetCallback = null;
+      });
+    });
+  } else {
+    commitTagChanges(newState);
+    _helmetCallback = null;
+  }
+};
+var client_default = handleStateChangeOnClient;
+var HelmetDispatcher = class extends reactExports.Component {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "rendered", false);
+  }
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual2(nextProps, this.props);
+  }
+  componentDidUpdate() {
+    this.emitChange();
+  }
+  componentWillUnmount() {
+    const { helmetInstances } = this.props.context;
+    helmetInstances.remove(this);
+    this.emitChange();
+  }
+  emitChange() {
+    const { helmetInstances, setHelmet } = this.props.context;
+    let serverState = null;
+    const state = reducePropsToState(
+      helmetInstances.get().map((instance) => {
+        const { context: _context, ...props } = instance.props;
+        return props;
+      })
+    );
+    if (HelmetProvider.canUseDOM) {
+      client_default(state);
+    } else if (server_default) {
+      serverState = server_default(state);
+    }
+    setHelmet(serverState);
+  }
+  // componentWillMount will be deprecated
+  // for SSR, initialize on first render
+  // constructor is also unsafe in StrictMode
+  init() {
+    if (this.rendered) {
+      return;
+    }
+    this.rendered = true;
+    const { helmetInstances } = this.props.context;
+    helmetInstances.add(this);
+    this.emitChange();
+  }
+  render() {
+    this.init();
+    return null;
+  }
+};
+var react19Instances = [];
+var toHtmlAttributes = (props) => {
+  const result = {};
+  for (const key of Object.keys(props)) {
+    result[HTML_TAG_MAP[key] || key] = props[key];
+  }
+  return result;
+};
+var toReactProps = (attrs) => {
+  const result = {};
+  for (const key of Object.keys(attrs)) {
+    const mapped = REACT_TAG_MAP[key];
+    result[mapped || key] = attrs[key];
+  }
+  return result;
+};
+var applyAttributes = (tagName, attributes) => {
+  if (!isDocument)
+    return;
+  const el = document.getElementsByTagName(tagName)[0];
+  if (!el)
+    return;
+  const managedAttr = "data-rh-managed";
+  const prev = el.getAttribute(managedAttr);
+  const prevKeys = prev ? prev.split(",") : [];
+  const nextKeys = Object.keys(attributes);
+  for (const key of prevKeys) {
+    if (!nextKeys.includes(key)) {
+      el.removeAttribute(key);
+    }
+  }
+  for (const key of nextKeys) {
+    const value = attributes[key];
+    if (value === void 0 || value === null || value === false) {
+      el.removeAttribute(key);
+    } else if (value === true) {
+      el.setAttribute(key, "");
+    } else {
+      el.setAttribute(key, String(value));
+    }
+  }
+  if (nextKeys.length > 0) {
+    el.setAttribute(managedAttr, nextKeys.join(","));
+  } else {
+    el.removeAttribute(managedAttr);
+  }
+};
+var syncAllAttributes = () => {
+  const htmlAttrs = {};
+  const bodyAttrs = {};
+  for (const instance of react19Instances) {
+    const { htmlAttributes, bodyAttributes } = instance.props;
+    if (htmlAttributes) {
+      Object.assign(htmlAttrs, toHtmlAttributes(htmlAttributes));
+    }
+    if (bodyAttributes) {
+      Object.assign(bodyAttrs, toHtmlAttributes(bodyAttributes));
+    }
+  }
+  applyAttributes("html", htmlAttrs);
+  applyAttributes("body", bodyAttrs);
+};
+var React19Dispatcher = class extends reactExports.Component {
+  componentDidMount() {
+    react19Instances.push(this);
+    syncAllAttributes();
+  }
+  componentDidUpdate() {
+    syncAllAttributes();
+  }
+  componentWillUnmount() {
+    const index2 = react19Instances.indexOf(this);
+    if (index2 !== -1) {
+      react19Instances.splice(index2, 1);
+    }
+    syncAllAttributes();
+  }
+  resolveTitle() {
+    const { title, titleTemplate, defaultTitle } = this.props;
+    if (title && titleTemplate) {
+      return titleTemplate.replace(/%s/g, () => Array.isArray(title) ? title.join("") : title);
+    }
+    return title || defaultTitle || void 0;
+  }
+  renderTitle() {
+    const title = this.resolveTitle();
+    if (title === void 0)
+      return null;
+    const titleAttributes = this.props.titleAttributes || {};
+    return o.createElement("title", toReactProps(titleAttributes), title);
+  }
+  renderBase() {
+    const { base } = this.props;
+    if (!base)
+      return null;
+    return o.createElement("base", toReactProps(base));
+  }
+  renderMeta() {
+    const { meta } = this.props;
+    if (!meta || !Array.isArray(meta))
+      return null;
+    return meta.map(
+      (attrs, i) => o.createElement("meta", {
+        key: i,
+        ...toReactProps(attrs)
+      })
+    );
+  }
+  renderLink() {
+    const { link } = this.props;
+    if (!link || !Array.isArray(link))
+      return null;
+    return link.map(
+      (attrs, i) => o.createElement("link", {
+        key: i,
+        ...toReactProps(attrs)
+      })
+    );
+  }
+  renderScript() {
+    const { script } = this.props;
+    if (!script || !Array.isArray(script))
+      return null;
+    return script.map((attrs, i) => {
+      const { innerHTML, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (innerHTML) {
+        props.dangerouslySetInnerHTML = { __html: innerHTML };
+      }
+      return o.createElement("script", { key: i, ...props });
+    });
+  }
+  renderStyle() {
+    const { style: style2 } = this.props;
+    if (!style2 || !Array.isArray(style2))
+      return null;
+    return style2.map((attrs, i) => {
+      const { cssText, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (cssText) {
+        props.dangerouslySetInnerHTML = { __html: cssText };
+      }
+      return o.createElement("style", { key: i, ...props });
+    });
+  }
+  renderNoscript() {
+    const { noscript } = this.props;
+    if (!noscript || !Array.isArray(noscript))
+      return null;
+    return noscript.map((attrs, i) => {
+      const { innerHTML, ...rest } = attrs;
+      const props = toReactProps(rest);
+      if (innerHTML) {
+        props.dangerouslySetInnerHTML = { __html: innerHTML };
+      }
+      return o.createElement("noscript", { key: i, ...props });
+    });
+  }
+  render() {
+    return o.createElement(
+      o.Fragment,
+      null,
+      this.renderTitle(),
+      this.renderBase(),
+      this.renderMeta(),
+      this.renderLink(),
+      this.renderScript(),
+      this.renderStyle(),
+      this.renderNoscript()
+    );
+  }
+};
+var Helmet = (_l = class extends reactExports.Component {
+  shouldComponentUpdate(nextProps) {
+    return !fastCompare(without(this.props, "helmetData"), without(nextProps, "helmetData"));
+  }
+  mapNestedChildrenToProps(child, nestedChildren) {
+    if (!nestedChildren) {
+      return null;
+    }
+    switch (child.type) {
+      case "script":
+      case "noscript":
+        return {
+          innerHTML: nestedChildren
+        };
+      case "style":
+        return {
+          cssText: nestedChildren
+        };
+      default:
+        throw new Error(
+          `<${child.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`
+        );
+    }
+  }
+  flattenArrayTypeChildren(child, arrayTypeChildren, newChildProps, nestedChildren) {
+    return {
+      ...arrayTypeChildren,
+      [child.type]: [
+        ...arrayTypeChildren[child.type] || [],
+        {
+          ...newChildProps,
+          ...this.mapNestedChildrenToProps(child, nestedChildren)
+        }
+      ]
+    };
+  }
+  mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren) {
+    switch (child.type) {
+      case "title":
+        return {
+          ...newProps,
+          [child.type]: nestedChildren,
+          titleAttributes: { ...newChildProps }
+        };
+      case "body":
+        return {
+          ...newProps,
+          bodyAttributes: { ...newChildProps }
+        };
+      case "html":
+        return {
+          ...newProps,
+          htmlAttributes: { ...newChildProps }
+        };
+      default:
+        return {
+          ...newProps,
+          [child.type]: { ...newChildProps }
+        };
+    }
+  }
+  mapArrayTypeChildrenToProps(arrayTypeChildren, newProps) {
+    let newFlattenedProps = { ...newProps };
+    Object.keys(arrayTypeChildren).forEach((arrayChildName) => {
+      newFlattenedProps = {
+        ...newFlattenedProps,
+        [arrayChildName]: arrayTypeChildren[arrayChildName]
+      };
+    });
+    return newFlattenedProps;
+  }
+  warnOnInvalidChildren(child, nestedChildren) {
+    invariant$2(
+      VALID_TAG_NAMES.some((name) => child.type === name),
+      typeof child.type === "function" ? `You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.` : `Only elements types ${VALID_TAG_NAMES.join(
+        ", "
+      )} are allowed. Helmet does not support rendering <${child.type}> elements. Refer to our API for more information.`
+    );
+    invariant$2(
+      !nestedChildren || typeof nestedChildren === "string" || Array.isArray(nestedChildren) && !nestedChildren.some((nestedChild) => typeof nestedChild !== "string"),
+      `Helmet expects a string as a child of <${child.type}>. Did you forget to wrap your children in braces? ( <${child.type}>{\`\`}</${child.type}> ) Refer to our API for more information.`
+    );
+    return true;
+  }
+  mapChildrenToProps(children, newProps) {
+    let arrayTypeChildren = {};
+    o.Children.forEach(children, (child) => {
+      if (!child || !child.props) {
+        return;
+      }
+      const { children: nestedChildren, ...childProps } = child.props;
+      const newChildProps = Object.keys(childProps).reduce((obj, key) => {
+        obj[HTML_TAG_MAP[key] || key] = childProps[key];
+        return obj;
+      }, {});
+      let { type } = child;
+      if (typeof type === "symbol") {
+        type = type.toString();
+      } else {
+        this.warnOnInvalidChildren(child, nestedChildren);
+      }
+      switch (type) {
+        case "Symbol(react.fragment)":
+          newProps = this.mapChildrenToProps(nestedChildren, newProps);
+          break;
+        case "link":
+        case "meta":
+        case "noscript":
+        case "script":
+        case "style":
+          arrayTypeChildren = this.flattenArrayTypeChildren(
+            child,
+            arrayTypeChildren,
+            newChildProps,
+            nestedChildren
+          );
+          break;
+        default:
+          newProps = this.mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren);
+          break;
+      }
+    });
+    return this.mapArrayTypeChildrenToProps(arrayTypeChildren, newProps);
+  }
+  render() {
+    const { children, ...props } = this.props;
+    let newProps = { ...props };
+    let { helmetData } = props;
+    if (children) {
+      newProps = this.mapChildrenToProps(children, newProps);
+    }
+    if (helmetData && !(helmetData instanceof HelmetData)) {
+      const data = helmetData;
+      helmetData = new HelmetData(data.context, true);
+      delete newProps.helmetData;
+    }
+    if (isReact19) {
+      return /* @__PURE__ */ o.createElement(React19Dispatcher, { ...newProps });
+    }
+    return helmetData ? /* @__PURE__ */ o.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ o.createElement(Context.Consumer, null, (context) => /* @__PURE__ */ o.createElement(HelmetDispatcher, { ...newProps, context }));
+  }
+}, __publicField(_l, "defaultProps", {
+  defer: true,
+  encodeSpecialCharacters: true,
+  prioritizeSeoTags: false
+}), _l);
 var prefix = "Invariant failed";
 function invariant(condition, message) {
   if (condition) {
@@ -17415,11 +18523,11 @@ class RouterCore {
         ignoredProps.forEach((prop) => {
           next.state[prop] = this.latestLocation.state[prop];
         });
-        const isEqual = deepEqual(next.state, this.latestLocation.state);
+        const isEqual2 = deepEqual(next.state, this.latestLocation.state);
         ignoredProps.forEach((prop) => {
           delete next.state[prop];
         });
-        return isEqual;
+        return isEqual2;
       };
       const isSameUrl = this.latestLocation.href === next.href;
       const previousCommitPromise = this.commitLocationPromise;
@@ -18571,7 +19679,7 @@ function is(x2, y) {
   return x2 === y && (0 !== x2 || 1 / x2 === 1 / y) || x2 !== x2 && y !== y;
 }
 var objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim.useSyncExternalStore, useRef = React.useRef, useEffect = React.useEffect, useMemo = React.useMemo, useDebugValue = React.useDebugValue;
-withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector, isEqual) {
+withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, getSnapshot, getServerSnapshot, selector, isEqual2) {
   var instRef = useRef(null);
   if (null === instRef.current) {
     var inst = { hasValue: false, value: null };
@@ -18584,9 +19692,9 @@ withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, 
           hasMemo = true;
           memoizedSnapshot = nextSnapshot;
           nextSnapshot = selector(nextSnapshot);
-          if (void 0 !== isEqual && inst.hasValue) {
+          if (void 0 !== isEqual2 && inst.hasValue) {
             var currentSelection = inst.value;
-            if (isEqual(currentSelection, nextSnapshot))
+            if (isEqual2(currentSelection, nextSnapshot))
               return memoizedSelection = currentSelection;
           }
           return memoizedSelection = nextSnapshot;
@@ -18594,7 +19702,7 @@ withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, 
         currentSelection = memoizedSelection;
         if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
         var nextSelection = selector(nextSnapshot);
-        if (void 0 !== isEqual && isEqual(currentSelection, nextSelection))
+        if (void 0 !== isEqual2 && isEqual2(currentSelection, nextSelection))
           return memoizedSnapshot = nextSnapshot, currentSelection;
         memoizedSnapshot = nextSnapshot;
         return memoizedSelection = nextSelection;
@@ -18609,7 +19717,7 @@ withSelector_production.useSyncExternalStoreWithSelector = function(subscribe2, 
         }
       ];
     },
-    [getSnapshot, getServerSnapshot, selector, isEqual]
+    [getSnapshot, getServerSnapshot, selector, isEqual2]
   );
   var value = useSyncExternalStore(subscribe2, instRef[0], instRef[1]);
   useEffect(
@@ -19836,7 +20944,7 @@ const EMPTY_WEBSITE_SETTINGS = {
   twitterUrl: "",
   linkedinUrl: ""
 };
-function normalizeText$1(value) {
+function normalizeText$3(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 function stripTrailingSlash(value) {
@@ -19848,19 +20956,19 @@ function joinUrl(baseUrl, path) {
 function pickFallbackImage(images, index2) {
   return images[index2 % images.length];
 }
-function toSlug(value) {
+function toSlug$1(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
-function toStringArray(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText$1(value)).filter((value) => value.length > 0) : [];
+function toStringArray$1(values) {
+  return Array.isArray(values) ? values.map((value) => normalizeText$3(value)).filter((value) => value.length > 0) : [];
 }
 function resolveWebsiteApiBaseUrl(value) {
   return stripTrailingSlash(
-    normalizeText$1(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
+    normalizeText$3(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
   );
 }
 function resolveWebsiteAssetUrl(assetPath, baseUrl) {
-  const normalizedAssetPath = normalizeText$1(assetPath);
+  const normalizedAssetPath = normalizeText$3(assetPath);
   if (!normalizedAssetPath) {
     return "";
   }
@@ -19917,7 +21025,7 @@ async function requestWebsiteOptional(path, init = {}) {
 }
 async function getWebsiteContentByKey(modelKey) {
   var _a2;
-  const trimmed = normalizeText$1(modelKey);
+  const trimmed = normalizeText$3(modelKey);
   if (!trimmed) return null;
   const result = await requestWebsiteOptional(
     `/website/content/${encodeURIComponent(trimmed)}`
@@ -19929,7 +21037,7 @@ async function getWebsiteContentByKey(modelKey) {
   return payload.data;
 }
 function useWebsiteContent(modelKey) {
-  const key = normalizeText$1(modelKey);
+  const key = normalizeText$3(modelKey);
   return useQuery({
     queryKey: ["website", "content", key],
     queryFn: async () => key ? getWebsiteContentByKey(key) : null,
@@ -19969,19 +21077,19 @@ async function trackWebsitePageView(path) {
   }
 }
 function normalizeCategory(category, baseUrl, index2) {
-  const name = normalizeText$1(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
-  const slug = normalizeText$1(category == null ? void 0 : category.slug) || toSlug(name);
-  const description = normalizeText$1(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
+  const name = normalizeText$3(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
+  const slug = normalizeText$3(category == null ? void 0 : category.slug) || toSlug$1(name);
+  const description = normalizeText$3(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
   return {
-    id: normalizeText$1(category == null ? void 0 : category._id) || `category-${slug || index2}`,
+    id: normalizeText$3(category == null ? void 0 : category._id) || `category-${slug || index2}`,
     name,
     slug,
-    image: resolveWebsiteAssetUrl(normalizeText$1(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
+    image: resolveWebsiteAssetUrl(normalizeText$3(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
     description,
-    tags: toStringArray(category == null ? void 0 : category.tags),
+    tags: toStringArray$1(category == null ? void 0 : category.tags),
     order: typeof (category == null ? void 0 : category.order) === "number" ? category.order : index2,
-    metaTitle: normalizeText$1(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
-    metaDescription: normalizeText$1(category == null ? void 0 : category.metaDescription) || description
+    metaTitle: normalizeText$3(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
+    metaDescription: normalizeText$3(category == null ? void 0 : category.metaDescription) || description
   };
 }
 function normalizeCategorySummary(category, baseUrl, index2) {
@@ -19998,60 +21106,60 @@ function normalizeCategorySummary(category, baseUrl, index2) {
   };
 }
 function normalizeProduct(product, baseUrl, index2) {
-  const name = normalizeText$1(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
-  const slug = normalizeText$1(product == null ? void 0 : product.slug) || toSlug(name);
-  const gallery = toStringArray(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
-  const image = resolveWebsiteAssetUrl(normalizeText$1(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
-  const shortDescription = normalizeText$1(product == null ? void 0 : product.shortDescription) || normalizeText$1(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
-  const description = normalizeText$1(product == null ? void 0 : product.description) || shortDescription;
+  const name = normalizeText$3(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
+  const slug = normalizeText$3(product == null ? void 0 : product.slug) || toSlug$1(name);
+  const gallery = toStringArray$1(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
+  const image = resolveWebsiteAssetUrl(normalizeText$3(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
+  const shortDescription = normalizeText$3(product == null ? void 0 : product.shortDescription) || normalizeText$3(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
+  const description = normalizeText$3(product == null ? void 0 : product.description) || shortDescription;
   return {
-    id: normalizeText$1(product == null ? void 0 : product._id) || `product-${slug || index2}`,
+    id: normalizeText$3(product == null ? void 0 : product._id) || `product-${slug || index2}`,
     name,
     slug,
     image,
     gallery: Array.from(/* @__PURE__ */ new Set([image, ...gallery])),
     shortDescription,
     description,
-    material: normalizeText$1(product == null ? void 0 : product.material),
-    frame: normalizeText$1(product == null ? void 0 : product.frame),
-    cushions: normalizeText$1(product == null ? void 0 : product.cushions),
-    warranty: normalizeText$1(product == null ? void 0 : product.warranty),
-    tags: toStringArray(product == null ? void 0 : product.tags),
+    material: normalizeText$3(product == null ? void 0 : product.material),
+    frame: normalizeText$3(product == null ? void 0 : product.frame),
+    cushions: normalizeText$3(product == null ? void 0 : product.cushions),
+    warranty: normalizeText$3(product == null ? void 0 : product.warranty),
+    tags: toStringArray$1(product == null ? void 0 : product.tags),
     category: normalizeCategorySummary(product == null ? void 0 : product.categoryId, baseUrl, index2),
     order: typeof (product == null ? void 0 : product.order) === "number" ? product.order : index2,
-    metaTitle: normalizeText$1(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
-    metaDescription: normalizeText$1(product == null ? void 0 : product.metaDescription) || shortDescription
+    metaTitle: normalizeText$3(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
+    metaDescription: normalizeText$3(product == null ? void 0 : product.metaDescription) || shortDescription
   };
 }
 function normalizeGalleryItem(item, baseUrl, index2) {
   return {
-    id: normalizeText$1(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
-    image: resolveWebsiteAssetUrl(normalizeText$1(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
+    id: normalizeText$3(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText$3(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
     alt: `JPM Enterprises gallery showcase ${index2 + 1}`,
-    createdAt: normalizeText$1(item == null ? void 0 : item.createdAt)
+    createdAt: normalizeText$3(item == null ? void 0 : item.createdAt)
   };
 }
 function normalizeReview(review, baseUrl, index2) {
   return {
-    id: normalizeText$1(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
-    name: normalizeText$1(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
+    id: normalizeText$3(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
+    name: normalizeText$3(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
     profilePic: resolveWebsiteAssetUrl(
-      normalizeText$1(review == null ? void 0 : review.profilePic),
+      normalizeText$3(review == null ? void 0 : review.profilePic),
       baseUrl
     ),
-    description: normalizeText$1(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
-    createdAt: normalizeText$1(review == null ? void 0 : review.createdAt)
+    description: normalizeText$3(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
+    createdAt: normalizeText$3(review == null ? void 0 : review.createdAt)
   };
 }
 function normalizeSettings(settings) {
   return {
-    enquiryEmail: normalizeText$1(settings == null ? void 0 : settings.enquiryEmail),
-    enquiryPhone: normalizeText$1(settings == null ? void 0 : settings.enquiryPhone),
-    address: normalizeText$1(settings == null ? void 0 : settings.address),
-    facebookUrl: normalizeText$1(settings == null ? void 0 : settings.facebookUrl),
-    instagramUrl: normalizeText$1(settings == null ? void 0 : settings.instagramUrl),
-    twitterUrl: normalizeText$1(settings == null ? void 0 : settings.twitterUrl),
-    linkedinUrl: normalizeText$1(settings == null ? void 0 : settings.linkedinUrl)
+    enquiryEmail: normalizeText$3(settings == null ? void 0 : settings.enquiryEmail),
+    enquiryPhone: normalizeText$3(settings == null ? void 0 : settings.enquiryPhone),
+    address: normalizeText$3(settings == null ? void 0 : settings.address),
+    facebookUrl: normalizeText$3(settings == null ? void 0 : settings.facebookUrl),
+    instagramUrl: normalizeText$3(settings == null ? void 0 : settings.instagramUrl),
+    twitterUrl: normalizeText$3(settings == null ? void 0 : settings.twitterUrl),
+    linkedinUrl: normalizeText$3(settings == null ? void 0 : settings.linkedinUrl)
   };
 }
 async function getWebsiteSettings() {
@@ -20068,11 +21176,11 @@ async function getWebsiteCategories() {
 }
 async function getWebsiteProducts(filters) {
   const searchParams = new URLSearchParams();
-  if (normalizeText$1(filters == null ? void 0 : filters.categorySlug)) {
-    searchParams.set("categorySlug", normalizeText$1(filters == null ? void 0 : filters.categorySlug));
+  if (normalizeText$3(filters == null ? void 0 : filters.categorySlug)) {
+    searchParams.set("categorySlug", normalizeText$3(filters == null ? void 0 : filters.categorySlug));
   }
-  if (normalizeText$1(filters == null ? void 0 : filters.categoryId)) {
-    searchParams.set("categoryId", normalizeText$1(filters == null ? void 0 : filters.categoryId));
+  if (normalizeText$3(filters == null ? void 0 : filters.categoryId)) {
+    searchParams.set("categoryId", normalizeText$3(filters == null ? void 0 : filters.categoryId));
   }
   const query = searchParams.toString();
   const response = await requestWebsiteApi(
@@ -20121,8 +21229,8 @@ function useWebsiteCategories() {
   });
 }
 function useWebsiteProducts(filters) {
-  const categorySlug = normalizeText$1(filters == null ? void 0 : filters.categorySlug);
-  const categoryId = normalizeText$1(filters == null ? void 0 : filters.categoryId);
+  const categorySlug = normalizeText$3(filters == null ? void 0 : filters.categorySlug);
+  const categoryId = normalizeText$3(filters == null ? void 0 : filters.categoryId);
   return useQuery({
     queryKey: ["website", "products", categorySlug, categoryId],
     queryFn: () => getWebsiteProducts({ categorySlug, categoryId }),
@@ -20144,7 +21252,7 @@ function useWebsiteReviews() {
   });
 }
 function useWebsiteProduct(slug) {
-  const productSlug = normalizeText$1(slug);
+  const productSlug = normalizeText$3(slug);
   return useQuery({
     queryKey: ["website", "product", productSlug],
     queryFn: () => getWebsiteProductBySlug(productSlug),
@@ -20238,6 +21346,7 @@ function AboutSection() {
           src: imageSrc,
           alt: "JPM Enterprises craftsmanship",
           loading: "lazy",
+          decoding: "async",
           className: "w-full h-auto object-cover rounded-sm",
           style: {
             boxShadow: "0 20px 60px oklch(0.12 0.01 60 / 0.15)"
@@ -20802,6 +21911,291 @@ const __iconNode = [
   ["line", { x1: "8", x2: "14", y1: "11", y2: "11", key: "durymu" }]
 ];
 const ZoomIn = createLucideIcon("zoom-in", __iconNode);
+const DEFAULT_BLOGS_CONTENT = {
+  overline: "Furniture Journal",
+  heading: "Ideas that help your home feel beautifully lived in",
+  description: "Publishing blog articles through the admin panel unlocks fresh keyword coverage, stronger internal linking, and more entry pages for search."
+};
+function normalizeText$2(value) {
+  return (value == null ? void 0 : value.trim()) ?? "";
+}
+function toSlug(value) {
+  return normalizeText$2(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+function toStringArray(values) {
+  return Array.isArray(values) ? values.map((value) => normalizeText$2(value)).filter(Boolean) : [];
+}
+function stripHtml(value) {
+  return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+function buildExcerpt(content) {
+  if (content.length <= 180) {
+    return content;
+  }
+  return `${content.slice(0, 177).trimEnd()}...`;
+}
+function computeReadingTime(content) {
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.ceil(wordCount / 180));
+  return `${minutes} min read`;
+}
+function resolveParagraphs(post, fallbackContent) {
+  if (Array.isArray(post.paragraphs)) {
+    const paragraphs = post.paragraphs.map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
+    if (paragraphs.length > 0) {
+      return paragraphs;
+    }
+  }
+  if (!fallbackContent) {
+    return [];
+  }
+  return fallbackContent.split(/\n\s*\n/).map((paragraph) => stripHtml(paragraph)).map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
+}
+function compareBlogPosts(left, right) {
+  if (left.featured !== right.featured) {
+    return left.featured ? -1 : 1;
+  }
+  if (left.order !== right.order) {
+    return left.order - right.order;
+  }
+  const leftDate = Date.parse(left.publishedAt);
+  const rightDate = Date.parse(right.publishedAt);
+  if (!Number.isNaN(leftDate) && !Number.isNaN(rightDate) && leftDate !== rightDate) {
+    return rightDate - leftDate;
+  }
+  return left.title.localeCompare(right.title);
+}
+function normalizeBlogPost(post, index2, baseUrl) {
+  if (post.visible === false) {
+    return null;
+  }
+  const title = normalizeText$2(post.title) || `JPM Blog ${index2 + 1}`;
+  const slug = normalizeText$2(post.slug) || toSlug(title) || `blog-${index2 + 1}`;
+  const rawContent = stripHtml(
+    normalizeText$2(post.content) || normalizeText$2(post.body) || normalizeText$2(post.description)
+  );
+  const paragraphs = resolveParagraphs(post, rawContent);
+  const content = paragraphs.join("\n\n") || rawContent;
+  const excerpt = normalizeText$2(post.excerpt) || normalizeText$2(post.summary) || buildExcerpt(paragraphs[0] || content);
+  const coverImage = resolveWebsiteAssetUrl(
+    normalizeText$2(post.coverImageUrl) || normalizeText$2(post.image),
+    baseUrl
+  ) || "";
+  return {
+    id: normalizeText$2(post.id || post._id) || `blog-${slug}`,
+    slug,
+    title,
+    excerpt,
+    content,
+    paragraphs,
+    coverImage,
+    authorName: normalizeText$2(post.authorName) || "JPM Enterprises",
+    publishedAt: normalizeText$2(post.publishedAt),
+    updatedAt: normalizeText$2(post.updatedAt),
+    tags: toStringArray(post.tags),
+    metaTitle: normalizeText$2(post.metaTitle) || `${title} | JPM Enterprises Blog`,
+    metaDescription: normalizeText$2(post.metaDescription) || excerpt,
+    readingTime: normalizeText$2(post.readingTime) || computeReadingTime(content),
+    featured: post.featured === true,
+    order: typeof post.order === "number" ? post.order : index2
+  };
+}
+function normalizeBlogsContent(raw) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const payload = raw && typeof raw === "object" ? raw : {};
+  const rawPosts = Array.isArray(payload.posts) ? payload.posts : [];
+  const posts = rawPosts.map((post, index2) => normalizeBlogPost(post, index2, baseUrl)).filter((post) => Boolean(post)).sort(compareBlogPosts);
+  return {
+    overline: normalizeText$2(String(payload.overline ?? "")) || DEFAULT_BLOGS_CONTENT.overline,
+    heading: normalizeText$2(String(payload.heading ?? "")) || DEFAULT_BLOGS_CONTENT.heading,
+    description: normalizeText$2(String(payload.description ?? "")) || DEFAULT_BLOGS_CONTENT.description,
+    posts
+  };
+}
+function useWebsiteBlogs() {
+  const query = useWebsiteContent("blogs");
+  const data = reactExports.useMemo(
+    () => normalizeBlogsContent(
+      query.data && typeof query.data === "object" ? query.data : null
+    ),
+    [query.data]
+  );
+  return {
+    ...query,
+    data
+  };
+}
+function useWebsiteBlog(slug) {
+  const query = useWebsiteBlogs();
+  const normalizedSlug = normalizeText$2(slug);
+  const data = reactExports.useMemo(
+    () => query.data.posts.find((post) => post.slug === normalizedSlug) ?? null,
+    [normalizedSlug, query.data.posts]
+  );
+  return {
+    ...query,
+    data
+  };
+}
+function formatBlogDate$2(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "Fresh insights";
+  }
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  }).format(date);
+}
+function BlogSection() {
+  const headerRef = useScrollReveal();
+  const { data, isLoading } = useWebsiteBlogs();
+  const posts = data.posts.slice(0, 3);
+  if (!isLoading && posts.length === 0) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "section",
+    {
+      id: "blogs",
+      className: "py-24",
+      style: {
+        background: "linear-gradient(180deg, oklch(0.985 0.008 86), oklch(0.965 0.012 82))"
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: headerRef, className: "reveal max-w-3xl", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "mb-3 font-general text-sm font-semibold uppercase tracking-[0.25em]",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: data.overline
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl font-bold text-foreground lg:text-5xl", children: data.heading }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 font-general text-base leading-relaxed text-muted-foreground", children: data.description })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Link,
+            {
+              to: "/blogs",
+              className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+              style: {
+                border: "1px solid oklch(0.65 0.12 75 / 0.28)",
+                color: "oklch(0.65 0.12 75)"
+              },
+              children: [
+                "View All Articles",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 lg:grid-cols-3", children: isLoading ? Array.from({ length: 3 }, (_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "overflow-hidden rounded-[30px] bg-white",
+            style: {
+              border: "1px solid oklch(0.9 0.015 82)",
+              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] animate-pulse bg-[oklch(0.92_0.012_82)]" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 p-6", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 w-24 animate-pulse rounded-full bg-[oklch(0.9_0.015_82)]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-5/6 animate-pulse rounded-[18px] bg-[oklch(0.95_0.01_82)]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-4/5 animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" })
+              ] })
+            ]
+          },
+          `blog-skeleton-${index2 + 1}`
+        )) : posts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "article",
+          {
+            className: "overflow-hidden rounded-[30px] bg-white",
+            style: {
+              border: "1px solid oklch(0.9 0.015 82)",
+              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Link,
+                {
+                  to: "/blogs/$blogSlug",
+                  params: { blogSlug: post.slug },
+                  className: "block",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-[4/3] overflow-hidden", children: post.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: post.coverImage,
+                      alt: post.title,
+                      loading: "lazy",
+                      decoding: "async",
+                      className: "h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    }
+                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "h-full w-full",
+                      style: {
+                        background: "linear-gradient(135deg, oklch(0.68 0.11 76), oklch(0.86 0.08 84))"
+                      }
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 p-6", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
+                      style: {
+                        background: "oklch(0.65 0.12 75 / 0.1)",
+                        color: "oklch(0.55 0.14 65)"
+                      },
+                      children: formatBlogDate$2(post.publishedAt)
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-xs uppercase tracking-[0.16em] text-muted-foreground", children: post.readingTime })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Link,
+                    {
+                      to: "/blogs/$blogSlug",
+                      params: { blogSlug: post.slug },
+                      className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                      children: post.title
+                    }
+                  ) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: post.excerpt })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Link,
+                  {
+                    to: "/blogs/$blogSlug",
+                    params: { blogSlug: post.slug },
+                    className: "inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+                    style: { color: "oklch(0.65 0.12 75)" },
+                    children: [
+                      "Read Article",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
+                    ]
+                  }
+                )
+              ] })
+            ]
+          },
+          post.id
+        )) })
+      ] })
+    }
+  );
+}
 const ALL_COLLECTIONS_SLUG = "all";
 const CATEGORY_LOADING_KEYS = [
   "loading-alpha",
@@ -21009,6 +22403,8 @@ function CollectionSection() {
                       {
                         src: category.image,
                         alt: category.name,
+                        loading: "lazy",
+                        decoding: "async",
                         className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       }
                     ),
@@ -21094,12 +22490,21 @@ function CollectionSection() {
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3] overflow-hidden", children: [
                         /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "img",
+                          Link,
                           {
-                            src: product.image,
-                            alt: product.name,
-                            loading: "lazy",
-                            className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            to: "/product/$productSlug",
+                            params: { productSlug: product.slug },
+                            className: "block h-full w-full",
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "img",
+                              {
+                                src: product.image,
+                                alt: product.name,
+                                loading: "lazy",
+                                decoding: "async",
+                                className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              }
+                            )
                           }
                         ),
                         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.78))]" }),
@@ -21134,7 +22539,15 @@ function CollectionSection() {
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5 p-6", children: [
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: product.name }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Link,
+                            {
+                              to: "/product/$productSlug",
+                              params: { productSlug: product.slug },
+                              className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                              children: product.name
+                            }
+                          ) }),
                           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: product.shortDescription || product.description })
                         ] }),
                         infoChips.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: infoChips.slice(0, 3).map((chip) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -21152,14 +22565,11 @@ function CollectionSection() {
                         )) }) : null,
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
                           /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                            "button",
+                            Link,
                             {
-                              type: "button",
+                              to: "/product/$productSlug",
+                              params: { productSlug: product.slug },
                               "data-ocid": `collection.view_button.${product.slug}`,
-                              onClick: () => navigate({
-                                to: "/product/$productSlug",
-                                params: { productSlug: product.slug }
-                              }),
                               className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5",
                               style: {
                                 background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
@@ -22146,6 +23556,7 @@ const quickLinks = [
   { label: "Custom Design", section: "custom-design" },
   { label: "Why Us", section: "why-us" },
   { label: "Gallery", section: "gallery" },
+  { label: "Blogs", to: "/blogs" },
   { label: "Contact", section: "contact" }
 ];
 const serviceLinks = [
@@ -22211,6 +23622,7 @@ function Footer() {
               {
                 src: "/assets/uploads/image-1.png",
                 alt: "JPM Enterprises",
+                decoding: "async",
                 className: "mb-5 h-12 w-auto brightness-0 invert"
               }
             ),
@@ -22249,12 +23661,20 @@ function Footer() {
                 children: "Explore"
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: quickLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: quickLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: link.section ? /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
                 type: "button",
                 onClick: () => handleQuickLink(link.section),
                 "data-ocid": `footer.${link.section.replace("-", "_")}_link`,
+                className: "font-general text-sm transition-colors duration-200",
+                style: { color: "oklch(0.72 0.015 82)" },
+                children: link.label
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Link,
+              {
+                to: link.to,
                 className: "font-general text-sm transition-colors duration-200",
                 style: { color: "oklch(0.72 0.015 82)" },
                 children: link.label
@@ -22479,6 +23899,7 @@ function GallerySection() {
                   src: item.image,
                   alt: item.alt,
                   loading: "lazy",
+                  decoding: "async",
                   className: "absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 }
               ),
@@ -22535,6 +23956,7 @@ function GallerySection() {
         {
           src: gallery[lightboxIndex].image,
           alt: gallery[lightboxIndex].alt,
+          decoding: "async",
           className: "max-h-[86vh] max-w-[86vw] rounded-[28px] object-contain shadow-2xl"
         }
       ),
@@ -22561,7 +23983,7 @@ function getPhoneHref$2(phone) {
   const digits = phone.replace(/[^\d+]/g, "");
   return digits ? `tel:${digits}` : "";
 }
-function normalizeText(value) {
+function normalizeText$1(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 const FALLBACK_HIGHLIGHT_LABEL = "Curated collection";
@@ -22571,17 +23993,17 @@ function HeroSection() {
   const { data: cmsData } = useWebsiteContent("hero");
   const content = cmsData;
   const baseUrl = resolveWebsiteApiBaseUrl();
-  const eyebrowText = normalizeText(content == null ? void 0 : content.eyebrowText) || "Handcrafted luxury furniture from Hisar";
-  const headlineLine1 = normalizeText(content == null ? void 0 : content.headlineLine1) || "Crafted for";
-  const headlineAccent = normalizeText(content == null ? void 0 : content.headlineAccent) || "beautiful living.";
-  const subheading = normalizeText(content == null ? void 0 : content.subheading) || "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
-  const caption = normalizeText(content == null ? void 0 : content.caption) || "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living.";
-  const primaryCtaLabel = normalizeText(content == null ? void 0 : content.primaryCtaLabel) || "Explore Collections";
-  const secondaryCtaLabel = normalizeText(content == null ? void 0 : content.secondaryCtaLabel) || "Start Custom Design";
-  const highlightsCardTitle = normalizeText(content == null ? void 0 : content.highlightsCardTitle) || "Collection Highlights";
-  const deskHeading = normalizeText(content == null ? void 0 : content.deskHeading) || "Speak with the design desk";
+  const eyebrowText = normalizeText$1(content == null ? void 0 : content.eyebrowText) || "Handcrafted luxury furniture from Hisar";
+  const headlineLine1 = normalizeText$1(content == null ? void 0 : content.headlineLine1) || "Crafted for";
+  const headlineAccent = normalizeText$1(content == null ? void 0 : content.headlineAccent) || "beautiful living.";
+  const subheading = normalizeText$1(content == null ? void 0 : content.subheading) || "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
+  const caption = normalizeText$1(content == null ? void 0 : content.caption) || "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living.";
+  const primaryCtaLabel = normalizeText$1(content == null ? void 0 : content.primaryCtaLabel) || "Explore Collections";
+  const secondaryCtaLabel = normalizeText$1(content == null ? void 0 : content.secondaryCtaLabel) || "Start Custom Design";
+  const highlightsCardTitle = normalizeText$1(content == null ? void 0 : content.highlightsCardTitle) || "Collection Highlights";
+  const deskHeading = normalizeText$1(content == null ? void 0 : content.deskHeading) || "Speak with the design desk";
   const defaultBgPath = "/assets/generated/hero-sofa.dim_1600x900.jpg";
-  const backgroundPath = normalizeText(content == null ? void 0 : content.backgroundImageUrl) || defaultBgPath;
+  const backgroundPath = normalizeText$1(content == null ? void 0 : content.backgroundImageUrl) || defaultBgPath;
   const backgroundImageCss = /^https?:\/\//i.test(backgroundPath) ? backgroundPath : resolveWebsiteAssetUrl(backgroundPath, baseUrl) || backgroundPath;
   const highlightedCollections = categories.slice(0, 8);
   const cmsHighlights = Array.isArray(content == null ? void 0 : content.highlights) ? content == null ? void 0 : content.highlights : [];
@@ -22595,17 +24017,17 @@ function HeroSection() {
     }
     return cmsHighlights.map((entry, index2) => {
       const fallback = highlightedCollections[index2];
-      const explicitImage = normalizeText(entry == null ? void 0 : entry.imageUrl);
+      const explicitImage = normalizeText$1(entry == null ? void 0 : entry.imageUrl);
       const imageUrl = (explicitImage ? resolveWebsiteAssetUrl(explicitImage, baseUrl) || explicitImage : "") || (fallback == null ? void 0 : fallback.image) || "";
       return {
-        title: normalizeText(entry == null ? void 0 : entry.title) || (fallback == null ? void 0 : fallback.name) || `Highlight ${index2 + 1}`,
-        subtitle: normalizeText(entry == null ? void 0 : entry.subtitle) || FALLBACK_HIGHLIGHT_LABEL,
+        title: normalizeText$1(entry == null ? void 0 : entry.title) || (fallback == null ? void 0 : fallback.name) || `Highlight ${index2 + 1}`,
+        subtitle: normalizeText$1(entry == null ? void 0 : entry.subtitle) || FALLBACK_HIGHLIGHT_LABEL,
         image: imageUrl
       };
     });
   })();
-  const deskPhone = normalizeText(content == null ? void 0 : content.deskPhone) || normalizeText(settings == null ? void 0 : settings.enquiryPhone);
-  const deskEmail = normalizeText(content == null ? void 0 : content.deskEmail) || normalizeText(settings == null ? void 0 : settings.enquiryEmail);
+  const deskPhone = normalizeText$1(content == null ? void 0 : content.deskPhone) || normalizeText$1(settings == null ? void 0 : settings.enquiryPhone);
+  const deskEmail = normalizeText$1(content == null ? void 0 : content.deskEmail) || normalizeText$1(settings == null ? void 0 : settings.enquiryEmail);
   const phoneHref = getPhoneHref$2(deskPhone);
   const scrollToCollection = () => {
     var _a2;
@@ -22718,6 +24140,8 @@ function HeroSection() {
                         {
                           src: row.image,
                           alt: row.title,
+                          loading: "lazy",
+                          decoding: "async",
                           className: "h-14 w-16 rounded-2xl object-cover"
                         }
                       ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -22793,6 +24217,7 @@ const navLinks = [
   { label: "Custom Design", href: "#custom-design" },
   { label: "Why Us", href: "#why-us" },
   { label: "Gallery", href: "#gallery" },
+  { label: "Blogs", to: "/blogs" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" }
@@ -22821,13 +24246,15 @@ function Navbar() {
       return;
     }
     setMenuOpen(false);
+    if (location2.pathname !== "/") {
+      setActive(location2.pathname);
+    }
   }, [location2.pathname]);
   reactExports.useEffect(() => {
     if (location2.pathname !== "/") {
-      setActive("");
       return;
     }
-    const sections = navLinks.map((link) => document.getElementById(link.href.slice(1))).filter((section) => Boolean(section));
+    const sections = navLinks.filter((link) => Boolean(link.href)).map((link) => document.getElementById(link.href.slice(1))).filter((section) => Boolean(section));
     if (sections.length === 0) {
       setActive("#home");
       return;
@@ -22892,12 +24319,13 @@ function Navbar() {
                 {
                   src: "/assets/uploads/image-1.png",
                   alt: "JPM Enterprises",
+                  decoding: "async",
                   className: "h-16 w-auto object-contain"
                 }
               )
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden items-center gap-7 lg:flex", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden items-center gap-7 lg:flex", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: link.href ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
               type: "button",
@@ -22915,13 +24343,30 @@ function Navbar() {
                 )
               ]
             }
-          ) }, link.href)) }),
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Link,
+            {
+              to: link.to,
+              "data-ocid": `nav.${link.label.toLowerCase().replace(" ", "_")}_link`,
+              className: `relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
+              children: [
+                link.label,
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: `absolute -bottom-2 left-0 h-px transition-all duration-300 ${active === link.to ? "w-full" : "w-0"}`,
+                    style: { background: "oklch(0.65 0.12 75)" }
+                  }
+                )
+              ]
+            }
+          ) }, link.href ?? link.to)) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden items-center gap-4 lg:flex", children: (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
               type: "button",
               onClick: handlePrimaryAction,
-              className: "inline-flex items-center gap-2 rounded-full px-4 py-2 whitespace-nowrap font-general text-[11px] font-semibold tracking-[0.24em] uppercase transition-all duration-300 hover:-translate-y-0.5",
+              className: "inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.24em] transition-all duration-300 hover:-translate-y-0.5",
               style: {
                 background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
                 color: "oklch(0.12 0.01 60)",
@@ -22957,7 +24402,7 @@ function Navbar() {
                     transitionDelay: menuOpen ? `${index2 * 45}ms` : "0ms"
                   },
                   className: `transition-all duration-300 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`,
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  children: link.href ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "button",
                     {
                       type: "button",
@@ -22968,9 +24413,20 @@ function Navbar() {
                       },
                       children: link.label
                     }
+                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Link,
+                    {
+                      to: link.to,
+                      onClick: () => setMenuOpen(false),
+                      className: "font-playfair text-3xl text-foreground transition-colors",
+                      style: {
+                        color: active === link.to ? "oklch(0.65 0.12 75)" : void 0
+                      },
+                      children: link.label
+                    }
                   )
                 },
-                link.href
+                link.href ?? link.to
               )) }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
@@ -22984,7 +24440,7 @@ function Navbar() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       "p",
                       {
-                        className: "mb-2 font-general text-xs font-semibold tracking-[0.25em] uppercase",
+                        className: "mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em]",
                         style: { color: "oklch(0.65 0.12 75)" },
                         children: "Design Support"
                       }
@@ -23000,7 +24456,7 @@ function Navbar() {
                       {
                         type: "button",
                         onClick: handlePrimaryAction,
-                        className: "mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold tracking-[0.2em] uppercase",
+                        className: "mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em]",
                         style: {
                           background: "oklch(0.65 0.12 75)",
                           color: "oklch(0.12 0.01 60)"
@@ -23020,6 +24476,259 @@ function Navbar() {
       ]
     }
   );
+}
+const SITE_NAME = "JPM Enterprises";
+const SITE_URL = normalizeBaseUrl(
+  "https://jpme.in"
+);
+const DEFAULT_DESCRIPTION = "Luxury sofa manufacturer in Hisar crafting bespoke furniture, premium seating collections, and refined living spaces.";
+const DEFAULT_IMAGE = "/assets/generated/hero-sofa.dim_1600x900.jpg";
+function normalizeBaseUrl(value) {
+  return value.replace(/\/+$/, "");
+}
+function normalizeText(value) {
+  return (value == null ? void 0 : value.trim()) ?? "";
+}
+function normalizeKeywords(values) {
+  return Array.from(
+    new Set(
+      (values ?? []).map((value) => normalizeText(value)).filter(Boolean)
+    )
+  );
+}
+function toIsoDate(value) {
+  const trimmed = normalizeText(value);
+  if (!trimmed) {
+    return "";
+  }
+  const date = new Date(trimmed);
+  return Number.isNaN(date.getTime()) ? "" : date.toISOString();
+}
+function toDatePublished(value) {
+  const isoDate = toIsoDate(value);
+  return isoDate || void 0;
+}
+function resolveAbsoluteUrl(pathOrUrl) {
+  const candidate = normalizeText(pathOrUrl) || "/";
+  try {
+    return new URL(candidate, `${SITE_URL}/`).toString();
+  } catch {
+    return `${SITE_URL}/`;
+  }
+}
+function createSeoPayload(config) {
+  const title = config.title.includes(SITE_NAME) ? config.title : `${config.title} | ${SITE_NAME}`;
+  const description = normalizeText(config.description) || DEFAULT_DESCRIPTION;
+  const image = resolveAbsoluteUrl(config.image || DEFAULT_IMAGE);
+  const canonicalUrl = resolveAbsoluteUrl(config.path);
+  const keywords = normalizeKeywords(config.keywords);
+  const tags = normalizeKeywords(config.tags);
+  const structuredData = Array.isArray(config.structuredData) ? config.structuredData : config.structuredData ? [config.structuredData] : [];
+  return {
+    title,
+    description,
+    image,
+    canonicalUrl,
+    type: config.type || "website",
+    robots: normalizeText(config.robots) || "index, follow",
+    author: normalizeText(config.author),
+    publishedTime: toIsoDate(config.publishedTime),
+    modifiedTime: toIsoDate(config.modifiedTime),
+    keywords,
+    tags,
+    structuredData
+  };
+}
+function buildWebsiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: resolveAbsoluteUrl("/"),
+    inLanguage: "en-IN",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: resolveAbsoluteUrl("/"),
+      logo: resolveAbsoluteUrl("/assets/uploads/image-1.png")
+    }
+  };
+}
+function buildWebPageSchema({
+  title,
+  description,
+  path,
+  image
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: resolveAbsoluteUrl(path),
+    image: resolveAbsoluteUrl(image || DEFAULT_IMAGE),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: resolveAbsoluteUrl("/")
+    },
+    inLanguage: "en-IN"
+  };
+}
+function buildLocalBusinessSchema(settings) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FurnitureStore",
+    name: SITE_NAME,
+    description: DEFAULT_DESCRIPTION,
+    url: resolveAbsoluteUrl("/"),
+    image: resolveAbsoluteUrl(DEFAULT_IMAGE),
+    logo: resolveAbsoluteUrl("/assets/uploads/image-1.png"),
+    telephone: (settings == null ? void 0 : settings.enquiryPhone) || void 0,
+    email: (settings == null ? void 0 : settings.enquiryEmail) || void 0,
+    address: (settings == null ? void 0 : settings.address) ? {
+      "@type": "PostalAddress",
+      streetAddress: settings.address,
+      addressCountry: "IN"
+    } : void 0,
+    sameAs: [
+      settings == null ? void 0 : settings.facebookUrl,
+      settings == null ? void 0 : settings.instagramUrl,
+      settings == null ? void 0 : settings.twitterUrl,
+      settings == null ? void 0 : settings.linkedinUrl
+    ].filter(Boolean)
+  };
+}
+function buildBreadcrumbSchema(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index2) => ({
+      "@type": "ListItem",
+      position: index2 + 1,
+      name: item.name,
+      item: resolveAbsoluteUrl(item.path)
+    }))
+  };
+}
+function buildItemListSchema(name, items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index2) => ({
+      "@type": "ListItem",
+      position: index2 + 1,
+      url: resolveAbsoluteUrl(item.path),
+      name: item.name,
+      image: item.image ? resolveAbsoluteUrl(item.image) : void 0
+    }))
+  };
+}
+function buildProductSchema(product, settings) {
+  var _a2;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.metaDescription || product.description,
+    image: product.gallery.length > 0 ? product.gallery : [product.image],
+    category: ((_a2 = product.category) == null ? void 0 : _a2.name) || void 0,
+    material: product.material || void 0,
+    sku: product.slug,
+    brand: {
+      "@type": "Brand",
+      name: SITE_NAME
+    },
+    manufacturer: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      telephone: (settings == null ? void 0 : settings.enquiryPhone) || void 0,
+      email: (settings == null ? void 0 : settings.enquiryEmail) || void 0
+    },
+    url: resolveAbsoluteUrl(`/product/${product.slug}`)
+  };
+}
+function buildBlogPostingSchema(blog) {
+  const publishedTime = toDatePublished(blog.publishedAt);
+  const modifiedTime = toDatePublished(blog.updatedAt || blog.publishedAt);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.metaDescription || blog.excerpt,
+    image: blog.coverImage ? [blog.coverImage] : [resolveAbsoluteUrl(DEFAULT_IMAGE)],
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    author: {
+      "@type": "Organization",
+      name: blog.authorName || SITE_NAME
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: resolveAbsoluteUrl("/assets/uploads/image-1.png")
+      }
+    },
+    mainEntityOfPage: resolveAbsoluteUrl(`/blogs/${blog.slug}`),
+    keywords: blog.tags.join(", "),
+    articleSection: "Furniture Blog"
+  };
+}
+function buildBlogListingSchema(blogs) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${SITE_NAME} Blog`,
+    description: "Insights on sofa design, furniture care, and custom living spaces from JPM Enterprises.",
+    url: resolveAbsoluteUrl("/blogs"),
+    blogPost: blogs.map((blog) => ({
+      "@type": "BlogPosting",
+      headline: blog.title,
+      url: resolveAbsoluteUrl(`/blogs/${blog.slug}`),
+      image: blog.coverImage ? [blog.coverImage] : [resolveAbsoluteUrl(DEFAULT_IMAGE)],
+      datePublished: toDatePublished(blog.publishedAt),
+      author: {
+        "@type": "Organization",
+        name: blog.authorName || SITE_NAME
+      }
+    }))
+  };
+}
+function SeoHead(config) {
+  const seo = createSeoPayload(config);
+  const ogImageAlt = config.title.includes("JPM Enterprises") ? config.title : `${config.title} | JPM Enterprises`;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Helmet, { prioritizeSeoTags: true, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("html", { lang: "en-IN" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: seo.title }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "description", content: seo.description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "robots", content: seo.robots }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "theme-color", content: "#b78a4a" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:site_name", content: "JPM Enterprises" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:locale", content: "en_IN" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:title", content: seo.title }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:description", content: seo.description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:type", content: seo.type }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:url", content: seo.canonicalUrl }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image", content: seo.image }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "og:image:alt", content: ogImageAlt }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:card", content: "summary_large_image" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:title", content: seo.title }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:description", content: seo.description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:image", content: seo.image }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "twitter:url", content: seo.canonicalUrl }),
+    seo.keywords.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "keywords", content: seo.keywords.join(", ") }) : null,
+    seo.author ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { name: "author", content: seo.author }) : null,
+    seo.publishedTime ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:published_time", content: seo.publishedTime }) : null,
+    seo.modifiedTime ? /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:modified_time", content: seo.modifiedTime }) : null,
+    seo.tags.map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx("meta", { property: "article:tag", content: tag }, tag)),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("link", { rel: "canonical", href: seo.canonicalUrl }),
+    seo.structuredData.map((entry, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("script", { type: "application/ld+json", children: JSON.stringify(entry) }, `structured-data-${index2}`))
+  ] });
 }
 const accentColors = [
   "oklch(0.65 0.12 75)",
@@ -23170,6 +24879,8 @@ function TestimonialsSection() {
                       {
                         src: activeReview.profilePic,
                         alt: activeReview.name,
+                        loading: "lazy",
+                        decoding: "async",
                         className: "h-14 w-14 rounded-full object-cover"
                       }
                     ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -23388,177 +25099,442 @@ function WhyChooseSection() {
     )
   ] }) });
 }
-const SITE_NAME = "JPM Enterprises";
-const DEFAULT_DESCRIPTION = "Luxury sofa manufacturer in Hisar crafting bespoke furniture, premium seating collections, and refined living spaces.";
-const DEFAULT_IMAGE = "/assets/generated/hero-sofa.dim_1600x900.jpg";
-function resolveAbsoluteUrl(pathOrUrl) {
-  if (typeof window === "undefined") {
-    return pathOrUrl ?? "";
+var M = (e, i, s, u, m, a, l, h) => {
+  let d = document.documentElement, w = ["light", "dark"];
+  function p(n) {
+    (Array.isArray(e) ? e : [e]).forEach((y) => {
+      let k = y === "class", S = k && a ? m.map((f) => a[f] || f) : m;
+      k ? (d.classList.remove(...S), d.classList.add(a && a[n] ? a[n] : n)) : d.setAttribute(y, n);
+    }), R(n);
   }
-  try {
-    return new URL(
-      pathOrUrl || window.location.pathname,
-      window.location.origin
-    ).toString();
-  } catch {
-    return window.location.href;
+  function R(n) {
+    h && w.includes(n) && (d.style.colorScheme = n);
   }
-}
-function upsertMeta(selector, attribute, key, content) {
-  if (typeof document === "undefined") {
-    return;
+  function c() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
-  let element = document.head.querySelector(selector);
-  if (!element) {
-    element = document.createElement("meta");
-    element.setAttribute(attribute, key);
-    document.head.append(element);
+  if (u) p(u);
+  else try {
+    let n = localStorage.getItem(i) || s, y = l && n === "system" ? c() : n;
+    p(y);
+  } catch (n) {
   }
-  element.setAttribute("content", content);
-}
-function upsertLink(rel, href) {
-  if (typeof document === "undefined") {
-    return;
-  }
-  let element = document.head.querySelector(
-    `link[rel="${rel}"]`
-  );
-  if (!element) {
-    element = document.createElement("link");
-    element.setAttribute("rel", rel);
-    document.head.append(element);
-  }
-  element.setAttribute("href", href);
-}
-function upsertStructuredData(structuredData) {
-  if (typeof document === "undefined") {
-    return;
-  }
-  const scriptId = "jpm-structured-data";
-  const existingScript = document.getElementById(scriptId);
-  if (!structuredData) {
-    existingScript == null ? void 0 : existingScript.remove();
-    return;
-  }
-  const normalizedData = Array.isArray(structuredData) ? structuredData : [structuredData];
-  const script = existingScript instanceof HTMLScriptElement ? existingScript : document.createElement("script");
-  script.id = scriptId;
-  script.type = "application/ld+json";
-  script.text = JSON.stringify(normalizedData);
-  if (!existingScript) {
-    document.head.append(script);
-  }
-}
-function useDocumentMetadata(config) {
-  reactExports.useEffect(() => {
-    const title = config.title.includes(SITE_NAME) ? config.title : `${config.title} | ${SITE_NAME}`;
-    const description = config.description || DEFAULT_DESCRIPTION;
-    const image = resolveAbsoluteUrl(config.image || DEFAULT_IMAGE);
-    const canonicalUrl = resolveAbsoluteUrl(config.path);
-    const keywords = (config.keywords ?? []).join(", ");
-    document.title = title;
-    document.documentElement.lang = "en-IN";
-    upsertMeta('meta[name="description"]', "name", "description", description);
-    upsertMeta('meta[name="robots"]', "name", "robots", "index, follow");
-    upsertMeta('meta[name="theme-color"]', "name", "theme-color", "#b78a4a");
-    if (keywords) {
-      upsertMeta('meta[name="keywords"]', "name", "keywords", keywords);
+};
+var x = reactExports.createContext(void 0), U = { setTheme: (e) => {
+}, themes: [] }, z = () => {
+  var e;
+  return (e = reactExports.useContext(x)) != null ? e : U;
+};
+reactExports.memo(({ forcedTheme: e, storageKey: i, attribute: s, enableSystem: u, enableColorScheme: m, defaultTheme: a, value: l, themes: h, nonce: d, scriptProps: w }) => {
+  let p = JSON.stringify([s, i, a, e, h, l, u, m]).slice(1, -1);
+  return reactExports.createElement("script", { ...w, suppressHydrationWarning: true, nonce: typeof window == "undefined" ? d : "", dangerouslySetInnerHTML: { __html: `(${M.toString()})(${p})` } });
+});
+const Toaster = ({ ...props }) => {
+  const { theme = "system" } = z();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    $e,
+    {
+      theme,
+      className: "toaster group",
+      style: {
+        "--normal-bg": "var(--popover)",
+        "--normal-text": "var(--popover-foreground)",
+        "--normal-border": "var(--border)"
+      },
+      ...props
     }
-    upsertMeta('meta[property="og:title"]', "property", "og:title", title);
-    upsertMeta(
-      'meta[property="og:description"]',
-      "property",
-      "og:description",
-      description
-    );
-    upsertMeta(
-      'meta[property="og:type"]',
-      "property",
-      "og:type",
-      config.type || "website"
-    );
-    upsertMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
-    upsertMeta('meta[property="og:image"]', "property", "og:image", image);
-    upsertMeta(
-      'meta[property="og:site_name"]',
-      "property",
-      "og:site_name",
-      SITE_NAME
-    );
-    upsertMeta('meta[property="og:locale"]', "property", "og:locale", "en_IN");
-    upsertMeta(
-      'meta[name="twitter:card"]',
-      "name",
-      "twitter:card",
-      "summary_large_image"
-    );
-    upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
-    upsertMeta(
-      'meta[name="twitter:description"]',
-      "name",
-      "twitter:description",
-      description
-    );
-    upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", image);
-    upsertLink("canonical", canonicalUrl);
-    upsertStructuredData(config.structuredData);
-  }, [config]);
+  );
+};
+function formatBlogDate$1(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "Latest article";
+  }
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }).format(date);
 }
-function buildWebsiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: SITE_NAME,
-    url: resolveAbsoluteUrl("/")
-  };
+function BlogDetailPage() {
+  const { blogSlug } = useParams({ strict: false });
+  const { data: blog, isLoading } = useWebsiteBlog(blogSlug);
+  const { data: blogFeed } = useWebsiteBlogs();
+  const relatedPosts = blog ? blogFeed.posts.filter((post) => post.slug !== blog.slug).slice(0, 3) : [];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    blog ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: blog.metaTitle || blog.title,
+        description: blog.metaDescription || blog.excerpt,
+        path: `/blogs/${blog.slug}`,
+        image: blog.coverImage,
+        type: "article",
+        keywords: [
+          blog.title,
+          ...blog.tags,
+          "sofa design blog",
+          "furniture buying guide"
+        ],
+        tags: blog.tags,
+        author: blog.authorName,
+        publishedTime: blog.publishedAt,
+        modifiedTime: blog.updatedAt || blog.publishedAt,
+        structuredData: [
+          buildWebPageSchema({
+            title: blog.title,
+            description: blog.metaDescription || blog.excerpt,
+            path: `/blogs/${blog.slug}`,
+            image: blog.coverImage
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blogs" },
+            { name: blog.title, path: `/blogs/${blog.slug}` }
+          ]),
+          buildBlogPostingSchema(blog)
+        ]
+      }
+    ) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "main",
+      {
+        className: "pb-24 pt-28",
+        style: {
+          background: "linear-gradient(180deg, oklch(0.985 0.008 85), oklch(0.965 0.012 82))"
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-5xl px-6 lg:px-8", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Link,
+            {
+              to: "/blogs",
+              className: "mb-10 inline-flex items-center gap-2 font-general text-sm font-semibold uppercase tracking-[0.18em]",
+              style: { color: "oklch(0.65 0.12 75)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { size: 16 }),
+                "Back to Blogs"
+              ]
+            }
+          ),
+          isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 rounded-[32px] bg-white p-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-28 animate-pulse rounded-full bg-[oklch(0.9_0.015_82)]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-12 w-4/5 animate-pulse rounded-[18px] bg-[oklch(0.95_0.01_82)]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[16/9] animate-pulse rounded-[28px] bg-[oklch(0.93_0.012_82)]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-5/6 animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" })
+          ] }) : blog ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "article",
+              {
+                className: "overflow-hidden rounded-[34px] bg-white shadow-[0_22px_48px_oklch(0.12_0.01_60_/_0.06)]",
+                style: { border: "1px solid oklch(0.9 0.015 82)" },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-8 pt-8 lg:px-12 lg:pt-12", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3 font-general text-xs uppercase tracking-[0.18em] text-muted-foreground", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: formatBlogDate$1(blog.publishedAt) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: blog.readingTime }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: blog.authorName })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-5 font-playfair text-4xl font-bold text-foreground lg:text-6xl", children: blog.title }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-3xl font-general text-base leading-relaxed text-muted-foreground", children: blog.excerpt }),
+                    blog.tags.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 flex flex-wrap gap-2", children: blog.tags.map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "rounded-full px-3 py-1 font-general text-[11px] uppercase tracking-[0.16em]",
+                        style: {
+                          background: "oklch(0.97 0.008 84)",
+                          color: "oklch(0.55 0.05 68)",
+                          border: "1px solid oklch(0.9 0.015 82)"
+                        },
+                        children: tag
+                      },
+                      tag
+                    )) }) : null
+                  ] }),
+                  blog.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: blog.coverImage,
+                      alt: blog.title,
+                      fetchPriority: "high",
+                      decoding: "async",
+                      className: "aspect-[16/9] w-full object-cover"
+                    }
+                  ) }) : null,
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-8 py-10 lg:px-12 lg:py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-stone max-w-none prose-headings:font-playfair prose-headings:text-foreground prose-p:font-general prose-p:text-secondary-foreground", children: blog.paragraphs.map((paragraph, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: paragraph }, `${blog.id}-paragraph-${index2 + 1}`)) }) })
+                ]
+              }
+            ),
+            relatedPosts.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mt-16", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-8 flex items-end justify-between gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    className: "font-general text-xs font-semibold uppercase tracking-[0.22em]",
+                    style: { color: "oklch(0.65 0.12 75)" },
+                    children: "Continue Reading"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 font-playfair text-3xl font-semibold text-foreground", children: "More articles from JPM" })
+              ] }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-3", children: relatedPosts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "article",
+                {
+                  className: "overflow-hidden rounded-[28px] bg-white",
+                  style: {
+                    border: "1px solid oklch(0.9 0.015 82)",
+                    boxShadow: "0 18px 38px oklch(0.12 0.01 60 / 0.05)"
+                  },
+                  children: [
+                    post.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Link,
+                      {
+                        to: "/blogs/$blogSlug",
+                        params: { blogSlug: post.slug },
+                        className: "block",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "img",
+                          {
+                            src: post.coverImage,
+                            alt: post.title,
+                            loading: "lazy",
+                            decoding: "async",
+                            className: "aspect-[4/3] w-full object-cover"
+                          }
+                        )
+                      }
+                    ) : null,
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-[11px] uppercase tracking-[0.18em] text-muted-foreground", children: formatBlogDate$1(post.publishedAt) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-3 font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        Link,
+                        {
+                          to: "/blogs/$blogSlug",
+                          params: { blogSlug: post.slug },
+                          className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                          children: post.title
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 font-general text-sm leading-relaxed text-muted-foreground", children: post.excerpt }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        Link,
+                        {
+                          to: "/blogs/$blogSlug",
+                          params: { blogSlug: post.slug },
+                          className: "mt-5 inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+                          style: { color: "oklch(0.65 0.12 75)" },
+                          children: [
+                            "Read Next",
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
+                          ]
+                        }
+                      )
+                    ] })
+                  ]
+                },
+                post.id
+              )) })
+            ] }) : null
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "rounded-[32px] bg-white px-8 py-16 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Blog article not found" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "This slug isn't in the live blog feed right now. Once the article is published from the panel, it will appear here automatically." })
+              ]
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
 }
-function buildLocalBusinessSchema(settings) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FurnitureStore",
-    name: SITE_NAME,
-    description: DEFAULT_DESCRIPTION,
-    url: resolveAbsoluteUrl("/"),
-    image: resolveAbsoluteUrl(DEFAULT_IMAGE),
-    logo: resolveAbsoluteUrl("/assets/uploads/image-1.png"),
-    telephone: (settings == null ? void 0 : settings.enquiryPhone) || void 0,
-    email: (settings == null ? void 0 : settings.enquiryEmail) || void 0,
-    address: (settings == null ? void 0 : settings.address) ? {
-      "@type": "PostalAddress",
-      streetAddress: settings.address,
-      addressCountry: "IN"
-    } : void 0,
-    sameAs: [
-      settings == null ? void 0 : settings.facebookUrl,
-      settings == null ? void 0 : settings.instagramUrl,
-      settings == null ? void 0 : settings.twitterUrl,
-      settings == null ? void 0 : settings.linkedinUrl
-    ].filter(Boolean)
-  };
+function formatBlogDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "Latest article";
+  }
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  }).format(date);
 }
-function buildProductSchema(product, settings) {
-  var _a2;
-  return {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.metaDescription || product.description,
-    image: product.gallery.length > 0 ? product.gallery : [product.image],
-    category: ((_a2 = product.category) == null ? void 0 : _a2.name) || void 0,
-    material: product.material || void 0,
-    sku: product.slug,
-    brand: {
-      "@type": "Brand",
-      name: SITE_NAME
-    },
-    manufacturer: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      telephone: (settings == null ? void 0 : settings.enquiryPhone) || void 0,
-      email: (settings == null ? void 0 : settings.enquiryEmail) || void 0
-    },
-    url: resolveAbsoluteUrl(`/product/${product.slug}`)
-  };
+function BlogsPage() {
+  const { data, isLoading } = useWebsiteBlogs();
+  const featuredPost = data.posts[0] ?? null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Furniture Blog and Sofa Design Ideas",
+        description: "Read JPM Enterprises articles on sofa buying, custom furniture design, upholstery choices, and home styling ideas.",
+        path: "/blogs",
+        image: featuredPost == null ? void 0 : featuredPost.coverImage,
+        type: "article",
+        keywords: [
+          "furniture blog",
+          "sofa design ideas",
+          "custom furniture tips",
+          "upholstery guide India",
+          "living room furniture inspiration"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: "Furniture Blog and Sofa Design Ideas",
+            description: "Read JPM Enterprises articles on sofa buying, custom furniture design, upholstery choices, and home styling ideas.",
+            path: "/blogs",
+            image: featuredPost == null ? void 0 : featuredPost.coverImage
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blogs" }
+          ]),
+          buildBlogListingSchema(data.posts)
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "main",
+      {
+        className: "pb-24 pt-28",
+        style: {
+          background: "linear-gradient(180deg, oklch(0.985 0.008 85), oklch(0.965 0.012 82))"
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "rounded-[36px] bg-white px-8 py-12 shadow-[0_20px_48px_oklch(0.12_0.01_60_/_0.06)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "font-general text-sm font-semibold uppercase tracking-[0.28em]",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: data.overline
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-4 max-w-4xl font-playfair text-4xl font-bold text-foreground lg:text-6xl", children: data.heading }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-3xl font-general text-base leading-relaxed text-muted-foreground", children: data.description })
+          ] }),
+          isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3", children: Array.from({ length: 6 }, (_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "overflow-hidden rounded-[30px] bg-white",
+              style: {
+                border: "1px solid oklch(0.9 0.015 82)",
+                boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.05)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] animate-pulse bg-[oklch(0.93_0.012_82)]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 p-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 w-24 animate-pulse rounded-full bg-[oklch(0.9_0.015_82)]" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-4/5 animate-pulse rounded-[18px] bg-[oklch(0.95_0.01_82)]" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" })
+                ] })
+              ]
+            },
+            `blog-card-skeleton-${index2 + 1}`
+          )) }) : data.posts.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3", children: data.posts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "article",
+            {
+              className: "overflow-hidden rounded-[30px] bg-white",
+              style: {
+                border: "1px solid oklch(0.9 0.015 82)",
+                boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.05)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Link,
+                  {
+                    to: "/blogs/$blogSlug",
+                    params: { blogSlug: post.slug },
+                    className: "block",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-[4/3] overflow-hidden", children: post.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "img",
+                      {
+                        src: post.coverImage,
+                        alt: post.title,
+                        loading: "lazy",
+                        decoding: "async",
+                        className: "h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      }
+                    ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "h-full w-full",
+                        style: {
+                          background: "linear-gradient(135deg, oklch(0.68 0.11 76), oklch(0.86 0.08 84))"
+                        }
+                      }
+                    ) })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 p-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.16em] text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: formatBlogDate(post.publishedAt) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: post.readingTime })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Link,
+                      {
+                        to: "/blogs/$blogSlug",
+                        params: { blogSlug: post.slug },
+                        className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                        children: post.title
+                      }
+                    ) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: post.excerpt })
+                  ] }),
+                  post.tags.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: post.tags.slice(0, 3).map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "rounded-full px-3 py-1 font-general text-[11px] uppercase tracking-[0.16em]",
+                      style: {
+                        background: "oklch(0.97 0.008 84)",
+                        color: "oklch(0.55 0.05 68)",
+                        border: "1px solid oklch(0.9 0.015 82)"
+                      },
+                      children: tag
+                    },
+                    tag
+                  )) }) : null,
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    Link,
+                    {
+                      to: "/blogs/$blogSlug",
+                      params: { blogSlug: post.slug },
+                      className: "inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+                      style: { color: "oklch(0.65 0.12 75)" },
+                      children: [
+                        "Read Article",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
+                      ]
+                    }
+                  )
+                ] })
+              ]
+            },
+            post.id
+          )) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "section",
+            {
+              className: "mt-10 rounded-[32px] bg-white px-8 py-16 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Blog posts will appear here as soon as they're published" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "The website is ready for dynamic SEO articles. Once posts are added under the blog content feed, this page and the homepage listing will update automatically." })
+              ]
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
 }
 const stepCount = 6;
 const styleOptions = [
@@ -24306,18 +26282,32 @@ const steps = [
 function CustomDesignPage() {
   const search = useSearch({ strict: false });
   const selectedProduct = search.product ? search.product.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ") : "";
-  useDocumentMetadata({
-    title: "Custom Sofa Design",
-    description: "Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience.",
-    path: "/custom-design",
-    keywords: [
-      "custom sofa design",
-      "bespoke sofa maker",
-      "made to order sofa",
-      "luxury furniture customization"
-    ]
-  });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Custom Sofa Design",
+        description: "Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience.",
+        path: "/custom-design",
+        keywords: [
+          "custom sofa design",
+          "bespoke sofa maker",
+          "made to order sofa",
+          "luxury furniture customization"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: "Custom Sofa Design",
+            description: "Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience.",
+            path: "/custom-design"
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Custom Design", path: "/custom-design" }
+          ])
+        ]
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -24415,52 +26405,6 @@ function CustomDesignPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-var M = (e, i, s, u, m, a, l, h) => {
-  let d = document.documentElement, w = ["light", "dark"];
-  function p(n) {
-    (Array.isArray(e) ? e : [e]).forEach((y) => {
-      let k = y === "class", S = k && a ? m.map((f) => a[f] || f) : m;
-      k ? (d.classList.remove(...S), d.classList.add(a && a[n] ? a[n] : n)) : d.setAttribute(y, n);
-    }), R(n);
-  }
-  function R(n) {
-    h && w.includes(n) && (d.style.colorScheme = n);
-  }
-  function c() {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  if (u) p(u);
-  else try {
-    let n = localStorage.getItem(i) || s, y = l && n === "system" ? c() : n;
-    p(y);
-  } catch (n) {
-  }
-};
-var x = reactExports.createContext(void 0), U = { setTheme: (e) => {
-}, themes: [] }, z = () => {
-  var e;
-  return (e = reactExports.useContext(x)) != null ? e : U;
-};
-reactExports.memo(({ forcedTheme: e, storageKey: i, attribute: s, enableSystem: u, enableColorScheme: m, defaultTheme: a, value: l, themes: h, nonce: d, scriptProps: w }) => {
-  let p = JSON.stringify([s, i, a, e, h, l, u, m]).slice(1, -1);
-  return reactExports.createElement("script", { ...w, suppressHydrationWarning: true, nonce: typeof window == "undefined" ? d : "", dangerouslySetInnerHTML: { __html: `(${M.toString()})(${p})` } });
-});
-const Toaster = ({ ...props }) => {
-  const { theme = "system" } = z();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    $e,
-    {
-      theme,
-      className: "toaster group",
-      style: {
-        "--normal-bg": "var(--popover)",
-        "--normal-text": "var(--popover-foreground)",
-        "--normal-border": "var(--border)"
-      },
-      ...props
-    }
-  );
-};
 const DETAIL_SKELETON_KEYS = [
   "detail-skeleton-a",
   "detail-skeleton-b",
@@ -24517,20 +26461,6 @@ function ProductDetailPage() {
     }
     setSelectedImage(product.gallery[0] || product.image);
   }, [product]);
-  useDocumentMetadata({
-    title: (product == null ? void 0 : product.metaTitle) || (product == null ? void 0 : product.name) || "Luxury Sofa Collection",
-    description: (product == null ? void 0 : product.metaDescription) || (product == null ? void 0 : product.shortDescription) || "Explore handcrafted sofa details from JPM Enterprises.",
-    path: product ? `/product/${product.slug}` : "/",
-    image: product == null ? void 0 : product.image,
-    type: "product",
-    keywords: [
-      (product == null ? void 0 : product.name) || "luxury sofa",
-      ((_a2 = product == null ? void 0 : product.category) == null ? void 0 : _a2.name) || "furniture collection",
-      "premium handcrafted sofa",
-      "bespoke furniture India"
-    ].filter(Boolean),
-    structuredData: product ? buildProductSchema(product, settings) : void 0
-  });
   const detailItems = product ? [
     { label: "Material", value: product.material },
     { label: "Frame", value: product.frame },
@@ -24538,6 +26468,36 @@ function ProductDetailPage() {
     { label: "Warranty", value: product.warranty }
   ].filter((item) => item.value) : [];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    product ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: product.metaTitle || product.name,
+        description: product.metaDescription || product.shortDescription || "Explore handcrafted sofa details from JPM Enterprises.",
+        path: `/product/${product.slug}`,
+        image: product.image,
+        type: "product",
+        keywords: [
+          product.name,
+          ((_a2 = product.category) == null ? void 0 : _a2.name) || "furniture collection",
+          "premium handcrafted sofa",
+          "bespoke furniture India"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: product.name,
+            description: product.metaDescription || product.shortDescription || product.description,
+            path: `/product/${product.slug}`,
+            image: product.image
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Collections", path: "/#collection" },
+            { name: product.name, path: `/product/${product.slug}` }
+          ]),
+          buildProductSchema(product, settings)
+        ]
+      }
+    ) : null,
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "main",
@@ -24547,6 +26507,27 @@ function ProductDetailPage() {
           background: "linear-gradient(180deg, oklch(0.98 0.008 85), oklch(0.96 0.01 82))"
         },
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
+          product ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "nav",
+            {
+              "aria-label": "Breadcrumb",
+              className: "mb-6 flex flex-wrap items-center gap-2 font-general text-xs uppercase tracking-[0.16em] text-muted-foreground",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "transition-colors hover:text-foreground", children: "Home" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "/" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "a",
+                  {
+                    href: "/#collection",
+                    className: "transition-colors hover:text-foreground",
+                    children: "Collections"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "/" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground", children: product.name })
+              ]
+            }
+          ) : null,
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
@@ -24602,6 +26583,8 @@ function ProductDetailPage() {
                       {
                         src: selectedImage || product.image,
                         alt: product.name,
+                        fetchPriority: "high",
+                        decoding: "async",
                         className: "aspect-[5/4] w-full object-cover"
                       }
                     )
@@ -24621,6 +26604,8 @@ function ProductDetailPage() {
                       {
                         src: image,
                         alt: product.name,
+                        loading: "lazy",
+                        decoding: "async",
                         className: "aspect-[4/3] w-full object-cover"
                       }
                     )
@@ -24791,24 +26776,39 @@ function ProductDetailPage() {
                   },
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "img",
+                      Link,
                       {
-                        src: relatedProduct.image,
-                        alt: relatedProduct.name,
-                        className: "aspect-[4/3] w-full object-cover"
+                        to: "/product/$productSlug",
+                        params: { productSlug: relatedProduct.slug },
+                        className: "block",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "img",
+                          {
+                            src: relatedProduct.image,
+                            alt: relatedProduct.name,
+                            loading: "lazy",
+                            decoding: "async",
+                            className: "aspect-[4/3] w-full object-cover"
+                          }
+                        )
                       }
                     ),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: relatedProduct.name }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        Link,
+                        {
+                          to: "/product/$productSlug",
+                          params: { productSlug: relatedProduct.slug },
+                          className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                          children: relatedProduct.name
+                        }
+                      ) }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 font-general text-sm leading-relaxed text-muted-foreground", children: relatedProduct.shortDescription }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
+                        Link,
                         {
-                          type: "button",
-                          onClick: () => navigate({
-                            to: "/product/$productSlug",
-                            params: { productSlug: relatedProduct.slug }
-                          }),
+                          to: "/product/$productSlug",
+                          params: { productSlug: relatedProduct.slug },
                           className: "mt-5 inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]",
                           style: { color: "oklch(0.65 0.12 75)" },
                           children: [
@@ -24889,17 +26889,6 @@ const services = [
   }
 ];
 function ServicesPage() {
-  useDocumentMetadata({
-    title: "Furniture Design Services",
-    description: "Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery.",
-    path: "/services",
-    keywords: [
-      "furniture design services",
-      "custom sofa consultation",
-      "fabric selection service",
-      "white glove furniture delivery"
-    ]
-  });
   reactExports.useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (hash) {
@@ -24907,6 +26896,31 @@ function ServicesPage() {
     }
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Furniture Design Services",
+        description: "Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery.",
+        path: "/services",
+        keywords: [
+          "furniture design services",
+          "custom sofa consultation",
+          "fabric selection service",
+          "white glove furniture delivery"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: "Furniture Design Services",
+            description: "Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery.",
+            path: "/services"
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" }
+          ])
+        ]
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -25015,20 +27029,41 @@ function ServicesPage() {
 }
 function HomePage() {
   const { data: settings } = useWebsiteSettings();
-  useDocumentMetadata({
-    title: "Luxury Sofa Collections and Custom Furniture",
-    description: "Explore JPM Enterprises for collection-focused sofa designs, custom furniture solutions, gallery showcases, and premium handcrafted furniture from Hisar.",
-    path: "/",
-    keywords: [
-      "luxury sofa manufacturer",
-      "custom sofa design",
-      "furniture store in Hisar",
-      "premium sofa collections",
-      "bespoke furniture India"
-    ],
-    structuredData: [buildWebsiteSchema(), buildLocalBusinessSchema(settings)]
-  });
+  const { data: products = [] } = useWebsiteProducts();
+  const { data: blogContent } = useWebsiteBlogs();
+  const featuredProducts = products.slice(0, 8);
+  const featuredBlogs = blogContent.posts.slice(0, 4);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Luxury Sofa Collections and Custom Furniture",
+        description: "Explore JPM Enterprises for collection-focused sofa designs, custom furniture solutions, gallery showcases, and premium handcrafted furniture from Hisar.",
+        path: "/",
+        keywords: [
+          "luxury sofa manufacturer",
+          "custom sofa design",
+          "furniture store in Hisar",
+          "premium sofa collections",
+          "bespoke furniture India"
+        ],
+        structuredData: [
+          buildWebsiteSchema(),
+          buildLocalBusinessSchema(settings),
+          ...featuredProducts.length > 0 ? [
+            buildItemListSchema(
+              "JPM Featured Sofa Collection",
+              featuredProducts.map((product) => ({
+                name: product.name,
+                path: `/product/${product.slug}`,
+                image: product.image
+              }))
+            )
+          ] : [],
+          ...featuredBlogs.length > 0 ? [buildBlogListingSchema(featuredBlogs)] : []
+        ]
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(HeroSection, {}),
@@ -25036,6 +27071,7 @@ function HomePage() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(CustomDesignSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(WhyChooseSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GallerySection, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BlogSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TestimonialsSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(AboutSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(ContactSection, {})
@@ -25072,11 +27108,23 @@ const servicesRoute = createRoute({
   path: "/services",
   component: ServicesPage
 });
+const blogsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/blogs",
+  component: BlogsPage
+});
+const blogDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/blogs/$blogSlug",
+  component: BlogDetailPage
+});
 const routeTree = rootRoute.addChildren([
   homeRoute,
   productRoute,
   customDesignRoute,
-  servicesRoute
+  servicesRoute,
+  blogsRoute,
+  blogDetailRoute
 ]);
 const router = createRouter({ routeTree });
 function App() {
@@ -25705,7 +27753,7 @@ function split(lst, le2 = false) {
   }
   return [Ah, Al];
 }
-const shrSH = (h, _l, s) => h >>> s;
+const shrSH = (h, _l2, s) => h >>> s;
 const shrSL = (h, l, s) => h << 32 - s | l >>> s;
 const rotrSH = (h, l, s) => h >>> s | l << 32 - s;
 const rotrSL = (h, l, s) => h << 32 - s | l >>> s;
@@ -30952,5 +33000,5 @@ BigInt.prototype.toJSON = function() {
 };
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
+  /* @__PURE__ */ jsxRuntimeExports.jsx(HelmetProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );

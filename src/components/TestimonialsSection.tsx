@@ -169,6 +169,8 @@ export function TestimonialsSection() {
                       <img
                         src={activeReview.profilePic}
                         alt={activeReview.name}
+                        loading="lazy"
+                        decoding="async"
                         className="h-14 w-14 rounded-full object-cover"
                       />
                     ) : (

@@ -204,6 +204,8 @@ export function HeroSection() {
                       <img
                         src={row.image}
                         alt={row.title}
+                        loading="lazy"
+                        decoding="async"
                         className="h-14 w-16 rounded-2xl object-cover"
                       />
                     ) : (

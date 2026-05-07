@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
 import { useWebsiteSettings } from "../lib/websiteApi";
@@ -10,6 +10,7 @@ const quickLinks = [
   { label: "Custom Design", section: "custom-design" },
   { label: "Why Us", section: "why-us" },
   { label: "Gallery", section: "gallery" },
+  { label: "Blogs", to: "/blogs" },
   { label: "Contact", section: "contact" },
 ];
 
@@ -83,6 +84,7 @@ export function Footer() {
             <img
               src="/assets/uploads/image-1.png"
               alt="JPM Enterprises"
+              decoding="async"
               className="mb-5 h-12 w-auto brightness-0 invert"
             />
             <p
@@ -126,15 +128,25 @@ export function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <button
-                    type="button"
-                    onClick={() => handleQuickLink(link.section)}
-                    data-ocid={`footer.${link.section.replace("-", "_")}_link`}
-                    className="font-general text-sm transition-colors duration-200"
-                    style={{ color: "oklch(0.72 0.015 82)" }}
-                  >
-                    {link.label}
-                  </button>
+                  {link.section ? (
+                    <button
+                      type="button"
+                      onClick={() => handleQuickLink(link.section)}
+                      data-ocid={`footer.${link.section.replace("-", "_")}_link`}
+                      className="font-general text-sm transition-colors duration-200"
+                      style={{ color: "oklch(0.72 0.015 82)" }}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.to!}
+                      className="font-general text-sm transition-colors duration-200"
+                      style={{ color: "oklch(0.72 0.015 82)" }}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

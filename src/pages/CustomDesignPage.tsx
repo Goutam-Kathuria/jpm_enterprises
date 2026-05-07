@@ -3,7 +3,8 @@ import { Home, Layers, Palette, Ruler } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SofaConfigurator } from "../components/SofaConfigurator";
-import { useDocumentMetadata } from "../lib/seo";
+import { SeoHead } from "../components/SeoHead";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/seo";
 
 const steps = [
   {
@@ -41,21 +42,31 @@ export function CustomDesignPage() {
         .join(" ")
     : "";
 
-  useDocumentMetadata({
-    title: "Custom Sofa Design",
-    description:
-      "Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience.",
-    path: "/custom-design",
-    keywords: [
-      "custom sofa design",
-      "bespoke sofa maker",
-      "made to order sofa",
-      "luxury furniture customization",
-    ],
-  });
-
   return (
     <div className="min-h-screen bg-background">
+      <SeoHead
+        title="Custom Sofa Design"
+        description="Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience."
+        path="/custom-design"
+        keywords={[
+          "custom sofa design",
+          "bespoke sofa maker",
+          "made to order sofa",
+          "luxury furniture customization",
+        ]}
+        structuredData={[
+          buildWebPageSchema({
+            title: "Custom Sofa Design",
+            description:
+              "Build a bespoke JPM sofa with tailored dimensions, curated materials, and a guided customization experience.",
+            path: "/custom-design",
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Custom Design", path: "/custom-design" },
+          ]),
+        ]}
+      />
       <Navbar />
       <main>
         {/* Hero Intro */}

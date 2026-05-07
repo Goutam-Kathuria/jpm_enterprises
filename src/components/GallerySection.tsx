@@ -138,6 +138,7 @@ export function GallerySection() {
                       src={item.image}
                       alt={item.alt}
                       loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.54))]" />
@@ -194,6 +195,7 @@ export function GallerySection() {
           <img
             src={gallery[lightboxIndex].image}
             alt={gallery[lightboxIndex].alt}
+            decoding="async"
             className="max-h-[86vh] max-w-[86vw] rounded-[28px] object-contain shadow-2xl"
           />
 

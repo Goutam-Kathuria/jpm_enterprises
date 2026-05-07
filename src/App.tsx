@@ -6,6 +6,7 @@ import {
   createRouter,
 } from "@tanstack/react-router";
 import { AboutSection } from "./components/AboutSection";
+import { BlogSection } from "./components/BlogSection";
 import { CollectionSection } from "./components/CollectionSection";
 import { ContactSection } from "./components/ContactSection";
 import { CustomDesignSection } from "./components/CustomDesignSection";
@@ -13,40 +14,65 @@ import { Footer } from "./components/Footer";
 import { GallerySection } from "./components/GallerySection";
 import { HeroSection } from "./components/HeroSection";
 import { Navbar } from "./components/Navbar";
+import { SeoHead } from "./components/SeoHead";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { WebsiteAnalyticsPing } from "./components/WebsiteAnalyticsPing";
 import { WhyChooseSection } from "./components/WhyChooseSection";
+import { Toaster } from "./components/ui/sonner";
+import { useWebsiteBlogs } from "./lib/blogs";
 import {
+  buildBlogListingSchema,
+  buildItemListSchema,
   buildLocalBusinessSchema,
   buildWebsiteSchema,
-  useDocumentMetadata,
 } from "./lib/seo";
-import { useWebsiteSettings } from "./lib/websiteApi";
+import { useWebsiteProducts, useWebsiteSettings } from "./lib/websiteApi";
+import { BlogDetailPage } from "./pages/BlogDetailPage";
+import { BlogsPage } from "./pages/BlogsPage";
 import { CustomDesignPage } from "./pages/CustomDesignPage";
-import { Toaster } from "./components/ui/sonner";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ServicesPage } from "./pages/ServicesPage";
 
 function HomePage() {
   const { data: settings } = useWebsiteSettings();
-
-  useDocumentMetadata({
-    title: "Luxury Sofa Collections and Custom Furniture",
-    description:
-      "Explore JPM Enterprises for collection-focused sofa designs, custom furniture solutions, gallery showcases, and premium handcrafted furniture from Hisar.",
-    path: "/",
-    keywords: [
-      "luxury sofa manufacturer",
-      "custom sofa design",
-      "furniture store in Hisar",
-      "premium sofa collections",
-      "bespoke furniture India",
-    ],
-    structuredData: [buildWebsiteSchema(), buildLocalBusinessSchema(settings)],
-  });
+  const { data: products = [] } = useWebsiteProducts();
+  const { data: blogContent } = useWebsiteBlogs();
+  const featuredProducts = products.slice(0, 8);
+  const featuredBlogs = blogContent.posts.slice(0, 4);
 
   return (
     <div className="min-h-screen bg-background">
+      <SeoHead
+        title="Luxury Sofa Collections and Custom Furniture"
+        description="Explore JPM Enterprises for collection-focused sofa designs, custom furniture solutions, gallery showcases, and premium handcrafted furniture from Hisar."
+        path="/"
+        keywords={[
+          "luxury sofa manufacturer",
+          "custom sofa design",
+          "furniture store in Hisar",
+          "premium sofa collections",
+          "bespoke furniture India",
+        ]}
+        structuredData={[
+          buildWebsiteSchema(),
+          buildLocalBusinessSchema(settings),
+          ...(featuredProducts.length > 0
+            ? [
+                buildItemListSchema(
+                  "JPM Featured Sofa Collection",
+                  featuredProducts.map((product) => ({
+                    name: product.name,
+                    path: `/product/${product.slug}`,
+                    image: product.image,
+                  })),
+                ),
+              ]
+            : []),
+          ...(featuredBlogs.length > 0
+            ? [buildBlogListingSchema(featuredBlogs)]
+            : []),
+        ]}
+      />
       <Navbar />
       <main>
         <HeroSection />
@@ -54,6 +80,7 @@ function HomePage() {
         <CustomDesignSection />
         <WhyChooseSection />
         <GallerySection />
+        <BlogSection />
         <TestimonialsSection />
         <AboutSection />
         <ContactSection />
@@ -100,11 +127,25 @@ const servicesRoute = createRoute({
   component: ServicesPage,
 });
 
+const blogsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/blogs",
+  component: BlogsPage,
+});
+
+const blogDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/blogs/$blogSlug",
+  component: BlogDetailPage,
+});
+
 const routeTree = rootRoute.addChildren([
   homeRoute,
   productRoute,
   customDesignRoute,
   servicesRoute,
+  blogsRoute,
+  blogDetailRoute,
 ]);
 
 const router = createRouter({ routeTree });

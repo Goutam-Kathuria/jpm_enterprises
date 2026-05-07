@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
-import { useDocumentMetadata } from "../lib/seo";
+import { SeoHead } from "../components/SeoHead";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "../lib/seo";
 import { scrollToSection } from "../utils/scrollToSection";
 
 const services = [
@@ -68,19 +69,6 @@ const services = [
 ];
 
 export function ServicesPage() {
-  useDocumentMetadata({
-    title: "Furniture Design Services",
-    description:
-      "Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery.",
-    path: "/services",
-    keywords: [
-      "furniture design services",
-      "custom sofa consultation",
-      "fabric selection service",
-      "white glove furniture delivery",
-    ],
-  });
-
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (hash) {
@@ -90,6 +78,29 @@ export function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SeoHead
+        title="Furniture Design Services"
+        description="Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery."
+        path="/services"
+        keywords={[
+          "furniture design services",
+          "custom sofa consultation",
+          "fabric selection service",
+          "white glove furniture delivery",
+        ]}
+        structuredData={[
+          buildWebPageSchema({
+            title: "Furniture Design Services",
+            description:
+              "Explore JPM Enterprises services including custom sofa creation, fabric selection, interior consultation, and white-glove delivery.",
+            path: "/services",
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
+      />
       <Navbar />
       <main>
         {/* Hero */}

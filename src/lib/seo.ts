@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import type { WebsiteBlog } from "./blogs";
 import type { WebsiteProduct, WebsiteSettings } from "./websiteApi";
 
-const SITE_NAME = "JPM Enterprises";
-const DEFAULT_DESCRIPTION =
+export const SITE_NAME = "JPM Enterprises";
+export const SITE_URL = normalizeBaseUrl(
+  import.meta.env.VITE_SITE_URL || "https://jpme.in",
+);
+export const DEFAULT_DESCRIPTION =
   "Luxury sofa manufacturer in Hisar crafting bespoke furniture, premium seating collections, and refined living spaces.";
-const DEFAULT_IMAGE = "/assets/generated/hero-sofa.dim_1600x900.jpg";
+export const DEFAULT_IMAGE = "/assets/generated/hero-sofa.dim_1600x900.jpg";
 
-interface SeoConfig {
+export interface SeoConfig {
   title: string;
   description?: string;
   image?: string;
@@ -14,157 +17,86 @@ interface SeoConfig {
   type?: "website" | "article" | "product";
   keywords?: string[];
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+  robots?: string;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
 }
 
-function resolveAbsoluteUrl(pathOrUrl?: string) {
-  if (typeof window === "undefined") {
-    return pathOrUrl ?? "";
+function normalizeBaseUrl(value: string) {
+  return value.replace(/\/+$/, "");
+}
+
+function normalizeText(value: string | null | undefined) {
+  return value?.trim() ?? "";
+}
+
+function normalizeKeywords(values: string[] | undefined) {
+  return Array.from(
+    new Set(
+      (values ?? [])
+        .map((value) => normalizeText(value))
+        .filter(Boolean),
+    ),
+  );
+}
+
+function toIsoDate(value: string | null | undefined) {
+  const trimmed = normalizeText(value);
+
+  if (!trimmed) {
+    return "";
   }
+
+  const date = new Date(trimmed);
+  return Number.isNaN(date.getTime()) ? "" : date.toISOString();
+}
+
+function toDatePublished(value: string | null | undefined) {
+  const isoDate = toIsoDate(value);
+  return isoDate || undefined;
+}
+
+export function resolveAbsoluteUrl(pathOrUrl?: string) {
+  const candidate = normalizeText(pathOrUrl) || "/";
 
   try {
-    return new URL(
-      pathOrUrl || window.location.pathname,
-      window.location.origin,
-    ).toString();
+    return new URL(candidate, `${SITE_URL}/`).toString();
   } catch {
-    return window.location.href;
+    return `${SITE_URL}/`;
   }
 }
 
-function upsertMeta(
-  selector: string,
-  attribute: "name" | "property",
-  key: string,
-  content: string,
-) {
-  if (typeof document === "undefined") {
-    return;
-  }
+export function createSeoPayload(config: SeoConfig) {
+  const title = config.title.includes(SITE_NAME)
+    ? config.title
+    : `${config.title} | ${SITE_NAME}`;
+  const description = normalizeText(config.description) || DEFAULT_DESCRIPTION;
+  const image = resolveAbsoluteUrl(config.image || DEFAULT_IMAGE);
+  const canonicalUrl = resolveAbsoluteUrl(config.path);
+  const keywords = normalizeKeywords(config.keywords);
+  const tags = normalizeKeywords(config.tags);
+  const structuredData = Array.isArray(config.structuredData)
+    ? config.structuredData
+    : config.structuredData
+      ? [config.structuredData]
+      : [];
 
-  let element = document.head.querySelector<HTMLMetaElement>(selector);
-
-  if (!element) {
-    element = document.createElement("meta");
-    element.setAttribute(attribute, key);
-    document.head.append(element);
-  }
-
-  element.setAttribute("content", content);
-}
-
-function upsertLink(rel: string, href: string) {
-  if (typeof document === "undefined") {
-    return;
-  }
-
-  let element = document.head.querySelector<HTMLLinkElement>(
-    `link[rel="${rel}"]`,
-  );
-
-  if (!element) {
-    element = document.createElement("link");
-    element.setAttribute("rel", rel);
-    document.head.append(element);
-  }
-
-  element.setAttribute("href", href);
-}
-
-function upsertStructuredData(
-  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>,
-) {
-  if (typeof document === "undefined") {
-    return;
-  }
-
-  const scriptId = "jpm-structured-data";
-  const existingScript = document.getElementById(scriptId);
-
-  if (!structuredData) {
-    existingScript?.remove();
-    return;
-  }
-
-  const normalizedData = Array.isArray(structuredData)
-    ? structuredData
-    : [structuredData];
-
-  const script =
-    existingScript instanceof HTMLScriptElement
-      ? existingScript
-      : document.createElement("script");
-
-  script.id = scriptId;
-  script.type = "application/ld+json";
-  script.text = JSON.stringify(normalizedData);
-
-  if (!existingScript) {
-    document.head.append(script);
-  }
-}
-
-export function useDocumentMetadata(config: SeoConfig) {
-  useEffect(() => {
-    const title = config.title.includes(SITE_NAME)
-      ? config.title
-      : `${config.title} | ${SITE_NAME}`;
-    const description = config.description || DEFAULT_DESCRIPTION;
-    const image = resolveAbsoluteUrl(config.image || DEFAULT_IMAGE);
-    const canonicalUrl = resolveAbsoluteUrl(config.path);
-    const keywords = (config.keywords ?? []).join(", ");
-
-    document.title = title;
-    document.documentElement.lang = "en-IN";
-
-    upsertMeta('meta[name="description"]', "name", "description", description);
-    upsertMeta('meta[name="robots"]', "name", "robots", "index, follow");
-    upsertMeta('meta[name="theme-color"]', "name", "theme-color", "#b78a4a");
-
-    if (keywords) {
-      upsertMeta('meta[name="keywords"]', "name", "keywords", keywords);
-    }
-
-    upsertMeta('meta[property="og:title"]', "property", "og:title", title);
-    upsertMeta(
-      'meta[property="og:description"]',
-      "property",
-      "og:description",
-      description,
-    );
-    upsertMeta(
-      'meta[property="og:type"]',
-      "property",
-      "og:type",
-      config.type || "website",
-    );
-    upsertMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
-    upsertMeta('meta[property="og:image"]', "property", "og:image", image);
-    upsertMeta(
-      'meta[property="og:site_name"]',
-      "property",
-      "og:site_name",
-      SITE_NAME,
-    );
-    upsertMeta('meta[property="og:locale"]', "property", "og:locale", "en_IN");
-
-    upsertMeta(
-      'meta[name="twitter:card"]',
-      "name",
-      "twitter:card",
-      "summary_large_image",
-    );
-    upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
-    upsertMeta(
-      'meta[name="twitter:description"]',
-      "name",
-      "twitter:description",
-      description,
-    );
-    upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", image);
-
-    upsertLink("canonical", canonicalUrl);
-    upsertStructuredData(config.structuredData);
-  }, [config]);
+  return {
+    title,
+    description,
+    image,
+    canonicalUrl,
+    type: config.type || "website",
+    robots: normalizeText(config.robots) || "index, follow",
+    author: normalizeText(config.author),
+    publishedTime: toIsoDate(config.publishedTime),
+    modifiedTime: toIsoDate(config.modifiedTime),
+    keywords,
+    tags,
+    structuredData,
+  };
 }
 
 export function buildWebsiteSchema() {
@@ -173,6 +105,40 @@ export function buildWebsiteSchema() {
     "@type": "WebSite",
     name: SITE_NAME,
     url: resolveAbsoluteUrl("/"),
+    inLanguage: "en-IN",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: resolveAbsoluteUrl("/"),
+      logo: resolveAbsoluteUrl("/assets/uploads/image-1.png"),
+    },
+  };
+}
+
+export function buildWebPageSchema({
+  title,
+  description,
+  path,
+  image,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: resolveAbsoluteUrl(path),
+    image: resolveAbsoluteUrl(image || DEFAULT_IMAGE),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: resolveAbsoluteUrl("/"),
+    },
+    inLanguage: "en-IN",
   };
 }
 
@@ -203,6 +169,41 @@ export function buildLocalBusinessSchema(settings?: Partial<WebsiteSettings>) {
   };
 }
 
+export function buildBreadcrumbSchema(
+  items: Array<{ name: string; path: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: resolveAbsoluteUrl(item.path),
+    })),
+  };
+}
+
+export function buildItemListSchema(
+  name: string,
+  items: Array<{ name: string; path: string; image?: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: resolveAbsoluteUrl(item.path),
+      name: item.name,
+      image: item.image ? resolveAbsoluteUrl(item.image) : undefined,
+    })),
+  };
+}
+
 export function buildProductSchema(
   product: WebsiteProduct,
   settings?: Partial<WebsiteSettings>,
@@ -227,5 +228,59 @@ export function buildProductSchema(
       email: settings?.enquiryEmail || undefined,
     },
     url: resolveAbsoluteUrl(`/product/${product.slug}`),
+  };
+}
+
+export function buildBlogPostingSchema(blog: WebsiteBlog) {
+  const publishedTime = toDatePublished(blog.publishedAt);
+  const modifiedTime = toDatePublished(blog.updatedAt || blog.publishedAt);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.metaDescription || blog.excerpt,
+    image: blog.coverImage ? [blog.coverImage] : [resolveAbsoluteUrl(DEFAULT_IMAGE)],
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    author: {
+      "@type": "Organization",
+      name: blog.authorName || SITE_NAME,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: resolveAbsoluteUrl("/assets/uploads/image-1.png"),
+      },
+    },
+    mainEntityOfPage: resolveAbsoluteUrl(`/blogs/${blog.slug}`),
+    keywords: blog.tags.join(", "),
+    articleSection: "Furniture Blog",
+  };
+}
+
+export function buildBlogListingSchema(blogs: WebsiteBlog[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${SITE_NAME} Blog`,
+    description:
+      "Insights on sofa design, furniture care, and custom living spaces from JPM Enterprises.",
+    url: resolveAbsoluteUrl("/blogs"),
+    blogPost: blogs.map((blog) => ({
+      "@type": "BlogPosting",
+      headline: blog.title,
+      url: resolveAbsoluteUrl(`/blogs/${blog.slug}`),
+      image: blog.coverImage
+        ? [blog.coverImage]
+        : [resolveAbsoluteUrl(DEFAULT_IMAGE)],
+      datePublished: toDatePublished(blog.publishedAt),
+      author: {
+        "@type": "Organization",
+        name: blog.authorName || SITE_NAME,
+      },
+    })),
   };
 }
