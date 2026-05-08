@@ -22052,9 +22052,6 @@ function BlogSection() {
   const headerRef = useScrollReveal();
   const { data, isLoading } = useWebsiteBlogs();
   const posts = data.posts.slice(0, 3);
-  if (!isLoading && posts.length === 0) {
-    return null;
-  }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "section",
     {
@@ -22112,7 +22109,7 @@ function BlogSection() {
             ]
           },
           `blog-skeleton-${index2 + 1}`
-        )) : posts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        )) : posts.length > 0 ? posts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "article",
           {
             className: "overflow-hidden rounded-[30px] bg-white",
@@ -22191,12 +22188,25 @@ function BlogSection() {
             ]
           },
           post.id
-        )) })
+        )) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "lg:col-span-3 rounded-[30px] bg-white px-8 py-14 text-center",
+            style: {
+              border: "1px solid oklch(0.9 0.015 82)",
+              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "Thoughtful articles will be published here soon" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "We're preparing practical guidance on sofa selection, materials, maintenance, and custom furniture planning to make the journal genuinely useful when it goes live." })
+            ]
+          }
+        ) })
       ] })
     }
   );
 }
-const ALL_COLLECTIONS_SLUG = "all";
+const ALL_COLLECTIONS_SLUG$1 = "all";
 const CATEGORY_LOADING_KEYS = [
   "loading-alpha",
   "loading-bravo",
@@ -22224,7 +22234,7 @@ function LoadingCard() {
 function CollectionSection() {
   const headerRef = useScrollReveal();
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = reactExports.useState(ALL_COLLECTIONS_SLUG);
+  const [selectedCategory, setSelectedCategory] = reactExports.useState(ALL_COLLECTIONS_SLUG$1);
   const [isPending, startTransition2] = reactExports.useTransition();
   const deferredCategory = reactExports.useDeferredValue(selectedCategory);
   const {
@@ -22250,7 +22260,7 @@ function CollectionSection() {
   );
   const categoryCards = [
     {
-      slug: ALL_COLLECTIONS_SLUG,
+      slug: ALL_COLLECTIONS_SLUG$1,
       name: "All Collections",
       description: "Browse the full JPM catalogue across every handcrafted seating collection.",
       image: "/assets/generated/hero-sofa.dim_1600x900.jpg",
@@ -22261,14 +22271,16 @@ function CollectionSection() {
       count: categoryCounts[category.slug] ?? 0
     }))
   ];
-  const activeCategory = deferredCategory === ALL_COLLECTIONS_SLUG ? null : categories.find((category) => category.slug === deferredCategory) || null;
+  const activeCategory = deferredCategory === ALL_COLLECTIONS_SLUG$1 ? null : categories.find((category) => category.slug === deferredCategory) || null;
   const featuredCategory = activeCategory ?? categories[0] ?? null;
-  const filteredProducts = deferredCategory === ALL_COLLECTIONS_SLUG ? products : products.filter(
+  const filteredProducts = deferredCategory === ALL_COLLECTIONS_SLUG$1 ? products : products.filter(
     (product) => {
       var _a2;
       return ((_a2 = product.category) == null ? void 0 : _a2.slug) === deferredCategory;
     }
   );
+  const visibleProducts = filteredProducts.slice(0, 20);
+  const showFullCollectionButton = filteredProducts.length > 20;
   const loading = categoriesLoading || productsLoading;
   const error = categoriesError || productsError;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -22436,10 +22448,7 @@ function CollectionSection() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-playfair text-3xl font-semibold text-foreground", children: (activeCategory == null ? void 0 : activeCategory.name) || "Every signature design in one view" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-sm text-muted-foreground", children: [
-                filteredProducts.length,
-                " products showing"
-              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm text-muted-foreground", children: showFullCollectionButton ? `Showing ${visibleProducts.length} of ${filteredProducts.length} products` : `${filteredProducts.length} products showing` }),
               isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "span",
                 {
@@ -22467,145 +22476,167 @@ function CollectionSection() {
               ]
             }
           ) : null,
-          !error ? filteredProducts.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: `grid gap-6 md:grid-cols-2 xl:grid-cols-3 ${isPending ? "opacity-80" : "opacity-100"} transition-opacity duration-200`,
-              children: filteredProducts.map((product, index2) => {
-                var _a2;
-                const infoChips = [
-                  product.material,
-                  product.frame,
-                  product.warranty
-                ].filter(Boolean);
-                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "article",
-                  {
-                    "data-ocid": `collection.item.${product.slug}`,
-                    className: "group overflow-hidden rounded-[30px] bg-white transition-all duration-300 hover:-translate-y-1",
-                    style: {
-                      border: "1px solid oklch(0.9 0.015 82)",
-                      boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.06)"
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3] overflow-hidden", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Link,
-                          {
-                            to: "/product/$productSlug",
-                            params: { productSlug: product.slug },
-                            className: "block h-full w-full",
-                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "img",
+          !error ? filteredProducts.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: `grid gap-6 md:grid-cols-2 xl:grid-cols-3 ${isPending ? "opacity-80" : "opacity-100"} transition-opacity duration-200`,
+                children: visibleProducts.map((product, index2) => {
+                  var _a2;
+                  const infoChips = [
+                    product.material,
+                    product.frame,
+                    product.warranty
+                  ].filter(Boolean);
+                  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "article",
+                    {
+                      "data-ocid": `collection.item.${product.slug}`,
+                      className: "group overflow-hidden rounded-[30px] bg-white transition-all duration-300 hover:-translate-y-1",
+                      style: {
+                        border: "1px solid oklch(0.9 0.015 82)",
+                        boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.06)"
+                      },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3] overflow-hidden", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Link,
+                            {
+                              to: "/product/$productSlug",
+                              params: { productSlug: product.slug },
+                              className: "block h-full w-full",
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "img",
+                                {
+                                  src: product.image,
+                                  alt: product.name,
+                                  loading: "lazy",
+                                  decoding: "async",
+                                  className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                }
+                              )
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.78))]" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute left-5 top-5 flex flex-wrap gap-2", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
                               {
-                                src: product.image,
-                                alt: product.name,
-                                loading: "lazy",
-                                decoding: "async",
-                                className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                className: "rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
+                                style: {
+                                  background: "oklch(1 0 0 / 0.18)",
+                                  color: "oklch(0.95 0.005 85)",
+                                  border: "1px solid oklch(1 0 0 / 0.16)"
+                                },
+                                children: ((_a2 = product.category) == null ? void 0 : _a2.name) || "Signature Design"
+                              }
+                            ),
+                            index2 < 2 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "span",
+                              {
+                                className: "inline-flex items-center gap-1 rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
+                                style: {
+                                  background: "oklch(0.65 0.12 75 / 0.92)",
+                                  color: "oklch(0.12 0.01 60)"
+                                },
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 12 }),
+                                  "Featured"
+                                ]
+                              }
+                            ) : null
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5 p-6", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              Link,
+                              {
+                                to: "/product/$productSlug",
+                                params: { productSlug: product.slug },
+                                className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                                children: product.name
+                              }
+                            ) }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: product.shortDescription || product.description })
+                          ] }),
+                          infoChips.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: infoChips.slice(0, 3).map((chip) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "span",
+                            {
+                              className: "rounded-full px-3 py-1 font-general text-[11px] uppercase tracking-[0.16em]",
+                              style: {
+                                background: "oklch(0.97 0.008 84)",
+                                color: "oklch(0.55 0.05 68)",
+                                border: "1px solid oklch(0.9 0.015 82)"
+                              },
+                              children: chip
+                            },
+                            chip
+                          )) }) : null,
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              Link,
+                              {
+                                to: "/product/$productSlug",
+                                params: { productSlug: product.slug },
+                                "data-ocid": `collection.view_button.${product.slug}`,
+                                className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5",
+                                style: {
+                                  background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+                                  color: "oklch(0.12 0.01 60)"
+                                },
+                                children: [
+                                  "View Details",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 15 })
+                                ]
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "button",
+                              {
+                                type: "button",
+                                onClick: () => navigate({
+                                  to: "/custom-design",
+                                  search: { product: product.slug }
+                                }),
+                                className: "rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-300",
+                                style: {
+                                  color: "oklch(0.65 0.12 75)",
+                                  border: "1px solid oklch(0.65 0.12 75 / 0.32)"
+                                },
+                                children: "Customize"
                               }
                             )
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.78))]" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute left-5 top-5 flex flex-wrap gap-2", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "span",
-                            {
-                              className: "rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
-                              style: {
-                                background: "oklch(1 0 0 / 0.18)",
-                                color: "oklch(0.95 0.005 85)",
-                                border: "1px solid oklch(1 0 0 / 0.16)"
-                              },
-                              children: ((_a2 = product.category) == null ? void 0 : _a2.name) || "Signature Design"
-                            }
-                          ),
-                          index2 < 2 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                            "span",
-                            {
-                              className: "inline-flex items-center gap-1 rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
-                              style: {
-                                background: "oklch(0.65 0.12 75 / 0.92)",
-                                color: "oklch(0.12 0.01 60)"
-                              },
-                              children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 12 }),
-                                "Featured"
-                              ]
-                            }
-                          ) : null
+                          ] })
                         ] })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5 p-6", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            Link,
-                            {
-                              to: "/product/$productSlug",
-                              params: { productSlug: product.slug },
-                              className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
-                              children: product.name
-                            }
-                          ) }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: product.shortDescription || product.description })
-                        ] }),
-                        infoChips.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: infoChips.slice(0, 3).map((chip) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "span",
-                          {
-                            className: "rounded-full px-3 py-1 font-general text-[11px] uppercase tracking-[0.16em]",
-                            style: {
-                              background: "oklch(0.97 0.008 84)",
-                              color: "oklch(0.55 0.05 68)",
-                              border: "1px solid oklch(0.9 0.015 82)"
-                            },
-                            children: chip
-                          },
-                          chip
-                        )) }) : null,
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                            Link,
-                            {
-                              to: "/product/$productSlug",
-                              params: { productSlug: product.slug },
-                              "data-ocid": `collection.view_button.${product.slug}`,
-                              className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-0.5",
-                              style: {
-                                background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
-                                color: "oklch(0.12 0.01 60)"
-                              },
-                              children: [
-                                "View Details",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 15 })
-                              ]
-                            }
-                          ),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "button",
-                            {
-                              type: "button",
-                              onClick: () => navigate({
-                                to: "/custom-design",
-                                search: { product: product.slug }
-                              }),
-                              className: "rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-300",
-                              style: {
-                                color: "oklch(0.65 0.12 75)",
-                                border: "1px solid oklch(0.65 0.12 75 / 0.32)"
-                              },
-                              children: "Customize"
-                            }
-                          )
-                        ] })
-                      ] })
-                    ]
-                  },
-                  product.id
-                );
-              })
-            }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      ]
+                    },
+                    product.id
+                  );
+                })
+              }
+            ),
+            showFullCollectionButton ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                onClick: () => navigate({
+                  to: "/collections",
+                  search: activeCategory ? { category: activeCategory.slug } : {}
+                }),
+                className: "inline-flex items-center gap-2 rounded-full px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+                style: {
+                  background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+                  color: "oklch(0.12 0.01 60)",
+                  boxShadow: "0 18px 32px oklch(0.65 0.12 75 / 0.18)"
+                },
+                children: [
+                  "Browse Full Collection",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 15 })
+                ]
+              }
+            ) }) : null
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
               className: "rounded-[28px] p-10 text-center",
@@ -22614,8 +22645,8 @@ function CollectionSection() {
                 border: "1px solid oklch(0.9 0.015 82)"
               },
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "No products found in this collection yet" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm text-muted-foreground", children: "The collection filter is live. As soon as products are assigned in the backend, they will appear here automatically." })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "We're currently curating this collection" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm text-muted-foreground", children: "There are no products published in this category just yet. Please explore another collection or check back shortly for new additions." })
               ]
             }
           ) : null
@@ -23802,18 +23833,20 @@ function GallerySection() {
   const headerRef = useScrollReveal();
   const { data: gallery = [], isLoading, error } = useWebsiteGallery();
   const [lightboxIndex, setLightboxIndex] = reactExports.useState(null);
+  const visibleGallery = gallery.slice(0, 10);
+  const showFullGalleryButton = gallery.length > 10;
   const closeLightbox = reactExports.useCallback(() => setLightboxIndex(null), []);
   const prevImage = reactExports.useCallback(
     () => setLightboxIndex(
-      (current) => current !== null && gallery.length > 0 ? (current - 1 + gallery.length) % gallery.length : null
+      (current) => current !== null && visibleGallery.length > 0 ? (current - 1 + visibleGallery.length) % visibleGallery.length : null
     ),
-    [gallery.length]
+    [visibleGallery.length]
   );
   const nextImage = reactExports.useCallback(
     () => setLightboxIndex(
-      (current) => current !== null && gallery.length > 0 ? (current + 1) % gallery.length : null
+      (current) => current !== null && visibleGallery.length > 0 ? (current + 1) % visibleGallery.length : null
     ),
-    [gallery.length]
+    [visibleGallery.length]
   );
   reactExports.useEffect(() => {
     if (lightboxIndex === null) {
@@ -23828,10 +23861,10 @@ function GallerySection() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [closeLightbox, lightboxIndex, nextImage, prevImage]);
   reactExports.useEffect(() => {
-    if (lightboxIndex !== null && lightboxIndex >= gallery.length) {
+    if (lightboxIndex !== null && lightboxIndex >= visibleGallery.length) {
       setLightboxIndex(null);
     }
-  }, [gallery.length, lightboxIndex]);
+  }, [lightboxIndex, visibleGallery.length]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "gallery", className: "bg-muted py-24", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-14 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end", children: [
@@ -23882,53 +23915,68 @@ function GallerySection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(GalleryLoadingCard, {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GalleryLoadingCard, { tall: true }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GalleryLoadingCard, {})
-      ] }) : gallery.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]", children: gallery.map((item, index2) => {
-        const tallCard = index2 === 0 || index2 === 2;
-        return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
+      ] }) : gallery.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]", children: visibleGallery.map((item, index2) => {
+          const tallCard = index2 === 0 || index2 === 2;
+          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              "data-ocid": `gallery.item.${item.id}`,
+              className: `group relative overflow-hidden rounded-[28px] ${tallCard ? "lg:row-span-2" : ""}`,
+              onClick: () => setLightboxIndex(index2),
+              style: { minHeight: "280px" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "img",
+                  {
+                    src: item.image,
+                    alt: item.alt,
+                    loading: "lazy",
+                    decoding: "async",
+                    className: "absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.54))]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "flex h-16 w-16 items-center justify-center rounded-full",
+                    style: { background: "oklch(1 0 0 / 0.16)" },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(ZoomIn, { size: 28, className: "text-white" })
+                  }
+                ) })
+              ]
+            },
+            item.id
+          );
+        }) }),
+        showFullGalleryButton ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Link,
           {
-            type: "button",
-            "data-ocid": `gallery.item.${item.id}`,
-            className: `group relative overflow-hidden rounded-[28px] ${tallCard ? "lg:row-span-2" : ""}`,
-            onClick: () => setLightboxIndex(index2),
-            style: { minHeight: "280px" },
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: item.image,
-                  alt: item.alt,
-                  loading: "lazy",
-                  decoding: "async",
-                  className: "absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.54))]" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: "flex h-16 w-16 items-center justify-center rounded-full",
-                  style: { background: "oklch(1 0 0 / 0.16)" },
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(ZoomIn, { size: 28, className: "text-white" })
-                }
-              ) })
-            ]
-          },
-          item.id
-        );
-      }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            to: "/gallery",
+            className: "inline-flex items-center gap-2 rounded-full px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+            style: {
+              background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+              color: "oklch(0.12 0.01 60)",
+              boxShadow: "0 18px 32px oklch(0.65 0.12 75 / 0.18)"
+            },
+            children: "View Full Gallery"
+          }
+        ) }) : null
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "div",
         {
           className: "rounded-[28px] bg-white p-10 text-center",
           style: { border: "1px solid oklch(0.9 0.015 82)" },
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "Gallery items will appear here soon" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm text-muted-foreground", children: "This masonry view is live and ready for the gallery API feed." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "A curated gallery will appear here soon" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm text-muted-foreground", children: "We're preparing visual showcases of recent work, materials, and finished spaces. Please check back shortly for the full gallery experience." })
           ]
         }
       ) : null
     ] }),
-    lightboxIndex !== null && gallery[lightboxIndex] ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/92", children: [
+    lightboxIndex !== null && visibleGallery[lightboxIndex] ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/92", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
@@ -23954,8 +24002,8 @@ function GallerySection() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
-          src: gallery[lightboxIndex].image,
-          alt: gallery[lightboxIndex].alt,
+          src: visibleGallery[lightboxIndex].image,
+          alt: visibleGallery[lightboxIndex].alt,
           decoding: "async",
           className: "max-h-[86vh] max-w-[86vw] rounded-[28px] object-contain shadow-2xl"
         }
@@ -23974,7 +24022,7 @@ function GallerySection() {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "absolute bottom-6 left-1/2 -translate-x-1/2 font-general text-sm text-white/62", children: [
         lightboxIndex + 1,
         " / ",
-        gallery.length
+        visibleGallery.length
       ] })
     ] }) : null
   ] });
@@ -25343,7 +25391,7 @@ function BlogDetailPage() {
               style: { border: "1px solid oklch(0.9 0.015 82)" },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Blog article not found" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "This slug isn't in the live blog feed right now. Once the article is published from the panel, it will appear here automatically." })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "The article you're looking for is not available at the moment. Please return to the journal to continue exploring our latest insights and design guidance." })
               ]
             }
           )
@@ -25525,11 +25573,310 @@ function BlogsPage() {
               className: "mt-10 rounded-[32px] bg-white px-8 py-16 text-center",
               style: { border: "1px solid oklch(0.9 0.015 82)" },
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Blog posts will appear here as soon as they're published" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "The website is ready for dynamic SEO articles. Once posts are added under the blog content feed, this page and the homepage listing will update automatically." })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "Thoughtful articles will be published here soon" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "We're preparing practical guidance on sofa selection, materials, maintenance, and custom furniture planning so this journal launches with genuinely useful reading." })
               ]
             }
           )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
+}
+const ALL_COLLECTIONS_SLUG = "all";
+function CollectionsPage() {
+  const search = useSearch({ strict: false });
+  const navigate = useNavigate();
+  const selectedCategory = search.category || ALL_COLLECTIONS_SLUG;
+  const {
+    data: categories = [],
+    isLoading: categoriesLoading,
+    error: categoriesError
+  } = useWebsiteCategories();
+  const {
+    data: products = [],
+    isLoading: productsLoading,
+    error: productsError
+  } = useWebsiteProducts();
+  const categoryCounts = products.reduce(
+    (counts, product) => {
+      var _a2;
+      if (!((_a2 = product.category) == null ? void 0 : _a2.slug)) {
+        return counts;
+      }
+      counts[product.category.slug] = (counts[product.category.slug] ?? 0) + 1;
+      return counts;
+    },
+    {}
+  );
+  const activeCategory = selectedCategory === ALL_COLLECTIONS_SLUG ? null : categories.find((category) => category.slug === selectedCategory) || null;
+  const filteredProducts = selectedCategory === ALL_COLLECTIONS_SLUG ? products : products.filter(
+    (product) => {
+      var _a2;
+      return ((_a2 = product.category) == null ? void 0 : _a2.slug) === selectedCategory;
+    }
+  );
+  const loading = categoriesLoading || productsLoading;
+  const error = categoriesError || productsError;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Full Furniture Collection Catalogue",
+        description: "Browse the complete JPM Enterprises catalogue with category filters across luxury sofas, custom furniture, and handcrafted seating collections.",
+        path: "/collections",
+        keywords: [
+          "furniture catalogue",
+          "sofa collection catalogue",
+          "luxury furniture collections",
+          "custom furniture hisar"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: "Full Furniture Collection Catalogue",
+            description: "Browse the complete JPM Enterprises catalogue with category filters across luxury sofas, custom furniture, and handcrafted seating collections.",
+            path: "/collections"
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Collections", path: "/collections" }
+          ]),
+          ...filteredProducts.length > 0 ? [
+            buildItemListSchema(
+              (activeCategory == null ? void 0 : activeCategory.name) || "JPM Collection Catalogue",
+              filteredProducts.map((product) => ({
+                name: product.name,
+                path: `/product/${product.slug}`,
+                image: product.image
+              }))
+            )
+          ] : []
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "main",
+      {
+        className: "pb-24 pt-28",
+        style: {
+          background: "linear-gradient(180deg, oklch(0.985 0.008 85), oklch(0.965 0.012 82))"
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "rounded-[36px] bg-white px-8 py-12 shadow-[0_20px_48px_oklch(0.12_0.01_60_/_0.06)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "font-general text-sm font-semibold uppercase tracking-[0.28em]",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: "Collection Catalogue"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-4 max-w-4xl font-playfair text-4xl font-bold text-foreground lg:text-6xl", children: "Explore every signature design in one place" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-3xl font-general text-base leading-relaxed text-muted-foreground", children: "Filter by category to review each furniture line with clarity, compare styles, and move directly into the product details that best match your project." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mt-10 rounded-[32px] bg-white p-6 shadow-[0_16px_36px_oklch(0.12_0.01_60_/_0.05)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex flex-wrap items-center justify-between gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    className: "font-general text-xs font-semibold uppercase tracking-[0.22em]",
+                    style: { color: "oklch(0.65 0.12 75)" },
+                    children: "Category Filter"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 font-playfair text-2xl font-semibold text-foreground", children: (activeCategory == null ? void 0 : activeCategory.name) || "All Collections" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-general text-sm text-muted-foreground", children: [
+                filteredProducts.length,
+                " products available"
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => navigate({ to: "/collections", search: {} }),
+                  className: "rounded-full px-4 py-2 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all",
+                  style: {
+                    background: selectedCategory === ALL_COLLECTIONS_SLUG ? "oklch(0.65 0.12 75)" : "oklch(0.97 0.008 84)",
+                    color: selectedCategory === ALL_COLLECTIONS_SLUG ? "oklch(0.12 0.01 60)" : "oklch(0.45 0.03 70)",
+                    border: selectedCategory === ALL_COLLECTIONS_SLUG ? "1px solid oklch(0.65 0.12 75)" : "1px solid oklch(0.9 0.015 82)"
+                  },
+                  children: [
+                    "All Collections (",
+                    products.length,
+                    ")"
+                  ]
+                }
+              ),
+              categories.map((category) => {
+                const isActive = category.slug === selectedCategory;
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => navigate({
+                      to: "/collections",
+                      search: { category: category.slug }
+                    }),
+                    className: "rounded-full px-4 py-2 font-general text-xs font-semibold uppercase tracking-[0.18em] transition-all",
+                    style: {
+                      background: isActive ? "oklch(0.65 0.12 75)" : "oklch(0.97 0.008 84)",
+                      color: isActive ? "oklch(0.12 0.01 60)" : "oklch(0.45 0.03 70)",
+                      border: isActive ? "1px solid oklch(0.65 0.12 75)" : "1px solid oklch(0.9 0.015 82)"
+                    },
+                    children: [
+                      category.name,
+                      " (",
+                      categoryCounts[category.slug] ?? 0,
+                      ")"
+                    ]
+                  },
+                  category.id
+                );
+              })
+            ] })
+          ] }),
+          error && !loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "section",
+            {
+              className: "mt-10 rounded-[32px] bg-white px-8 py-14 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "The catalogue could not be loaded right now" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "Please try again in a moment. If the issue continues, check whether the website product service is available." })
+              ]
+            }
+          ) : null,
+          !error ? loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3", children: Array.from({ length: 6 }, (_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "overflow-hidden rounded-[30px] bg-white",
+              style: {
+                border: "1px solid oklch(0.9 0.015 82)",
+                boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.06)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] animate-pulse bg-[oklch(0.93_0.01_82)]" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 p-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 w-24 animate-pulse rounded-full bg-[oklch(0.9_0.015_82)]" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-4/5 animate-pulse rounded-[18px] bg-[oklch(0.94_0.01_82)]" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-[oklch(0.94_0.01_82)]" })
+                ] })
+              ]
+            },
+            `catalogue-skeleton-${index2 + 1}`
+          )) }) : filteredProducts.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3", children: filteredProducts.map((product, index2) => {
+            var _a2;
+            const infoChips = [
+              product.material,
+              product.frame,
+              product.warranty
+            ].filter(Boolean);
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "article",
+              {
+                className: "group overflow-hidden rounded-[30px] bg-white",
+                style: {
+                  border: "1px solid oklch(0.9 0.015 82)",
+                  boxShadow: "0 20px 40px oklch(0.12 0.01 60 / 0.06)"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Link,
+                    {
+                      to: "/product/$productSlug",
+                      params: { productSlug: product.slug },
+                      className: "block",
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3] overflow-hidden", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "img",
+                          {
+                            src: product.image,
+                            alt: product.name,
+                            loading: index2 < 3 ? "eager" : "lazy",
+                            decoding: "async",
+                            className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.78))]" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-5 top-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: "rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
+                            style: {
+                              background: "oklch(1 0 0 / 0.18)",
+                              color: "oklch(0.95 0.005 85)",
+                              border: "1px solid oklch(1 0 0 / 0.16)"
+                            },
+                            children: ((_a2 = product.category) == null ? void 0 : _a2.name) || "Signature Design"
+                          }
+                        ) })
+                      ] })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5 p-6", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        Link,
+                        {
+                          to: "/product/$productSlug",
+                          params: { productSlug: product.slug },
+                          className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                          children: product.name
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-general text-sm leading-relaxed text-muted-foreground", children: product.shortDescription || product.description })
+                    ] }),
+                    infoChips.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: infoChips.slice(0, 3).map((chip) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "rounded-full px-3 py-1 font-general text-[11px] uppercase tracking-[0.16em]",
+                        style: {
+                          background: "oklch(0.97 0.008 84)",
+                          color: "oklch(0.55 0.05 68)",
+                          border: "1px solid oklch(0.9 0.015 82)"
+                        },
+                        children: chip
+                      },
+                      chip
+                    )) }) : null,
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Link,
+                      {
+                        to: "/product/$productSlug",
+                        params: { productSlug: product.slug },
+                        className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]",
+                        style: {
+                          background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+                          color: "oklch(0.12 0.01 60)"
+                        },
+                        children: [
+                          "View Details",
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 15 })
+                        ]
+                      }
+                    )
+                  ] })
+                ]
+              },
+              product.id
+            );
+          }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "section",
+            {
+              className: "mt-10 rounded-[32px] bg-white px-8 py-16 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "We're currently curating this collection" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "There are no products published in this category just yet. Please explore another collection or check back shortly for new additions." })
+              ]
+            }
+          ) : null
         ] })
       }
     ),
@@ -26405,6 +26752,181 @@ function CustomDesignPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
+function GalleryPage() {
+  const { data: gallery = [], isLoading, error } = useWebsiteGallery();
+  const [lightboxIndex, setLightboxIndex] = reactExports.useState(null);
+  const closeLightbox = reactExports.useCallback(() => setLightboxIndex(null), []);
+  const prevImage = reactExports.useCallback(
+    () => setLightboxIndex(
+      (current) => current !== null && gallery.length > 0 ? (current - 1 + gallery.length) % gallery.length : null
+    ),
+    [gallery.length]
+  );
+  const nextImage = reactExports.useCallback(
+    () => setLightboxIndex(
+      (current) => current !== null && gallery.length > 0 ? (current + 1) % gallery.length : null
+    ),
+    [gallery.length]
+  );
+  reactExports.useEffect(() => {
+    if (lightboxIndex === null) {
+      return;
+    }
+    const handleKey = (event) => {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") prevImage();
+      if (event.key === "ArrowRight") nextImage();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [closeLightbox, lightboxIndex, nextImage, prevImage]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      SeoHead,
+      {
+        title: "Full Furniture Gallery",
+        description: "Explore the complete JPM Enterprises gallery of handcrafted sofas, interiors, and finished furniture installations.",
+        path: "/gallery",
+        keywords: [
+          "furniture gallery",
+          "sofa gallery",
+          "interior furniture inspiration",
+          "luxury sofa images"
+        ],
+        structuredData: [
+          buildWebPageSchema({
+            title: "Full Furniture Gallery",
+            description: "Explore the complete JPM Enterprises gallery of handcrafted sofas, interiors, and finished furniture installations.",
+            path: "/gallery"
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Gallery", path: "/gallery" }
+          ])
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "main",
+      {
+        className: "pb-24 pt-28",
+        style: {
+          background: "linear-gradient(180deg, oklch(0.985 0.008 85), oklch(0.965 0.012 82))"
+        },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "rounded-[36px] bg-white px-8 py-12 shadow-[0_20px_48px_oklch(0.12_0.01_60_/_0.06)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "font-general text-sm font-semibold uppercase tracking-[0.28em]",
+                style: { color: "oklch(0.65 0.12 75)" },
+                children: "Gallery"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-4 max-w-4xl font-playfair text-4xl font-bold text-foreground lg:text-6xl", children: "A closer look at our work in finished spaces" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-3xl font-general text-base leading-relaxed text-muted-foreground", children: "Browse the complete visual gallery for a broader view of materials, detailing, and how each piece lives within real interiors." })
+          ] }),
+          error && !isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "section",
+            {
+              className: "mt-10 rounded-[32px] bg-white px-8 py-16 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "The gallery could not be loaded right now" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "Please try again shortly. If the issue continues, confirm the gallery service is available." })
+              ]
+            }
+          ) : null,
+          !error ? isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]", children: Array.from({ length: 6 }, (_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "aspect-[4/3] animate-pulse rounded-[28px] bg-[oklch(0.9_0.015_82)]"
+            },
+            `gallery-page-skeleton-${index2 + 1}`
+          )) }) : gallery.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]", children: gallery.map((item, index2) => {
+            const tallCard = index2 % 5 === 0 || index2 % 5 === 3;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                className: `group relative overflow-hidden rounded-[28px] ${tallCard ? "lg:row-span-2" : ""}`,
+                onClick: () => setLightboxIndex(index2),
+                style: { minHeight: "280px" },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: item.image,
+                      alt: item.alt,
+                      loading: index2 < 4 ? "eager" : "lazy",
+                      decoding: "async",
+                      className: "absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(12,12,10,0.54))]" })
+                ]
+              },
+              item.id
+            );
+          }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "section",
+            {
+              className: "mt-10 rounded-[32px] bg-white px-8 py-16 text-center",
+              style: { border: "1px solid oklch(0.9 0.015 82)" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-3xl font-semibold text-foreground", children: "A curated gallery will appear here soon" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "We're preparing visual showcases of recent work, materials, and finished spaces. Please check back shortly for the full gallery experience." })
+              ]
+            }
+          ) : null
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {}),
+    lightboxIndex !== null && gallery[lightboxIndex] ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/92", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: closeLightbox,
+          className: "absolute right-5 top-5 rounded-full p-3 text-white transition-colors hover:bg-white/10",
+          "aria-label": "Close lightbox",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 24 })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: prevImage,
+          className: "absolute left-5 rounded-full p-3 text-white transition-colors hover:bg-white/10",
+          "aria-label": "Previous",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { size: 28 })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "img",
+        {
+          src: gallery[lightboxIndex].image,
+          alt: gallery[lightboxIndex].alt,
+          decoding: "async",
+          className: "max-h-[86vh] max-w-[86vw] rounded-[28px] object-contain shadow-2xl"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: nextImage,
+          className: "absolute right-5 rounded-full p-3 text-white transition-colors hover:bg-white/10",
+          "aria-label": "Next",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { size: 28 })
+        }
+      )
+    ] }) : null
+  ] });
+}
 const DETAIL_SKELETON_KEYS = [
   "detail-skeleton-a",
   "detail-skeleton-b",
@@ -27108,6 +27630,16 @@ const servicesRoute = createRoute({
   path: "/services",
   component: ServicesPage
 });
+const collectionsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/collections",
+  component: CollectionsPage
+});
+const galleryRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/gallery",
+  component: GalleryPage
+});
 const blogsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/blogs",
@@ -27123,6 +27655,8 @@ const routeTree = rootRoute.addChildren([
   productRoute,
   customDesignRoute,
   servicesRoute,
+  collectionsRoute,
+  galleryRoute,
   blogsRoute,
   blogDetailRoute
 ]);

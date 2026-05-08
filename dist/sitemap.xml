@@ -16,7 +16,23 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://jpme.in/collections</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jpme.in/gallery</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://jpme.in/blogs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jpme.in/product/2-seater-bed</loc>
+    <lastmod>2026-04-25T16:44:54.313Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

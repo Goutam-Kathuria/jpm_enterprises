@@ -87,6 +87,8 @@ export function CollectionSection() {
       : products.filter(
           (product) => product.category?.slug === deferredCategory,
         );
+  const visibleProducts = filteredProducts.slice(0, 20);
+  const showFullCollectionButton = filteredProducts.length > 20;
 
   const loading = categoriesLoading || productsLoading;
   const error = categoriesError || productsError;
@@ -275,7 +277,9 @@ export function CollectionSection() {
           </div>
           <div className="flex items-center gap-4">
             <p className="font-general text-sm text-muted-foreground">
-              {filteredProducts.length} products showing
+              {showFullCollectionButton
+                ? `Showing ${visibleProducts.length} of ${filteredProducts.length} products`
+                : `${filteredProducts.length} products showing`}
             </p>
             {isPending ? (
               <span
@@ -311,12 +315,13 @@ export function CollectionSection() {
 
         {!error ? (
           filteredProducts.length > 0 ? (
-            <div
-              className={`grid gap-6 md:grid-cols-2 xl:grid-cols-3 ${
-                isPending ? "opacity-80" : "opacity-100"
-              } transition-opacity duration-200`}
-            >
-              {filteredProducts.map((product, index) => {
+            <>
+              <div
+                className={`grid gap-6 md:grid-cols-2 xl:grid-cols-3 ${
+                  isPending ? "opacity-80" : "opacity-100"
+                } transition-opacity duration-200`}
+              >
+                {visibleProducts.map((product, index) => {
                 const infoChips = [
                   product.material,
                   product.frame,
@@ -442,9 +447,36 @@ export function CollectionSection() {
                       </div>
                     </div>
                   </article>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+
+              {showFullCollectionButton ? (
+                <div className="mt-10 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      navigate({
+                        to: "/collections",
+                        search: activeCategory
+                          ? { category: activeCategory.slug }
+                          : {},
+                      })
+                    }
+                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+                      color: "oklch(0.12 0.01 60)",
+                      boxShadow: "0 18px 32px oklch(0.65 0.12 75 / 0.18)",
+                    }}
+                  >
+                    Browse Full Collection
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+              ) : null}
+            </>
           ) : (
             <div
               className="rounded-[28px] p-10 text-center"
@@ -454,11 +486,12 @@ export function CollectionSection() {
               }}
             >
               <p className="font-playfair text-2xl font-semibold text-foreground">
-                No products found in this collection yet
+                We&apos;re currently curating this collection
               </p>
               <p className="mt-3 font-general text-sm text-muted-foreground">
-                The collection filter is live. As soon as products are assigned in
-                the backend, they will appear here automatically.
+                There are no products published in this category just yet.
+                Please explore another collection or check back shortly for new
+                additions.
               </p>
             </div>
           )

@@ -237,9 +237,9 @@ export function BlogDetailPage() {
                 Blog article not found
               </h1>
               <p className="mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground">
-                This slug isn&apos;t in the live blog feed right now. Once the
-                article is published from the panel, it will appear here
-                automatically.
+                The article you&apos;re looking for is not available at the
+                moment. Please return to the journal to continue exploring our
+                latest insights and design guidance.
               </p>
             </div>
           )}

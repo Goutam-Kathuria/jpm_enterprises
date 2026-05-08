@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -17,25 +18,27 @@ export function GallerySection() {
   const headerRef = useScrollReveal();
   const { data: gallery = [], isLoading, error } = useWebsiteGallery();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const visibleGallery = gallery.slice(0, 10);
+  const showFullGalleryButton = gallery.length > 10;
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
   const prevImage = useCallback(
     () =>
       setLightboxIndex((current) =>
-        current !== null && gallery.length > 0
-          ? (current - 1 + gallery.length) % gallery.length
+        current !== null && visibleGallery.length > 0
+          ? (current - 1 + visibleGallery.length) % visibleGallery.length
           : null,
       ),
-    [gallery.length],
+    [visibleGallery.length],
   );
   const nextImage = useCallback(
     () =>
       setLightboxIndex((current) =>
-        current !== null && gallery.length > 0
-          ? (current + 1) % gallery.length
+        current !== null && visibleGallery.length > 0
+          ? (current + 1) % visibleGallery.length
           : null,
       ),
-    [gallery.length],
+    [visibleGallery.length],
   );
 
   useEffect(() => {
@@ -54,10 +57,10 @@ export function GallerySection() {
   }, [closeLightbox, lightboxIndex, nextImage, prevImage]);
 
   useEffect(() => {
-    if (lightboxIndex !== null && lightboxIndex >= gallery.length) {
+    if (lightboxIndex !== null && lightboxIndex >= visibleGallery.length) {
       setLightboxIndex(null);
     }
-  }, [gallery.length, lightboxIndex]);
+  }, [lightboxIndex, visibleGallery.length]);
 
   return (
     <section id="gallery" className="bg-muted py-24">
@@ -119,8 +122,9 @@ export function GallerySection() {
               <GalleryLoadingCard />
             </div>
           ) : gallery.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]">
-              {gallery.map((item, index) => {
+            <>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[280px]">
+                {visibleGallery.map((item, index) => {
                 const tallCard = index === 0 || index === 2;
 
                 return (
@@ -153,24 +157,44 @@ export function GallerySection() {
                   </button>
                 );
               })}
-            </div>
+              </div>
+
+              {showFullGalleryButton ? (
+                <div className="mt-10 flex justify-center">
+                  <Link
+                    to="/gallery"
+                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
+                      color: "oklch(0.12 0.01 60)",
+                      boxShadow: "0 18px 32px oklch(0.65 0.12 75 / 0.18)",
+                    }}
+                  >
+                    View Full Gallery
+                  </Link>
+                </div>
+              ) : null}
+            </>
           ) : (
             <div
               className="rounded-[28px] bg-white p-10 text-center"
               style={{ border: "1px solid oklch(0.9 0.015 82)" }}
             >
               <p className="font-playfair text-2xl font-semibold text-foreground">
-                Gallery items will appear here soon
+                A curated gallery will appear here soon
               </p>
               <p className="mt-3 font-general text-sm text-muted-foreground">
-                This masonry view is live and ready for the gallery API feed.
+                We&apos;re preparing visual showcases of recent work,
+                materials, and finished spaces. Please check back shortly for
+                the full gallery experience.
               </p>
             </div>
           )
         ) : null}
       </div>
 
-      {lightboxIndex !== null && gallery[lightboxIndex] ? (
+      {lightboxIndex !== null && visibleGallery[lightboxIndex] ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/92">
           <button
             type="button"
@@ -193,8 +217,8 @@ export function GallerySection() {
           </button>
 
           <img
-            src={gallery[lightboxIndex].image}
-            alt={gallery[lightboxIndex].alt}
+            src={visibleGallery[lightboxIndex].image}
+            alt={visibleGallery[lightboxIndex].alt}
             decoding="async"
             className="max-h-[86vh] max-w-[86vw] rounded-[28px] object-contain shadow-2xl"
           />
@@ -210,7 +234,7 @@ export function GallerySection() {
           </button>
 
           <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-general text-sm text-white/62">
-            {lightboxIndex + 1} / {gallery.length}
+            {lightboxIndex + 1} / {visibleGallery.length}
           </p>
         </div>
       ) : null}

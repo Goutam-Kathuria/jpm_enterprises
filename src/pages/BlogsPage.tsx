@@ -197,12 +197,12 @@ export function BlogsPage() {
               style={{ border: "1px solid oklch(0.9 0.015 82)" }}
             >
               <h2 className="font-playfair text-3xl font-semibold text-foreground">
-                Blog posts will appear here as soon as they&apos;re published
+                Thoughtful articles will be published here soon
               </h2>
               <p className="mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground">
-                The website is ready for dynamic SEO articles. Once posts are
-                added under the blog content feed, this page and the homepage
-                listing will update automatically.
+                We&apos;re preparing practical guidance on sofa selection,
+                materials, maintenance, and custom furniture planning so this
+                journal launches with genuinely useful reading.
               </p>
             </section>
           )}

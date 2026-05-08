@@ -29,7 +29,9 @@ import {
 import { useWebsiteProducts, useWebsiteSettings } from "./lib/websiteApi";
 import { BlogDetailPage } from "./pages/BlogDetailPage";
 import { BlogsPage } from "./pages/BlogsPage";
+import { CollectionsPage } from "./pages/CollectionsPage";
 import { CustomDesignPage } from "./pages/CustomDesignPage";
+import { GalleryPage } from "./pages/GalleryPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ServicesPage } from "./pages/ServicesPage";
 
@@ -127,6 +129,18 @@ const servicesRoute = createRoute({
   component: ServicesPage,
 });
 
+const collectionsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/collections",
+  component: CollectionsPage,
+});
+
+const galleryRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/gallery",
+  component: GalleryPage,
+});
+
 const blogsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/blogs",
@@ -144,6 +158,8 @@ const routeTree = rootRoute.addChildren([
   productRoute,
   customDesignRoute,
   servicesRoute,
+  collectionsRoute,
+  galleryRoute,
   blogsRoute,
   blogDetailRoute,
 ]);

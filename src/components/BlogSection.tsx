@@ -22,10 +22,6 @@ export function BlogSection() {
   const { data, isLoading } = useWebsiteBlogs();
   const posts = data.posts.slice(0, 3);
 
-  if (!isLoading && posts.length === 0) {
-    return null;
-  }
-
   return (
     <section
       id="blogs"
@@ -85,7 +81,8 @@ export function BlogSection() {
                   </div>
                 </div>
               ))
-            : posts.map((post) => (
+            : posts.length > 0
+              ? posts.map((post) => (
                 <article
                   key={post.id}
                   className="overflow-hidden rounded-[30px] bg-white"
@@ -162,7 +159,25 @@ export function BlogSection() {
                     </Link>
                   </div>
                 </article>
-              ))}
+                ))
+              : (
+                <div
+                  className="lg:col-span-3 rounded-[30px] bg-white px-8 py-14 text-center"
+                  style={{
+                    border: "1px solid oklch(0.9 0.015 82)",
+                    boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)",
+                  }}
+                >
+                  <p className="font-playfair text-2xl font-semibold text-foreground">
+                    Thoughtful articles will be published here soon
+                  </p>
+                  <p className="mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground">
+                    We&apos;re preparing practical guidance on sofa selection,
+                    materials, maintenance, and custom furniture planning to
+                    make the journal genuinely useful when it goes live.
+                  </p>
+                </div>
+              )}
         </div>
       </div>
     </section>
