@@ -141,7 +141,7 @@ export function Navbar() {
           aria-label="JPM Enterprises home"
         >
           <img
-            src="/assets/uploads/image-1.png"
+            src="/assets/uploads/newLogo.png"
             alt="JPM Enterprises"
             decoding="async"
             className="h-16 w-auto object-contain"

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
+import { useWebsiteCmsPages } from "../lib/cmsPages";
 import { useWebsiteSettings } from "../lib/websiteApi";
 import { scrollToSection } from "../utils/scrollToSection";
 
@@ -31,6 +32,7 @@ function getPhoneHref(phone: string) {
 export function Footer() {
   const navigate = useNavigate();
   const { data: settings } = useWebsiteSettings();
+  const { footerPages } = useWebsiteCmsPages();
 
   const socialLinks = [
     {
@@ -244,6 +246,20 @@ export function Footer() {
             Luxury sofas, custom furniture, and detail-led interiors from Hisar.
           </p>
         </div>
+        {footerPages.length > 0 ? (
+          <div className="mt-4 flex flex-wrap gap-4 border-t border-white/10 pt-4">
+            {footerPages.map((page) => (
+              <Link
+                key={page.slug}
+                to={`/${page.slug}`}
+                className="font-general text-xs transition-colors duration-200"
+                style={{ color: "oklch(0.72 0.015 82)" }}
+              >
+                {page.title}
+              </Link>
+            ))}
+          </div>
+        ) : null}
       </div>
     </footer>
   );

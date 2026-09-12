@@ -31,6 +31,7 @@ import { BlogDetailPage } from "./pages/BlogDetailPage";
 import { BlogsPage } from "./pages/BlogsPage";
 import { CollectionsPage } from "./pages/CollectionsPage";
 import { CustomDesignPage } from "./pages/CustomDesignPage";
+import { CmsPage } from "./pages/CmsPage";
 import { GalleryPage } from "./pages/GalleryPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ServicesPage } from "./pages/ServicesPage";
@@ -153,6 +154,24 @@ const blogDetailRoute = createRoute({
   component: BlogDetailPage,
 });
 
+const aboutUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/about-us",
+  component: () => <CmsPage slug="about-us" />,
+});
+
+const contactUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/contact-us",
+  component: () => <CmsPage slug="contact-us" />,
+});
+
+const privacyPolicyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/privacy-policy",
+  component: () => <CmsPage slug="privacy-policy" />,
+});
+
 const routeTree = rootRoute.addChildren([
   homeRoute,
   productRoute,
@@ -162,6 +181,9 @@ const routeTree = rootRoute.addChildren([
   galleryRoute,
   blogsRoute,
   blogDetailRoute,
+  aboutUsRoute,
+  contactUsRoute,
+  privacyPolicyRoute,
 ]);
 
 const router = createRouter({ routeTree });
