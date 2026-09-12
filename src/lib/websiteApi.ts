@@ -82,6 +82,21 @@ interface RawWebsiteSettings {
   linkedinUrl?: string;
 }
 
+interface RawWebsiteBanner {
+  _id?: string;
+  productId?: {
+    _id?: string;
+    name?: string;
+    slug?: string;
+    image?: string;
+    price?: number;
+  };
+  image?: string;
+  displayOrder?: number;
+  isActive?: boolean;
+  createdAt?: string;
+}
+
 interface WebsiteCategoriesResponse {
   categories?: RawWebsiteCategory[];
 }
@@ -97,6 +112,10 @@ interface WebsiteProductResponse {
 
 interface WebsiteGalleryResponse {
   gallery?: RawWebsiteGalleryItem[];
+}
+
+interface WebsiteBannersResponse {
+  banners?: RawWebsiteBanner[];
 }
 
 interface WebsiteReviewsResponse {
@@ -146,6 +165,17 @@ export interface WebsiteGalleryItem {
   image: string;
   alt: string;
   createdAt: string;
+}
+
+export interface WebsiteBanner {
+  id: string;
+  image: string;
+  displayOrder: number;
+  product: {
+    id: string;
+    name: string;
+    slug: string;
+  } | null;
 }
 
 export interface WebsiteReview {
@@ -304,22 +334,6 @@ async function requestWebsiteOptional<T>(path: string, init: RequestInit = {}) {
   }
 
   return { data: responseData as T, baseUrl };
-}
-
-export interface HeroSectionContent {
-  eyebrowText?: string;
-  headlineLine1?: string;
-  headlineAccent?: string;
-  subheading?: string;
-  caption?: string;
-  primaryCtaLabel?: string;
-  secondaryCtaLabel?: string;
-  backgroundImageUrl?: string;
-  highlightsCardTitle?: string;
-  highlights?: { title?: string; subtitle?: string; imageUrl?: string }[];
-  deskHeading?: string;
-  deskPhone?: string;
-  deskEmail?: string;
 }
 
 export interface WhyChooseSectionContent {
@@ -546,6 +560,26 @@ function normalizeReview(
   };
 }
 
+function normalizeBanner(
+  banner: RawWebsiteBanner | null | undefined,
+  baseUrl: string,
+  index: number,
+): WebsiteBanner {
+  const productData = banner?.productId;
+  const productId = typeof productData === "object" ? productData?._id : productData;
+  
+  return {
+    id: normalizeText(banner?._id) || `banner-${index + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText(banner?.image), baseUrl) || "",
+    displayOrder: typeof banner?.displayOrder === "number" ? banner.displayOrder : index,
+    product: productData && typeof productData === "object" ? {
+      id: normalizeText(productData._id) || "",
+      name: normalizeText(productData.name) || "",
+      slug: normalizeText(productData.slug) || "",
+    } : null,
+  };
+}
+
 function normalizeSettings(
   settings: RawWebsiteSettings | null | undefined,
 ): WebsiteSettings {
@@ -619,6 +653,15 @@ export async function getWebsiteReviews() {
   );
 }
 
+export async function getWebsiteBanners() {
+  const response =
+    await requestWebsiteApi<WebsiteBannersResponse>("/website/banners");
+
+  return (response.data.banners ?? []).map((banner, index) =>
+    normalizeBanner(banner, response.baseUrl, index),
+  );
+}
+
 export async function getWebsiteProductBySlug(slug: string) {
   const response = await requestWebsiteApi<WebsiteProductResponse>(
     `/website/products/${encodeURIComponent(slug)}`,
@@ -670,6 +713,14 @@ export function useWebsiteGallery() {
   return useQuery({
     queryKey: ["website", "gallery"],
     queryFn: getWebsiteGallery,
+    staleTime: 60 * 1000,
+  });
+}
+
+export function useWebsiteBanners() {
+  return useQuery({
+    queryKey: ["website", "banners"],
+    queryFn: getWebsiteBanners,
     staleTime: 60 * 1000,
   });
 }

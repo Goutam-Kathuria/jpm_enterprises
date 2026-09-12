@@ -6,13 +6,13 @@ import {
   createRouter,
 } from "@tanstack/react-router";
 import { AboutSection } from "./components/AboutSection";
+import { BannerSection } from "./components/BannerSection";
 import { BlogSection } from "./components/BlogSection";
 import { CollectionSection } from "./components/CollectionSection";
 import { ContactSection } from "./components/ContactSection";
 import { CustomDesignSection } from "./components/CustomDesignSection";
 import { Footer } from "./components/Footer";
 import { GallerySection } from "./components/GallerySection";
-import { HeroSection } from "./components/HeroSection";
 import { Navbar } from "./components/Navbar";
 import { SeoHead } from "./components/SeoHead";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -78,7 +78,7 @@ function HomePage() {
       />
       <Navbar />
       <main>
-        <HeroSection />
+        <BannerSection />
         <CollectionSection />
         <CustomDesignSection />
         <WhyChooseSection />

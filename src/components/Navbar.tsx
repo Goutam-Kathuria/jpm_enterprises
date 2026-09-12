@@ -149,9 +149,7 @@ export function Navbar() {
                   type="button"
                   onClick={() => handleNav(link.href)}
                   data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                  className={`relative font-general text-sm font-medium transition-colors duration-200 ${
-                    isLightHeader ? "text-foreground" : "text-white"
-                  }`}
+                  className="relative font-general text-sm font-medium text-foreground transition-colors duration-200"
                 >
                   {link.label}
                   <span
@@ -164,9 +162,7 @@ export function Navbar() {
                 <Link
                   to={link.to!}
                   data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                  className={`relative font-general text-sm font-medium transition-colors duration-200 ${
-                    isLightHeader ? "text-foreground" : "text-white"
-                  }`}
+                  className="relative font-general text-sm font-medium text-foreground transition-colors duration-200"
                 >
                   {link.label}
                   <span
@@ -195,9 +191,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className={`rounded-full p-2 transition-colors lg:hidden ${
-            isLightHeader ? "text-foreground" : "text-white"
-          }`}
+          className="rounded-full p-2 text-foreground transition-colors lg:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           data-ocid="nav.menu_toggle"
           aria-label="Toggle menu"

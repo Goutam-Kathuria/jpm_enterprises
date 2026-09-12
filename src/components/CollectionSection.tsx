@@ -96,7 +96,7 @@ export function CollectionSection() {
   return (
     <section
       id="collection"
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-7"
       style={{
         background:
           "linear-gradient(180deg, oklch(0.98 0.008 85), oklch(0.95 0.01 82))",
@@ -104,10 +104,10 @@ export function CollectionSection() {
     >
       <div
         className="absolute inset-x-0 top-0 h-56"
-        style={{
-          background:
-            "radial-gradient(circle at 15% 0%, oklch(0.72 0.08 82 / 0.22), transparent 44%)",
-        }}
+        // style={{
+        //   background:
+        //     "radial-gradient(circle at 15% 0%, oklch(0.72 0.08 82 / 0.22), transparent 44%)",
+        // }}
       />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
