@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SeoHead } from "../components/SeoHead";
-import { useWebsiteBlogs } from "../lib/blogs";
+import { DEFAULT_BLOGS_CONTENT, useWebsiteBlogs } from "../lib/blogs";
 import {
   buildBlogListingSchema,
   buildBreadcrumbSchema,
@@ -25,7 +25,7 @@ function formatBlogDate(value: string) {
 }
 
 export function BlogsPage() {
-  const { data, isLoading } = useWebsiteBlogs();
+  const { data = DEFAULT_BLOGS_CONTENT, isLoading } = useWebsiteBlogs();
   const featuredPost = data.posts[0] ?? null;
 
   return (

@@ -1,8 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import {
   resolveWebsiteApiBaseUrl,
   resolveWebsiteAssetUrl,
-  useWebsiteContent,
 } from "./websiteApi";
 
 interface RawWebsiteBlogPost {
@@ -56,7 +56,17 @@ export interface WebsiteBlogsContent {
   posts: WebsiteBlog[];
 }
 
-const DEFAULT_BLOGS_CONTENT: WebsiteBlogsContent = {
+interface WebsiteBlogsResponse {
+  blogs?: RawWebsiteBlogPost[];
+  content?: {
+    overline?: string;
+    heading?: string;
+    description?: string;
+  };
+  message?: string;
+}
+
+export const DEFAULT_BLOGS_CONTENT: WebsiteBlogsContent = {
   overline: "Furniture Journal",
   heading: "Ideas that help your home feel beautifully lived in",
   description:
@@ -197,9 +207,15 @@ function normalizeBlogPost(
 function normalizeBlogsContent(raw: Record<string, unknown> | null | undefined) {
   const baseUrl = resolveWebsiteApiBaseUrl();
   const payload = raw && typeof raw === "object" ? raw : {};
-  const rawPosts = Array.isArray(payload.posts)
-    ? (payload.posts as RawWebsiteBlogPost[])
-    : [];
+  const rawPosts = Array.isArray(payload.blogs)
+    ? (payload.blogs as RawWebsiteBlogPost[])
+    : Array.isArray(payload.posts)
+      ? (payload.posts as RawWebsiteBlogPost[])
+      : [];
+  const content =
+    payload.content && typeof payload.content === "object"
+      ? (payload.content as Record<string, unknown>)
+      : payload;
 
   const posts = rawPosts
     .map((post, index) => normalizeBlogPost(post, index, baseUrl))
@@ -208,44 +224,83 @@ function normalizeBlogsContent(raw: Record<string, unknown> | null | undefined) 
 
   return {
     overline:
-      normalizeText(String(payload.overline ?? "")) ||
+      normalizeText(String(content.overline ?? "")) ||
       DEFAULT_BLOGS_CONTENT.overline,
     heading:
-      normalizeText(String(payload.heading ?? "")) ||
+      normalizeText(String(content.heading ?? "")) ||
       DEFAULT_BLOGS_CONTENT.heading,
     description:
-      normalizeText(String(payload.description ?? "")) ||
+      normalizeText(String(content.description ?? "")) ||
       DEFAULT_BLOGS_CONTENT.description,
     posts,
   } satisfies WebsiteBlogsContent;
 }
 
-export function useWebsiteBlogs() {
-  const query = useWebsiteContent("blogs");
-  const data = useMemo(
-    () =>
-      normalizeBlogsContent(
-        query.data && typeof query.data === "object"
-          ? (query.data as Record<string, unknown>)
-          : null,
-      ),
-    [query.data],
+async function getWebsiteBlogsContent() {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(`${baseUrl}/website/blogs`, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (response.status === 404) {
+    return DEFAULT_BLOGS_CONTENT;
+  }
+
+  const payload = (await response.json().catch(() => ({}))) as WebsiteBlogsResponse;
+
+  if (!response.ok) {
+    throw new Error(payload.message || "Could not load blogs.");
+  }
+
+  return normalizeBlogsContent(payload as Record<string, unknown>);
+}
+
+async function getWebsiteBlogBySlug(slug: string) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(
+    `${baseUrl}/website/blogs/${encodeURIComponent(slug)}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    },
   );
 
-  return {
-    ...query,
-    data,
+  if (response.status === 404) {
+    return null;
+  }
+
+  const payload = (await response.json().catch(() => ({}))) as {
+    blog?: RawWebsiteBlogPost;
+    message?: string;
   };
+
+  if (!response.ok) {
+    throw new Error(payload.message || "Could not load blog.");
+  }
+
+  return payload.blog ? normalizeBlogPost(payload.blog, 0, baseUrl) : null;
+}
+
+export function useWebsiteBlogs() {
+  return useQuery({
+    queryKey: ["website", "blogs"],
+    queryFn: getWebsiteBlogsContent,
+    staleTime: 60 * 1000,
+  });
 }
 
 export function useWebsiteBlog(slug?: string) {
-  const query = useWebsiteBlogs();
   const normalizedSlug = normalizeText(slug);
-  const data = useMemo(
-    () =>
-      query.data.posts.find((post) => post.slug === normalizedSlug) ?? null,
-    [normalizedSlug, query.data.posts],
-  );
+  const query = useQuery({
+    queryKey: ["website", "blogs", normalizedSlug],
+    queryFn: () => getWebsiteBlogBySlug(normalizedSlug),
+    staleTime: 60 * 1000,
+    enabled: normalizedSlug.length > 0,
+  });
+  const data = useMemo(() => query.data ?? null, [query.data]);
 
   return {
     ...query,

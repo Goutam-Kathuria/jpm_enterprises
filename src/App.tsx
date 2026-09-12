@@ -19,7 +19,7 @@ import { TestimonialsSection } from "./components/TestimonialsSection";
 import { WebsiteAnalyticsPing } from "./components/WebsiteAnalyticsPing";
 import { WhyChooseSection } from "./components/WhyChooseSection";
 import { Toaster } from "./components/ui/sonner";
-import { useWebsiteBlogs } from "./lib/blogs";
+import { DEFAULT_BLOGS_CONTENT, useWebsiteBlogs } from "./lib/blogs";
 import {
   buildBlogListingSchema,
   buildItemListSchema,
@@ -39,7 +39,7 @@ import { ServicesPage } from "./pages/ServicesPage";
 function HomePage() {
   const { data: settings } = useWebsiteSettings();
   const { data: products = [] } = useWebsiteProducts();
-  const { data: blogContent } = useWebsiteBlogs();
+  const { data: blogContent = DEFAULT_BLOGS_CONTENT } = useWebsiteBlogs();
   const featuredProducts = products.slice(0, 8);
   const featuredBlogs = blogContent.posts.slice(0, 4);
 

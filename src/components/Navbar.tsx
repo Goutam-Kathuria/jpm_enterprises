@@ -121,18 +121,11 @@ export function Navbar() {
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
         isLightHeader
-          ? "bg-white/88 shadow-[0_18px_45px_oklch(0.12_0.01_60_/_0.08)] backdrop-blur-xl"
+          ? "border-b border-border bg-card/95 shadow-sm backdrop-blur-xl"
           : "bg-transparent"
       }`}
-      style={
-        scrolled
-          ? {
-              borderBottom: "1px solid oklch(0.65 0.12 75 / 0.16)",
-            }
-          : undefined
-      }
     >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-8 lg:px-10">
+      <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-5 px-6 py-3 lg:px-8">
         <button
           type="button"
           onClick={() => handleNav("#home")}
@@ -144,11 +137,11 @@ export function Navbar() {
             src="/assets/uploads/newLogo.png"
             alt="JPM Enterprises"
             decoding="async"
-            className="h-16 w-auto object-contain"
+            className="h-14 w-auto object-contain"
           />
         </button>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className="hidden items-center gap-5 lg:flex xl:gap-6">
           {navLinks.map((link) => (
             <li key={link.href ?? link.to}>
               {link.href ? (
@@ -156,32 +149,30 @@ export function Navbar() {
                   type="button"
                   onClick={() => handleNav(link.href)}
                   data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                  className={`relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${
+                  className={`relative font-general text-sm font-medium transition-colors duration-200 ${
                     isLightHeader ? "text-foreground" : "text-white"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${
+                    className={`absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${
                       active === link.href ? "w-full" : "w-0"
                     }`}
-                    style={{ background: "oklch(0.65 0.12 75)" }}
                   />
                 </button>
               ) : (
                 <Link
                   to={link.to!}
                   data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                  className={`relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${
+                  className={`relative font-general text-sm font-medium transition-colors duration-200 ${
                     isLightHeader ? "text-foreground" : "text-white"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${
+                    className={`absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${
                       active === link.to ? "w-full" : "w-0"
                     }`}
-                    style={{ background: "oklch(0.65 0.12 75)" }}
                   />
                 </Link>
               )}
@@ -194,16 +185,10 @@ export function Navbar() {
             <button
               type="button"
               onClick={handlePrimaryAction}
-              className="inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.24em] transition-all duration-300 hover:-translate-y-0.5"
-              style={{
-                background:
-                  "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
-                color: "oklch(0.12 0.01 60)",
-                boxShadow: "0 12px 28px oklch(0.65 0.12 75 / 0.28)",
-              }}
+              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-6 py-2.5 font-general text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-foreground shadow-md transition-all duration-300 hover:brightness-110"
             >
               Call Now
-              <ArrowUpRight size={15} />
+              <ArrowUpRight size={15} strokeWidth={2.5} />
             </button>
           ) : null}
         </div>
@@ -222,7 +207,7 @@ export function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-x-0 top-20 z-40 min-h-[calc(100vh-5rem)] bg-[oklch(0.98_0.008_84_/_0.96)] px-6 py-10 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`fixed inset-x-0 top-20 z-40 min-h-[calc(100vh-5rem)] bg-card/96 px-6 py-10 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           menuOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -246,10 +231,10 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => handleNav(link.href)}
-                    className="font-playfair text-3xl text-foreground transition-colors"
+                    className="font-playfair text-3xl text-foreground transition-colors hover:text-accent"
                     style={{
                       color:
-                        active === link.href ? "oklch(0.65 0.12 75)" : undefined,
+                        active === link.href ? "oklch(var(--accent))" : undefined,
                     }}
                   >
                     {link.label}
@@ -258,10 +243,10 @@ export function Navbar() {
                   <Link
                     to={link.to!}
                     onClick={() => setMenuOpen(false)}
-                    className="font-playfair text-3xl text-foreground transition-colors"
+                    className="font-playfair text-3xl text-foreground transition-colors hover:text-accent"
                     style={{
                       color:
-                        active === link.to ? "oklch(0.65 0.12 75)" : undefined,
+                        active === link.to ? "oklch(var(--accent))" : undefined,
                     }}
                   >
                     {link.label}
@@ -271,18 +256,8 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div
-            className="rounded-[28px] p-6"
-            style={{
-              background:
-                "linear-gradient(180deg, oklch(1 0 0 / 0.82), oklch(0.95 0.01 84 / 0.94))",
-              border: "1px solid oklch(0.65 0.12 75 / 0.16)",
-            }}
-          >
-            <p
-              className="mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em]"
-              style={{ color: "oklch(0.65 0.12 75)" }}
-            >
+          <div className="rounded-[--radius] border border-border bg-card/90 p-6 shadow-lg backdrop-blur-sm">
+            <p className="mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em] text-accent">
               Design Support
             </p>
             <p className="mb-5 font-playfair text-2xl font-semibold text-foreground">
@@ -296,14 +271,10 @@ export function Navbar() {
             <button
               type="button"
               onClick={handlePrimaryAction}
-              className="mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{
-                background: "oklch(0.65 0.12 75)",
-                color: "oklch(0.12 0.01 60)",
-              }}
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em] text-accent-foreground shadow-md transition-all duration-300 hover:brightness-110"
             >
               {settings?.enquiryPhone ? "Call Now" : "Contact Us"}
-              <ArrowUpRight size={15} />
+              <ArrowUpRight size={15} strokeWidth={2.5} />
             </button>
           </div>
         </div>

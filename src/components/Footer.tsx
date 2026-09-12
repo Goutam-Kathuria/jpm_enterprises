@@ -84,7 +84,7 @@ export function Footer() {
         <div className="mb-12 grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.1fr_0.75fr_0.75fr_1fr]">
           <div>
             <img
-              src="/assets/uploads/image-1.png"
+              src="/assets/uploads/newLogo.png"
               alt="JPM Enterprises"
               decoding="async"
               className="mb-5 h-12 w-auto brightness-0 invert"

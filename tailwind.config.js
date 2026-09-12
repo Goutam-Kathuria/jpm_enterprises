@@ -48,9 +48,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        gold: "0 4px 24px oklch(0.65 0.12 75 / 0.25)",
-        "gold-lg": "0 8px 40px oklch(0.65 0.12 75 / 0.35)",
-        luxury: "0 20px 60px oklch(0.12 0.01 60 / 0.15)",
+        gold: "0 4px 24px rgba(212, 175, 55, 0.25)",
+        "gold-lg": "0 8px 40px rgba(212, 175, 55, 0.35)",
+        luxury: "0 20px 60px rgba(0, 0, 0, 0.12)",
+        burgundy: "0 8px 32px rgba(70, 50, 40, 0.2)",
       },
       keyframes: {
         "accordion-down": {

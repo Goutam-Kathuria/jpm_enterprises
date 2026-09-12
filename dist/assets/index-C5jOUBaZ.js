@@ -20913,7 +20913,7 @@ function useScrollReveal() {
   }, []);
   return ref;
 }
-const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
+const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "http://localhost:7000/jpm";
 const FALLBACK_CATEGORY_IMAGES = [
   "/assets/generated/hero-sofa.dim_1600x900.jpg",
   "/assets/generated/sofa-modern.dim_800x600.jpg",
@@ -20944,7 +20944,7 @@ const EMPTY_WEBSITE_SETTINGS = {
   twitterUrl: "",
   linkedinUrl: ""
 };
-function normalizeText$3(value) {
+function normalizeText$4(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 function stripTrailingSlash(value) {
@@ -20960,15 +20960,15 @@ function toSlug$1(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 function toStringArray$1(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText$3(value)).filter((value) => value.length > 0) : [];
+  return Array.isArray(values) ? values.map((value) => normalizeText$4(value)).filter((value) => value.length > 0) : [];
 }
 function resolveWebsiteApiBaseUrl(value) {
   return stripTrailingSlash(
-    normalizeText$3(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
+    normalizeText$4(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
   );
 }
 function resolveWebsiteAssetUrl(assetPath, baseUrl) {
-  const normalizedAssetPath = normalizeText$3(assetPath);
+  const normalizedAssetPath = normalizeText$4(assetPath);
   if (!normalizedAssetPath) {
     return "";
   }
@@ -21025,7 +21025,7 @@ async function requestWebsiteOptional(path, init = {}) {
 }
 async function getWebsiteContentByKey(modelKey) {
   var _a2;
-  const trimmed = normalizeText$3(modelKey);
+  const trimmed = normalizeText$4(modelKey);
   if (!trimmed) return null;
   const result = await requestWebsiteOptional(
     `/website/content/${encodeURIComponent(trimmed)}`
@@ -21037,7 +21037,7 @@ async function getWebsiteContentByKey(modelKey) {
   return payload.data;
 }
 function useWebsiteContent(modelKey) {
-  const key = normalizeText$3(modelKey);
+  const key = normalizeText$4(modelKey);
   return useQuery({
     queryKey: ["website", "content", key],
     queryFn: async () => key ? getWebsiteContentByKey(key) : null,
@@ -21077,19 +21077,19 @@ async function trackWebsitePageView(path) {
   }
 }
 function normalizeCategory(category, baseUrl, index2) {
-  const name = normalizeText$3(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
-  const slug = normalizeText$3(category == null ? void 0 : category.slug) || toSlug$1(name);
-  const description = normalizeText$3(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
+  const name = normalizeText$4(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
+  const slug = normalizeText$4(category == null ? void 0 : category.slug) || toSlug$1(name);
+  const description = normalizeText$4(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
   return {
-    id: normalizeText$3(category == null ? void 0 : category._id) || `category-${slug || index2}`,
+    id: normalizeText$4(category == null ? void 0 : category._id) || `category-${slug || index2}`,
     name,
     slug,
-    image: resolveWebsiteAssetUrl(normalizeText$3(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
+    image: resolveWebsiteAssetUrl(normalizeText$4(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
     description,
     tags: toStringArray$1(category == null ? void 0 : category.tags),
     order: typeof (category == null ? void 0 : category.order) === "number" ? category.order : index2,
-    metaTitle: normalizeText$3(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
-    metaDescription: normalizeText$3(category == null ? void 0 : category.metaDescription) || description
+    metaTitle: normalizeText$4(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
+    metaDescription: normalizeText$4(category == null ? void 0 : category.metaDescription) || description
   };
 }
 function normalizeCategorySummary(category, baseUrl, index2) {
@@ -21106,60 +21106,60 @@ function normalizeCategorySummary(category, baseUrl, index2) {
   };
 }
 function normalizeProduct(product, baseUrl, index2) {
-  const name = normalizeText$3(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
-  const slug = normalizeText$3(product == null ? void 0 : product.slug) || toSlug$1(name);
+  const name = normalizeText$4(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
+  const slug = normalizeText$4(product == null ? void 0 : product.slug) || toSlug$1(name);
   const gallery = toStringArray$1(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
-  const image = resolveWebsiteAssetUrl(normalizeText$3(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
-  const shortDescription = normalizeText$3(product == null ? void 0 : product.shortDescription) || normalizeText$3(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
-  const description = normalizeText$3(product == null ? void 0 : product.description) || shortDescription;
+  const image = resolveWebsiteAssetUrl(normalizeText$4(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
+  const shortDescription = normalizeText$4(product == null ? void 0 : product.shortDescription) || normalizeText$4(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
+  const description = normalizeText$4(product == null ? void 0 : product.description) || shortDescription;
   return {
-    id: normalizeText$3(product == null ? void 0 : product._id) || `product-${slug || index2}`,
+    id: normalizeText$4(product == null ? void 0 : product._id) || `product-${slug || index2}`,
     name,
     slug,
     image,
     gallery: Array.from(/* @__PURE__ */ new Set([image, ...gallery])),
     shortDescription,
     description,
-    material: normalizeText$3(product == null ? void 0 : product.material),
-    frame: normalizeText$3(product == null ? void 0 : product.frame),
-    cushions: normalizeText$3(product == null ? void 0 : product.cushions),
-    warranty: normalizeText$3(product == null ? void 0 : product.warranty),
+    material: normalizeText$4(product == null ? void 0 : product.material),
+    frame: normalizeText$4(product == null ? void 0 : product.frame),
+    cushions: normalizeText$4(product == null ? void 0 : product.cushions),
+    warranty: normalizeText$4(product == null ? void 0 : product.warranty),
     tags: toStringArray$1(product == null ? void 0 : product.tags),
     category: normalizeCategorySummary(product == null ? void 0 : product.categoryId, baseUrl, index2),
     order: typeof (product == null ? void 0 : product.order) === "number" ? product.order : index2,
-    metaTitle: normalizeText$3(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
-    metaDescription: normalizeText$3(product == null ? void 0 : product.metaDescription) || shortDescription
+    metaTitle: normalizeText$4(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
+    metaDescription: normalizeText$4(product == null ? void 0 : product.metaDescription) || shortDescription
   };
 }
 function normalizeGalleryItem(item, baseUrl, index2) {
   return {
-    id: normalizeText$3(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
-    image: resolveWebsiteAssetUrl(normalizeText$3(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
+    id: normalizeText$4(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText$4(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
     alt: `JPM Enterprises gallery showcase ${index2 + 1}`,
-    createdAt: normalizeText$3(item == null ? void 0 : item.createdAt)
+    createdAt: normalizeText$4(item == null ? void 0 : item.createdAt)
   };
 }
 function normalizeReview(review, baseUrl, index2) {
   return {
-    id: normalizeText$3(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
-    name: normalizeText$3(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
+    id: normalizeText$4(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
+    name: normalizeText$4(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
     profilePic: resolveWebsiteAssetUrl(
-      normalizeText$3(review == null ? void 0 : review.profilePic),
+      normalizeText$4(review == null ? void 0 : review.profilePic),
       baseUrl
     ),
-    description: normalizeText$3(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
-    createdAt: normalizeText$3(review == null ? void 0 : review.createdAt)
+    description: normalizeText$4(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
+    createdAt: normalizeText$4(review == null ? void 0 : review.createdAt)
   };
 }
 function normalizeSettings(settings) {
   return {
-    enquiryEmail: normalizeText$3(settings == null ? void 0 : settings.enquiryEmail),
-    enquiryPhone: normalizeText$3(settings == null ? void 0 : settings.enquiryPhone),
-    address: normalizeText$3(settings == null ? void 0 : settings.address),
-    facebookUrl: normalizeText$3(settings == null ? void 0 : settings.facebookUrl),
-    instagramUrl: normalizeText$3(settings == null ? void 0 : settings.instagramUrl),
-    twitterUrl: normalizeText$3(settings == null ? void 0 : settings.twitterUrl),
-    linkedinUrl: normalizeText$3(settings == null ? void 0 : settings.linkedinUrl)
+    enquiryEmail: normalizeText$4(settings == null ? void 0 : settings.enquiryEmail),
+    enquiryPhone: normalizeText$4(settings == null ? void 0 : settings.enquiryPhone),
+    address: normalizeText$4(settings == null ? void 0 : settings.address),
+    facebookUrl: normalizeText$4(settings == null ? void 0 : settings.facebookUrl),
+    instagramUrl: normalizeText$4(settings == null ? void 0 : settings.instagramUrl),
+    twitterUrl: normalizeText$4(settings == null ? void 0 : settings.twitterUrl),
+    linkedinUrl: normalizeText$4(settings == null ? void 0 : settings.linkedinUrl)
   };
 }
 async function getWebsiteSettings() {
@@ -21176,11 +21176,11 @@ async function getWebsiteCategories() {
 }
 async function getWebsiteProducts(filters) {
   const searchParams = new URLSearchParams();
-  if (normalizeText$3(filters == null ? void 0 : filters.categorySlug)) {
-    searchParams.set("categorySlug", normalizeText$3(filters == null ? void 0 : filters.categorySlug));
+  if (normalizeText$4(filters == null ? void 0 : filters.categorySlug)) {
+    searchParams.set("categorySlug", normalizeText$4(filters == null ? void 0 : filters.categorySlug));
   }
-  if (normalizeText$3(filters == null ? void 0 : filters.categoryId)) {
-    searchParams.set("categoryId", normalizeText$3(filters == null ? void 0 : filters.categoryId));
+  if (normalizeText$4(filters == null ? void 0 : filters.categoryId)) {
+    searchParams.set("categoryId", normalizeText$4(filters == null ? void 0 : filters.categoryId));
   }
   const query = searchParams.toString();
   const response = await requestWebsiteApi(
@@ -21229,8 +21229,8 @@ function useWebsiteCategories() {
   });
 }
 function useWebsiteProducts(filters) {
-  const categorySlug = normalizeText$3(filters == null ? void 0 : filters.categorySlug);
-  const categoryId = normalizeText$3(filters == null ? void 0 : filters.categoryId);
+  const categorySlug = normalizeText$4(filters == null ? void 0 : filters.categorySlug);
+  const categoryId = normalizeText$4(filters == null ? void 0 : filters.categoryId);
   return useQuery({
     queryKey: ["website", "products", categorySlug, categoryId],
     queryFn: () => getWebsiteProducts({ categorySlug, categoryId }),
@@ -21252,7 +21252,7 @@ function useWebsiteReviews() {
   });
 }
 function useWebsiteProduct(slug) {
-  const productSlug = normalizeText$3(slug);
+  const productSlug = normalizeText$4(slug);
   return useQuery({
     queryKey: ["website", "product", productSlug],
     queryFn: () => getWebsiteProductBySlug(productSlug),
@@ -21914,16 +21914,17 @@ const ZoomIn = createLucideIcon("zoom-in", __iconNode);
 const DEFAULT_BLOGS_CONTENT = {
   overline: "Furniture Journal",
   heading: "Ideas that help your home feel beautifully lived in",
-  description: "Publishing blog articles through the admin panel unlocks fresh keyword coverage, stronger internal linking, and more entry pages for search."
+  description: "Publishing blog articles through the admin panel unlocks fresh keyword coverage, stronger internal linking, and more entry pages for search.",
+  posts: []
 };
-function normalizeText$2(value) {
+function normalizeText$3(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 function toSlug(value) {
-  return normalizeText$2(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return normalizeText$3(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 function toStringArray(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText$2(value)).filter(Boolean) : [];
+  return Array.isArray(values) ? values.map((value) => normalizeText$3(value)).filter(Boolean) : [];
 }
 function stripHtml(value) {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -21941,7 +21942,7 @@ function computeReadingTime(content) {
 }
 function resolveParagraphs(post, fallbackContent) {
   if (Array.isArray(post.paragraphs)) {
-    const paragraphs = post.paragraphs.map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
+    const paragraphs = post.paragraphs.map((paragraph) => normalizeText$3(paragraph)).filter(Boolean);
     if (paragraphs.length > 0) {
       return paragraphs;
     }
@@ -21949,7 +21950,7 @@ function resolveParagraphs(post, fallbackContent) {
   if (!fallbackContent) {
     return [];
   }
-  return fallbackContent.split(/\n\s*\n/).map((paragraph) => stripHtml(paragraph)).map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
+  return fallbackContent.split(/\n\s*\n/).map((paragraph) => stripHtml(paragraph)).map((paragraph) => normalizeText$3(paragraph)).filter(Boolean);
 }
 function compareBlogPosts(left, right) {
   if (left.featured !== right.featured) {
@@ -21969,33 +21970,33 @@ function normalizeBlogPost(post, index2, baseUrl) {
   if (post.visible === false) {
     return null;
   }
-  const title = normalizeText$2(post.title) || `JPM Blog ${index2 + 1}`;
-  const slug = normalizeText$2(post.slug) || toSlug(title) || `blog-${index2 + 1}`;
+  const title = normalizeText$3(post.title) || `JPM Blog ${index2 + 1}`;
+  const slug = normalizeText$3(post.slug) || toSlug(title) || `blog-${index2 + 1}`;
   const rawContent = stripHtml(
-    normalizeText$2(post.content) || normalizeText$2(post.body) || normalizeText$2(post.description)
+    normalizeText$3(post.content) || normalizeText$3(post.body) || normalizeText$3(post.description)
   );
   const paragraphs = resolveParagraphs(post, rawContent);
   const content = paragraphs.join("\n\n") || rawContent;
-  const excerpt = normalizeText$2(post.excerpt) || normalizeText$2(post.summary) || buildExcerpt(paragraphs[0] || content);
+  const excerpt = normalizeText$3(post.excerpt) || normalizeText$3(post.summary) || buildExcerpt(paragraphs[0] || content);
   const coverImage = resolveWebsiteAssetUrl(
-    normalizeText$2(post.coverImageUrl) || normalizeText$2(post.image),
+    normalizeText$3(post.coverImageUrl) || normalizeText$3(post.image),
     baseUrl
   ) || "";
   return {
-    id: normalizeText$2(post.id || post._id) || `blog-${slug}`,
+    id: normalizeText$3(post.id || post._id) || `blog-${slug}`,
     slug,
     title,
     excerpt,
     content,
     paragraphs,
     coverImage,
-    authorName: normalizeText$2(post.authorName) || "JPM Enterprises",
-    publishedAt: normalizeText$2(post.publishedAt),
-    updatedAt: normalizeText$2(post.updatedAt),
+    authorName: normalizeText$3(post.authorName) || "JPM Enterprises",
+    publishedAt: normalizeText$3(post.publishedAt),
+    updatedAt: normalizeText$3(post.updatedAt),
     tags: toStringArray(post.tags),
-    metaTitle: normalizeText$2(post.metaTitle) || `${title} | JPM Enterprises Blog`,
-    metaDescription: normalizeText$2(post.metaDescription) || excerpt,
-    readingTime: normalizeText$2(post.readingTime) || computeReadingTime(content),
+    metaTitle: normalizeText$3(post.metaTitle) || `${title} | JPM Enterprises Blog`,
+    metaDescription: normalizeText$3(post.metaDescription) || excerpt,
+    readingTime: normalizeText$3(post.readingTime) || computeReadingTime(content),
     featured: post.featured === true,
     order: typeof post.order === "number" ? post.order : index2
   };
@@ -22003,35 +22004,67 @@ function normalizeBlogPost(post, index2, baseUrl) {
 function normalizeBlogsContent(raw) {
   const baseUrl = resolveWebsiteApiBaseUrl();
   const payload = raw && typeof raw === "object" ? raw : {};
-  const rawPosts = Array.isArray(payload.posts) ? payload.posts : [];
+  const rawPosts = Array.isArray(payload.blogs) ? payload.blogs : Array.isArray(payload.posts) ? payload.posts : [];
+  const content = payload.content && typeof payload.content === "object" ? payload.content : payload;
   const posts = rawPosts.map((post, index2) => normalizeBlogPost(post, index2, baseUrl)).filter((post) => Boolean(post)).sort(compareBlogPosts);
   return {
-    overline: normalizeText$2(String(payload.overline ?? "")) || DEFAULT_BLOGS_CONTENT.overline,
-    heading: normalizeText$2(String(payload.heading ?? "")) || DEFAULT_BLOGS_CONTENT.heading,
-    description: normalizeText$2(String(payload.description ?? "")) || DEFAULT_BLOGS_CONTENT.description,
+    overline: normalizeText$3(String(content.overline ?? "")) || DEFAULT_BLOGS_CONTENT.overline,
+    heading: normalizeText$3(String(content.heading ?? "")) || DEFAULT_BLOGS_CONTENT.heading,
+    description: normalizeText$3(String(content.description ?? "")) || DEFAULT_BLOGS_CONTENT.description,
     posts
   };
 }
-function useWebsiteBlogs() {
-  const query = useWebsiteContent("blogs");
-  const data = reactExports.useMemo(
-    () => normalizeBlogsContent(
-      query.data && typeof query.data === "object" ? query.data : null
-    ),
-    [query.data]
+async function getWebsiteBlogsContent() {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(`${baseUrl}/website/blogs`, {
+    headers: {
+      Accept: "application/json"
+    }
+  });
+  if (response.status === 404) {
+    return DEFAULT_BLOGS_CONTENT;
+  }
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(payload.message || "Could not load blogs.");
+  }
+  return normalizeBlogsContent(payload);
+}
+async function getWebsiteBlogBySlug(slug) {
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  const response = await fetch(
+    `${baseUrl}/website/blogs/${encodeURIComponent(slug)}`,
+    {
+      headers: {
+        Accept: "application/json"
+      }
+    }
   );
-  return {
-    ...query,
-    data
-  };
+  if (response.status === 404) {
+    return null;
+  }
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(payload.message || "Could not load blog.");
+  }
+  return payload.blog ? normalizeBlogPost(payload.blog, 0, baseUrl) : null;
+}
+function useWebsiteBlogs() {
+  return useQuery({
+    queryKey: ["website", "blogs"],
+    queryFn: getWebsiteBlogsContent,
+    staleTime: 60 * 1e3
+  });
 }
 function useWebsiteBlog(slug) {
-  const query = useWebsiteBlogs();
-  const normalizedSlug = normalizeText$2(slug);
-  const data = reactExports.useMemo(
-    () => query.data.posts.find((post) => post.slug === normalizedSlug) ?? null,
-    [normalizedSlug, query.data.posts]
-  );
+  const normalizedSlug = normalizeText$3(slug);
+  const query = useQuery({
+    queryKey: ["website", "blogs", normalizedSlug],
+    queryFn: () => getWebsiteBlogBySlug(normalizedSlug),
+    staleTime: 60 * 1e3,
+    enabled: normalizedSlug.length > 0
+  });
+  const data = reactExports.useMemo(() => query.data ?? null, [query.data]);
   return {
     ...query,
     data
@@ -22050,7 +22083,7 @@ function formatBlogDate$2(value) {
 }
 function BlogSection() {
   const headerRef = useScrollReveal();
-  const { data, isLoading } = useWebsiteBlogs();
+  const { data = DEFAULT_BLOGS_CONTENT, isLoading } = useWebsiteBlogs();
   const posts = data.posts.slice(0, 3);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "section",
@@ -23569,6 +23602,55 @@ function CustomDesignSection() {
     )) })
   ] }) }) });
 }
+const defaultPages = [
+  { slug: "about-us", title: "About Us", content: "", active: true, showInFooter: true },
+  { slug: "contact-us", title: "Contact Us", content: "", active: true, showInFooter: true },
+  { slug: "privacy-policy", title: "Privacy Policy", content: "", active: true, showInFooter: true }
+];
+function normalizeText$2(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+function normalizePages(raw) {
+  const data = raw && typeof raw === "object" ? raw : {};
+  const pages = Array.isArray(data.pages) ? data.pages : [];
+  const normalizedPages = pages.map((item) => {
+    const page = item && typeof item === "object" ? item : {};
+    const slug = normalizeText$2(page.slug);
+    if (!slug) return null;
+    return {
+      slug,
+      title: normalizeText$2(page.title),
+      content: normalizeText$2(page.content),
+      active: page.active !== false,
+      showInFooter: page.showInFooter !== false
+    };
+  }).filter((page) => Boolean(page));
+  return defaultPages.map((required) => {
+    const page = normalizedPages.find((entry) => entry.slug === required.slug);
+    return page ? { ...required, ...page } : required;
+  });
+}
+function useWebsiteCmsPages() {
+  const query = useWebsiteContent("cms_pages");
+  const pages = reactExports.useMemo(() => normalizePages(query.data), [query.data]);
+  const footerPages = pages.filter((page) => page.active && page.showInFooter);
+  return {
+    ...query,
+    pages,
+    footerPages
+  };
+}
+function useWebsiteCmsPage(slug) {
+  const cms = useWebsiteCmsPages();
+  const page = reactExports.useMemo(
+    () => cms.pages.find((entry) => entry.slug === slug && entry.active) ?? null,
+    [cms.pages, slug]
+  );
+  return {
+    ...cms,
+    page
+  };
+}
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) {
@@ -23604,6 +23686,7 @@ function getPhoneHref$3(phone) {
 function Footer() {
   const navigate = useNavigate();
   const { data: settings } = useWebsiteSettings();
+  const { footerPages } = useWebsiteCmsPages();
   const socialLinks = [
     {
       Icon: SiInstagram,
@@ -23816,7 +23899,17 @@ function Footer() {
               children: "Luxury sofas, custom furniture, and detail-led interiors from Hisar."
             }
           )
-        ] })
+        ] }),
+        footerPages.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex flex-wrap gap-4 border-t border-white/10 pt-4", children: footerPages.map((page) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Link,
+          {
+            to: `/${page.slug}`,
+            className: "font-general text-xs transition-colors duration-200",
+            style: { color: "oklch(0.72 0.015 82)" },
+            children: page.title
+          },
+          page.slug
+        )) }) : null
       ] })
     }
   );
@@ -24045,15 +24138,12 @@ function HeroSection() {
   const headlineLine1 = normalizeText$1(content == null ? void 0 : content.headlineLine1) || "Crafted for";
   const headlineAccent = normalizeText$1(content == null ? void 0 : content.headlineAccent) || "beautiful living.";
   const subheading = normalizeText$1(content == null ? void 0 : content.subheading) || "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
-  const caption = normalizeText$1(content == null ? void 0 : content.caption) || "Every furniture piece is designed for lasting comfort, rich textures, and a polished finish that brings out the best in modern living.";
   const primaryCtaLabel = normalizeText$1(content == null ? void 0 : content.primaryCtaLabel) || "Explore Collections";
   const secondaryCtaLabel = normalizeText$1(content == null ? void 0 : content.secondaryCtaLabel) || "Start Custom Design";
-  const highlightsCardTitle = normalizeText$1(content == null ? void 0 : content.highlightsCardTitle) || "Collection Highlights";
-  const deskHeading = normalizeText$1(content == null ? void 0 : content.deskHeading) || "Speak with the design desk";
   const defaultBgPath = "/assets/generated/hero-sofa.dim_1600x900.jpg";
   const backgroundPath = normalizeText$1(content == null ? void 0 : content.backgroundImageUrl) || defaultBgPath;
   const backgroundImageCss = /^https?:\/\//i.test(backgroundPath) ? backgroundPath : resolveWebsiteAssetUrl(backgroundPath, baseUrl) || backgroundPath;
-  const highlightedCollections = categories.slice(0, 8);
+  const highlightedCollections = categories.slice(0, 3);
   const cmsHighlights = Array.isArray(content == null ? void 0 : content.highlights) ? content == null ? void 0 : content.highlights : [];
   const highlightRows = (() => {
     if (!cmsHighlights.length && categoriesReady) {
@@ -24075,7 +24165,6 @@ function HeroSection() {
     });
   })();
   const deskPhone = normalizeText$1(content == null ? void 0 : content.deskPhone) || normalizeText$1(settings == null ? void 0 : settings.enquiryPhone);
-  const deskEmail = normalizeText$1(content == null ? void 0 : content.deskEmail) || normalizeText$1(settings == null ? void 0 : settings.enquiryEmail);
   const phoneHref = getPhoneHref$2(deskPhone);
   const scrollToCollection = () => {
     var _a2;
@@ -24085,163 +24174,90 @@ function HeroSection() {
     "section",
     {
       id: "home",
-      className: "relative flex min-h-screen items-center overflow-hidden",
+      className: "relative flex min-h-[760px] items-center overflow-hidden py-24 sm:min-h-[820px] lg:min-h-screen",
       style: {
         backgroundImage: `url('${backgroundImageCss}')`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed"
+        backgroundPosition: "center"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(100deg,rgba(12,12,10,0.85)_8%,rgba(18,16,14,0.62)_50%,rgba(18,16,14,0.35)_100%)]" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "absolute inset-0",
-            style: {
-              background: "radial-gradient(circle at 75% 30%, oklch(0.7 0.12 80 / 0.24), transparent 32%)"
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(100deg,rgba(26,12,9,0.88)_0%,rgba(35,20,14,0.72)_45%,rgba(35,20,14,0.44)_100%)]" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 mx-auto w-full max-w-7xl px-6 pt-12 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: "hero-label mb-5 font-general text-xs font-semibold uppercase tracking-[0.2em] sm:text-sm",
+              style: { color: "oklch(0.82 0.12 84)" },
+              children: eyebrowText
             }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-6 pt-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-8", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "p",
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "hero-title font-playfair text-4xl font-bold leading-[1.06] text-white sm:text-6xl lg:text-7xl", children: [
+            headlineLine1,
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-[oklch(0.85_0.09_84)]", children: headlineAccent })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub mt-6 max-w-2xl font-general text-base leading-relaxed text-white/82 sm:text-lg", children: subheading }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hero-cta mt-9 flex flex-wrap gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
               {
-                className: "hero-label mb-6 font-general text-sm font-semibold uppercase tracking-[0.32em]",
-                style: { color: "oklch(0.78 0.12 82)" },
-                children: eyebrowText
+                type: "button",
+                onClick: scrollToCollection,
+                "data-ocid": "hero.primary_button",
+                className: "inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-general text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 hover:-translate-y-1 sm:px-7",
+                style: {
+                  background: "linear-gradient(135deg, oklch(0.58 0.15 35), oklch(0.78 0.12 82))",
+                  color: "oklch(0.98 0.008 84)",
+                  boxShadow: "0 18px 34px oklch(0.24 0.08 32 / 0.28)"
+                },
+                children: [
+                  primaryCtaLabel,
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 16 })
+                ]
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "hero-title font-playfair text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-8xl", children: [
-              headlineLine1,
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-[oklch(0.85_0.09_84)]", children: headlineAccent })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub mt-6 max-w-2xl font-general text-lg leading-relaxed text-white/80 sm:text-xl", children: subheading }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hero-cta mt-10 flex flex-wrap gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "button",
-                {
-                  type: "button",
-                  onClick: scrollToCollection,
-                  "data-ocid": "hero.primary_button",
-                  className: "inline-flex items-center gap-2 rounded-full px-8 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-1",
-                  style: {
-                    background: "linear-gradient(135deg, oklch(0.67 0.12 76), oklch(0.78 0.11 82))",
-                    color: "oklch(0.12 0.01 60)",
-                    boxShadow: "0 20px 35px oklch(0.65 0.12 75 / 0.28)"
-                  },
-                  children: [
-                    primaryCtaLabel,
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 16 })
-                  ]
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "button",
-                {
-                  type: "button",
-                  onClick: () => {
-                    var _a2;
-                    return (_a2 = document.querySelector("#custom-design")) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
-                  },
-                  "data-ocid": "hero.secondary_button",
-                  className: "rounded-full border px-8 py-4 font-general text-sm font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:-translate-y-1",
-                  style: {
-                    borderColor: "oklch(1 0 0 / 0.28)",
-                    background: "oklch(1 0 0 / 0.08)"
-                  },
-                  children: secondaryCtaLabel
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 max-w-2xl text-sm font-general leading-relaxed text-white/75", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: caption }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                onClick: () => {
+                  var _a2;
+                  return (_a2 = document.querySelector("#custom-design")) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
+                },
+                "data-ocid": "hero.secondary_button",
+                className: "rounded-full border px-6 py-3.5 font-general text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-1 sm:px-7",
+                style: {
+                  borderColor: "oklch(0.82 0.12 84 / 0.42)",
+                  background: "oklch(0.18 0.04 38 / 0.42)"
+                },
+                children: secondaryCtaLabel
+              }
+            )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden self-end lg:block", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          highlightRows.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-12 grid max-w-3xl gap-3 sm:grid-cols-3", children: highlightRows.map((row, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "ml-auto max-w-md rounded-[32px] p-7 text-white shadow-[0_28px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl",
-              style: {
-                background: "linear-gradient(180deg, oklch(1 0 0 / 0.16), oklch(0.12 0.01 60 / 0.3))",
-                border: "1px solid oklch(1 0 0 / 0.14)"
-              },
+              className: "border-t pt-4",
+              style: { borderColor: "oklch(0.82 0.12 84 / 0.32)" },
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "p",
-                  {
-                    className: "font-general text-xs font-semibold uppercase tracking-[0.28em]",
-                    style: { color: "oklch(0.82 0.11 82)" },
-                    children: highlightsCardTitle
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 space-y-4", children: highlightRows.length > 0 ? highlightRows.map((row, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "div",
-                  {
-                    className: "flex items-center gap-4 rounded-[22px] px-4 py-3",
-                    style: {
-                      background: index2 === 0 ? "oklch(1 0 0 / 0.12)" : "oklch(1 0 0 / 0.06)"
-                    },
-                    children: [
-                      row.image ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "img",
-                        {
-                          src: row.image,
-                          alt: row.title,
-                          loading: "lazy",
-                          decoding: "async",
-                          className: "h-14 w-16 rounded-2xl object-cover"
-                        }
-                      ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "div",
-                        {
-                          className: "h-14 w-16 shrink-0 rounded-2xl",
-                          style: { background: "oklch(1 0 0 / 0.12)" },
-                          "aria-hidden": true
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-lg font-semibold", children: row.title }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-xs uppercase tracking-[0.16em] text-white/60", children: row.subtitle })
-                      ] })
-                    ]
-                  },
-                  `${row.title}-${index2}`
-                )) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "div",
-                  {
-                    className: "rounded-[22px] px-4 py-5",
-                    style: { background: "oklch(1 0 0 / 0.08)" },
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-general text-sm leading-relaxed text-white/70", children: "Collection-led design previews will appear here as soon as the website collections load." })
-                  }
-                ) }),
-                deskPhone || deskEmail ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "div",
-                  {
-                    className: "mt-6 rounded-[24px] px-5 py-4",
-                    style: {
-                      background: "oklch(1 0 0 / 0.08)",
-                      border: "1px solid oklch(0.65 0.12 75 / 0.18)"
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-3 font-playfair text-xl font-semibold", children: deskHeading }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 font-general text-sm text-white/78", children: [
-                        deskPhone ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: phoneHref || void 0, className: "flex items-center gap-3", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { size: 15, style: { color: "oklch(0.82 0.11 82)" } }),
-                          deskPhone
-                        ] }) : null,
-                        deskEmail ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `mailto:${deskEmail}`, className: "flex items-center gap-3", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { size: 15, style: { color: "oklch(0.82 0.11 82)" } }),
-                          deskEmail
-                        ] }) : null
-                      ] })
-                    ]
-                  }
-                ) : null
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-xl font-semibold text-white", children: row.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 font-general text-xs uppercase tracking-[0.14em] text-white/58", children: row.subtitle })
+              ]
+            },
+            `${row.title}-${index2}`
+          )) }) : null,
+          deskPhone ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "a",
+            {
+              href: phoneHref || void 0,
+              className: "mt-8 inline-flex font-general text-sm font-semibold text-white/78 transition-colors hover:text-white",
+              children: [
+                "Design desk: ",
+                deskPhone
               ]
             }
-          ) })
-        ] }),
+          ) : null
+        ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
@@ -24353,7 +24369,7 @@ function Navbar() {
         borderBottom: "1px solid oklch(0.65 0.12 75 / 0.16)"
       } : void 0,
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-8 lg:px-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-5 px-6 py-3 lg:px-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
@@ -24365,21 +24381,21 @@ function Navbar() {
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "img",
                 {
-                  src: "/assets/uploads/image-1.png",
+                  src: "/assets/uploads/newLogo.png",
                   alt: "JPM Enterprises",
                   decoding: "async",
-                  className: "h-16 w-auto object-contain"
+                  className: "h-14 w-auto object-contain"
                 }
               )
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden items-center gap-7 lg:flex", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: link.href ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden items-center gap-5 lg:flex xl:gap-6", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: link.href ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
               type: "button",
               onClick: () => handleNav(link.href),
               "data-ocid": `nav.${link.label.toLowerCase().replace(" ", "_")}_link`,
-              className: `relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
+              className: `relative font-general text-sm font-medium transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
               children: [
                 link.label,
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -24396,7 +24412,7 @@ function Navbar() {
             {
               to: link.to,
               "data-ocid": `nav.${link.label.toLowerCase().replace(" ", "_")}_link`,
-              className: `relative font-general text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
+              className: `relative font-general text-sm font-medium transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
               children: [
                 link.label,
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -24414,11 +24430,11 @@ function Navbar() {
             {
               type: "button",
               onClick: handlePrimaryAction,
-              className: "inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.24em] transition-all duration-300 hover:-translate-y-0.5",
+              className: "inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-300 hover:-translate-y-0.5",
               style: {
-                background: "linear-gradient(135deg, oklch(0.66 0.12 75), oklch(0.76 0.11 82))",
-                color: "oklch(0.12 0.01 60)",
-                boxShadow: "0 12px 28px oklch(0.65 0.12 75 / 0.28)"
+                background: "linear-gradient(135deg, oklch(0.48 0.16 30), oklch(0.76 0.12 82))",
+                color: "oklch(0.98 0.008 84)",
+                boxShadow: "0 12px 28px oklch(0.25 0.08 32 / 0.24)"
               },
               children: [
                 "Call Now",
@@ -25207,7 +25223,7 @@ function formatBlogDate$1(value) {
 function BlogDetailPage() {
   const { blogSlug } = useParams({ strict: false });
   const { data: blog, isLoading } = useWebsiteBlog(blogSlug);
-  const { data: blogFeed } = useWebsiteBlogs();
+  const { data: blogFeed = DEFAULT_BLOGS_CONTENT } = useWebsiteBlogs();
   const relatedPosts = blog ? blogFeed.posts.filter((post) => post.slug !== blog.slug).slice(0, 3) : [];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
     blog ? /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -25413,7 +25429,7 @@ function formatBlogDate(value) {
   }).format(date);
 }
 function BlogsPage() {
-  const { data, isLoading } = useWebsiteBlogs();
+  const { data = DEFAULT_BLOGS_CONTENT, isLoading } = useWebsiteBlogs();
   const featuredPost = data.posts[0] ?? null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -26752,6 +26768,34 @@ function CustomDesignPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
+const labelBySlug = {
+  "about-us": "About Us",
+  "contact-us": "Contact Us",
+  "privacy-policy": "Privacy Policy"
+};
+function CmsPage({ slug }) {
+  const { page, isLoading } = useWebsiteCmsPage(slug);
+  const title = (page == null ? void 0 : page.title) || labelBySlug[slug];
+  const description = `Read ${title} information from JPM Enterprises.`;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SeoHead, { title, description, path: `/${slug}` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "mx-auto max-w-5xl px-6 pb-24 pt-28 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "rounded-3xl border border-border bg-white px-6 py-8 shadow-sm lg:px-10 lg:py-10", children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Loading page..." }) : page ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mb-6 font-playfair text-4xl font-bold text-foreground", children: title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "prose max-w-none prose-headings:font-playfair prose-p:font-general",
+          dangerouslySetInnerHTML: { __html: page.content || "<p>No content available.</p>" }
+        }
+      )
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mb-4 font-playfair text-3xl font-semibold text-foreground", children: title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "This page is currently unavailable." })
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
+}
 function GalleryPage() {
   const { data: gallery = [], isLoading, error } = useWebsiteGallery();
   const [lightboxIndex, setLightboxIndex] = reactExports.useState(null);
@@ -27552,7 +27596,7 @@ function ServicesPage() {
 function HomePage() {
   const { data: settings } = useWebsiteSettings();
   const { data: products = [] } = useWebsiteProducts();
-  const { data: blogContent } = useWebsiteBlogs();
+  const { data: blogContent = DEFAULT_BLOGS_CONTENT } = useWebsiteBlogs();
   const featuredProducts = products.slice(0, 8);
   const featuredBlogs = blogContent.posts.slice(0, 4);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-background", children: [
@@ -27650,6 +27694,21 @@ const blogDetailRoute = createRoute({
   path: "/blogs/$blogSlug",
   component: BlogDetailPage
 });
+const aboutUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/about-us",
+  component: () => /* @__PURE__ */ jsxRuntimeExports.jsx(CmsPage, { slug: "about-us" })
+});
+const contactUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/contact-us",
+  component: () => /* @__PURE__ */ jsxRuntimeExports.jsx(CmsPage, { slug: "contact-us" })
+});
+const privacyPolicyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/privacy-policy",
+  component: () => /* @__PURE__ */ jsxRuntimeExports.jsx(CmsPage, { slug: "privacy-policy" })
+});
 const routeTree = rootRoute.addChildren([
   homeRoute,
   productRoute,
@@ -27658,7 +27717,10 @@ const routeTree = rootRoute.addChildren([
   collectionsRoute,
   galleryRoute,
   blogsRoute,
-  blogDetailRoute
+  blogDetailRoute,
+  aboutUsRoute,
+  contactUsRoute,
+  privacyPolicyRoute
 ]);
 const router = createRouter({ routeTree });
 function App() {

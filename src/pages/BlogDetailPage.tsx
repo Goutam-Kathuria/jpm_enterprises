@@ -3,7 +3,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SeoHead } from "../components/SeoHead";
-import { useWebsiteBlog, useWebsiteBlogs } from "../lib/blogs";
+import {
+  DEFAULT_BLOGS_CONTENT,
+  useWebsiteBlog,
+  useWebsiteBlogs,
+} from "../lib/blogs";
 import {
   buildBlogPostingSchema,
   buildBreadcrumbSchema,
@@ -27,7 +31,7 @@ function formatBlogDate(value: string) {
 export function BlogDetailPage() {
   const { blogSlug } = useParams({ strict: false }) as { blogSlug?: string };
   const { data: blog, isLoading } = useWebsiteBlog(blogSlug);
-  const { data: blogFeed } = useWebsiteBlogs();
+  const { data: blogFeed = DEFAULT_BLOGS_CONTENT } = useWebsiteBlogs();
   const relatedPosts = blog
     ? blogFeed.posts
         .filter((post) => post.slug !== blog.slug)
