@@ -20913,7 +20913,7 @@ function useScrollReveal() {
   }, []);
   return ref;
 }
-const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "http://localhost:7000/jpm";
+const DEFAULT_LOCAL_WEBSITE_API_BASE_URL = "https://api.jpme.in/jpm";
 const FALLBACK_CATEGORY_IMAGES = [
   "/assets/generated/hero-sofa.dim_1600x900.jpg",
   "/assets/generated/sofa-modern.dim_800x600.jpg",
@@ -20944,7 +20944,7 @@ const EMPTY_WEBSITE_SETTINGS = {
   twitterUrl: "",
   linkedinUrl: ""
 };
-function normalizeText$4(value) {
+function normalizeText$3(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 function stripTrailingSlash(value) {
@@ -20960,15 +20960,15 @@ function toSlug$1(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 function toStringArray$1(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText$4(value)).filter((value) => value.length > 0) : [];
+  return Array.isArray(values) ? values.map((value) => normalizeText$3(value)).filter((value) => value.length > 0) : [];
 }
 function resolveWebsiteApiBaseUrl(value) {
   return stripTrailingSlash(
-    normalizeText$4(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
+    normalizeText$3(value) || DEFAULT_LOCAL_WEBSITE_API_BASE_URL
   );
 }
 function resolveWebsiteAssetUrl(assetPath, baseUrl) {
-  const normalizedAssetPath = normalizeText$4(assetPath);
+  const normalizedAssetPath = normalizeText$3(assetPath);
   if (!normalizedAssetPath) {
     return "";
   }
@@ -21025,7 +21025,7 @@ async function requestWebsiteOptional(path, init = {}) {
 }
 async function getWebsiteContentByKey(modelKey) {
   var _a2;
-  const trimmed = normalizeText$4(modelKey);
+  const trimmed = normalizeText$3(modelKey);
   if (!trimmed) return null;
   const result = await requestWebsiteOptional(
     `/website/content/${encodeURIComponent(trimmed)}`
@@ -21037,7 +21037,7 @@ async function getWebsiteContentByKey(modelKey) {
   return payload.data;
 }
 function useWebsiteContent(modelKey) {
-  const key = normalizeText$4(modelKey);
+  const key = normalizeText$3(modelKey);
   return useQuery({
     queryKey: ["website", "content", key],
     queryFn: async () => key ? getWebsiteContentByKey(key) : null,
@@ -21077,19 +21077,19 @@ async function trackWebsitePageView(path) {
   }
 }
 function normalizeCategory(category, baseUrl, index2) {
-  const name = normalizeText$4(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
-  const slug = normalizeText$4(category == null ? void 0 : category.slug) || toSlug$1(name);
-  const description = normalizeText$4(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
+  const name = normalizeText$3(category == null ? void 0 : category.name) || `Collection ${index2 + 1}`;
+  const slug = normalizeText$3(category == null ? void 0 : category.slug) || toSlug$1(name);
+  const description = normalizeText$3(category == null ? void 0 : category.description) || "Explore handcrafted seating designed for luxurious everyday living.";
   return {
-    id: normalizeText$4(category == null ? void 0 : category._id) || `category-${slug || index2}`,
+    id: normalizeText$3(category == null ? void 0 : category._id) || `category-${slug || index2}`,
     name,
     slug,
-    image: resolveWebsiteAssetUrl(normalizeText$4(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
+    image: resolveWebsiteAssetUrl(normalizeText$3(category == null ? void 0 : category.image), baseUrl) || pickFallbackImage(FALLBACK_CATEGORY_IMAGES, index2),
     description,
     tags: toStringArray$1(category == null ? void 0 : category.tags),
     order: typeof (category == null ? void 0 : category.order) === "number" ? category.order : index2,
-    metaTitle: normalizeText$4(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
-    metaDescription: normalizeText$4(category == null ? void 0 : category.metaDescription) || description
+    metaTitle: normalizeText$3(category == null ? void 0 : category.metaTitle) || `${name} Collection | JPM Enterprises`,
+    metaDescription: normalizeText$3(category == null ? void 0 : category.metaDescription) || description
   };
 }
 function normalizeCategorySummary(category, baseUrl, index2) {
@@ -21106,60 +21106,74 @@ function normalizeCategorySummary(category, baseUrl, index2) {
   };
 }
 function normalizeProduct(product, baseUrl, index2) {
-  const name = normalizeText$4(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
-  const slug = normalizeText$4(product == null ? void 0 : product.slug) || toSlug$1(name);
+  const name = normalizeText$3(product == null ? void 0 : product.name) || `Product ${index2 + 1}`;
+  const slug = normalizeText$3(product == null ? void 0 : product.slug) || toSlug$1(name);
   const gallery = toStringArray$1(product == null ? void 0 : product.gallery).map((image2) => resolveWebsiteAssetUrl(image2, baseUrl)).filter(Boolean);
-  const image = resolveWebsiteAssetUrl(normalizeText$4(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
-  const shortDescription = normalizeText$4(product == null ? void 0 : product.shortDescription) || normalizeText$4(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
-  const description = normalizeText$4(product == null ? void 0 : product.description) || shortDescription;
+  const image = resolveWebsiteAssetUrl(normalizeText$3(product == null ? void 0 : product.image), baseUrl) || gallery[0] || pickFallbackImage(FALLBACK_PRODUCT_IMAGES, index2);
+  const shortDescription = normalizeText$3(product == null ? void 0 : product.shortDescription) || normalizeText$3(product == null ? void 0 : product.description) || "Refined proportions, premium comfort, and long-lasting craftsmanship.";
+  const description = normalizeText$3(product == null ? void 0 : product.description) || shortDescription;
   return {
-    id: normalizeText$4(product == null ? void 0 : product._id) || `product-${slug || index2}`,
+    id: normalizeText$3(product == null ? void 0 : product._id) || `product-${slug || index2}`,
     name,
     slug,
     image,
     gallery: Array.from(/* @__PURE__ */ new Set([image, ...gallery])),
     shortDescription,
     description,
-    material: normalizeText$4(product == null ? void 0 : product.material),
-    frame: normalizeText$4(product == null ? void 0 : product.frame),
-    cushions: normalizeText$4(product == null ? void 0 : product.cushions),
-    warranty: normalizeText$4(product == null ? void 0 : product.warranty),
+    material: normalizeText$3(product == null ? void 0 : product.material),
+    frame: normalizeText$3(product == null ? void 0 : product.frame),
+    cushions: normalizeText$3(product == null ? void 0 : product.cushions),
+    warranty: normalizeText$3(product == null ? void 0 : product.warranty),
     tags: toStringArray$1(product == null ? void 0 : product.tags),
     category: normalizeCategorySummary(product == null ? void 0 : product.categoryId, baseUrl, index2),
     order: typeof (product == null ? void 0 : product.order) === "number" ? product.order : index2,
-    metaTitle: normalizeText$4(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
-    metaDescription: normalizeText$4(product == null ? void 0 : product.metaDescription) || shortDescription
+    metaTitle: normalizeText$3(product == null ? void 0 : product.metaTitle) || `${name} | JPM Enterprises`,
+    metaDescription: normalizeText$3(product == null ? void 0 : product.metaDescription) || shortDescription
   };
 }
 function normalizeGalleryItem(item, baseUrl, index2) {
   return {
-    id: normalizeText$4(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
-    image: resolveWebsiteAssetUrl(normalizeText$4(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
+    id: normalizeText$3(item == null ? void 0 : item._id) || `gallery-${index2 + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText$3(item == null ? void 0 : item.image), baseUrl) || pickFallbackImage(FALLBACK_GALLERY_IMAGES, index2),
     alt: `JPM Enterprises gallery showcase ${index2 + 1}`,
-    createdAt: normalizeText$4(item == null ? void 0 : item.createdAt)
+    createdAt: normalizeText$3(item == null ? void 0 : item.createdAt)
   };
 }
 function normalizeReview(review, baseUrl, index2) {
   return {
-    id: normalizeText$4(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
-    name: normalizeText$4(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
+    id: normalizeText$3(review == null ? void 0 : review._id) || `review-${index2 + 1}`,
+    name: normalizeText$3(review == null ? void 0 : review.name) || `Client ${index2 + 1}`,
     profilePic: resolveWebsiteAssetUrl(
-      normalizeText$4(review == null ? void 0 : review.profilePic),
+      normalizeText$3(review == null ? void 0 : review.profilePic),
       baseUrl
     ),
-    description: normalizeText$4(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
-    createdAt: normalizeText$4(review == null ? void 0 : review.createdAt)
+    description: normalizeText$3(review == null ? void 0 : review.description) || "JPM delivered a beautifully crafted piece with impressive comfort and finish.",
+    createdAt: normalizeText$3(review == null ? void 0 : review.createdAt)
+  };
+}
+function normalizeBanner(banner, baseUrl, index2) {
+  const productData = banner == null ? void 0 : banner.productId;
+  typeof productData === "object" ? productData == null ? void 0 : productData._id : productData;
+  return {
+    id: normalizeText$3(banner == null ? void 0 : banner._id) || `banner-${index2 + 1}`,
+    image: resolveWebsiteAssetUrl(normalizeText$3(banner == null ? void 0 : banner.image), baseUrl) || "",
+    displayOrder: typeof (banner == null ? void 0 : banner.displayOrder) === "number" ? banner.displayOrder : index2,
+    product: productData && typeof productData === "object" ? {
+      id: normalizeText$3(productData._id) || "",
+      name: normalizeText$3(productData.name) || "",
+      slug: normalizeText$3(productData.slug) || ""
+    } : null
   };
 }
 function normalizeSettings(settings) {
   return {
-    enquiryEmail: normalizeText$4(settings == null ? void 0 : settings.enquiryEmail),
-    enquiryPhone: normalizeText$4(settings == null ? void 0 : settings.enquiryPhone),
-    address: normalizeText$4(settings == null ? void 0 : settings.address),
-    facebookUrl: normalizeText$4(settings == null ? void 0 : settings.facebookUrl),
-    instagramUrl: normalizeText$4(settings == null ? void 0 : settings.instagramUrl),
-    twitterUrl: normalizeText$4(settings == null ? void 0 : settings.twitterUrl),
-    linkedinUrl: normalizeText$4(settings == null ? void 0 : settings.linkedinUrl)
+    enquiryEmail: normalizeText$3(settings == null ? void 0 : settings.enquiryEmail),
+    enquiryPhone: normalizeText$3(settings == null ? void 0 : settings.enquiryPhone),
+    address: normalizeText$3(settings == null ? void 0 : settings.address),
+    facebookUrl: normalizeText$3(settings == null ? void 0 : settings.facebookUrl),
+    instagramUrl: normalizeText$3(settings == null ? void 0 : settings.instagramUrl),
+    twitterUrl: normalizeText$3(settings == null ? void 0 : settings.twitterUrl),
+    linkedinUrl: normalizeText$3(settings == null ? void 0 : settings.linkedinUrl)
   };
 }
 async function getWebsiteSettings() {
@@ -21176,11 +21190,11 @@ async function getWebsiteCategories() {
 }
 async function getWebsiteProducts(filters) {
   const searchParams = new URLSearchParams();
-  if (normalizeText$4(filters == null ? void 0 : filters.categorySlug)) {
-    searchParams.set("categorySlug", normalizeText$4(filters == null ? void 0 : filters.categorySlug));
+  if (normalizeText$3(filters == null ? void 0 : filters.categorySlug)) {
+    searchParams.set("categorySlug", normalizeText$3(filters == null ? void 0 : filters.categorySlug));
   }
-  if (normalizeText$4(filters == null ? void 0 : filters.categoryId)) {
-    searchParams.set("categoryId", normalizeText$4(filters == null ? void 0 : filters.categoryId));
+  if (normalizeText$3(filters == null ? void 0 : filters.categoryId)) {
+    searchParams.set("categoryId", normalizeText$3(filters == null ? void 0 : filters.categoryId));
   }
   const query = searchParams.toString();
   const response = await requestWebsiteApi(
@@ -21200,6 +21214,12 @@ async function getWebsiteReviews() {
   const response = await requestWebsiteApi("/website/reviews");
   return (response.data.reviews ?? []).map(
     (review, index2) => normalizeReview(review, response.baseUrl, index2)
+  );
+}
+async function getWebsiteBanners() {
+  const response = await requestWebsiteApi("/website/banners");
+  return (response.data.banners ?? []).map(
+    (banner, index2) => normalizeBanner(banner, response.baseUrl, index2)
   );
 }
 async function getWebsiteProductBySlug(slug) {
@@ -21229,8 +21249,8 @@ function useWebsiteCategories() {
   });
 }
 function useWebsiteProducts(filters) {
-  const categorySlug = normalizeText$4(filters == null ? void 0 : filters.categorySlug);
-  const categoryId = normalizeText$4(filters == null ? void 0 : filters.categoryId);
+  const categorySlug = normalizeText$3(filters == null ? void 0 : filters.categorySlug);
+  const categoryId = normalizeText$3(filters == null ? void 0 : filters.categoryId);
   return useQuery({
     queryKey: ["website", "products", categorySlug, categoryId],
     queryFn: () => getWebsiteProducts({ categorySlug, categoryId }),
@@ -21244,6 +21264,13 @@ function useWebsiteGallery() {
     staleTime: 60 * 1e3
   });
 }
+function useWebsiteBanners() {
+  return useQuery({
+    queryKey: ["website", "banners"],
+    queryFn: getWebsiteBanners,
+    staleTime: 60 * 1e3
+  });
+}
 function useWebsiteReviews() {
   return useQuery({
     queryKey: ["website", "reviews"],
@@ -21252,7 +21279,7 @@ function useWebsiteReviews() {
   });
 }
 function useWebsiteProduct(slug) {
-  const productSlug = normalizeText$4(slug);
+  const productSlug = normalizeText$3(slug);
   return useQuery({
     queryKey: ["website", "product", productSlug],
     queryFn: () => getWebsiteProductBySlug(productSlug),
@@ -21366,6 +21393,62 @@ function AboutSection() {
     ] }) })
   ] }) }) });
 }
+function BannerSection() {
+  const { data: banners = [] } = useWebsiteBanners();
+  const [currentIndex, setCurrentIndex] = reactExports.useState(0);
+  const baseUrl = resolveWebsiteApiBaseUrl();
+  reactExports.useEffect(() => {
+    if (banners.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % banners.length);
+    }, 5e3);
+    return () => clearInterval(interval);
+  }, [banners.length]);
+  const goToSlide = (index2) => {
+    setCurrentIndex(index2);
+  };
+  if (banners.length === 0) {
+    return null;
+  }
+  const currentBanner = banners[currentIndex];
+  const bannerImageUrl = (currentBanner == null ? void 0 : currentBanner.image) ? /^https?:\/\//i.test(currentBanner.image) ? currentBanner.image : resolveWebsiteAssetUrl(currentBanner.image, baseUrl) || currentBanner.image : "";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "banner", className: "relative w-full mt-24 mb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-[280px] sm:h-[340px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-xl", children: [
+    bannerImageUrl && ((currentBanner == null ? void 0 : currentBanner.product) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "a",
+      {
+        href: `/product/${currentBanner.product.slug}`,
+        className: "block w-full h-full",
+        "aria-label": `View ${currentBanner.product.name}`,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: bannerImageUrl,
+            alt: currentBanner.product.name,
+            className: "w-full h-full object-cover transition-opacity duration-700"
+          }
+        )
+      }
+    ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "img",
+      {
+        src: bannerImageUrl,
+        alt: "Banner",
+        className: "w-full h-full object-cover transition-opacity duration-700"
+      }
+    )),
+    banners.length > 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2", children: banners.map((_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        type: "button",
+        onClick: () => goToSlide(index2),
+        className: `h-2 rounded-full transition-all ${index2 === currentIndex ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"}`,
+        "aria-label": `Go to banner ${index2 + 1}`,
+        "aria-current": index2 === currentIndex ? "true" : "false"
+      },
+      index2
+    )) })
+  ] }) }) });
+}
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -21471,7 +21554,7 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$t = [
+const __iconNode$s = [
   ["path", { d: "M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3", key: "irtipd" }],
   [
     "path",
@@ -21483,18 +21566,7 @@ const __iconNode$t = [
   ["path", { d: "M5 18v2", key: "ppbyun" }],
   ["path", { d: "M19 18v2", key: "gy7782" }]
 ];
-const Armchair = createLucideIcon("armchair", __iconNode$t);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$s = [
-  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
-  ["path", { d: "M19 12H5", key: "x3x0zl" }]
-];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$s);
+const Armchair = createLucideIcon("armchair", __iconNode$s);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -21502,10 +21574,10 @@ const ArrowLeft = createLucideIcon("arrow-left", __iconNode$s);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$r = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$r);
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$r);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -21513,10 +21585,10 @@ const ArrowRight = createLucideIcon("arrow-right", __iconNode$r);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$q = [
-  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
-  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$q);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$q);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -21524,6 +21596,17 @@ const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$q);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$p = [
+  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
+  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+];
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$p);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$o = [
   [
     "path",
     {
@@ -21533,23 +21616,15 @@ const __iconNode$p = [
   ],
   ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
 ];
-const Award = createLucideIcon("award", __iconNode$p);
+const Award = createLucideIcon("award", __iconNode$o);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$o = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$o);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$n = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$n);
+const __iconNode$n = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$n);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -21917,14 +21992,14 @@ const DEFAULT_BLOGS_CONTENT = {
   description: "Publishing blog articles through the admin panel unlocks fresh keyword coverage, stronger internal linking, and more entry pages for search.",
   posts: []
 };
-function normalizeText$3(value) {
+function normalizeText$2(value) {
   return (value == null ? void 0 : value.trim()) ?? "";
 }
 function toSlug(value) {
-  return normalizeText$3(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return normalizeText$2(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 function toStringArray(values) {
-  return Array.isArray(values) ? values.map((value) => normalizeText$3(value)).filter(Boolean) : [];
+  return Array.isArray(values) ? values.map((value) => normalizeText$2(value)).filter(Boolean) : [];
 }
 function stripHtml(value) {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -21942,7 +22017,7 @@ function computeReadingTime(content) {
 }
 function resolveParagraphs(post, fallbackContent) {
   if (Array.isArray(post.paragraphs)) {
-    const paragraphs = post.paragraphs.map((paragraph) => normalizeText$3(paragraph)).filter(Boolean);
+    const paragraphs = post.paragraphs.map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
     if (paragraphs.length > 0) {
       return paragraphs;
     }
@@ -21950,7 +22025,7 @@ function resolveParagraphs(post, fallbackContent) {
   if (!fallbackContent) {
     return [];
   }
-  return fallbackContent.split(/\n\s*\n/).map((paragraph) => stripHtml(paragraph)).map((paragraph) => normalizeText$3(paragraph)).filter(Boolean);
+  return fallbackContent.split(/\n\s*\n/).map((paragraph) => stripHtml(paragraph)).map((paragraph) => normalizeText$2(paragraph)).filter(Boolean);
 }
 function compareBlogPosts(left, right) {
   if (left.featured !== right.featured) {
@@ -21970,33 +22045,33 @@ function normalizeBlogPost(post, index2, baseUrl) {
   if (post.visible === false) {
     return null;
   }
-  const title = normalizeText$3(post.title) || `JPM Blog ${index2 + 1}`;
-  const slug = normalizeText$3(post.slug) || toSlug(title) || `blog-${index2 + 1}`;
+  const title = normalizeText$2(post.title) || `JPM Blog ${index2 + 1}`;
+  const slug = normalizeText$2(post.slug) || toSlug(title) || `blog-${index2 + 1}`;
   const rawContent = stripHtml(
-    normalizeText$3(post.content) || normalizeText$3(post.body) || normalizeText$3(post.description)
+    normalizeText$2(post.content) || normalizeText$2(post.body) || normalizeText$2(post.description)
   );
   const paragraphs = resolveParagraphs(post, rawContent);
   const content = paragraphs.join("\n\n") || rawContent;
-  const excerpt = normalizeText$3(post.excerpt) || normalizeText$3(post.summary) || buildExcerpt(paragraphs[0] || content);
+  const excerpt = normalizeText$2(post.excerpt) || normalizeText$2(post.summary) || buildExcerpt(paragraphs[0] || content);
   const coverImage = resolveWebsiteAssetUrl(
-    normalizeText$3(post.coverImageUrl) || normalizeText$3(post.image),
+    normalizeText$2(post.coverImageUrl) || normalizeText$2(post.image),
     baseUrl
   ) || "";
   return {
-    id: normalizeText$3(post.id || post._id) || `blog-${slug}`,
+    id: normalizeText$2(post.id || post._id) || `blog-${slug}`,
     slug,
     title,
     excerpt,
     content,
     paragraphs,
     coverImage,
-    authorName: normalizeText$3(post.authorName) || "JPM Enterprises",
-    publishedAt: normalizeText$3(post.publishedAt),
-    updatedAt: normalizeText$3(post.updatedAt),
+    authorName: normalizeText$2(post.authorName) || "JPM Enterprises",
+    publishedAt: normalizeText$2(post.publishedAt),
+    updatedAt: normalizeText$2(post.updatedAt),
     tags: toStringArray(post.tags),
-    metaTitle: normalizeText$3(post.metaTitle) || `${title} | JPM Enterprises Blog`,
-    metaDescription: normalizeText$3(post.metaDescription) || excerpt,
-    readingTime: normalizeText$3(post.readingTime) || computeReadingTime(content),
+    metaTitle: normalizeText$2(post.metaTitle) || `${title} | JPM Enterprises Blog`,
+    metaDescription: normalizeText$2(post.metaDescription) || excerpt,
+    readingTime: normalizeText$2(post.readingTime) || computeReadingTime(content),
     featured: post.featured === true,
     order: typeof post.order === "number" ? post.order : index2
   };
@@ -22008,9 +22083,9 @@ function normalizeBlogsContent(raw) {
   const content = payload.content && typeof payload.content === "object" ? payload.content : payload;
   const posts = rawPosts.map((post, index2) => normalizeBlogPost(post, index2, baseUrl)).filter((post) => Boolean(post)).sort(compareBlogPosts);
   return {
-    overline: normalizeText$3(String(content.overline ?? "")) || DEFAULT_BLOGS_CONTENT.overline,
-    heading: normalizeText$3(String(content.heading ?? "")) || DEFAULT_BLOGS_CONTENT.heading,
-    description: normalizeText$3(String(content.description ?? "")) || DEFAULT_BLOGS_CONTENT.description,
+    overline: normalizeText$2(String(content.overline ?? "")) || DEFAULT_BLOGS_CONTENT.overline,
+    heading: normalizeText$2(String(content.heading ?? "")) || DEFAULT_BLOGS_CONTENT.heading,
+    description: normalizeText$2(String(content.description ?? "")) || DEFAULT_BLOGS_CONTENT.description,
     posts
   };
 }
@@ -22057,7 +22132,7 @@ function useWebsiteBlogs() {
   });
 }
 function useWebsiteBlog(slug) {
-  const normalizedSlug = normalizeText$3(slug);
+  const normalizedSlug = normalizeText$2(slug);
   const query = useQuery({
     queryKey: ["website", "blogs", normalizedSlug],
     queryFn: () => getWebsiteBlogBySlug(normalizedSlug),
@@ -22089,21 +22164,11 @@ function BlogSection() {
     "section",
     {
       id: "blogs",
-      className: "py-24",
-      style: {
-        background: "linear-gradient(180deg, oklch(0.985 0.008 86), oklch(0.965 0.012 82))"
-      },
+      className: "bg-secondary py-24",
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: headerRef, className: "reveal max-w-3xl", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "p",
-              {
-                className: "mb-3 font-general text-sm font-semibold uppercase tracking-[0.25em]",
-                style: { color: "oklch(0.65 0.12 75)" },
-                children: data.overline
-              }
-            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-3 font-general text-sm font-semibold uppercase tracking-[0.25em] text-primary", children: data.overline }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-playfair text-4xl font-bold text-foreground lg:text-5xl", children: data.heading }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 font-general text-base leading-relaxed text-muted-foreground", children: data.description })
           ] }),
@@ -22111,11 +22176,7 @@ function BlogSection() {
             Link,
             {
               to: "/blogs",
-              className: "inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em]",
-              style: {
-                border: "1px solid oklch(0.65 0.12 75 / 0.28)",
-                color: "oklch(0.65 0.12 75)"
-              },
+              className: "inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-7 py-3 font-general text-xs font-semibold uppercase tracking-[0.18em] text-foreground shadow-sm transition-all duration-300 hover:bg-accent hover:border-accent hover:text-accent-foreground",
               children: [
                 "View All Articles",
                 /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
@@ -22126,18 +22187,14 @@ function BlogSection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 lg:grid-cols-3", children: isLoading ? Array.from({ length: 3 }, (_, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
-            className: "overflow-hidden rounded-[30px] bg-white",
-            style: {
-              border: "1px solid oklch(0.9 0.015 82)",
-              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
-            },
+            className: "overflow-hidden rounded-[--radius] border border-border bg-card shadow-sm",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] animate-pulse bg-[oklch(0.92_0.012_82)]" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] animate-pulse bg-muted" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 p-6", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 w-24 animate-pulse rounded-full bg-[oklch(0.9_0.015_82)]" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-5/6 animate-pulse rounded-[18px] bg-[oklch(0.95_0.01_82)]" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-4/5 animate-pulse rounded-full bg-[oklch(0.95_0.01_82)]" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 w-24 animate-pulse rounded-full bg-muted" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-5/6 animate-pulse rounded-[calc(var(--radius)-2px)] bg-muted" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-full animate-pulse rounded-full bg-muted" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-4 w-4/5 animate-pulse rounded-full bg-muted" })
               ] })
             ]
           },
@@ -22145,11 +22202,7 @@ function BlogSection() {
         )) : posts.length > 0 ? posts.map((post) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "article",
           {
-            className: "overflow-hidden rounded-[30px] bg-white",
-            style: {
-              border: "1px solid oklch(0.9 0.015 82)",
-              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
-            },
+            className: "group overflow-hidden rounded-[--radius] border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-md",
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Link,
@@ -22157,48 +22210,30 @@ function BlogSection() {
                   to: "/blogs/$blogSlug",
                   params: { blogSlug: post.slug },
                   className: "block",
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-[4/3] overflow-hidden", children: post.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-[4/3] overflow-hidden bg-muted", children: post.coverImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "img",
                     {
                       src: post.coverImage,
                       alt: post.title,
                       loading: "lazy",
                       decoding: "async",
-                      className: "h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      className: "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     }
-                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "div",
-                    {
-                      className: "h-full w-full",
-                      style: {
-                        background: "linear-gradient(135deg, oklch(0.68 0.11 76), oklch(0.86 0.08 84))"
-                      }
-                    }
-                  ) })
+                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full w-full bg-primary" }) })
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 p-6", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "span",
-                    {
-                      className: "rounded-full px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em]",
-                      style: {
-                        background: "oklch(0.65 0.12 75 / 0.1)",
-                        color: "oklch(0.55 0.14 65)"
-                      },
-                      children: formatBlogDate$2(post.publishedAt)
-                    }
-                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-[calc(var(--radius)-2px)] bg-accent/10 px-3 py-1 font-general text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground", children: formatBlogDate$2(post.publishedAt) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-xs uppercase tracking-[0.16em] text-muted-foreground", children: post.readingTime })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-playfair text-2xl font-semibold text-card-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                     Link,
                     {
                       to: "/blogs/$blogSlug",
                       params: { blogSlug: post.slug },
-                      className: "transition-colors hover:text-[oklch(0.65_0.12_75)]",
+                      className: "transition-colors hover:text-primary",
                       children: post.title
                     }
                   ) }),
@@ -22209,8 +22244,7 @@ function BlogSection() {
                   {
                     to: "/blogs/$blogSlug",
                     params: { blogSlug: post.slug },
-                    className: "inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em]",
-                    style: { color: "oklch(0.65 0.12 75)" },
+                    className: "inline-flex items-center gap-2 font-general text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-colors hover:text-accent",
                     children: [
                       "Read Article",
                       /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 })
@@ -22221,20 +22255,10 @@ function BlogSection() {
             ]
           },
           post.id
-        )) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            className: "lg:col-span-3 rounded-[30px] bg-white px-8 py-14 text-center",
-            style: {
-              border: "1px solid oklch(0.9 0.015 82)",
-              boxShadow: "0 20px 42px oklch(0.12 0.01 60 / 0.05)"
-            },
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-foreground", children: "Thoughtful articles will be published here soon" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "We're preparing practical guidance on sofa selection, materials, maintenance, and custom furniture planning to make the journal genuinely useful when it goes live." })
-            ]
-          }
-        ) })
+        )) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-3 rounded-[--radius] border border-border bg-card px-8 py-14 text-center shadow-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-2xl font-semibold text-card-foreground", children: "Thoughtful articles will be published here soon" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto mt-4 max-w-2xl font-general text-sm leading-relaxed text-muted-foreground", children: "We're preparing practical guidance on sofa selection, materials, maintenance, and custom furniture planning to make the journal genuinely useful when it goes live." })
+        ] }) })
       ] })
     }
   );
@@ -22320,7 +22344,7 @@ function CollectionSection() {
     "section",
     {
       id: "collection",
-      className: "relative overflow-hidden py-24",
+      className: "relative overflow-hidden py-7",
       style: {
         background: "linear-gradient(180deg, oklch(0.98 0.008 85), oklch(0.95 0.01 82))"
       },
@@ -22328,10 +22352,7 @@ function CollectionSection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "absolute inset-x-0 top-0 h-56",
-            style: {
-              background: "radial-gradient(circle at 15% 0%, oklch(0.72 0.08 82 / 0.22), transparent 44%)"
-            }
+            className: "absolute inset-x-0 top-0 h-56"
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto max-w-7xl px-6 lg:px-8", children: [
@@ -23123,7 +23144,7 @@ function validateForm(fields) {
   }
   return errors;
 }
-function getPhoneHref$4(phone) {
+function getPhoneHref$3(phone) {
   const digits = phone.replace(/[^\d+]/g, "");
   return digits ? `tel:${digits}` : "";
 }
@@ -23212,7 +23233,7 @@ function ContactSection() {
         (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "a",
           {
-            href: getPhoneHref$4(settings.enquiryPhone),
+            href: getPhoneHref$3(settings.enquiryPhone),
             className: "flex items-start gap-4 rounded-[24px] bg-white px-5 py-5 shadow-[0_18px_38px_oklch(0.12_0.01_60_/_0.05)]",
             style: { border: "1px solid oklch(0.9 0.015 82)" },
             children: [
@@ -23607,7 +23628,7 @@ const defaultPages = [
   { slug: "contact-us", title: "Contact Us", content: "", active: true, showInFooter: true },
   { slug: "privacy-policy", title: "Privacy Policy", content: "", active: true, showInFooter: true }
 ];
-function normalizeText$2(value) {
+function normalizeText$1(value) {
   return typeof value === "string" ? value.trim() : "";
 }
 function normalizePages(raw) {
@@ -23615,12 +23636,12 @@ function normalizePages(raw) {
   const pages = Array.isArray(data.pages) ? data.pages : [];
   const normalizedPages = pages.map((item) => {
     const page = item && typeof item === "object" ? item : {};
-    const slug = normalizeText$2(page.slug);
+    const slug = normalizeText$1(page.slug);
     if (!slug) return null;
     return {
       slug,
-      title: normalizeText$2(page.title),
-      content: normalizeText$2(page.content),
+      title: normalizeText$1(page.title),
+      content: normalizeText$1(page.content),
       active: page.active !== false,
       showInFooter: page.showInFooter !== false
     };
@@ -23664,10 +23685,10 @@ function scrollToSection(id) {
   });
 }
 const quickLinks = [
-  { label: "Home", section: "home" },
+  // { label: "Home", section: "home" },
   { label: "Collection", section: "collection" },
   { label: "Custom Design", section: "custom-design" },
-  { label: "Why Us", section: "why-us" },
+  // { label: "Why Us", section: "why-us" },
   { label: "Gallery", section: "gallery" },
   { label: "Blogs", to: "/blogs" },
   { label: "Contact", section: "contact" }
@@ -23679,7 +23700,7 @@ const serviceLinks = [
   { label: "Delivery & Installation", anchor: "delivery-installation" }
 ];
 const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
-function getPhoneHref$3(phone) {
+function getPhoneHref$2(phone) {
   const digits = phone.replace(/[^\d+]/g, "");
   return digits ? `tel:${digits}` : "";
 }
@@ -23734,10 +23755,10 @@ function Footer() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "img",
               {
-                src: "/assets/uploads/image-1.png",
+                src: "/assets/uploads/newLogo.png",
                 alt: "JPM Enterprises",
                 decoding: "async",
-                className: "mb-5 h-12 w-auto brightness-0 invert"
+                className: "mb-5 h-12 w-auto"
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -23840,7 +23861,7 @@ function Footer() {
               (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "a",
                 {
-                  href: getPhoneHref$3(settings.enquiryPhone),
+                  href: getPhoneHref$2(settings.enquiryPhone),
                   className: "flex items-center gap-3 transition-colors duration-200",
                   style: { color: "oklch(0.72 0.015 82)" },
                   children: [
@@ -24120,167 +24141,12 @@ function GallerySection() {
     ] }) : null
   ] });
 }
-function getPhoneHref$2(phone) {
-  const digits = phone.replace(/[^\d+]/g, "");
-  return digits ? `tel:${digits}` : "";
-}
-function normalizeText$1(value) {
-  return (value == null ? void 0 : value.trim()) ?? "";
-}
-const FALLBACK_HIGHLIGHT_LABEL = "Curated collection";
-function HeroSection() {
-  const { data: categories = [], isSuccess: categoriesReady } = useWebsiteCategories();
-  const { data: settings } = useWebsiteSettings();
-  const { data: cmsData } = useWebsiteContent("hero");
-  const content = cmsData;
-  const baseUrl = resolveWebsiteApiBaseUrl();
-  const eyebrowText = normalizeText$1(content == null ? void 0 : content.eyebrowText) || "Handcrafted luxury furniture from Hisar";
-  const headlineLine1 = normalizeText$1(content == null ? void 0 : content.headlineLine1) || "Crafted for";
-  const headlineAccent = normalizeText$1(content == null ? void 0 : content.headlineAccent) || "beautiful living.";
-  const subheading = normalizeText$1(content == null ? void 0 : content.subheading) || "Discover collection-led sofa experiences, tailored comfort, and a custom design journey built around your home, your taste, and your dimensions.";
-  const primaryCtaLabel = normalizeText$1(content == null ? void 0 : content.primaryCtaLabel) || "Explore Collections";
-  const secondaryCtaLabel = normalizeText$1(content == null ? void 0 : content.secondaryCtaLabel) || "Start Custom Design";
-  const defaultBgPath = "/assets/generated/hero-sofa.dim_1600x900.jpg";
-  const backgroundPath = normalizeText$1(content == null ? void 0 : content.backgroundImageUrl) || defaultBgPath;
-  const backgroundImageCss = /^https?:\/\//i.test(backgroundPath) ? backgroundPath : resolveWebsiteAssetUrl(backgroundPath, baseUrl) || backgroundPath;
-  const highlightedCollections = categories.slice(0, 3);
-  const cmsHighlights = Array.isArray(content == null ? void 0 : content.highlights) ? content == null ? void 0 : content.highlights : [];
-  const highlightRows = (() => {
-    if (!cmsHighlights.length && categoriesReady) {
-      return highlightedCollections.map((collection) => ({
-        title: collection.name,
-        subtitle: FALLBACK_HIGHLIGHT_LABEL,
-        image: collection.image
-      }));
-    }
-    return cmsHighlights.map((entry, index2) => {
-      const fallback = highlightedCollections[index2];
-      const explicitImage = normalizeText$1(entry == null ? void 0 : entry.imageUrl);
-      const imageUrl = (explicitImage ? resolveWebsiteAssetUrl(explicitImage, baseUrl) || explicitImage : "") || (fallback == null ? void 0 : fallback.image) || "";
-      return {
-        title: normalizeText$1(entry == null ? void 0 : entry.title) || (fallback == null ? void 0 : fallback.name) || `Highlight ${index2 + 1}`,
-        subtitle: normalizeText$1(entry == null ? void 0 : entry.subtitle) || FALLBACK_HIGHLIGHT_LABEL,
-        image: imageUrl
-      };
-    });
-  })();
-  const deskPhone = normalizeText$1(content == null ? void 0 : content.deskPhone) || normalizeText$1(settings == null ? void 0 : settings.enquiryPhone);
-  const phoneHref = getPhoneHref$2(deskPhone);
-  const scrollToCollection = () => {
-    var _a2;
-    (_a2 = document.querySelector("#collection")) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "section",
-    {
-      id: "home",
-      className: "relative flex min-h-[760px] items-center overflow-hidden py-24 sm:min-h-[820px] lg:min-h-screen",
-      style: {
-        backgroundImage: `url('${backgroundImageCss}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      },
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[linear-gradient(100deg,rgba(26,12,9,0.88)_0%,rgba(35,20,14,0.72)_45%,rgba(35,20,14,0.44)_100%)]" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 mx-auto w-full max-w-7xl px-6 pt-12 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "p",
-            {
-              className: "hero-label mb-5 font-general text-xs font-semibold uppercase tracking-[0.2em] sm:text-sm",
-              style: { color: "oklch(0.82 0.12 84)" },
-              children: eyebrowText
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "hero-title font-playfair text-4xl font-bold leading-[1.06] text-white sm:text-6xl lg:text-7xl", children: [
-            headlineLine1,
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-[oklch(0.85_0.09_84)]", children: headlineAccent })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hero-sub mt-6 max-w-2xl font-general text-base leading-relaxed text-white/82 sm:text-lg", children: subheading }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hero-cta mt-9 flex flex-wrap gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                type: "button",
-                onClick: scrollToCollection,
-                "data-ocid": "hero.primary_button",
-                className: "inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-general text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 hover:-translate-y-1 sm:px-7",
-                style: {
-                  background: "linear-gradient(135deg, oklch(0.58 0.15 35), oklch(0.78 0.12 82))",
-                  color: "oklch(0.98 0.008 84)",
-                  boxShadow: "0 18px 34px oklch(0.24 0.08 32 / 0.28)"
-                },
-                children: [
-                  primaryCtaLabel,
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 16 })
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                type: "button",
-                onClick: () => {
-                  var _a2;
-                  return (_a2 = document.querySelector("#custom-design")) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
-                },
-                "data-ocid": "hero.secondary_button",
-                className: "rounded-full border px-6 py-3.5 font-general text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-1 sm:px-7",
-                style: {
-                  borderColor: "oklch(0.82 0.12 84 / 0.42)",
-                  background: "oklch(0.18 0.04 38 / 0.42)"
-                },
-                children: secondaryCtaLabel
-              }
-            )
-          ] }),
-          highlightRows.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-12 grid max-w-3xl gap-3 sm:grid-cols-3", children: highlightRows.map((row, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "border-t pt-4",
-              style: { borderColor: "oklch(0.82 0.12 84 / 0.32)" },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-playfair text-xl font-semibold text-white", children: row.title }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 font-general text-xs uppercase tracking-[0.14em] text-white/58", children: row.subtitle })
-              ]
-            },
-            `${row.title}-${index2}`
-          )) }) : null,
-          deskPhone ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "a",
-            {
-              href: phoneHref || void 0,
-              className: "mt-8 inline-flex font-general text-sm font-semibold text-white/78 transition-colors hover:text-white",
-              children: [
-                "Design desk: ",
-                deskPhone
-              ]
-            }
-          ) : null
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
-          {
-            type: "button",
-            onClick: scrollToCollection,
-            className: "absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60 transition-colors hover:text-white",
-            "aria-label": "Scroll down",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-general text-xs uppercase tracking-[0.26em]", children: "Scroll" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 20, className: "hero-scroll" })
-            ]
-          }
-        )
-      ]
-    }
-  );
-}
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Collection", href: "#collection" },
   { label: "Custom Design", href: "#custom-design" },
   { label: "Why Us", href: "#why-us" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Gallery", to: "/gallery" },
   { label: "Blogs", to: "/blogs" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "About", href: "#about" },
@@ -24364,10 +24230,7 @@ function Navbar() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "header",
     {
-      className: `fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${isLightHeader ? "bg-white/88 shadow-[0_18px_45px_oklch(0.12_0.01_60_/_0.08)] backdrop-blur-xl" : "bg-transparent"}`,
-      style: scrolled ? {
-        borderBottom: "1px solid oklch(0.65 0.12 75 / 0.16)"
-      } : void 0,
+      className: `fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${isLightHeader ? "border-b border-border bg-card/95 shadow-sm backdrop-blur-xl" : "bg-transparent"}`,
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-5 px-6 py-3 lg:px-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -24395,14 +24258,13 @@ function Navbar() {
               type: "button",
               onClick: () => handleNav(link.href),
               "data-ocid": `nav.${link.label.toLowerCase().replace(" ", "_")}_link`,
-              className: `relative font-general text-sm font-medium transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
+              className: "relative font-general text-sm font-medium text-foreground transition-colors duration-200",
               children: [
                 link.label,
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "span",
                   {
-                    className: `absolute -bottom-2 left-0 h-px transition-all duration-300 ${active === link.href ? "w-full" : "w-0"}`,
-                    style: { background: "oklch(0.65 0.12 75)" }
+                    className: `absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${active === link.href ? "w-full" : "w-0"}`
                   }
                 )
               ]
@@ -24412,14 +24274,13 @@ function Navbar() {
             {
               to: link.to,
               "data-ocid": `nav.${link.label.toLowerCase().replace(" ", "_")}_link`,
-              className: `relative font-general text-sm font-medium transition-colors duration-200 ${isLightHeader ? "text-foreground" : "text-white"}`,
+              className: "relative font-general text-sm font-medium text-foreground transition-colors duration-200",
               children: [
                 link.label,
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "span",
                   {
-                    className: `absolute -bottom-2 left-0 h-px transition-all duration-300 ${active === link.to ? "w-full" : "w-0"}`,
-                    style: { background: "oklch(0.65 0.12 75)" }
+                    className: `absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${active === link.to ? "w-full" : "w-0"}`
                   }
                 )
               ]
@@ -24430,15 +24291,10 @@ function Navbar() {
             {
               type: "button",
               onClick: handlePrimaryAction,
-              className: "inline-flex whitespace-nowrap rounded-full px-4 py-2 font-general text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-300 hover:-translate-y-0.5",
-              style: {
-                background: "linear-gradient(135deg, oklch(0.48 0.16 30), oklch(0.76 0.12 82))",
-                color: "oklch(0.98 0.008 84)",
-                boxShadow: "0 12px 28px oklch(0.25 0.08 32 / 0.24)"
-              },
+              className: "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-6 py-2.5 font-general text-[11px] font-semibold uppercase tracking-[0.14em] text-accent-foreground shadow-md transition-all duration-300 hover:brightness-110",
               children: [
                 "Call Now",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 15 })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 15, strokeWidth: 2.5 })
               ]
             }
           ) : null }),
@@ -24446,7 +24302,7 @@ function Navbar() {
             "button",
             {
               type: "button",
-              className: `rounded-full p-2 transition-colors lg:hidden ${isLightHeader ? "text-foreground" : "text-white"}`,
+              className: "rounded-full p-2 text-foreground transition-colors lg:hidden",
               onClick: () => setMenuOpen((open) => !open),
               "data-ocid": "nav.menu_toggle",
               "aria-label": "Toggle menu",
@@ -24457,7 +24313,7 @@ function Navbar() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: `fixed inset-x-0 top-20 z-40 min-h-[calc(100vh-5rem)] bg-[oklch(0.98_0.008_84_/_0.96)] px-6 py-10 backdrop-blur-xl transition-all duration-300 lg:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`,
+            className: `fixed inset-x-0 top-20 z-40 min-h-[calc(100vh-5rem)] bg-card/96 px-6 py-10 backdrop-blur-xl transition-all duration-300 lg:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`,
             children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex h-full max-w-md flex-col justify-between", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-6", children: navLinks.map((link, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "li",
@@ -24471,9 +24327,9 @@ function Navbar() {
                     {
                       type: "button",
                       onClick: () => handleNav(link.href),
-                      className: "font-playfair text-3xl text-foreground transition-colors",
+                      className: "font-playfair text-3xl text-foreground transition-colors hover:text-accent",
                       style: {
-                        color: active === link.href ? "oklch(0.65 0.12 75)" : void 0
+                        color: active === link.href ? "oklch(var(--accent))" : void 0
                       },
                       children: link.label
                     }
@@ -24482,9 +24338,9 @@ function Navbar() {
                     {
                       to: link.to,
                       onClick: () => setMenuOpen(false),
-                      className: "font-playfair text-3xl text-foreground transition-colors",
+                      className: "font-playfair text-3xl text-foreground transition-colors hover:text-accent",
                       style: {
-                        color: active === link.to ? "oklch(0.65 0.12 75)" : void 0
+                        color: active === link.to ? "oklch(var(--accent))" : void 0
                       },
                       children: link.label
                     }
@@ -24492,48 +24348,27 @@ function Navbar() {
                 },
                 link.href ?? link.to
               )) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "rounded-[28px] p-6",
-                  style: {
-                    background: "linear-gradient(180deg, oklch(1 0 0 / 0.82), oklch(0.95 0.01 84 / 0.94))",
-                    border: "1px solid oklch(0.65 0.12 75 / 0.16)"
-                  },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "p",
-                      {
-                        className: "mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em]",
-                        style: { color: "oklch(0.65 0.12 75)" },
-                        children: "Design Support"
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-5 font-playfair text-2xl font-semibold text-foreground", children: "Planning a new sofa story?" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 font-general text-sm text-muted-foreground", children: [
-                      (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.enquiryPhone }) : null,
-                      (settings == null ? void 0 : settings.enquiryEmail) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.enquiryEmail }) : null,
-                      (settings == null ? void 0 : settings.address) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.address }) : null
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
-                      {
-                        type: "button",
-                        onClick: handlePrimaryAction,
-                        className: "mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em]",
-                        style: {
-                          background: "oklch(0.65 0.12 75)",
-                          color: "oklch(0.12 0.01 60)"
-                        },
-                        children: [
-                          (settings == null ? void 0 : settings.enquiryPhone) ? "Call Now" : "Contact Us",
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 15 })
-                        ]
-                      }
-                    )
-                  ]
-                }
-              )
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-[--radius] border border-border bg-card/90 p-6 shadow-lg backdrop-blur-sm", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 font-general text-xs font-semibold uppercase tracking-[0.25em] text-accent", children: "Design Support" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-5 font-playfair text-2xl font-semibold text-foreground", children: "Planning a new sofa story?" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 font-general text-sm text-muted-foreground", children: [
+                  (settings == null ? void 0 : settings.enquiryPhone) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.enquiryPhone }) : null,
+                  (settings == null ? void 0 : settings.enquiryEmail) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.enquiryEmail }) : null,
+                  (settings == null ? void 0 : settings.address) ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: settings.address }) : null
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: handlePrimaryAction,
+                    className: "mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-general text-xs font-semibold uppercase tracking-[0.2em] text-accent-foreground shadow-md transition-all duration-300 hover:brightness-110",
+                    children: [
+                      (settings == null ? void 0 : settings.enquiryPhone) ? "Call Now" : "Contact Us",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { size: 15, strokeWidth: 2.5 })
+                    ]
+                  }
+                )
+              ] })
             ] })
           }
         )
@@ -27632,7 +27467,7 @@ function HomePage() {
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(HeroSection, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BannerSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(CustomDesignSection, {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx(WhyChooseSection, {}),

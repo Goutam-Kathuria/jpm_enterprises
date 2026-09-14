@@ -6,10 +6,10 @@ import { useWebsiteSettings } from "../lib/websiteApi";
 import { scrollToSection } from "../utils/scrollToSection";
 
 const quickLinks = [
-  { label: "Home", section: "home" },
+  // { label: "Home", section: "home" },
   { label: "Collection", section: "collection" },
   { label: "Custom Design", section: "custom-design" },
-  { label: "Why Us", section: "why-us" },
+  // { label: "Why Us", section: "why-us" },
   { label: "Gallery", section: "gallery" },
   { label: "Blogs", to: "/blogs" },
   { label: "Contact", section: "contact" },
@@ -87,7 +87,7 @@ export function Footer() {
               src="/assets/uploads/newLogo.png"
               alt="JPM Enterprises"
               decoding="async"
-              className="mb-5 h-12 w-auto brightness-0 invert"
+              className="mb-5 h-12 w-auto"
             />
             <p
               className="max-w-md font-general text-sm leading-relaxed"
