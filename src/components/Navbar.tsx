@@ -149,7 +149,7 @@ export function Navbar() {
                   type="button"
                   onClick={() => handleNav(link.href)}
                   data-ocid={`nav.${link.label.toLowerCase().replace(" ", "_")}_link`}
-                  className="relative font-general text-sm font-medium text-foreground transition-colors duration-200"
+                  className="relative font-general text-[14px] font-semibold text-foreground transition-colors duration-200"
                 >
                   {link.label}
                   <span
@@ -181,7 +181,7 @@ export function Navbar() {
             <img
               src="/assets/uploads/iso.png"
               alt="ISO 9001:2015"
-              className="h-11 w-11 object-contain"
+              className="h-12 w-12 object-contain"
             />
             <div className="flex flex-col leading-tight">
               <p className="whitespace-nowrap font-general text-xs font-bold">
