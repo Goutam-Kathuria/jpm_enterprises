@@ -125,7 +125,7 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-5 px-6 py-3 lg:px-8">
+      <nav className="mx-auto flex h-[80px] max-w-7xl items-center justify-between gap-8 px-6 py-3 lg:px-8">
         <button
           type="button"
           onClick={() => handleNav("#home")}
@@ -137,11 +137,11 @@ export function Navbar() {
             src="/assets/uploads/newLogo.png"
             alt="JPM Enterprises"
             decoding="async"
-            className="h-14 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
         </button>
 
-        <ul className="hidden items-center gap-5 lg:flex xl:gap-6">
+        <ul className="hidden items-center gap-6 lg:flex xl:gap-7">
           {navLinks.map((link) => (
             <li key={link.href ?? link.to}>
               {link.href ? (
@@ -153,7 +153,7 @@ export function Navbar() {
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${
+                    className={`absolute -bottom-2 left-0 h-0.5 bg-accent transition-all duration-300 ${
                       active === link.href ? "w-full" : "w-0"
                     }`}
                   />
@@ -166,7 +166,7 @@ export function Navbar() {
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-2 left-0 h-px bg-accent transition-all duration-300 ${
+                    className={`absolute -bottom-2 left-0 h-0.5 bg-accent transition-all duration-300 ${
                       active === link.to ? "w-full" : "w-0"
                     }`}
                   />
@@ -176,7 +176,22 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden items-center gap-5 lg:flex">
+          {/* <div className="flex items-center gap-3 rounded-full px-5 py-2.5 shadow-sm"> */}
+            <img
+              src="/assets/uploads/iso.png"
+              alt="ISO 9001:2015"
+              className="h-11 w-11 object-contain"
+            />
+            <div className="flex flex-col leading-tight">
+              <p className="whitespace-nowrap font-general text-xs font-bold">
+                ISO 9001:2015
+              </p>
+              <p className="whitespace-nowrap font-general text-[10px] font-semibold">
+                Certified Company
+              </p>
+            {/* </div> */}
+          </div>
           {settings?.enquiryPhone ? (
             <button
               type="button"
